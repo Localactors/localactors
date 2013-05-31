@@ -1,0 +1,33 @@
+﻿.underbar{ height: 48px;overflow: auto;}
+.datepicker{z-index:1155;}
+body > .navbar .brand {
+    color: #000000;
+    float: right;
+    font-weight: bold;
+    margin-left: 20px;
+    padding-left: 0;
+    padding-right: 0;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 0 30px rgba(255, 255, 255, 0.125);
+    transition: all 0.2s linear 0s;
+}
+body > .navbar .brand:hover {
+    text-decoration: none;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 0 30px rgba(255, 255, 255, 0.4);
+}
+
+
+.editor-label{ float:left;width: 140px;clear: left;}
+.editor-field{ float:left;width: 300px;}
+.display-label{ float:left;width: 160px;clear: left;display: inline-block;padding: 5px;text-align: left;font-weight: bold;color: #999;}
+.display-field{ float:left;width: 500px;display: inline-block;padding: 5px;}
+fieldset{ margin: 5px;padding: 5px;}
+.text-box{}
+.single-line{}
+.wysiwyg{}
+
+form p{ display: block;clear: left;}
+form.compact{ display: inline-block;float: left;margin: 2px;overflow: auto;}
+.formsmall{ border: 1px solid #ccc;font-size: 80%;padding: 4px;display: inline-block;}
+.formsmall label{ font-size: 10px;text-align: right;padding-right: 8px;}
+.formsmall input, .formsmall select{font-size: 10px;margin: 1px;padding: 1px;height: 18px;}
+

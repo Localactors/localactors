@@ -1,0 +1,67 @@
+﻿@model SubscribeModel
+
+@{
+    ViewBag.Title = "Registrazione Utente";
+}
+
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <div class="">
+
+        <div class="">
+            @Html.LabelFor(model => model.Email, "Email")
+            @Html.TextBoxFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+
+        <div class="clarfix">
+            @Html.LabelFor(model => model.Password, "Password")
+            @Html.PasswordFor(model => model.Password)
+            @Html.ValidationMessageFor(model => model.Password)
+        </div>
+
+        <div class="">
+            @Html.LabelFor(model => model.Password, "Conferma Password")
+            @Html.PasswordFor(model => model.Confirm)
+            @Html.ValidationMessageFor(model => model.Confirm)
+        </div>
+
+
+        <div class="">
+            @Html.LabelFor(model => model.Newsletter, "Icriviti alla Newsletter")
+            @Html.CheckBoxFor(model => model.Newsletter)
+            @Html.ValidationMessageFor(model => model.Newsletter)
+        </div>
+
+        </div>
+        <hr />
+        <div class="">
+        
+            <p>
+            Dopo aver letto l'informativa  <a href="@Url.Action("privacy","Home")" target="_blank">Privacy</a>, acconsento al trattamento dei miei dati per finalit&agrave; di invio di mails a carattere promozionale
+            </p>
+            <div class="">
+
+                <div class="">
+                <label for="Privacy0" class="" style="text-align:right;">Acconsento</label>
+                <input type="radio" class="" id="Privacy0" name="Privacy" value="Acconsento" data-val-required="Il campo Privacy &#232; obbligatorio." data-val="true" />
+                </div>
+                <div class="">
+                <label for="Privacy1" class=""  style="text-align:right;">Non Acconsento</label>
+                <input type="radio" class="" id="Privacy1" name="Privacy" value="Non Acconsento" data-val-required="Il campo Privacy &#232; obbligatorio." data-val="true" />
+                </div>
+                @Html.ValidationMessageFor(model => model.Privacy)
+            </div>
+
+        </div>
+        <br />
+
+            <input type="submit" class="btn"  value="  Iscriviti  " class="" />
+
+}
+

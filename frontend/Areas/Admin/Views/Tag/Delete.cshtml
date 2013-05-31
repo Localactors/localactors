@@ -1,0 +1,25 @@
+﻿@model Localactors.entities.tag
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<ul class="breadcrumb">
+    <li><a href='@Url.Action("Index","Home")'>Home</a> <span class="divider">/</span></li>
+    <li><a href="@Url.Action("Index","Tag")">tags</a> <span class="divider">/</span></li>
+    <li class="active"><a href="@Url.Action("Delete", "Tag", new {id = Model.TagID})">@Model.Name (delete)</a></li>
+</ul>
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+
+    <div class="display-label">Name</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" class="btn"  value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index",new{},new{@class="btn"})
+    </p>
+}

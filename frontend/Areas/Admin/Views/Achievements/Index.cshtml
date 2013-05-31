@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Localactors.entities.achievement>
+
+@{
+    ViewBag.Title = "Index";
+}
+<ul class="breadcrumb">
+    <li><a href='@Url.Action("Index","Home")'>Home</a> <span class="divider">/</span></li>
+    <li><a href='@Url.Action("Index","projects")'>Projects</a> <span class="divider">/</span></li>
+    <li class=""><a href="/admin/projects/edit/@ViewBag.Project.ProjectID">@ViewBag.Project.Title</a> <span class="divider">/</span> </li>
+    <li class="active"><a href="/admin/achievements/?projectid=@ViewBag.Project.ProjectID">Achievements</a> </li>
+</ul>
+<p>
+    @Html.ActionLink("Create New", "Create", new { projectid = ViewBag.Project.ProjectID }, new { @class = "btn" })
+</p>
+<table class="table table-condensed table-striped table-bordered">
+    <tr>
+        <th>
+            project
+        </th>
+        <th>
+            Date
+        </th>
+        <th>
+            Title
+        </th>
+ 
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.project.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.AchievementID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.AchievementID })
+        </td>
+    </tr>
+}
+
+</table>

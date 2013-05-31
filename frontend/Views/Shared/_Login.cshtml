@@ -1,0 +1,10 @@
+﻿@if (Request.IsAuthenticated)
+{                      
+    <a href="@Url.Action("Index", "Supporter")">@User.Identity.Name</a>
+    <a href="@Url.Action("Logout", "Account")">Esci</a> 
+}
+else
+{
+    <a href="@Url.Action("Login", "Account")">Accedi</a>
+    <a href="@Url.Action("Subscribe", "Account")">Iscriviti</a>
+}

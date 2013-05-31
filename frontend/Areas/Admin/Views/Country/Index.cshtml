@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Localactors.entities.country>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<ul class="breadcrumb">
+    <li><a href='@Url.Action("Index","Home")'>Home</a> <span class="divider">/</span></li>
+    <li class="active"><a href='@Url.Action("Index","Country")'>Countries</a> </li>
+</ul>
+
+<p>
+    @Html.ActionLink("Create New", "Create", new { }, new { @class = "btn" })
+</p>
+<table class="table table-condensed table-striped table-bordered">
+    <tr>
+        <th>
+            Code
+        </th>
+        <th>
+            Name
+        </th>
+        <th>
+            Order
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Order)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CountryID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CountryID })
+        </td>
+    </tr>
+}
+
+</table>

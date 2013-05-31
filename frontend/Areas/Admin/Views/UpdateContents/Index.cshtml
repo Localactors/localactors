@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Localactors.entities.update_content>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-condensed table-striped table-bordered">
+    <tr>
+        <th>
+            update
+        </th>
+        <th>
+            Order
+        </th>
+        <th>
+            update_content_type
+        </th>
+        <th>
+            Title
+        </th>
+       
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.update.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Order)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.update_content_type.ContentTypeName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ContentID }) |
+
+            @Html.ActionLink("Delete", "Delete", new { id=item.ContentID })
+        </td>
+    </tr>
+}
+
+</table>

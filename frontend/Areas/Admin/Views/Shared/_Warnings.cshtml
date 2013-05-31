@@ -1,0 +1,23 @@
+﻿<div>
+    @if (TempData["success"] != null)
+    { 
+        <div class="alert-message success" data-alert="alert">
+            <a class="close" href="#">×</a>
+            <p>@TempData["success"]</p>
+        </div>
+    }
+    @if (TempData["warning"] != null)
+    { 
+        <div class="alert-message warning" data-alert="alert">
+            <a class="close" href="#">×</a>
+            <p>@TempData["warning"]</p>
+        </div>
+    }
+    @if (TempData["error"] != null)
+    { 
+        <div class="alert-message error" data-alert="alert">
+            <a class="close" href="#">×</a>
+            <p>@TempData["error"]</p>
+        </div>
+    }
+</div>

@@ -1,0 +1,40 @@
+﻿@model Localactors.entities.update_comment
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>update_comment</legend>
+
+    <div class="display-label">update</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.update.Title)
+    </div>
+
+    <div class="display-label">user</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.user.Role)
+    </div>
+
+    <div class="display-label">Date</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Date)
+    </div>
+
+    <div class="display-label">Text</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Text)
+    </div>
+
+    <div class="display-label">Picture</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Picture)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.CommentID }) |
+    @Html.ActionLink("Back to List", "Index",new{},new{@class="btn"})
+</p>

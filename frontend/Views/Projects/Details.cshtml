@@ -1,0 +1,49 @@
+﻿@model Localactors.entities.project
+@{
+    ViewBag.Title = "Project Details";
+}
+@Html.ActionLink("Back to List", "Index",new{},new{@class="btn"})
+
+@Html.DisplayFor(model => model.user.UserName)
+@Html.DisplayFor(model => model.Title)
+@Html.DisplayFor(model => model.Description)
+@Html.DisplayFor(model => model.Date)
+@Html.DisplayFor(model => model.DateStart)
+@Html.DisplayFor(model => model.DateEnd)
+@Html.DisplayFor(model => model.country.Code)
+@Html.DisplayFor(model => model.Location)
+
+<div>Updates</div>
+@foreach (var update in Model.updates)
+{
+    <div>@update.Title</div>
+    <div>@update.Date</div>
+    <div>@update.UpdateID</div>
+
+    <hr />
+    foreach (var content in update.update_content)
+    {
+        <div>@content.ContentID</div>
+    }
+    
+    <hr />
+    foreach (var comment in update.update_comment)
+    {
+        <div>@comment.CommentID</div>
+    }
+    <div>add comment</div>
+}
+
+<div>Guestbook</div>
+@foreach (var guestpost in Model.project_guestbook) {
+    <div>@guestpost.GuestpostID</div>
+    <div>@guestpost.Date</div>
+    <div>@guestpost.Picture</div>
+    <div>@guestpost.Text</div>
+    <div>@guestpost.user.UserName</div>
+}
+
+<div>Donate</div>
+
+
+@Html.ActionLink("Back to List", "Index",new{},new{@class="btn"})

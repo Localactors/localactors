@@ -1,0 +1,65 @@
+﻿@model Localactors.entities.project_guestbook
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>project_guestbook</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProjectID, "project")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("ProjectID", String.Empty)
+            @Html.ValidationMessageFor(model => model.ProjectID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UserID, "user")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("UserID", String.Empty)
+            @Html.ValidationMessageFor(model => model.UserID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Date)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Date)
+            @Html.ValidationMessageFor(model => model.Date)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Text)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Text)
+            @Html.ValidationMessageFor(model => model.Text)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Picture)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Picture)
+            @Html.ValidationMessageFor(model => model.Picture)
+        </div>
+
+        <p>
+            <input type="submit" class="btn"  value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index",new{},new{@class="btn"})
+</div>

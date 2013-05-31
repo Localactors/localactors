@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Localactors.entities.project_guestbook>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            project
+        </th>
+        <th>
+            user
+        </th>
+        <th>
+            Date
+        </th>
+        <th>
+            Text
+        </th>
+        <th>
+            Picture
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.project.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.user.Role)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Text)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Picture)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.GuestpostID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.GuestpostID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.GuestpostID })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Localactors.entities.user_roles>
+
+@{
+    ViewBag.Title = "User Roles";
+}
+
+<ul class="breadcrumb">
+    <li><a href='@Url.Action("Index","Home")'>Home</a> <span class="divider">/</span></li>
+    <li class="active"><a href='@Url.Action("Index","UserRoles")'>User Roles</a> </li>
+</ul>
+
+
+
+<table class="table table-condensed table-striped table-bordered">
+    <tr>
+        <th>
+            RoleName
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.RoleName)
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="robots" content="no-index,no-follow" />
+    <link href="@Url.Content("~/Areas/Admin/Content/css/bootstrap.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Areas/Admin/Content/css/bootstrap-responsive.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Areas/Admin/Content/css/jqueryui/custom.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Areas/Admin/Content/css/style.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/css/datepicker.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/css/bootstrap-wysihtml5.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/favicon.png")" type="image/png" rel="icon"  />
+    <script src="@Url.Content("~/Scripts/jquery-1.7.2.min.js")" type="text/javascript"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/bootstrap.js")" ></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/bootstrap-datepicker.js")" ></script>
+    <script src="@Url.Content("~/Scripts/wysihtml5-0.3.0_rc2.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/bootstrap-wysihtml5.js")" type="text/javascript"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/site2.js")" ></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/site.js")" ></script>
+</head>
+<body>
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar">
+                    </span>
+                </button>
+                <a class="brand" href="@Url.Action("Index", "Home")">Localactors</a>
+                <div class="nav-collapse collapse">
+                    <ul class="nav">
+                        
+                        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Users</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="@Url.Action("Index", "User")">Users</a> </li>
+                                <li><a href="@Url.Action("Index", "Mailinglist")">Mailing List</a> </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Projects</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="@Url.Action("Index", "Projects")" >Projects</a></li>
+                                <li><a href="@Url.Action("Index", "Donations")">Donations</a></li>
+                                <li><a href="@Url.Action("Index", "Tag")">Tags</a></li>
+                                <li class="divider"></li>
+                                <li><a href="@Url.Action("Create", "Projects")" >New Project</a></li>
+                            </ul>
+                        </li>
+@*                        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Updates</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="@Url.Action("Index", "Update")">Updates</a></li>
+                                <li><a href="@Url.Action("Index", "UpdateContents")">Contents</a> </li>
+                            </ul>
+                        </li>*@
+                        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Lookups</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="@Url.Action("Index", "Country")">Countries</a></li>
+                                <li><a href="@Url.Action("Index", "UpdateContentTypes")">Content Types</a></li>
+                                <li><a href="@Url.Action("Index", "UserRoles")">User Roles </a></li>
+                            </ul>
+                        </li>
+                        <li class="divider-vertical"></li>
+                        @if (Request.IsAuthenticated)
+                        {                   
+                            <li><a href="@Url.Action("ChangePassword", "Account")">@User.Identity.Name</a></li>
+                            <li><a href="@Url.Action("Logout", "Account")">Logout</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="@Url.Action("Login", "Account")">Login</a></li>
+                        }
+                        <li class="divider-vertical"></li>
+                        <li><a href="https://908011304798.signin.aws.amazon.com/console" target="_blank">AWS
+                            Signup</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="underbar">
+    </div>
+    <div class="container">
+        @{Html.RenderPartial("_Warnings");}
+        @RenderBody()
+    </div>
+</body>
+</html>

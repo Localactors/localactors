@@ -1,0 +1,18 @@
+﻿@model Localactors.entities.user
+@{
+@{
+    ViewBag.Title = Model.UserName;
+    Layout = "~/Views/Account/_Layout.cshtml";
+}
+
+<div class="span8 ">
+
+    <h6>@Model.UserName</h6>
+    <hr />
+    <div class="clearfix">
+        @Model.Name (@Model.DateJoined)
+    </div>
+    <div class="clearfix">
+        <i>@Model.Bio</i>
+    </div>
+</div>
