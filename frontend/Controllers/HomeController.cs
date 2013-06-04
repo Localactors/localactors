@@ -24,6 +24,22 @@ namespace Localactors.webapp.Controllers
             return View();
         }
 
+        public ActionResult CallForProjects()
+        {
+            return View();
+        }
+        public ActionResult Guidelines() {
+            return View();
+        }
+        public ActionResult OurApproach()
+        {
+            return View();
+        }
+        public ActionResult HowTo()
+        {
+            return View();
+        }
+
 
         public ActionResult fourofour() {
             return View();

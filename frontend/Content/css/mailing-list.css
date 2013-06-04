@@ -1,0 +1,527 @@
+@font-face {
+  font-family: "source sans pro";
+  src: url("/fonts/sourcesanspro/sourcesanspro-bold-webfont.eot");
+  src: url("/fonts/sourcesanspro/sourcesanspro-bold-webfont.eot?#iefix") format('eot'), url("/fonts/sourcesanspro/sourcesanspro-bold-webfont.woff") format('woff'), url("/fonts/sourcesanspro/sourcesanspro-bold-webfont.ttf") format('truetype');
+  font-weight: 600;
+  font-style: normal; }
+
+@font-face {
+  font-family: "source sans pro";
+  src: url("/fonts/sourcesanspro/sourcesanspro-italic-webfont.eot");
+  src: url("/fonts/sourcesanspro/sourcesanspro-italic-webfont.eot?#iefix") format('eot'), url("/fonts/sourcesanspro/sourcesanspro-italic-webfont.woff") format('woff'), url("/fonts/sourcesanspro/sourcesanspro-italic-webfont.ttf") format('truetype');
+  font-weight: 400;
+  font-style: italic; }
+
+@font-face {
+  font-family: "source sans pro";
+  src: url("/fonts/sourcesanspro/sourcesanspro-regular-webfont.eot");
+  src: url("/fonts/sourcesanspro/sourcesanspro-regular-webfont.eot?#iefix") format('eot'), url("/fonts/sourcesanspro/sourcesanspro-regular-webfont.woff") format('woff'), url("/fonts/sourcesanspro/sourcesanspro-regular-webfont.ttf") format('truetype');
+  font-weight: 400;
+  font-style: normal; }
+
+@font-face {
+  font-family: "miso";
+  src: url("/fonts/miso/miso-bold-webfont.eot");
+  src: url("/fonts/miso/miso-bold-webfont.eot?#iefix") format('eot'), url("/fonts/miso/miso-bold-webfont.woff") format('woff'), url("/fonts/miso/miso-bold-webfont.ttf") format('truetype');
+  font-weight: 600;
+  font-style: normal; }
+
+@font-face {
+  font-family: "miso";
+  src: url("/fonts/miso/miso-light-webfont.eot");
+  src: url("/fonts/miso/miso-light-webfont.eot?#iefix") format('eot'), url("/fonts/miso/miso-light-webfont.woff") format('woff'), url("/fonts/miso/miso-light-webfont.ttf") format('truetype');
+  font-weight: 200;
+  font-style: normal; }
+
+@font-face {
+  font-family: "miso";
+  src: url("/fonts/miso/miso-webfont.eot");
+  src: url("/fonts/miso/miso-webfont.eot?#iefix") format('eot'), url("/fonts/miso/miso-webfont.woff") format('woff'), url("/fonts/miso/miso-webfont.ttf") format('truetype');
+  font-weight: 400;
+  font-style: normal; }
+
+/* line 33, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+summary {
+  display: block; }
+
+/* line 40, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+audio,
+canvas,
+video {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1; }
+
+/* line 48, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+audio:not([controls]) {
+  display: none;
+  height: 0; }
+
+/* line 55, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+[hidden] {
+  display: none; }
+
+/* line 69, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+html {
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%; }
+
+/* line 82, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+html,
+button,
+input,
+select,
+textarea {
+  font-family: sans-serif; }
+
+/* line 88, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+body {
+  margin: 0; }
+
+/* line 103, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+a:focus {
+  outline: thin dotted; }
+
+/* line 109, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+a:active,
+a:hover {
+  outline: 0; }
+
+/* line 122, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0; }
+
+/* line 127, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+h2 {
+  font-size: 1.5em;
+  margin: 0.83em 0; }
+
+/* line 132, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+h3 {
+  font-size: 1.17em;
+  margin: 1em 0; }
+
+/* line 137, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+h4 {
+  font-size: 1em;
+  margin: 1.33em 0; }
+
+/* line 142, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+h5 {
+  font-size: 0.83em;
+  margin: 1.67em 0; }
+
+/* line 147, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+h6 {
+  font-size: 0.67em;
+  margin: 2.33em 0; }
+
+/* line 153, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+abbr[title] {
+  border-bottom: 1px dotted; }
+
+/* line 159, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+b,
+strong {
+  font-weight: bold; }
+
+/* line 163, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+blockquote {
+  margin: 1em 40px; }
+
+/* line 168, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+dfn {
+  font-style: italic; }
+
+/* line 174, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0; }
+
+/* line 181, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+mark {
+  background: #ff0;
+  color: #000; }
+
+/* line 188, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+p,
+pre {
+  margin: 1em 0; }
+
+/* line 196, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, serif;
+  _font-family: 'courier new', monospace;
+  font-size: 1em; }
+
+/* line 203, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+pre {
+  white-space: pre;
+  white-space: pre-wrap;
+  word-wrap: break-word; }
+
+/* line 210, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+q {
+  quotes: none; }
+
+/* line 216, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+q:before,
+q:after {
+  content: '';
+  content: none; }
+
+/* line 222, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+small {
+  font-size: 80%; }
+
+/* line 228, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline; }
+
+/* line 235, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+sup {
+  top: -0.5em; }
+
+/* line 239, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+sub {
+  bottom: -0.25em; }
+
+/* line 253, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+dl,
+menu,
+ol,
+ul {
+  margin: 1em 0; }
+
+/* line 257, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+dd {
+  margin: 0 0 0 40px; }
+
+/* line 264, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+menu,
+ol,
+ul {
+  padding: 0 0 0 40px; }
+
+/* line 270, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+nav ul,
+nav ol {
+  list-style: none;
+  list-style-image: none; }
+
+/* line 283, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+img {
+  border: 0;
+  -ms-interpolation-mode: bicubic; }
+
+/* line 289, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+svg:not(:root) {
+  overflow: hidden; }
+
+/* line 300, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+figure {
+  margin: 0; }
+
+/* line 311, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+form {
+  margin: 0; }
+
+/* line 316, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em; }
+
+/* line 325, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+legend {
+  border: 0;
+  padding: 0;
+  white-space: normal;
+  *margin-left: -7px; }
+
+/* line 339, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+button,
+input,
+select,
+textarea {
+  font-size: 100%;
+  margin: 0;
+  vertical-align: baseline;
+  *vertical-align: middle; }
+
+/* line 349, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+button,
+input {
+  line-height: normal; }
+
+/* line 358, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+button,
+select {
+  text-transform: none; }
+
+/* line 372, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  cursor: pointer;
+  *overflow: visible; }
+
+/* line 380, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+button[disabled],
+html input[disabled] {
+  cursor: default; }
+
+/* line 389, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+  *height: 13px;
+  *width: 13px; }
+
+/* line 399, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+input[type="search"] {
+  -webkit-appearance: textfield;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box; }
+
+/* line 409, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none; }
+
+/* line 415, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0; }
+
+/* line 422, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+textarea {
+  overflow: auto;
+  vertical-align: top; }
+
+/* line 434, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-h5bp-0.1.1/stylesheets/h5bp/_normalize.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+/* line 33, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+body {
+  width: 100% !important;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased; }
+
+/* line 41, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+p {
+  font-family: "source sans pro", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+
+/* line 44, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+div.logo {
+  background: white url("/content/images/logo_mail.png") no-repeat left top;
+  width: 122px;
+  height: 71px;
+  margin-bottom: 0; }
+
+/* line 50, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0.625em 0 0 0;
+  color: #ff4874;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  line-height: 1em; }
+
+/* line 56, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+h1 {
+  font-size: 2.25em; }
+
+/* line 58, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+h2 {
+  font-size: 2em; }
+
+/* line 60, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+h3 {
+  font-size: 1.75em; }
+
+/* line 62, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+h4 {
+  font-size: 1.5em; }
+
+/* line 64, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+h5 {
+  font-size: 1.25em; }
+
+/* line 66, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+h6 {
+  font-size: 1em; }
+
+/* line 69, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+hr.border {
+  margin-bottom: 0;
+  border: 0;
+  height: 5px;
+  background: url("/content/images/textures/spined.png") repeat-x; }
+
+/* line 75, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+img {
+  width: 100%;
+  max-width: 100%; }
+
+/* line 79, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+p.subtitle {
+  font-size: 1.125em;
+  margin: 0.1875em 0 0.3125em 0;
+  color: #ff4874;
+  text-transform: uppercase;
+  font-size: 0.875em; }
+/* line 85, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+p.month {
+  font-size: 0.75em;
+  margin-top: 0.3125em;
+  margin-bottom: 1.25em;
+  position: relative;
+  color: #ff4874;
+  font-weight: bold;
+  text-transform: uppercase; }
+  /* line 93, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+  p.month span {
+    color: #6045ff; }
+/* line 95, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+p.description {
+  font-size: 1em;
+  display: inline;
+  color: #6045ff; }
+/* line 100, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+p a {
+  background-color: yellow;
+  color: black; }
+  /* line 103, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+  p a:hover {
+    color: #6045ff;
+    background-color: #81ffd0; }
+
+/* line 107, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+table[id="external"] {
+  margin: 0 !important;
+  padding: 0 !important;
+  background-color: white; }
+  /* line 112, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+  table[id="external"] td[id="externaltd"] {
+    max-width: 37.5em;
+    padding: 1.25em !important; }
+    @media (min-width: 25em) {
+      /* line 112, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+      table[id="external"] td[id="externaltd"] {
+        max-width: 25em;
+        padding-left: 0.625em;
+        padding-right: 0.625em;
+        margin-left: auto;
+        margin-right: auto; }
+        /* line 38, /Users/piermariacosina/.rvm/gems/ruby-1.9.3-p362/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/general/_clearfix.scss */
+        table[id="external"] td[id="externaltd"]:after {
+          content: "";
+          display: table;
+          clear: both; } }
+    @media (min-width: 32.5em) {
+      /* line 112, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+      table[id="external"] td[id="externaltd"] {
+        max-width: 32.5em; } }
+    /* line 117, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+    table[id="external"] td[id="externaltd"] table[id="main"] td[class="story"] {
+      margin-top: 1.25em; }
+
+@media screen and (max-device-width: 480px), screen and (max-width: 480px) {
+  /* line 123, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+  div.logo {
+    background: white url("/content/images/logo_mail_mobile.png") no-repeat left top;
+    width: 78px;
+    height: 47px;
+    margin-bottom: 1.875em; }
+
+  /* line 129, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+  h1, h2, h3, h4, h5, h6 {
+    margin: 0.3125em 0 0 0; }
+
+  /* line 133, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+  h1 {
+    font-size: 1.875em; }
+
+  /* line 135, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+  h2 {
+    font-size: 1.625em; }
+
+  /* line 137, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+  h3 {
+    font-size: 1.5em; }
+
+  /* line 139, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+  h4 {
+    font-size: 1.25em; }
+
+  /* line 141, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+  h5 {
+    font-size: 1em; }
+
+  /* line 143, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+  h6 {
+    font-size: 0.75em; }
+
+  /* line 146, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+  hr.border {
+    margin-top: 1.25em;
+    margin-bottom: 0.625em; }
+
+  /* line 151, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+  p.subtitle {
+    margin: 0.5em 0 0.625em 0; }
+  /* line 153, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+  p.month {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding-right: 0.83333em;
+    font-size: 0.75em; }
+  /* line 160, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+  p.description {
+    font-size: 0.8125em; }
+
+  /* line 163, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+  table[id="external"] {
+    margin: 0 !important;
+    padding: 0 !important; }
+    /* line 166, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+    table[id="external"] td[id="externaltd"] {
+      max-width: 32.5em;
+      _width: 32.5em;
+      position: relative;
+      padding: 0.3125em !important; }
+      /* line 170, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+      table[id="external"] td[id="externaltd"] table[id="main"] {
+        width: 100%; } }

@@ -1,9 +1,86 @@
-﻿<div>
-    Local Actors
-</div>
-<div>
-    @{Html.RenderPartial("_Login");}
-</div>
-<div>
-    @Html.ActionLink("Projects","Index","Projects")
-</div>
+﻿<header>
+    <div id='logo'>
+        <a class='logo' href='@Url.Action("Index", "Home")'>
+            <!--
+              <span class='sone'></span>
+              <span class='zero'></span>
+              <span class='stwo'></span>
+              <span class='one'></span>
+              <span class='sthree'></span>
+              <span class='two'></span>
+              <span class='sfour'></span>
+              <span class='three'></span>
+              <span class='stwo'></span>
+              <span class='num four'></span>
+              <span class='stripe four'></span>
+              <span class='num five'></span>
+              <span class='stripe three'></span>
+              <span class='num six'></span>
+              <span class='stripe two'></span>
+              <span class='num seven'></span>
+              <span class='stripe one'></span>
+              <span class='num eight'></span>
+              <span class='stripe two'></span>
+              <span class='num nine'></span>
+              <span class='stripe four'></span>
+            -->
+            <span class='logo_text'></span></a>
+    </div>
+    <nav class='navigation'>
+        <ul>
+            <li><a href='@Url.Action("OurApproach", "Home")'>Our approach</a> </li>
+            <li><a href='@Url.Action("HowTo", "Home")'>How to</a> </li>
+            <li><a href='@Url.Action("Index", "Projects")'>Projects</a> </li>
+            <li><a class='call-for-projects' href='@Url.Action("CallForProjects", "Home")'>Call for
+                projects</a> </li>
+        </ul>
+    </nav>
+    <!--
+          <div id='paper'>
+            <span class='pdf_icon'>PDF icon</span>
+            <a href='#'>Download PDF</a>
+          </div>
+          <div id='socials'></div>
+        -->
+    <div class='banner-container'>
+        <div class='banner-call'>
+            <div class='border1'>
+            </div>
+            <div class='border2'>
+            </div>
+            <div class='bg-dash'>
+            </div>
+            <div class='bg-white'>
+            </div>
+            <div class='icon'>
+            </div>
+            <ul>
+                <li><a href='@Url.Action("CallForProjects", "Home")' lang='en'>Looking for new projects!</a>
+                </li>
+                <li><a href='@Url.Action("CallForProjects", "Home")' lang='it'>Cerchiamo progetti interessanti!</a>
+                </li>
+                <li><a href='@Url.Action("CallForProjects", "Home")' lang='es'>¡En busca de nuevos proyectos!</a>
+                </li>
+                <li><a href='@Url.Action("CallForProjects", "Home")' lang='pt'>Buscamos novos projetos!</a>
+                </li>
+                <li><a href='@Url.Action("CallForProjects", "Home")' lang='tr'>Yeni projeler arıyoruz!</a>
+                </li>
+                <li><a href='@Url.Action("CallForProjects", "Home")' lang='fr'>Avez vous des nouveaux
+                    projets?</a> </li>
+                <li><a dir='rtl' href='@Url.Action("CallForProjects", "Home")' lang='ar'>نحن نبحث عن
+                    مشاريع جديدة</a> </li>
+                <li><a href='@Url.Action("CallForProjects", "Home")' lang='zh'>期待合作</a> </li>
+                <li><a href='@Url.Action("CallForProjects", "Home")' lang='cs'>Hledame nove projekty</a>
+                </li>
+                <li><a href='@Url.Action("CallForProjects", "Home")' lang='pl'>Masz nowy projekt ? Podziel
+                    sie z nami !</a> </li>
+                <li><a href='@Url.Action("CallForProjects", "Home")' lang='hu'>Uj projekteket keresunk!</a>
+                </li>
+                <li><a href='@Url.Action("CallForProjects", "Home")' lang='de'>Wir suchen neue Projekte!</a>
+                </li>
+                <li><a href='@Url.Action("CallForProjects", "Home")' lang='nl'>We zijn op zoek naar nieuwe
+                    projecten!</a> </li>
+            </ul>
+        </div>
+    </div>
+</header>
