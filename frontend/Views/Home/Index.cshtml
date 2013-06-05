@@ -119,8 +119,8 @@
         @foreach (user publisher in Model.publishers)
         {
             <li class='publisher'><a href='@Url.Action("Details", "Publisher", new { id = publisher.UserID })'>
-                <img src="@publisher.Image" alt="@publisher.Name" />
-                <span>@publisher.Name</span> </a></li>
+                <img src="@publisher.Image" alt="@publisher.Name @publisher.Lastname" />
+                <span>@publisher.Name @publisher.Lastname</span> </a></li>
         }
     </ul>
     <div class='clear'>
