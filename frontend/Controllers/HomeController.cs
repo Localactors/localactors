@@ -1,13 +1,26 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Linq;
+using Localactors.entities;
 
 namespace Localactors.webapp.Controllers
 {
     public class HomeController : ControllerBase
     {
+        public class HomeModel {
+            public List<user> publishers { get; set; }
+            public List<project> projects { get; set; } 
+        }
+
         public ActionResult Index() {
-            return View();
+
+            HomeModel model = new HomeModel();
+            model.publishers = db.users.Where(x => x.Role == "publisher").ToList();
+            model.projects = db.projects.OrderByDescending("ProjectID").Take(5).ToList();
+
+
+            return View(model);
         }
 
         public ActionResult Login()

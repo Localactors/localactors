@@ -14,6 +14,7 @@
           <EntitySet Name="project_guestbook" EntityType="localactorsModel.Store.project_guestbook" store:Type="Tables" Schema="localactors" />
           <EntitySet Name="project_tag" EntityType="localactorsModel.Store.project_tag" store:Type="Tables" Schema="localactors" />
           <EntitySet Name="tag" EntityType="localactorsModel.Store.tag" store:Type="Tables" Schema="localactors" />
+          <EntitySet Name="transaction" EntityType="localactorsModel.Store.transaction" store:Type="Tables" Schema="localactors" />
           <EntitySet Name="update" EntityType="localactorsModel.Store.update" store:Type="Tables" Schema="localactors" />
           <EntitySet Name="update_comment" EntityType="localactorsModel.Store.update_comment" store:Type="Tables" Schema="localactors" />
           <EntitySet Name="update_content" EntityType="localactorsModel.Store.update_content" store:Type="Tables" Schema="localactors" />
@@ -65,6 +66,10 @@
           <AssociationSet Name="FK_project_user" Association="localactorsModel.Store.FK_project_user">
             <End Role="user" EntitySet="user" />
             <End Role="project" EntitySet="project" />
+          </AssociationSet>
+          <AssociationSet Name="FK_transaction_donation" Association="localactorsModel.Store.FK_transaction_donation">
+            <End Role="donation" EntitySet="donation" />
+            <End Role="transaction" EntitySet="transaction" />
           </AssociationSet>
           <AssociationSet Name="FK_update_comment_update" Association="localactorsModel.Store.FK_update_comment_update">
             <End Role="update" EntitySet="update" />
@@ -132,7 +137,13 @@
           <Property Name="ProjectID" Type="int" />
           <Property Name="Date" Type="datetime" Nullable="false" />
           <Property Name="Amount" Type="decimal" Nullable="false" />
-          <Property Name="Description" Type="text" Nullable="false" />
+          <Property Name="Currency" Type="varchar" Nullable="false" MaxLength="5" />
+          <Property Name="Description" Type="text" />
+          <Property Name="PP_Email" Type="varchar" MaxLength="255" />
+          <Property Name="PP_Status" Type="varchar" MaxLength="50" />
+          <Property Name="PP_Transaction" Type="varchar" MaxLength="255" />
+          <Property Name="PP_Amount" Type="varchar" MaxLength="50" />
+          <Property Name="PP_Currency" Type="varchar" MaxLength="5" />
         </EntityType>
         <EntityType Name="mailinglist">
           <Key>
@@ -155,8 +166,11 @@
           <Property Name="Date" Type="datetime" Nullable="false" />
           <Property Name="DateStart" Type="datetime" Nullable="false" />
           <Property Name="DateEnd" Type="datetime" Nullable="false" />
+          <Property Name="Target" Type="int" Nullable="false" />
           <Property Name="CountryID" Type="int" Nullable="false" />
           <Property Name="Location" Type="varchar" MaxLength="255" />
+          <Property Name="Image" Type="varchar" MaxLength="255" />
+          <Property Name="Cover" Type="bool" Nullable="false" />
         </EntityType>
         <EntityType Name="project_guestbook">
           <Key>
@@ -183,6 +197,29 @@
           </Key>
           <Property Name="TagID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="transaction">
+          <Key>
+            <PropertyRef Name="TransactionID" />
+          </Key>
+          <Property Name="TransactionID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DonationID" Type="int" Nullable="false" />
+          <Property Name="TransactionType" Type="varchar" MaxLength="5" />
+          <Property Name="TransactionStatus" Type="varchar" MaxLength="10" />
+          <Property Name="TransactionCode" Type="varchar" MaxLength="255" />
+          <Property Name="TransactionSignature" Type="varchar" MaxLength="255" />
+          <Property Name="TransactionDate" Type="varchar" MaxLength="255" />
+          <Property Name="GrossAmount" Type="decimal" />
+          <Property Name="TaxAmount" Type="decimal" />
+          <Property Name="Currency" Type="varchar" MaxLength="5" />
+          <Property Name="PaymentStatus" Type="varchar" MaxLength="20" />
+          <Property Name="PendingReason" Type="varchar" MaxLength="255" />
+          <Property Name="SenderID" Type="varchar" MaxLength="255" />
+          <Property Name="SenderEmail" Type="varchar" MaxLength="255" />
+          <Property Name="ReceiverID" Type="varchar" MaxLength="255" />
+          <Property Name="ReceiverEmail" Type="varchar" MaxLength="255" />
+          <Property Name="ItemName" Type="varchar" MaxLength="255" />
+          <Property Name="ItemNumber" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="update">
           <Key>
@@ -256,6 +293,7 @@
           <Property Name="Email_Hash" Type="varchar" MaxLength="100" />
           <Property Name="DateJoined" Type="datetime" />
           <Property Name="DateLastLogin" Type="datetime" />
+          <Property Name="Image" Type="varchar" MaxLength="255" />
         </EntityType>
         <!--Errors Found During Generation:
       warning 6002: The table/view 'def.localactors.user_follow_project' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
@@ -399,6 +437,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_transaction_donation">
+          <End Role="donation" Type="localactorsModel.Store.donation" Multiplicity="1" />
+          <End Role="transaction" Type="localactorsModel.Store.transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="donation">
+              <PropertyRef Name="InvestmentID" />
+            </Principal>
+            <Dependent Role="transaction">
+              <PropertyRef Name="DonationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_update_comment_update">
           <End Role="update" Type="localactorsModel.Store.update" Multiplicity="1" />
           <End Role="update_comment" Type="localactorsModel.Store.update_comment" Multiplicity="*" />
@@ -518,8 +568,6 @@
         <EntityContainer Name="localactors" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="achievements" EntityType="localactorsModel.achievement" />
           <EntitySet Name="countries" EntityType="localactorsModel.country" />
-          <EntitySet Name="donations" EntityType="localactorsModel.donation" />
-          <EntitySet Name="projects" EntityType="localactorsModel.project" />
           <EntitySet Name="project_guestbook" EntityType="localactorsModel.project_guestbook" />
           <EntitySet Name="tags" EntityType="localactorsModel.tag" />
           <EntitySet Name="updates" EntityType="localactorsModel.update" />
@@ -527,37 +575,9 @@
           <EntitySet Name="update_content" EntityType="localactorsModel.update_content" />
           <EntitySet Name="update_content_type" EntityType="localactorsModel.update_content_type" />
           <EntitySet Name="users" EntityType="localactorsModel.user" />
-          <AssociationSet Name="FK_achievement_project" Association="localactorsModel.FK_achievement_project">
-            <End Role="project" EntitySet="projects" />
-            <End Role="achievement" EntitySet="achievements" />
-          </AssociationSet>
-          <AssociationSet Name="FK_project_country" Association="localactorsModel.FK_project_country">
-            <End Role="country" EntitySet="countries" />
-            <End Role="project" EntitySet="projects" />
-          </AssociationSet>
           <AssociationSet Name="FK_user_country" Association="localactorsModel.FK_user_country">
             <End Role="country" EntitySet="countries" />
             <End Role="user" EntitySet="users" />
-          </AssociationSet>
-          <AssociationSet Name="FK_donation_project" Association="localactorsModel.FK_donation_project">
-            <End Role="project" EntitySet="projects" />
-            <End Role="donation" EntitySet="donations" />
-          </AssociationSet>
-          <AssociationSet Name="FK_donation_user" Association="localactorsModel.FK_donation_user">
-            <End Role="user" EntitySet="users" />
-            <End Role="donation" EntitySet="donations" />
-          </AssociationSet>
-          <AssociationSet Name="FK__project" Association="localactorsModel.FK__project">
-            <End Role="project" EntitySet="projects" />
-            <End Role="update" EntitySet="updates" />
-          </AssociationSet>
-          <AssociationSet Name="FK_project_guestbook_project" Association="localactorsModel.FK_project_guestbook_project">
-            <End Role="project" EntitySet="projects" />
-            <End Role="project_guestbook" EntitySet="project_guestbook" />
-          </AssociationSet>
-          <AssociationSet Name="FK_project_user" Association="localactorsModel.FK_project_user">
-            <End Role="user" EntitySet="users" />
-            <End Role="project" EntitySet="projects" />
           </AssociationSet>
           <AssociationSet Name="FK_project_guestbook_user" Association="localactorsModel.FK_project_guestbook_user">
             <End Role="user" EntitySet="users" />
@@ -579,14 +599,6 @@
             <End Role="update_content_type" EntitySet="update_content_type" />
             <End Role="update_content" EntitySet="update_content" />
           </AssociationSet>
-          <AssociationSet Name="project_tag" Association="localactorsModel.project_tag">
-            <End Role="project" EntitySet="projects" />
-            <End Role="tag" EntitySet="tags" />
-          </AssociationSet>
-          <AssociationSet Name="user_follow_project" Association="localactorsModel.user_follow_project">
-            <End Role="project" EntitySet="projects" />
-            <End Role="user" EntitySet="users" />
-          </AssociationSet>
           <AssociationSet Name="FK_update_user" Association="localactorsModel.FK_update_user">
             <End Role="user" EntitySet="users" />
             <End Role="update" EntitySet="updates" />
@@ -597,6 +609,49 @@
           </AssociationSet>
           <EntitySet Name="user_roles" EntityType="localactorsModel.user_roles" />
           <EntitySet Name="mailinglists" EntityType="localactorsModel.mailinglist" />
+          <EntitySet Name="transactions" EntityType="localactorsModel.transaction" />
+          <EntitySet Name="donations" EntityType="localactorsModel.donation" />
+          <AssociationSet Name="FK_donation_user" Association="localactorsModel.FK_donation_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="donation" EntitySet="donations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_transaction_donation" Association="localactorsModel.FK_transaction_donation">
+            <End Role="donation" EntitySet="donations" />
+            <End Role="transaction" EntitySet="transactions" />
+          </AssociationSet>
+          <EntitySet Name="projects" EntityType="localactorsModel.project" />
+          <AssociationSet Name="FK_achievement_project" Association="localactorsModel.FK_achievement_project">
+            <End Role="project" EntitySet="projects" />
+            <End Role="achievement" EntitySet="achievements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_project_country" Association="localactorsModel.FK_project_country">
+            <End Role="country" EntitySet="countries" />
+            <End Role="project" EntitySet="projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_donation_project" Association="localactorsModel.FK_donation_project">
+            <End Role="project" EntitySet="projects" />
+            <End Role="donation" EntitySet="donations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__project" Association="localactorsModel.FK__project">
+            <End Role="project" EntitySet="projects" />
+            <End Role="update" EntitySet="updates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_project_guestbook_project" Association="localactorsModel.FK_project_guestbook_project">
+            <End Role="project" EntitySet="projects" />
+            <End Role="project_guestbook" EntitySet="project_guestbook" />
+          </AssociationSet>
+          <AssociationSet Name="FK_project_user" Association="localactorsModel.FK_project_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="project" EntitySet="projects" />
+          </AssociationSet>
+          <AssociationSet Name="project_tag" Association="localactorsModel.project_tag">
+            <End Role="project" EntitySet="projects" />
+            <End Role="tag" EntitySet="tags" />
+          </AssociationSet>
+          <AssociationSet Name="user_follow_project" Association="localactorsModel.user_follow_project">
+            <End Role="project" EntitySet="projects" />
+            <End Role="user" EntitySet="users" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="achievement">
           <Key>
@@ -618,43 +673,8 @@
           <Property Type="String" Name="Code" MaxLength="5" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="Name" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Type="Int32" Name="Order" Nullable="false" />
-          <NavigationProperty Name="projects" Relationship="localactorsModel.FK_project_country" FromRole="country" ToRole="project" />
           <NavigationProperty Name="users" Relationship="localactorsModel.FK_user_country" FromRole="country" ToRole="user" />
-        </EntityType>
-        <EntityType Name="donation">
-          <Key>
-            <PropertyRef Name="InvestmentID" />
-          </Key>
-          <Property Type="Int32" Name="InvestmentID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="UserID" Nullable="false" />
-          <Property Type="Int32" Name="ProjectID" />
-          <Property Type="DateTime" Name="Date" Nullable="false" />
-          <Property Type="Decimal" Name="Amount" Nullable="false" />
-          <Property Type="String" Name="Description" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="project" Relationship="localactorsModel.FK_donation_project" FromRole="donation" ToRole="project" />
-          <NavigationProperty Name="user" Relationship="localactorsModel.FK_donation_user" FromRole="donation" ToRole="user" />
-        </EntityType>
-        <EntityType Name="project">
-          <Key>
-            <PropertyRef Name="ProjectID" />
-          </Key>
-          <Property Type="Int32" Name="ProjectID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="UserID" Nullable="false" />
-          <Property Type="String" Name="Title" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Description" MaxLength="65535" FixedLength="false" Unicode="false" />
-          <Property Type="DateTime" Name="Date" Nullable="false" />
-          <Property Type="DateTime" Name="DateStart" Nullable="false" />
-          <Property Type="DateTime" Name="DateEnd" Nullable="false" />
-          <Property Type="Int32" Name="CountryID" Nullable="false" />
-          <Property Type="String" Name="Location" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="achievements" Relationship="localactorsModel.FK_achievement_project" FromRole="project" ToRole="achievement" />
-          <NavigationProperty Name="country" Relationship="localactorsModel.FK_project_country" FromRole="project" ToRole="country" />
-          <NavigationProperty Name="donations" Relationship="localactorsModel.FK_donation_project" FromRole="project" ToRole="donation" />
-          <NavigationProperty Name="updates" Relationship="localactorsModel.FK__project" FromRole="project" ToRole="update" />
-          <NavigationProperty Name="project_guestbook" Relationship="localactorsModel.FK_project_guestbook_project" FromRole="project" ToRole="project_guestbook" />
-          <NavigationProperty Name="user" Relationship="localactorsModel.FK_project_user" FromRole="project" ToRole="user" />
-          <NavigationProperty Name="tags" Relationship="localactorsModel.project_tag" FromRole="project" ToRole="tag" />
-          <NavigationProperty Name="users" Relationship="localactorsModel.user_follow_project" FromRole="project" ToRole="user" />
+          <NavigationProperty Name="projects" Relationship="localactorsModel.FK_project_country" FromRole="country" ToRole="project" />
         </EntityType>
         <EntityType Name="project_guestbook">
           <Key>
@@ -666,8 +686,8 @@
           <Property Type="DateTime" Name="Date" Nullable="false" />
           <Property Type="String" Name="Text" MaxLength="65535" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="Picture" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="project" Relationship="localactorsModel.FK_project_guestbook_project" FromRole="project_guestbook" ToRole="project" />
           <NavigationProperty Name="user" Relationship="localactorsModel.FK_project_guestbook_user" FromRole="project_guestbook" ToRole="user" />
+          <NavigationProperty Name="project" Relationship="localactorsModel.FK_project_guestbook_project" FromRole="project_guestbook" ToRole="project" />
         </EntityType>
         <EntityType Name="tag">
           <Key>
@@ -685,12 +705,12 @@
           <Property Type="Int32" Name="ProjectID" Nullable="false" />
           <Property Type="String" Name="Title" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Type="DateTime" Name="Date" Nullable="false" />
-          <NavigationProperty Name="project" Relationship="localactorsModel.FK__project" FromRole="update" ToRole="project" />
           <NavigationProperty Name="update_comment" Relationship="localactorsModel.FK_update_comment_update" FromRole="update" ToRole="update_comment" />
           <NavigationProperty Name="update_content" Relationship="localactorsModel.FK_update_content_update" FromRole="update" ToRole="update_content" />
           <Property Type="Int32" Name="UserID" Nullable="false" />
           <NavigationProperty Name="user" Relationship="localactorsModel.FK_update_user" FromRole="update" ToRole="user" />
           <Property Type="DateTime" Name="DateCreated" Nullable="false" />
+          <NavigationProperty Name="project" Relationship="localactorsModel.FK__project" FromRole="update" ToRole="project" />
         </EntityType>
         <EntityType Name="update_comment">
           <Key>
@@ -760,38 +780,15 @@
           <Property Type="DateTime" Name="DateJoined" />
           <Property Type="DateTime" Name="DateLastLogin" />
           <NavigationProperty Name="country" Relationship="localactorsModel.FK_user_country" FromRole="user" ToRole="country" />
-          <NavigationProperty Name="donations" Relationship="localactorsModel.FK_donation_user" FromRole="user" ToRole="donation" />
-          <NavigationProperty Name="projects" Relationship="localactorsModel.FK_project_user" FromRole="user" ToRole="project" />
           <NavigationProperty Name="project_guestbook" Relationship="localactorsModel.FK_project_guestbook_user" FromRole="user" ToRole="project_guestbook" />
           <NavigationProperty Name="update_comment" Relationship="localactorsModel.FK_update_comment_user" FromRole="user" ToRole="update_comment" />
-          <NavigationProperty Name="projects1" Relationship="localactorsModel.user_follow_project" FromRole="user" ToRole="project" />
           <NavigationProperty Name="updates" Relationship="localactorsModel.FK_update_user" FromRole="user" ToRole="update" />
           <NavigationProperty Name="update_content" Relationship="localactorsModel.FK_update_content_user" FromRole="user" ToRole="update_content" />
+          <Property Type="String" Name="Image" MaxLength="255" FixedLength="false" Unicode="false" Nullable="true" />
+          <NavigationProperty Name="donations" Relationship="localactorsModel.FK_donation_user" FromRole="user" ToRole="donation" />
+          <NavigationProperty Name="projects" Relationship="localactorsModel.FK_project_user" FromRole="user" ToRole="project" />
+          <NavigationProperty Name="projects1" Relationship="localactorsModel.user_follow_project" FromRole="user" ToRole="project" />
         </EntityType>
-        <Association Name="FK_achievement_project">
-          <End Type="localactorsModel.project" Role="project" Multiplicity="1" />
-          <End Type="localactorsModel.achievement" Role="achievement" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="project">
-              <PropertyRef Name="ProjectID" />
-            </Principal>
-            <Dependent Role="achievement">
-              <PropertyRef Name="ProjectID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_project_country">
-          <End Type="localactorsModel.country" Role="country" Multiplicity="1" />
-          <End Type="localactorsModel.project" Role="project" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="country">
-              <PropertyRef Name="CountryID" />
-            </Principal>
-            <Dependent Role="project">
-              <PropertyRef Name="CountryID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_user_country">
           <End Type="localactorsModel.country" Role="country" Multiplicity="0..1" />
           <End Type="localactorsModel.user" Role="user" Multiplicity="*" />
@@ -801,66 +798,6 @@
             </Principal>
             <Dependent Role="user">
               <PropertyRef Name="CountryID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_donation_project">
-          <End Type="localactorsModel.project" Role="project" Multiplicity="0..1" />
-          <End Type="localactorsModel.donation" Role="donation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="project">
-              <PropertyRef Name="ProjectID" />
-            </Principal>
-            <Dependent Role="donation">
-              <PropertyRef Name="ProjectID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_donation_user">
-          <End Type="localactorsModel.user" Role="user" Multiplicity="1" />
-          <End Type="localactorsModel.donation" Role="donation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="user">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="donation">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__project">
-          <End Type="localactorsModel.project" Role="project" Multiplicity="1" />
-          <End Type="localactorsModel.update" Role="update" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="project">
-              <PropertyRef Name="ProjectID" />
-            </Principal>
-            <Dependent Role="update">
-              <PropertyRef Name="ProjectID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_project_guestbook_project">
-          <End Type="localactorsModel.project" Role="project" Multiplicity="1" />
-          <End Type="localactorsModel.project_guestbook" Role="project_guestbook" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="project">
-              <PropertyRef Name="ProjectID" />
-            </Principal>
-            <Dependent Role="project_guestbook">
-              <PropertyRef Name="ProjectID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_project_user">
-          <End Type="localactorsModel.user" Role="user" Multiplicity="1" />
-          <End Type="localactorsModel.project" Role="project" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="user">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="project">
-              <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -924,14 +861,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="project_tag">
-          <End Type="localactorsModel.project" Role="project" Multiplicity="*" />
-          <End Type="localactorsModel.tag" Role="tag" Multiplicity="*" />
-        </Association>
-        <Association Name="user_follow_project">
-          <End Type="localactorsModel.project" Role="project" Multiplicity="*" />
-          <End Type="localactorsModel.user" Role="user" Multiplicity="*" />
-        </Association>
         <Association Name="FK_update_user">
           <End Type="localactorsModel.user" Role="user" Multiplicity="1" />
           <End Type="localactorsModel.update" Role="update" Multiplicity="*" />
@@ -973,6 +902,179 @@
           <Property Type="DateTime" Name="Date" Nullable="false" />
           <Property Type="Boolean" Name="Suppress" Nullable="false" />
         </EntityType>
+        <EntityType Name="transaction">
+          <Key>
+            <PropertyRef Name="TransactionID" />
+          </Key>
+          <Property Type="Int32" Name="TransactionID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="DonationID" Nullable="false" />
+          <Property Type="String" Name="TransactionType" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="TransactionStatus" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="GrossAmount" />
+          <Property Type="Decimal" Name="TaxAmount" />
+          <Property Type="String" Name="Currency" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="PaymentStatus" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="TransactionCode" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="TransactionSignature" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SenderID" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SenderEmail" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ReceiverID" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ReceiverEmail" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ItemName" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ItemNumber" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="PendingReason" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="donation" Relationship="localactorsModel.FK_transaction_donation" FromRole="transaction" ToRole="donation" />
+          <Property Type="String" Name="TransactionDate" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="donation">
+          <Key>
+            <PropertyRef Name="InvestmentID" />
+          </Key>
+          <Property Type="Int32" Name="InvestmentID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="Int32" Name="ProjectID" />
+          <Property Type="DateTime" Name="Date" Nullable="false" />
+          <Property Type="Decimal" Name="Amount" Nullable="false" />
+          <Property Type="String" Name="Currency" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Description" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="PP_Email" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="PP_Status" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="PP_Transaction" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="PP_Amount" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="PP_Currency" MaxLength="5" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="user" Relationship="localactorsModel.FK_donation_user" FromRole="donation" ToRole="user" />
+          <NavigationProperty Name="transactions" Relationship="localactorsModel.FK_transaction_donation" FromRole="donation" ToRole="transaction" />
+          <NavigationProperty Name="project" Relationship="localactorsModel.FK_donation_project" FromRole="donation" ToRole="project" />
+        </EntityType>
+        <Association Name="FK_donation_user">
+          <End Type="localactorsModel.user" Role="user" Multiplicity="1" />
+          <End Type="localactorsModel.donation" Role="donation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="donation">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_transaction_donation">
+          <End Type="localactorsModel.donation" Role="donation" Multiplicity="1" />
+          <End Type="localactorsModel.transaction" Role="transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="donation">
+              <PropertyRef Name="InvestmentID" />
+            </Principal>
+            <Dependent Role="transaction">
+              <PropertyRef Name="DonationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="project">
+          <Key>
+            <PropertyRef Name="ProjectID" />
+          </Key>
+          <Property Type="Int32" Name="ProjectID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Description" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Date" Nullable="false" />
+          <Property Type="DateTime" Name="DateStart" Nullable="false" />
+          <Property Type="DateTime" Name="DateEnd" Nullable="false" />
+          <Property Type="Int32" Name="CountryID" Nullable="false" />
+          <Property Type="String" Name="Location" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Image" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="Cover" Nullable="false" />
+          <NavigationProperty Name="achievements" Relationship="localactorsModel.FK_achievement_project" FromRole="project" ToRole="achievement" />
+          <NavigationProperty Name="country" Relationship="localactorsModel.FK_project_country" FromRole="project" ToRole="country" />
+          <NavigationProperty Name="donations" Relationship="localactorsModel.FK_donation_project" FromRole="project" ToRole="donation" />
+          <NavigationProperty Name="updates" Relationship="localactorsModel.FK__project" FromRole="project" ToRole="update" />
+          <NavigationProperty Name="project_guestbook" Relationship="localactorsModel.FK_project_guestbook_project" FromRole="project" ToRole="project_guestbook" />
+          <NavigationProperty Name="user" Relationship="localactorsModel.FK_project_user" FromRole="project" ToRole="user" />
+          <NavigationProperty Name="tags" Relationship="localactorsModel.project_tag" FromRole="project" ToRole="tag" />
+          <NavigationProperty Name="users" Relationship="localactorsModel.user_follow_project" FromRole="project" ToRole="user" />
+          <Property Type="Int32" Name="Target" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_achievement_project">
+          <End Type="localactorsModel.project" Role="project" Multiplicity="1" />
+          <End Type="localactorsModel.achievement" Role="achievement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="project">
+              <PropertyRef Name="ProjectID" />
+            </Principal>
+            <Dependent Role="achievement">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_project_country">
+          <End Type="localactorsModel.country" Role="country" Multiplicity="1" />
+          <End Type="localactorsModel.project" Role="project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="country">
+              <PropertyRef Name="CountryID" />
+            </Principal>
+            <Dependent Role="project">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_donation_project">
+          <End Type="localactorsModel.project" Role="project" Multiplicity="0..1" />
+          <End Type="localactorsModel.donation" Role="donation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="project">
+              <PropertyRef Name="ProjectID" />
+            </Principal>
+            <Dependent Role="donation">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__project">
+          <End Type="localactorsModel.project" Role="project" Multiplicity="1" />
+          <End Type="localactorsModel.update" Role="update" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="project">
+              <PropertyRef Name="ProjectID" />
+            </Principal>
+            <Dependent Role="update">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_project_guestbook_project">
+          <End Type="localactorsModel.project" Role="project" Multiplicity="1" />
+          <End Type="localactorsModel.project_guestbook" Role="project_guestbook" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="project">
+              <PropertyRef Name="ProjectID" />
+            </Principal>
+            <Dependent Role="project_guestbook">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_project_user">
+          <End Type="localactorsModel.user" Role="user" Multiplicity="1" />
+          <End Type="localactorsModel.project" Role="project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="project">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="project_tag">
+          <End Type="localactorsModel.project" Role="project" Multiplicity="*" />
+          <End Type="localactorsModel.tag" Role="tag" Multiplicity="*" />
+        </Association>
+        <Association Name="user_follow_project">
+          <End Type="localactorsModel.project" Role="project" Multiplicity="*" />
+          <End Type="localactorsModel.user" Role="user" Multiplicity="*" />
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -998,33 +1100,6 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="CountryID" ColumnName="CountryID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="donations">
-            <EntityTypeMapping TypeName="localactorsModel.donation">
-              <MappingFragment StoreEntitySet="donation">
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="InvestmentID" ColumnName="InvestmentID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="projects">
-            <EntityTypeMapping TypeName="localactorsModel.project">
-              <MappingFragment StoreEntitySet="project">
-                <ScalarProperty Name="Location" ColumnName="Location" />
-                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
-                <ScalarProperty Name="DateEnd" ColumnName="DateEnd" />
-                <ScalarProperty Name="DateStart" ColumnName="DateStart" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1104,6 +1179,7 @@
           <EntitySetMapping Name="users">
             <EntityTypeMapping TypeName="localactorsModel.user">
               <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="DateLastLogin" ColumnName="DateLastLogin" />
                 <ScalarProperty Name="DateJoined" ColumnName="DateJoined" />
                 <ScalarProperty Name="Email_Hash" ColumnName="Email_Hash" />
@@ -1126,22 +1202,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="project_tag" TypeName="localactorsModel.project_tag" StoreEntitySet="project_tag">
-            <EndProperty Name="tag">
-              <ScalarProperty Name="TagID" ColumnName="TagID" />
-            </EndProperty>
-            <EndProperty Name="project">
-              <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="user_follow_project" TypeName="localactorsModel.user_follow_project" StoreEntitySet="user_follow_project">
-            <EndProperty Name="user">
-              <ScalarProperty Name="UserID" ColumnName="UserID" />
-            </EndProperty>
-            <EndProperty Name="project">
-              <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
-            </EndProperty>
-          </AssociationSetMapping>
           <EntitySetMapping Name="user_roles">
             <EntityTypeMapping TypeName="localactorsModel.user_roles">
               <MappingFragment StoreEntitySet="user_roles">
@@ -1161,6 +1221,82 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="transactions">
+            <EntityTypeMapping TypeName="localactorsModel.transaction">
+              <MappingFragment StoreEntitySet="transaction">
+                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+                <ScalarProperty Name="PendingReason" ColumnName="PendingReason" />
+                <ScalarProperty Name="ItemNumber" ColumnName="ItemNumber" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="ReceiverEmail" ColumnName="ReceiverEmail" />
+                <ScalarProperty Name="ReceiverID" ColumnName="ReceiverID" />
+                <ScalarProperty Name="SenderEmail" ColumnName="SenderEmail" />
+                <ScalarProperty Name="SenderID" ColumnName="SenderID" />
+                <ScalarProperty Name="TransactionSignature" ColumnName="TransactionSignature" />
+                <ScalarProperty Name="TransactionCode" ColumnName="TransactionCode" />
+                <ScalarProperty Name="PaymentStatus" ColumnName="PaymentStatus" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="TaxAmount" ColumnName="TaxAmount" />
+                <ScalarProperty Name="GrossAmount" ColumnName="GrossAmount" />
+                <ScalarProperty Name="TransactionStatus" ColumnName="TransactionStatus" />
+                <ScalarProperty Name="TransactionType" ColumnName="TransactionType" />
+                <ScalarProperty Name="DonationID" ColumnName="DonationID" />
+                <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="donations">
+            <EntityTypeMapping TypeName="localactorsModel.donation">
+              <MappingFragment StoreEntitySet="donation">
+                <ScalarProperty Name="PP_Currency" ColumnName="PP_Currency" />
+                <ScalarProperty Name="PP_Amount" ColumnName="PP_Amount" />
+                <ScalarProperty Name="PP_Transaction" ColumnName="PP_Transaction" />
+                <ScalarProperty Name="PP_Status" ColumnName="PP_Status" />
+                <ScalarProperty Name="PP_Email" ColumnName="PP_Email" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="InvestmentID" ColumnName="InvestmentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="projects">
+            <EntityTypeMapping TypeName="localactorsModel.project">
+              <MappingFragment StoreEntitySet="project">
+                <ScalarProperty Name="Target" ColumnName="Target" />
+                <ScalarProperty Name="Cover" ColumnName="Cover" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+                <ScalarProperty Name="DateEnd" ColumnName="DateEnd" />
+                <ScalarProperty Name="DateStart" ColumnName="DateStart" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="project_tag" TypeName="localactorsModel.project_tag" StoreEntitySet="project_tag">
+            <EndProperty Name="tag">
+              <ScalarProperty Name="TagID" ColumnName="TagID" />
+            </EndProperty>
+            <EndProperty Name="project">
+              <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="user_follow_project" TypeName="localactorsModel.user_follow_project" StoreEntitySet="user_follow_project">
+            <EndProperty Name="user">
+              <ScalarProperty Name="UserID" ColumnName="UserID" />
+            </EndProperty>
+            <EndProperty Name="project">
+              <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1182,118 +1318,129 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="LocalActors">
-        <EntityTypeShape EntityType="localactorsModel.achievement" Width="1.5" PointX="5.25" PointY="11" Height="2.3648893229166674" />
-        <EntityTypeShape EntityType="localactorsModel.country" Width="1.5" PointX="0.75" PointY="13.875" Height="2.1725878906249942" />
-        <EntityTypeShape EntityType="localactorsModel.donation" Width="1.5" PointX="5.25" PointY="14.625" Height="2.5571907552083388" />
-        <EntityTypeShape EntityType="localactorsModel.project" Width="1.5" PointX="3" PointY="12.75" Height="4.2879036458333388" />
-        <EntityTypeShape EntityType="localactorsModel.project_guestbook" Width="1.5" PointX="8.25" PointY="13.625" Height="2.5571907552083388" />
-        <EntityTypeShape EntityType="localactorsModel.tag" Width="1.5" PointX="5.25" PointY="20.75" Height="1.5956835937500031" />
-        <EntityTypeShape EntityType="localactorsModel.update" Width="1.5" PointX="5.25" PointY="23.125" Height="2.3648893229166674" />
-        <EntityTypeShape EntityType="localactorsModel.update_comment" Width="1.5" PointX="7.5" PointY="23" Height="2.5571907552083388" />
-        <EntityTypeShape EntityType="localactorsModel.update_content" Width="1.5" PointX="10.5" PointY="22.375" Height="3.7109993489583388" />
-        <EntityTypeShape EntityType="localactorsModel.update_content_type" Width="1.5" PointX="8.25" PointY="20.5" Height="1.595683593749996" />
-        <EntityTypeShape EntityType="localactorsModel.user" Width="1.5" PointX="8.25" PointY="7" Height="5.8263151041666674" />
-        <AssociationConnector Association="localactorsModel.FK_achievement_project" >
-          <ConnectorPoint PointX="4.5" PointY="13.057444661458334" />
-          <ConnectorPoint PointX="5.25" PointY="13.057444661458334" />
-        </AssociationConnector>
-        <AssociationConnector Association="localactorsModel.FK_project_country" >
-          <ConnectorPoint PointX="2.25" PointY="14.961293945312498" />
-          <ConnectorPoint PointX="3" PointY="14.961293945312498" />
-        </AssociationConnector>
+        <EntityTypeShape EntityType="localactorsModel.achievement" Width="1.5" PointX="7.5" PointY="16.5" Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="localactorsModel.country" Width="1.5" PointX="0.75" PointY="11.75" Height="2.1725878906249996" />
+        <EntityTypeShape EntityType="localactorsModel.project_guestbook" Width="1.5" PointX="10.5" PointY="11.5" Height="2.5571907552083353" />
+        <EntityTypeShape EntityType="localactorsModel.tag" Width="1.5" PointX="7.5" PointY="19.625" Height="1.5956835937500031" />
+        <EntityTypeShape EntityType="localactorsModel.update" Width="1.5" PointX="10.5" PointY="7.375" Height="2.9417936197916674" />
+        <EntityTypeShape EntityType="localactorsModel.update_comment" Width="1.5" PointX="8.25" PointY="7.5" Height="2.5571907552083388" />
+        <EntityTypeShape EntityType="localactorsModel.update_content" Width="1.5" PointX="12.75" PointY="9.5" Height="4.2879036458333388" />
+        <EntityTypeShape EntityType="localactorsModel.update_content_type" Width="1.5" PointX="10.5" PointY="4.75" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="localactorsModel.user" Width="1.5" PointX="3" PointY="9.625" Height="6.4032194010416674" />
         <AssociationConnector Association="localactorsModel.FK_user_country" >
-          <ConnectorPoint PointX="1.5" PointY="13.875" />
-          <ConnectorPoint PointX="1.5" PointY="8.96875" />
-          <ConnectorPoint PointX="3.9713560416666662" PointY="8.96875" />
-          <ConnectorPoint PointX="4.1380227083333327" PointY="8.96875" />
-          <ConnectorPoint PointX="8.25" PointY="8.96875" />
-        </AssociationConnector>
-        <AssociationConnector Association="localactorsModel.FK_donation_project" >
-          <ConnectorPoint PointX="4.5" PointY="15.831451822916669" />
-          <ConnectorPoint PointX="5.25" PointY="15.831451822916669" />
-        </AssociationConnector>
-        <AssociationConnector Association="localactorsModel.FK_donation_user" >
-          <ConnectorPoint PointX="8.2753836153846141" PointY="13.210917968749998" />
-          <ConnectorPoint PointX="7.875" PointY="13.611301584134612" />
-          <ConnectorPoint PointX="7.875" PointY="15.903595377604169" />
-          <ConnectorPoint PointX="7.770833333333333" PointY="15.903595377604169" />
-          <ConnectorPoint PointX="7.604166666666667" PointY="15.903595377604169" />
-          <ConnectorPoint PointX="7.208333333333333" PointY="15.903595377604169" />
-          <ConnectorPoint PointX="7.041666666666667" PointY="15.903595377604169" />
-          <ConnectorPoint PointX="6.75" PointY="15.903595377604169" />
-        </AssociationConnector>
-        <AssociationConnector Association="localactorsModel.FK__project" >
-          <ConnectorPoint PointX="3.54687375" PointY="17.037903645833339" />
-          <ConnectorPoint PointX="3.54687375" PointY="24.49974609375" />
-          <ConnectorPoint PointX="5.25" PointY="24.49974609375" />
-        </AssociationConnector>
-        <AssociationConnector Association="localactorsModel.FK_project_guestbook_project" >
-          <ConnectorPoint PointX="4.5" PointY="14.09375" />
-          <ConnectorPoint PointX="7.041666666666667" PointY="14.09375" />
-          <ConnectorPoint PointX="7.208333333333333" PointY="14.09375" />
-          <ConnectorPoint PointX="7.604166666666667" PointY="14.09375" />
-          <ConnectorPoint PointX="7.770833333333333" PointY="14.09375" />
-          <ConnectorPoint PointX="7.791666666666667" PointY="14.09375" />
-          <ConnectorPoint PointX="7.958333333333333" PointY="14.09375" />
-          <ConnectorPoint PointX="8.25" PointY="14.09375" />
-        </AssociationConnector>
-        <AssociationConnector Association="localactorsModel.FK_project_user" >
-          <ConnectorPoint PointX="8.25" PointY="9.9843774999999937" />
-          <ConnectorPoint PointX="4.1380227083333327" PointY="9.9843774999999937" />
-          <ConnectorPoint PointX="3.9713560416666662" PointY="9.9843774999999937" />
-          <ConnectorPoint PointX="3.54687375" PointY="9.9843774999999937" />
-          <ConnectorPoint PointX="3.54687375" PointY="12.75" />
+          <ConnectorPoint PointX="2.25" PointY="12.8362939453125" />
+          <ConnectorPoint PointX="3" PointY="12.8362939453125" />
         </AssociationConnector>
         <AssociationConnector Association="localactorsModel.FK_project_guestbook_user" >
-          <ConnectorPoint PointX="9.031252499999999" PointY="13.210917968749998" />
-          <ConnectorPoint PointX="9.031252499999999" PointY="13.625" />
+          <ConnectorPoint PointX="4.5" PointY="15.336253255208334" />
+          <ConnectorPoint PointX="5.916666666666667" PointY="15.336253255208334" />
+          <ConnectorPoint PointX="6.083333333333333" PointY="15.336253255208334" />
+          <ConnectorPoint PointX="6.3229191666666669" PointY="15.336253255208334" />
+          <ConnectorPoint PointX="6.4895858333333329" PointY="15.336253255208334" />
+          <ConnectorPoint PointX="8.1666666666666661" PointY="15.336253255208334" />
+          <ConnectorPoint PointX="8.3333333333333339" PointY="15.336253255208334" />
+          <ConnectorPoint PointX="10.010416666666666" PointY="15.336253255208334" />
+          <ConnectorPoint PointX="10.177083333333334" PointY="15.336253255208334" />
+          <ConnectorPoint PointX="11.65625" PointY="15.336253255208334" />
+          <ConnectorPoint PointX="11.65625" PointY="14.057190755208335" />
         </AssociationConnector>
         <AssociationConnector Association="localactorsModel.FK_update_comment_update" >
-          <ConnectorPoint PointX="6.75" PointY="24.341095377604169" />
-          <ConnectorPoint PointX="7.5" PointY="24.341095377604169" />
+          <ConnectorPoint PointX="10.5" PointY="8.77859537760417" />
+          <ConnectorPoint PointX="9.75" PointY="8.77859537760417" />
         </AssociationConnector>
         <AssociationConnector Association="localactorsModel.FK_update_content_update" >
-          <ConnectorPoint PointX="6.75" PointY="25.747091471354171" />
-          <ConnectorPoint PointX="10.5" PointY="25.747091471354171" />
+          <ConnectorPoint PointX="12" PointY="9.9083968098958337" />
+          <ConnectorPoint PointX="12.75" PointY="9.9083968098958337" />
         </AssociationConnector>
         <AssociationConnector Association="localactorsModel.FK_update_comment_user" >
-          <ConnectorPoint PointX="8.25" PointY="11.597647734374995" />
-          <ConnectorPoint PointX="7.6875" PointY="11.597647734374995" />
-          <ConnectorPoint PointX="7.6875" PointY="23" />
+          <ConnectorPoint PointX="4.5" PointY="9.84109537760417" />
+          <ConnectorPoint PointX="5.916666666666667" PointY="9.84109537760417" />
+          <ConnectorPoint PointX="6.083333333333333" PointY="9.84109537760417" />
+          <ConnectorPoint PointX="8.25" PointY="9.84109537760417" />
         </AssociationConnector>
         <AssociationConnector Association="localactorsModel.FK_update_content_update_content_type" >
-          <ConnectorPoint PointX="9.75" PointY="21.393992513020834" />
-          <ConnectorPoint PointX="10.760414166666665" PointY="21.393992513020834" />
-          <ConnectorPoint PointX="10.927080833333333" PointY="21.393992513020834" />
-          <ConnectorPoint PointX="11.25" PointY="21.393992513020834" />
-          <ConnectorPoint PointX="11.25" PointY="22.375" />
-        </AssociationConnector>
-        <AssociationConnector Association="localactorsModel.project_tag" >
-          <ConnectorPoint PointX="4.1562525" PointY="17.037903645833339" />
-          <ConnectorPoint PointX="4.1562525" PointY="21.547841796875" />
-          <ConnectorPoint PointX="5.25" PointY="21.547841796875" />
-        </AssociationConnector>
-        <AssociationConnector Association="localactorsModel.user_follow_project" >
-          <ConnectorPoint PointX="4.054689375" PointY="12.75" />
-          <ConnectorPoint PointX="4.054689375" PointY="7.9531225000000063" />
-          <ConnectorPoint PointX="8.25" PointY="7.9531225000000063" />
+          <ConnectorPoint PointX="12" PointY="5.6439925130208337" />
+          <ConnectorPoint PointX="13.5" PointY="5.6439925130208337" />
+          <ConnectorPoint PointX="13.5" PointY="9.5" />
         </AssociationConnector>
         <AssociationConnector Association="localactorsModel.FK_update_user" >
-          <ConnectorPoint PointX="8.25" PointY="13.186687199519227" />
-          <ConnectorPoint PointX="7.8507692307692309" PointY="13.585917968749996" />
-          <ConnectorPoint PointX="7.770833333333333" PointY="13.585917968749996" />
-          <ConnectorPoint PointX="7.604166666666667" PointY="13.585917968749996" />
-          <ConnectorPoint PointX="7.125" PointY="13.585917968749996" />
-          <ConnectorPoint PointX="7.125" PointY="22.751152846153843" />
-          <ConnectorPoint PointX="6.75" PointY="23.126152846153843" />
+          <ConnectorPoint PointX="4.5" PointY="10.218242187500003" />
+          <ConnectorPoint PointX="5.916666666666667" PointY="10.218242187500003" />
+          <ConnectorPoint PointX="6.083333333333333" PointY="10.218242187500003" />
+          <ConnectorPoint PointX="10.5" PointY="10.218242187500003" />
         </AssociationConnector>
         <AssociationConnector Association="localactorsModel.FK_update_content_user" >
-          <ConnectorPoint PointX="9.75" PointY="10.105458984374998" />
-          <ConnectorPoint PointX="10.8437475" PointY="10.105458984374998" />
-          <ConnectorPoint PointX="10.8437475" PointY="22.375" />
+          <ConnectorPoint PointX="4.5" PointY="10.408396809895834" />
+          <ConnectorPoint PointX="5.916666666666667" PointY="10.408396809895834" />
+          <ConnectorPoint PointX="6.083333333333333" PointY="10.408396809895834" />
+          <ConnectorPoint PointX="6.3229191666666669" PointY="10.408396809895834" />
+          <ConnectorPoint PointX="6.4895858333333329" PointY="10.408396809895834" />
+          <ConnectorPoint PointX="12.75" PointY="10.408396809895834" />
         </AssociationConnector>
         <EntityTypeShape EntityType="localactorsModel.user_roles" Width="1.5" PointX="0.75" PointY="0.75" Height="1.4033821614583388" />
-        <EntityTypeShape EntityType="localactorsModel.mailinglist" Width="1.5" PointX="3.375" PointY="0.75" Height="1.9802864583333388" />
+        <EntityTypeShape EntityType="localactorsModel.mailinglist" Width="1.5" PointX="2.75" PointY="0.75" Height="1.9802864583333388" />
+        <EntityTypeShape EntityType="localactorsModel.transaction" Width="1.5" PointX="9.75" PointY="15.5" Height="4.6725065104166674" />
+        <EntityTypeShape EntityType="localactorsModel.donation" Width="1.5" PointX="7.5" PointY="10.875" Height="3.9033007812499996" />
+        <AssociationConnector Association="localactorsModel.FK_donation_user" >
+          <ConnectorPoint PointX="4.5" PointY="15.713488828124994" />
+          <ConnectorPoint PointX="5.916666666666667" PointY="15.713488828124994" />
+          <ConnectorPoint PointX="6.083333333333333" PointY="15.713488828124994" />
+          <ConnectorPoint PointX="6.3229191666666669" PointY="15.713488828124994" />
+          <ConnectorPoint PointX="6.4895858333333329" PointY="15.713488828124994" />
+          <ConnectorPoint PointX="8.25" PointY="15.713488828124994" />
+          <ConnectorPoint PointX="8.25" PointY="14.77830078125" />
+        </AssociationConnector>
+        <AssociationConnector Association="localactorsModel.FK_transaction_donation" >
+          <ConnectorPoint PointX="9" PointY="14.448995768229167" />
+          <ConnectorPoint PointX="10.09375" PointY="14.448995768229167" />
+          <ConnectorPoint PointX="10.09375" PointY="15.5" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="localactorsModel.project" Width="1.5" PointX="5.25" PointY="10.5" Height="4.6725065104166674" />
+        <AssociationConnector Association="localactorsModel.FK_achievement_project" >
+          <ConnectorPoint PointX="6" PointY="15.172506510416667" />
+          <ConnectorPoint PointX="6" PointY="17.682444661458334" />
+          <ConnectorPoint PointX="6.3229191666666669" PointY="17.682444661458334" />
+          <ConnectorPoint PointX="6.4895858333333329" PointY="17.682444661458334" />
+          <ConnectorPoint PointX="7.5" PointY="17.682444661458334" />
+        </AssociationConnector>
+        <AssociationConnector Association="localactorsModel.FK_project_country" >
+          <ConnectorPoint PointX="2.25" PointY="12.261894972656251" />
+          <ConnectorPoint PointX="2.75" PointY="12.261894972656251" />
+          <ConnectorPoint PointX="2.75" PointY="9.375" />
+          <ConnectorPoint PointX="6" PointY="9.375" />
+          <ConnectorPoint PointX="6" PointY="10.5" />
+        </AssociationConnector>
+        <AssociationConnector Association="localactorsModel.FK_donation_project" >
+          <ConnectorPoint PointX="6.75" PointY="12.826650390625" />
+          <ConnectorPoint PointX="7.5" PointY="12.826650390625" />
+        </AssociationConnector>
+        <AssociationConnector Association="localactorsModel.FK__project" >
+          <ConnectorPoint PointX="6.4062525" PointY="10.5" />
+          <ConnectorPoint PointX="6.4062525" PointY="10.186989687500002" />
+          <ConnectorPoint PointX="10.5" PointY="10.186989687500002" />
+        </AssociationConnector>
+        <AssociationConnector Association="localactorsModel.FK_project_guestbook_project" >
+          <ConnectorPoint PointX="6.75" PointY="15.006653645833334" />
+          <ConnectorPoint PointX="8.1666666666666661" PointY="15.006653645833334" />
+          <ConnectorPoint PointX="8.3333333333333339" PointY="15.006653645833334" />
+          <ConnectorPoint PointX="10.010416666666666" PointY="15.006653645833334" />
+          <ConnectorPoint PointX="10.177083333333334" PointY="15.006653645833334" />
+          <ConnectorPoint PointX="11.0468725" PointY="15.006653645833334" />
+          <ConnectorPoint PointX="11.0468725" PointY="14.057190755208335" />
+        </AssociationConnector>
+        <AssociationConnector Association="localactorsModel.FK_project_user" >
+          <ConnectorPoint PointX="4.5" PointY="12.836253255208334" />
+          <ConnectorPoint PointX="5.25" PointY="12.836253255208334" />
+        </AssociationConnector>
+        <AssociationConnector Association="localactorsModel.project_tag" >
+          <ConnectorPoint PointX="6.4062525" PointY="15.172506510416667" />
+          <ConnectorPoint PointX="6.4062525" PointY="20.422841796875" />
+          <ConnectorPoint PointX="7.5" PointY="20.422841796875" />
+        </AssociationConnector>
+        <AssociationConnector Association="localactorsModel.user_follow_project" >
+          <ConnectorPoint PointX="5.25" PointY="11.605626627604167" />
+          <ConnectorPoint PointX="4.5" PointY="11.605626627604167" />
+        </AssociationConnector>
       </Diagram>
     </Diagrams>
   </Designer>

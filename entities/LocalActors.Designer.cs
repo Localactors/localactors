@@ -19,23 +19,24 @@ using System.Xml.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("localactorsModel", "FK_achievement_project", "project", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.project), "achievement", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.achievement), true)]
-[assembly: EdmRelationshipAttribute("localactorsModel", "FK_project_country", "country", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.country), "project", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.project), true)]
 [assembly: EdmRelationshipAttribute("localactorsModel", "FK_user_country", "country", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Localactors.entities.country), "user", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.user), true)]
-[assembly: EdmRelationshipAttribute("localactorsModel", "FK_donation_project", "project", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Localactors.entities.project), "donation", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.donation), true)]
-[assembly: EdmRelationshipAttribute("localactorsModel", "FK_donation_user", "user", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.user), "donation", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.donation), true)]
-[assembly: EdmRelationshipAttribute("localactorsModel", "FK__project", "project", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.project), "update", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.update), true)]
-[assembly: EdmRelationshipAttribute("localactorsModel", "FK_project_guestbook_project", "project", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.project), "project_guestbook", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.project_guestbook), true)]
-[assembly: EdmRelationshipAttribute("localactorsModel", "FK_project_user", "user", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.user), "project", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.project), true)]
 [assembly: EdmRelationshipAttribute("localactorsModel", "FK_project_guestbook_user", "user", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.user), "project_guestbook", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.project_guestbook), true)]
 [assembly: EdmRelationshipAttribute("localactorsModel", "FK_update_comment_update", "update", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.update), "update_comment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.update_comment), true)]
 [assembly: EdmRelationshipAttribute("localactorsModel", "FK_update_content_update", "update", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.update), "update_content", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.update_content), true)]
 [assembly: EdmRelationshipAttribute("localactorsModel", "FK_update_comment_user", "user", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.user), "update_comment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.update_comment), true)]
 [assembly: EdmRelationshipAttribute("localactorsModel", "FK_update_content_update_content_type", "update_content_type", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.update_content_type), "update_content", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.update_content), true)]
-[assembly: EdmRelationshipAttribute("localactorsModel", "project_tag", "project", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.project), "tag", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.tag))]
-[assembly: EdmRelationshipAttribute("localactorsModel", "user_follow_project", "project", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.project), "user", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.user))]
 [assembly: EdmRelationshipAttribute("localactorsModel", "FK_update_user", "user", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.user), "update", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.update), true)]
 [assembly: EdmRelationshipAttribute("localactorsModel", "FK_update_content_user", "user", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.user), "update_content", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.update_content), true)]
+[assembly: EdmRelationshipAttribute("localactorsModel", "FK_donation_user", "user", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.user), "donation", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.donation), true)]
+[assembly: EdmRelationshipAttribute("localactorsModel", "FK_transaction_donation", "donation", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.donation), "transaction", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.transaction), true)]
+[assembly: EdmRelationshipAttribute("localactorsModel", "FK_achievement_project", "project", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.project), "achievement", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.achievement), true)]
+[assembly: EdmRelationshipAttribute("localactorsModel", "FK_project_country", "country", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.country), "project", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.project), true)]
+[assembly: EdmRelationshipAttribute("localactorsModel", "FK_donation_project", "project", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Localactors.entities.project), "donation", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.donation), true)]
+[assembly: EdmRelationshipAttribute("localactorsModel", "FK__project", "project", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.project), "update", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.update), true)]
+[assembly: EdmRelationshipAttribute("localactorsModel", "FK_project_guestbook_project", "project", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.project), "project_guestbook", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.project_guestbook), true)]
+[assembly: EdmRelationshipAttribute("localactorsModel", "FK_project_user", "user", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.user), "project", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.project), true)]
+[assembly: EdmRelationshipAttribute("localactorsModel", "project_tag", "project", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.project), "tag", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.tag))]
+[assembly: EdmRelationshipAttribute("localactorsModel", "user_follow_project", "project", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.project), "user", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.user))]
 
 #endregion
 
@@ -118,38 +119,6 @@ namespace Localactors.entities
             }
         }
         private ObjectSet<country> _countries;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<donation> donations
-        {
-            get
-            {
-                if ((_donations == null))
-                {
-                    _donations = base.CreateObjectSet<donation>("donations");
-                }
-                return _donations;
-            }
-        }
-        private ObjectSet<donation> _donations;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<project> projects
-        {
-            get
-            {
-                if ((_projects == null))
-                {
-                    _projects = base.CreateObjectSet<project>("projects");
-                }
-                return _projects;
-            }
-        }
-        private ObjectSet<project> _projects;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -294,6 +263,54 @@ namespace Localactors.entities
             }
         }
         private ObjectSet<mailinglist> _mailinglists;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<transaction> transactions
+        {
+            get
+            {
+                if ((_transactions == null))
+                {
+                    _transactions = base.CreateObjectSet<transaction>("transactions");
+                }
+                return _transactions;
+            }
+        }
+        private ObjectSet<transaction> _transactions;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<donation> donations
+        {
+            get
+            {
+                if ((_donations == null))
+                {
+                    _donations = base.CreateObjectSet<donation>("donations");
+                }
+                return _donations;
+            }
+        }
+        private ObjectSet<donation> _donations;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<project> projects
+        {
+            get
+            {
+                if ((_projects == null))
+                {
+                    _projects = base.CreateObjectSet<project>("projects");
+                }
+                return _projects;
+            }
+        }
+        private ObjectSet<project> _projects;
 
         #endregion
 
@@ -313,22 +330,6 @@ namespace Localactors.entities
         public void AddTocountries(country country)
         {
             base.AddObject("countries", country);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the donations EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddTodonations(donation donation)
-        {
-            base.AddObject("donations", donation);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the projects EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToprojects(project project)
-        {
-            base.AddObject("projects", project);
         }
     
         /// <summary>
@@ -401,6 +402,30 @@ namespace Localactors.entities
         public void AddTomailinglists(mailinglist mailinglist)
         {
             base.AddObject("mailinglists", mailinglist);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the transactions EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTotransactions(transaction transaction)
+        {
+            base.AddObject("transactions", transaction);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the donations EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTodonations(donation donation)
+        {
+            base.AddObject("donations", donation);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the projects EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToprojects(project project)
+        {
+            base.AddObject("projects", project);
         }
 
         #endregion
@@ -775,28 +800,6 @@ namespace Localactors.entities
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("localactorsModel", "FK_project_country", "project")]
-        public EntityCollection<project> projects
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<project>("localactorsModel.FK_project_country", "project");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<project>("localactorsModel.FK_project_country", "project", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("localactorsModel", "FK_user_country", "user")]
         public EntityCollection<user> users
         {
@@ -809,6 +812,28 @@ namespace Localactors.entities
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<user>("localactorsModel.FK_user_country", "user", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("localactorsModel", "FK_project_country", "project")]
+        public EntityCollection<project> projects
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<project>("localactorsModel.FK_project_country", "project");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<project>("localactorsModel.FK_project_country", "project", value);
                 }
             }
         }
@@ -834,15 +859,15 @@ namespace Localactors.entities
         /// <param name="userID">Initial value of the UserID property.</param>
         /// <param name="date">Initial value of the Date property.</param>
         /// <param name="amount">Initial value of the Amount property.</param>
-        /// <param name="description">Initial value of the Description property.</param>
-        public static donation Createdonation(global::System.Int32 investmentID, global::System.Int32 userID, global::System.DateTime date, global::System.Decimal amount, global::System.String description)
+        /// <param name="currency">Initial value of the Currency property.</param>
+        public static donation Createdonation(global::System.Int32 investmentID, global::System.Int32 userID, global::System.DateTime date, global::System.Decimal amount, global::System.String currency)
         {
             donation donation = new donation();
             donation.InvestmentID = investmentID;
             donation.UserID = userID;
             donation.Date = date;
             donation.Amount = amount;
-            donation.Description = description;
+            donation.Currency = currency;
             return donation;
         }
 
@@ -978,6 +1003,30 @@ namespace Localactors.entities
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
+        public global::System.String Currency
+        {
+            get
+            {
+                return _Currency;
+            }
+            set
+            {
+                OnCurrencyChanging(value);
+                ReportPropertyChanging("Currency");
+                _Currency = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Currency");
+                OnCurrencyChanged();
+            }
+        }
+        private global::System.String _Currency;
+        partial void OnCurrencyChanging(global::System.String value);
+        partial void OnCurrencyChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
         public global::System.String Description
         {
             get
@@ -988,7 +1037,7 @@ namespace Localactors.entities
             {
                 OnDescriptionChanging(value);
                 ReportPropertyChanging("Description");
-                _Description = StructuralObject.SetValidValue(value, false);
+                _Description = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("Description");
                 OnDescriptionChanged();
             }
@@ -996,49 +1045,131 @@ namespace Localactors.entities
         private global::System.String _Description;
         partial void OnDescriptionChanging(global::System.String value);
         partial void OnDescriptionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String PP_Email
+        {
+            get
+            {
+                return _PP_Email;
+            }
+            set
+            {
+                OnPP_EmailChanging(value);
+                ReportPropertyChanging("PP_Email");
+                _PP_Email = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("PP_Email");
+                OnPP_EmailChanged();
+            }
+        }
+        private global::System.String _PP_Email;
+        partial void OnPP_EmailChanging(global::System.String value);
+        partial void OnPP_EmailChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String PP_Status
+        {
+            get
+            {
+                return _PP_Status;
+            }
+            set
+            {
+                OnPP_StatusChanging(value);
+                ReportPropertyChanging("PP_Status");
+                _PP_Status = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("PP_Status");
+                OnPP_StatusChanged();
+            }
+        }
+        private global::System.String _PP_Status;
+        partial void OnPP_StatusChanging(global::System.String value);
+        partial void OnPP_StatusChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String PP_Transaction
+        {
+            get
+            {
+                return _PP_Transaction;
+            }
+            set
+            {
+                OnPP_TransactionChanging(value);
+                ReportPropertyChanging("PP_Transaction");
+                _PP_Transaction = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("PP_Transaction");
+                OnPP_TransactionChanged();
+            }
+        }
+        private global::System.String _PP_Transaction;
+        partial void OnPP_TransactionChanging(global::System.String value);
+        partial void OnPP_TransactionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String PP_Amount
+        {
+            get
+            {
+                return _PP_Amount;
+            }
+            set
+            {
+                OnPP_AmountChanging(value);
+                ReportPropertyChanging("PP_Amount");
+                _PP_Amount = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("PP_Amount");
+                OnPP_AmountChanged();
+            }
+        }
+        private global::System.String _PP_Amount;
+        partial void OnPP_AmountChanging(global::System.String value);
+        partial void OnPP_AmountChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String PP_Currency
+        {
+            get
+            {
+                return _PP_Currency;
+            }
+            set
+            {
+                OnPP_CurrencyChanging(value);
+                ReportPropertyChanging("PP_Currency");
+                _PP_Currency = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("PP_Currency");
+                OnPP_CurrencyChanged();
+            }
+        }
+        private global::System.String _PP_Currency;
+        partial void OnPP_CurrencyChanging(global::System.String value);
+        partial void OnPP_CurrencyChanged();
 
         #endregion
 
     
         #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("localactorsModel", "FK_donation_project", "project")]
-        public project project
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<project>("localactorsModel.FK_donation_project", "project").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<project>("localactorsModel.FK_donation_project", "project").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<project> projectReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<project>("localactorsModel.FK_donation_project", "project");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<project>("localactorsModel.FK_donation_project", "project", value);
-                }
-            }
-        }
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1074,6 +1205,66 @@ namespace Localactors.entities
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<user>("localactorsModel.FK_donation_user", "user", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("localactorsModel", "FK_transaction_donation", "transaction")]
+        public EntityCollection<transaction> transactions
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<transaction>("localactorsModel.FK_transaction_donation", "transaction");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<transaction>("localactorsModel.FK_transaction_donation", "transaction", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("localactorsModel", "FK_donation_project", "project")]
+        public project project
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<project>("localactorsModel.FK_donation_project", "project").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<project>("localactorsModel.FK_donation_project", "project").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<project> projectReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<project>("localactorsModel.FK_donation_project", "project");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<project>("localactorsModel.FK_donation_project", "project", value);
                 }
             }
         }
@@ -1261,7 +1452,9 @@ namespace Localactors.entities
         /// <param name="dateStart">Initial value of the DateStart property.</param>
         /// <param name="dateEnd">Initial value of the DateEnd property.</param>
         /// <param name="countryID">Initial value of the CountryID property.</param>
-        public static project Createproject(global::System.Int32 projectID, global::System.Int32 userID, global::System.String title, global::System.DateTime date, global::System.DateTime dateStart, global::System.DateTime dateEnd, global::System.Int32 countryID)
+        /// <param name="cover">Initial value of the Cover property.</param>
+        /// <param name="target">Initial value of the Target property.</param>
+        public static project Createproject(global::System.Int32 projectID, global::System.Int32 userID, global::System.String title, global::System.DateTime date, global::System.DateTime dateStart, global::System.DateTime dateEnd, global::System.Int32 countryID, global::System.Boolean cover, global::System.Int32 target)
         {
             project project = new project();
             project.ProjectID = projectID;
@@ -1271,6 +1464,8 @@ namespace Localactors.entities
             project.DateStart = dateStart;
             project.DateEnd = dateEnd;
             project.CountryID = countryID;
+            project.Cover = cover;
+            project.Target = target;
             return project;
         }
 
@@ -1496,6 +1691,78 @@ namespace Localactors.entities
         private global::System.String _Location;
         partial void OnLocationChanging(global::System.String value);
         partial void OnLocationChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Image
+        {
+            get
+            {
+                return _Image;
+            }
+            set
+            {
+                OnImageChanging(value);
+                ReportPropertyChanging("Image");
+                _Image = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Image");
+                OnImageChanged();
+            }
+        }
+        private global::System.String _Image;
+        partial void OnImageChanging(global::System.String value);
+        partial void OnImageChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean Cover
+        {
+            get
+            {
+                return _Cover;
+            }
+            set
+            {
+                OnCoverChanging(value);
+                ReportPropertyChanging("Cover");
+                _Cover = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Cover");
+                OnCoverChanged();
+            }
+        }
+        private global::System.Boolean _Cover;
+        partial void OnCoverChanging(global::System.Boolean value);
+        partial void OnCoverChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Target
+        {
+            get
+            {
+                return _Target;
+            }
+            set
+            {
+                OnTargetChanging(value);
+                ReportPropertyChanging("Target");
+                _Target = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Target");
+                OnTargetChanged();
+            }
+        }
+        private global::System.Int32 _Target;
+        partial void OnTargetChanging(global::System.Int32 value);
+        partial void OnTargetChanged();
 
         #endregion
 
@@ -1903,44 +2170,6 @@ namespace Localactors.entities
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("localactorsModel", "FK_project_guestbook_project", "project")]
-        public project project
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<project>("localactorsModel.FK_project_guestbook_project", "project").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<project>("localactorsModel.FK_project_guestbook_project", "project").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<project> projectReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<project>("localactorsModel.FK_project_guestbook_project", "project");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<project>("localactorsModel.FK_project_guestbook_project", "project", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("localactorsModel", "FK_project_guestbook_user", "user")]
         public user user
         {
@@ -1969,6 +2198,44 @@ namespace Localactors.entities
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<user>("localactorsModel.FK_project_guestbook_user", "user", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("localactorsModel", "FK_project_guestbook_project", "project")]
+        public project project
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<project>("localactorsModel.FK_project_guestbook_project", "project").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<project>("localactorsModel.FK_project_guestbook_project", "project").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<project> projectReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<project>("localactorsModel.FK_project_guestbook_project", "project");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<project>("localactorsModel.FK_project_guestbook_project", "project", value);
                 }
             }
         }
@@ -2078,6 +2345,515 @@ namespace Localactors.entities
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<project>("localactorsModel.project_tag", "project", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="localactorsModel", Name="transaction")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class transaction : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new transaction object.
+        /// </summary>
+        /// <param name="transactionID">Initial value of the TransactionID property.</param>
+        /// <param name="donationID">Initial value of the DonationID property.</param>
+        public static transaction Createtransaction(global::System.Int32 transactionID, global::System.Int32 donationID)
+        {
+            transaction transaction = new transaction();
+            transaction.TransactionID = transactionID;
+            transaction.DonationID = donationID;
+            return transaction;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 TransactionID
+        {
+            get
+            {
+                return _TransactionID;
+            }
+            set
+            {
+                if (_TransactionID != value)
+                {
+                    OnTransactionIDChanging(value);
+                    ReportPropertyChanging("TransactionID");
+                    _TransactionID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("TransactionID");
+                    OnTransactionIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _TransactionID;
+        partial void OnTransactionIDChanging(global::System.Int32 value);
+        partial void OnTransactionIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 DonationID
+        {
+            get
+            {
+                return _DonationID;
+            }
+            set
+            {
+                OnDonationIDChanging(value);
+                ReportPropertyChanging("DonationID");
+                _DonationID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DonationID");
+                OnDonationIDChanged();
+            }
+        }
+        private global::System.Int32 _DonationID;
+        partial void OnDonationIDChanging(global::System.Int32 value);
+        partial void OnDonationIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String TransactionType
+        {
+            get
+            {
+                return _TransactionType;
+            }
+            set
+            {
+                OnTransactionTypeChanging(value);
+                ReportPropertyChanging("TransactionType");
+                _TransactionType = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("TransactionType");
+                OnTransactionTypeChanged();
+            }
+        }
+        private global::System.String _TransactionType;
+        partial void OnTransactionTypeChanging(global::System.String value);
+        partial void OnTransactionTypeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String TransactionStatus
+        {
+            get
+            {
+                return _TransactionStatus;
+            }
+            set
+            {
+                OnTransactionStatusChanging(value);
+                ReportPropertyChanging("TransactionStatus");
+                _TransactionStatus = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("TransactionStatus");
+                OnTransactionStatusChanged();
+            }
+        }
+        private global::System.String _TransactionStatus;
+        partial void OnTransactionStatusChanging(global::System.String value);
+        partial void OnTransactionStatusChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Decimal> GrossAmount
+        {
+            get
+            {
+                return _GrossAmount;
+            }
+            set
+            {
+                OnGrossAmountChanging(value);
+                ReportPropertyChanging("GrossAmount");
+                _GrossAmount = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("GrossAmount");
+                OnGrossAmountChanged();
+            }
+        }
+        private Nullable<global::System.Decimal> _GrossAmount;
+        partial void OnGrossAmountChanging(Nullable<global::System.Decimal> value);
+        partial void OnGrossAmountChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Decimal> TaxAmount
+        {
+            get
+            {
+                return _TaxAmount;
+            }
+            set
+            {
+                OnTaxAmountChanging(value);
+                ReportPropertyChanging("TaxAmount");
+                _TaxAmount = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("TaxAmount");
+                OnTaxAmountChanged();
+            }
+        }
+        private Nullable<global::System.Decimal> _TaxAmount;
+        partial void OnTaxAmountChanging(Nullable<global::System.Decimal> value);
+        partial void OnTaxAmountChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Currency
+        {
+            get
+            {
+                return _Currency;
+            }
+            set
+            {
+                OnCurrencyChanging(value);
+                ReportPropertyChanging("Currency");
+                _Currency = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Currency");
+                OnCurrencyChanged();
+            }
+        }
+        private global::System.String _Currency;
+        partial void OnCurrencyChanging(global::System.String value);
+        partial void OnCurrencyChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String PaymentStatus
+        {
+            get
+            {
+                return _PaymentStatus;
+            }
+            set
+            {
+                OnPaymentStatusChanging(value);
+                ReportPropertyChanging("PaymentStatus");
+                _PaymentStatus = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("PaymentStatus");
+                OnPaymentStatusChanged();
+            }
+        }
+        private global::System.String _PaymentStatus;
+        partial void OnPaymentStatusChanging(global::System.String value);
+        partial void OnPaymentStatusChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String TransactionCode
+        {
+            get
+            {
+                return _TransactionCode;
+            }
+            set
+            {
+                OnTransactionCodeChanging(value);
+                ReportPropertyChanging("TransactionCode");
+                _TransactionCode = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("TransactionCode");
+                OnTransactionCodeChanged();
+            }
+        }
+        private global::System.String _TransactionCode;
+        partial void OnTransactionCodeChanging(global::System.String value);
+        partial void OnTransactionCodeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String TransactionSignature
+        {
+            get
+            {
+                return _TransactionSignature;
+            }
+            set
+            {
+                OnTransactionSignatureChanging(value);
+                ReportPropertyChanging("TransactionSignature");
+                _TransactionSignature = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("TransactionSignature");
+                OnTransactionSignatureChanged();
+            }
+        }
+        private global::System.String _TransactionSignature;
+        partial void OnTransactionSignatureChanging(global::System.String value);
+        partial void OnTransactionSignatureChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String SenderID
+        {
+            get
+            {
+                return _SenderID;
+            }
+            set
+            {
+                OnSenderIDChanging(value);
+                ReportPropertyChanging("SenderID");
+                _SenderID = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("SenderID");
+                OnSenderIDChanged();
+            }
+        }
+        private global::System.String _SenderID;
+        partial void OnSenderIDChanging(global::System.String value);
+        partial void OnSenderIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String SenderEmail
+        {
+            get
+            {
+                return _SenderEmail;
+            }
+            set
+            {
+                OnSenderEmailChanging(value);
+                ReportPropertyChanging("SenderEmail");
+                _SenderEmail = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("SenderEmail");
+                OnSenderEmailChanged();
+            }
+        }
+        private global::System.String _SenderEmail;
+        partial void OnSenderEmailChanging(global::System.String value);
+        partial void OnSenderEmailChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ReceiverID
+        {
+            get
+            {
+                return _ReceiverID;
+            }
+            set
+            {
+                OnReceiverIDChanging(value);
+                ReportPropertyChanging("ReceiverID");
+                _ReceiverID = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("ReceiverID");
+                OnReceiverIDChanged();
+            }
+        }
+        private global::System.String _ReceiverID;
+        partial void OnReceiverIDChanging(global::System.String value);
+        partial void OnReceiverIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ReceiverEmail
+        {
+            get
+            {
+                return _ReceiverEmail;
+            }
+            set
+            {
+                OnReceiverEmailChanging(value);
+                ReportPropertyChanging("ReceiverEmail");
+                _ReceiverEmail = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("ReceiverEmail");
+                OnReceiverEmailChanged();
+            }
+        }
+        private global::System.String _ReceiverEmail;
+        partial void OnReceiverEmailChanging(global::System.String value);
+        partial void OnReceiverEmailChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ItemName
+        {
+            get
+            {
+                return _ItemName;
+            }
+            set
+            {
+                OnItemNameChanging(value);
+                ReportPropertyChanging("ItemName");
+                _ItemName = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("ItemName");
+                OnItemNameChanged();
+            }
+        }
+        private global::System.String _ItemName;
+        partial void OnItemNameChanging(global::System.String value);
+        partial void OnItemNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ItemNumber
+        {
+            get
+            {
+                return _ItemNumber;
+            }
+            set
+            {
+                OnItemNumberChanging(value);
+                ReportPropertyChanging("ItemNumber");
+                _ItemNumber = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("ItemNumber");
+                OnItemNumberChanged();
+            }
+        }
+        private global::System.String _ItemNumber;
+        partial void OnItemNumberChanging(global::System.String value);
+        partial void OnItemNumberChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String PendingReason
+        {
+            get
+            {
+                return _PendingReason;
+            }
+            set
+            {
+                OnPendingReasonChanging(value);
+                ReportPropertyChanging("PendingReason");
+                _PendingReason = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("PendingReason");
+                OnPendingReasonChanged();
+            }
+        }
+        private global::System.String _PendingReason;
+        partial void OnPendingReasonChanging(global::System.String value);
+        partial void OnPendingReasonChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String TransactionDate
+        {
+            get
+            {
+                return _TransactionDate;
+            }
+            set
+            {
+                OnTransactionDateChanging(value);
+                ReportPropertyChanging("TransactionDate");
+                _TransactionDate = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("TransactionDate");
+                OnTransactionDateChanged();
+            }
+        }
+        private global::System.String _TransactionDate;
+        partial void OnTransactionDateChanging(global::System.String value);
+        partial void OnTransactionDateChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("localactorsModel", "FK_transaction_donation", "donation")]
+        public donation donation
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<donation>("localactorsModel.FK_transaction_donation", "donation").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<donation>("localactorsModel.FK_transaction_donation", "donation").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<donation> donationReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<donation>("localactorsModel.FK_transaction_donation", "donation");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<donation>("localactorsModel.FK_transaction_donation", "donation", value);
                 }
             }
         }
@@ -2277,44 +3053,6 @@ namespace Localactors.entities
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("localactorsModel", "FK__project", "project")]
-        public project project
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<project>("localactorsModel.FK__project", "project").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<project>("localactorsModel.FK__project", "project").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<project> projectReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<project>("localactorsModel.FK__project", "project");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<project>("localactorsModel.FK__project", "project", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("localactorsModel", "FK_update_comment_update", "update_comment")]
         public EntityCollection<update_comment> update_comment
         {
@@ -2387,6 +3125,44 @@ namespace Localactors.entities
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<user>("localactorsModel.FK_update_user", "user", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("localactorsModel", "FK__project", "project")]
+        public project project
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<project>("localactorsModel.FK__project", "project").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<project>("localactorsModel.FK__project", "project").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<project> projectReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<project>("localactorsModel.FK__project", "project");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<project>("localactorsModel.FK__project", "project", value);
                 }
             }
         }
@@ -3793,6 +4569,30 @@ namespace Localactors.entities
         private Nullable<global::System.DateTime> _DateLastLogin;
         partial void OnDateLastLoginChanging(Nullable<global::System.DateTime> value);
         partial void OnDateLastLoginChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Image
+        {
+            get
+            {
+                return _Image;
+            }
+            set
+            {
+                OnImageChanging(value);
+                ReportPropertyChanging("Image");
+                _Image = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Image");
+                OnImageChanged();
+            }
+        }
+        private global::System.String _Image;
+        partial void OnImageChanging(global::System.String value);
+        partial void OnImageChanged();
 
         #endregion
 
@@ -3833,50 +4633,6 @@ namespace Localactors.entities
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<country>("localactorsModel.FK_user_country", "country", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("localactorsModel", "FK_donation_user", "donation")]
-        public EntityCollection<donation> donations
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<donation>("localactorsModel.FK_donation_user", "donation");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<donation>("localactorsModel.FK_donation_user", "donation", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("localactorsModel", "FK_project_user", "project")]
-        public EntityCollection<project> projects
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<project>("localactorsModel.FK_project_user", "project");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<project>("localactorsModel.FK_project_user", "project", value);
                 }
             }
         }
@@ -3931,28 +4687,6 @@ namespace Localactors.entities
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("localactorsModel", "user_follow_project", "project")]
-        public EntityCollection<project> projects1
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<project>("localactorsModel.user_follow_project", "project");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<project>("localactorsModel.user_follow_project", "project", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("localactorsModel", "FK_update_user", "update")]
         public EntityCollection<update> updates
         {
@@ -3987,6 +4721,72 @@ namespace Localactors.entities
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<update_content>("localactorsModel.FK_update_content_user", "update_content", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("localactorsModel", "FK_donation_user", "donation")]
+        public EntityCollection<donation> donations
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<donation>("localactorsModel.FK_donation_user", "donation");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<donation>("localactorsModel.FK_donation_user", "donation", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("localactorsModel", "FK_project_user", "project")]
+        public EntityCollection<project> projects
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<project>("localactorsModel.FK_project_user", "project");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<project>("localactorsModel.FK_project_user", "project", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("localactorsModel", "user_follow_project", "project")]
+        public EntityCollection<project> projects1
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<project>("localactorsModel.user_follow_project", "project");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<project>("localactorsModel.user_follow_project", "project", value);
                 }
             }
         }

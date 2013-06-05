@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
+using Amazon.S3.Model;
 using Localactors.entities;
 
 namespace Localactors.webapp.Areas.Admin.Controllers
@@ -14,8 +17,6 @@ namespace Localactors.webapp.Areas.Admin.Controllers
     public class ProjectsController : ControllerBase
     {
       
-        //
-        // GET: /Admin/Projects/
 
         public ViewResult Index()
         {
@@ -23,17 +24,11 @@ namespace Localactors.webapp.Areas.Admin.Controllers
             return View(projects.ToList());
         }
 
-        //
-        // GET: /Admin/Projects/Details/5
-
         public ViewResult Details(int id)
         {
             project project = db.projects.Single(p => p.ProjectID == id);
             return View(project);
         }
-
-        //
-        // GET: /Admin/Projects/Create
 
         public ActionResult Create()
         {
@@ -41,13 +36,50 @@ namespace Localactors.webapp.Areas.Admin.Controllers
             ViewBag.UserID = new SelectList(db.users.Where(x => x.Role == "admin" || x.Role == "publisher"), "UserID", "UserName");
             return View();
         } 
-
-        //
-        // POST: /Admin/Projects/Create
-
         [HttpPost]
         public ActionResult Create(project project)
         {
+            if (Request.Files != null && Request.Files.Count > 0)
+            {
+                foreach (string keyname in Request.Files)
+                {
+                    HttpPostedFileBase file = Request.Files[keyname];
+                    if (file != null && file.ContentLength > 0 && !string.IsNullOrEmpty(file.FileName))
+                    {
+                        //file upload
+                        string ext = Path.GetExtension(file.FileName).ToLower();
+                        if (ext != ".png" && ext != ".jpg" && ext != ".jpeg" && ext != ".swf" && ext != ".fla")
+                        {
+                            ModelState.AddModelError(keyname, "Invalid file type");
+                        }
+                        else {
+
+                            try {
+                                //ok, making the new filename
+                                string filepath = string.Format("projects/{0}", file.FileName);
+                                var request = new PutObjectRequest().WithBucketName(ConfigurationManager.AppSettings["AWSS3Bucket"]).WithKey(filepath);
+                                request.InputStream = file.InputStream;
+                                AmazonS3Client.PutObject(request);
+
+                                string address = ConfigurationManager.AppSettings["AWSS3BucketUrl"] + filepath;
+
+                                ModelState.Remove(keyname);
+                                ModelState.Add(keyname, new ModelState());
+                                ModelState.SetModelValue(keyname, new ValueProviderResult(address, address, null));
+                            }
+                            catch (Exception ex) {
+                                ModelState.AddModelError(keyname, "Upload error: " + ex.Message);
+
+                            }
+                        }
+
+                        ViewBag.CountryID = new SelectList(db.countries, "CountryID", "Code", project.CountryID);
+                        ViewBag.UserID = new SelectList(db.users.Where(x => x.Role == "admin" || x.Role == "publisher"), "UserID", "UserName", project.UserID);
+                        return View(project);
+                    }
+                }
+            }
+
             if (ModelState.IsValid)
             {
                 db.projects.AddObject(project);
@@ -60,9 +92,6 @@ namespace Localactors.webapp.Areas.Admin.Controllers
             ViewBag.UserID = new SelectList(db.users.Where(x => x.Role == "admin" || x.Role == "publisher"), "UserID", "UserName", project.UserID);
             return View(project);
         }
-        
-        //
-        // GET: /Admin/Projects/Edit/5
  
         public ActionResult Edit(int id)
         {
@@ -73,13 +102,54 @@ namespace Localactors.webapp.Areas.Admin.Controllers
             ViewBag.Tags = db.tags;
             return View(project);
         }
-
-        //
-        // POST: /Admin/Projects/Edit/5
-
         [HttpPost]
         public ActionResult Edit(project project)
         {
+            if (Request.Files != null && Request.Files.Count > 0)
+            {
+                foreach (string keyname in Request.Files)
+                {
+                    HttpPostedFileBase file = Request.Files[keyname];
+                    if (file != null && file.ContentLength > 0 && !string.IsNullOrEmpty(file.FileName))
+                    {
+
+                        //file upload
+                        string ext = Path.GetExtension(file.FileName).ToLower();
+                        if (ext != ".png" && ext != ".jpg" && ext != ".jpeg" && ext != ".swf" && ext != ".fla")
+                        {
+                            ModelState.AddModelError(keyname, "Invalid file type");
+                        }
+                        else {
+
+                            try {
+                                //ok, making the new filename
+                                string filepath = string.Format("projects/{0}", file.FileName);
+
+
+                                var request = new PutObjectRequest().WithBucketName(ConfigurationManager.AppSettings["AWSS3Bucket"]).WithKey(filepath);
+                                request.InputStream = file.InputStream;
+                                AmazonS3Client.PutObject(request);
+
+                                string address = ConfigurationManager.AppSettings["AWSS3BucketUrl"] + filepath;
+
+                                ModelState.Remove(keyname);
+                                ModelState.Add(keyname, new ModelState());
+                                ModelState.SetModelValue(keyname, new ValueProviderResult(address, address, null));
+                            }
+                            catch (Exception ex) {
+                                ModelState.AddModelError(keyname, "Upload error: " + ex.Message);
+                            }
+                        }
+
+                        ViewBag.Supporters = new SelectList(db.users.Where(x => x.Role == "admin" || x.Role == "supporter"), "UserID", "UserName");
+                        ViewBag.CountryID = new SelectList(db.countries, "CountryID", "Code", project.CountryID);
+                        ViewBag.UserID = new SelectList(db.users.Where(x => x.Role == "admin" || x.Role == "publisher"), "UserID", "UserName", project.UserID);
+                        ViewBag.Tags = db.tags;
+                        return View(project);
+                    }
+                }
+            }
+
             if (ModelState.IsValid)
             {
                 db.projects.Attach(project);

@@ -1,0 +1,146 @@
+﻿@model IEnumerable<Localactors.entities.transaction>
+@{
+    ViewBag.Title = "Index";
+}
+@if (ViewBag.Project != null)
+{
+    <ul class="breadcrumb">
+        <li><a href='@Url.Action("Index", "Home")'>Home</a> <span class="divider">/</span></li>
+        <li><a href='@Url.Action("Index", "projects")'>Projects</a> <span class="divider">/</span></li>
+        <li class=""><a href="/admin/projects/edit/@ViewBag.Project.ProjectID">@ViewBag.Project.Title</a>
+            <span class="divider">/</span> </li>
+        <li class=""><a href="/admin/donations/?projectid=@ViewBag.Project.ProjectID">Donations</a>
+            <span class="divider">/</span></li>
+        @if (ViewBag.Donation != null)
+        {
+            <li><a href='@Url.Action("Edit", "Donations", new { id = ViewBag.Donation.InvestmentID })'>@ViewBag.Donation.InvestmentID</a>
+                <span class="divider">/</span></li>
+            <li class="active"><a href='@Url.Action("Index", "Transactions", new { donationid = ViewBag.Donation.InvestmentID })'>
+                Transactions</a> </li>
+        }
+        else
+        {
+            <li class="active"><a href='@Url.Action("Index", "Transactions")'>Transactions</a>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <ul class="breadcrumb">
+        <li><a href='@Url.Action("Index", "Home")'>Home</a> <span class="divider">/</span></li>
+        <li><a href='@Url.Action("Index", "Donations")'>Donations</a> <span class="divider">
+            /</span></li>
+        @if (ViewBag.Donation != null)
+        {
+            <li><a href='@Url.Action("Edit", "Donations", new { id = ViewBag.Donation.InvestmentID })'>@ViewBag.Donation.InvestmentID</a>
+                <span class="divider">/</span></li>
+            <li class="active"><a href='@Url.Action("Index", "Transactions", new { donationid = ViewBag.Donation.InvestmentID })'>
+                Transactions</a> </li>
+        }
+        else
+        {
+            <li class="active"><a href='@Url.Action("Index", "Transactions")'>Transactions</a>
+            </li>
+        }
+    </ul>
+
+}
+<table class="table table-condensed table-striped table-bordered">
+    <tr>
+        <th>
+            TransactionType
+        </th>
+        <th>
+            TransactionStatus
+        </th>
+        <th>
+            GrossAmount
+        </th>
+        <th>
+            TaxAmount
+        </th>
+        <th>
+            Currency
+        </th>
+        <th>
+            PaymentStatus
+        </th>
+        <th>
+            TransactionCode
+        </th>
+        <th>
+            TransactionSignature
+        </th>
+        <th>
+            SenderID
+        </th>
+        <th>
+            SenderEmail
+        </th>
+        <th>
+            ReceiverID
+        </th>
+        <th>
+            ReceiverEmail
+        </th>
+        <th>
+            ItemName
+        </th>
+        <th>
+            ItemNumber
+        </th>
+        <th>
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransactionType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransactionStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GrossAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaxAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Currency)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaymentStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransactionCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransactionSignature)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SenderID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SenderEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReceiverID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReceiverEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ItemName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ItemNumber)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.TransactionID })
+            </td>
+        </tr>
+    }
+</table>

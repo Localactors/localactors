@@ -1,0 +1,58 @@
+﻿@using System.Configuration
+@model IEnumerable<Localactors.entities.donation>
+@{
+    ViewBag.Title = "Donations";
+    var PP_URL = Url.Content("~/Scripts/paypal-button.min.js") + "?merchant=" + ConfigurationManager.AppSettings["PP_MerchantAccountId"];
+}
+<div class='call top'>
+    <script src="@PP_URL"
+            data-button="donate" 
+            data-name="Project" 
+            data-number="1" 
+            data-custom="@User.Identity.Name"
+            data-currency="@ConfigurationManager.AppSettings["PP_Currency"]"
+            data-callback="@ConfigurationManager.AppSettings["PP_Callback"]" 
+        @if (@ConfigurationManager.AppSettings["PP_environment"] == "sandbox")
+        {
+            <text>data-env = "sandbox"</text>
+        }
+            data-return="@Url.AbsoluteAction("return", "donation", new { })"
+        ></script>
+</div>
+<div class='call top'>
+<table>
+    <tr>
+        <th>
+            project
+        </th>
+        <th>
+            Date
+        </th>
+        <th>
+            Amount
+        </th>
+        <th>
+            Currency
+        </th>
+        <th>
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.project.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Currency)
+            </td>
+        </tr>
+    }
+</table>
+</div>

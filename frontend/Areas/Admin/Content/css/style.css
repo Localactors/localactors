@@ -20,6 +20,7 @@ body > .navbar .brand:hover {
 .editor-field{ float:left;width: 300px;}
 .display-label{ float:left;width: 160px;clear: left;display: inline-block;padding: 5px;text-align: left;font-weight: bold;color: #999;}
 .display-field{ float:left;width: 500px;display: inline-block;padding: 5px;}
+.field-validation-valid{ color: red;display: block;clear: both;}
 fieldset{ margin: 5px;padding: 5px;}
 .text-box{}
 .single-line{}
@@ -31,3 +32,6 @@ form.compact{ display: inline-block;float: left;margin: 2px;overflow: auto;}
 .formsmall label{ font-size: 10px;text-align: right;padding-right: 8px;}
 .formsmall input, .formsmall select{font-size: 10px;margin: 1px;padding: 1px;height: 18px;}
 
+
+.imageupload{}
+.imagepreview{ border-radius: 5px;border: 1px solid #ccc;box-shadow: 2px 2px 3px black;}

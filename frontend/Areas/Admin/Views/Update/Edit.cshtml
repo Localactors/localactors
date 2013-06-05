@@ -19,6 +19,8 @@
     @Html.ValidationSummary(true)
     <fieldset>
         @Html.HiddenFor(model => model.UpdateID)
+        @Html.HiddenFor(model => model.UserID)
+        @Html.HiddenFor(model => model.DateCreated)
         <div class="editor-label">
             @Html.LabelFor(model => model.ProjectID, "project")
         </div>
@@ -46,81 +48,7 @@
     </fieldset>
 }
 <hr />
-@*<a href="#myModal" role="button" class="btn" data-toggle="modal"> Content</a>
-<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="Add Content" aria-hidden="true">
-    <form action="@Url.Action("ContentCreate", "Update")"  enctype="multipart/form-data">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-            ×</button>
-        <h3 id="">
-            Add Content</h3>
-    </div>
-    <div class="modal-body">
-        <input type="hidden" name="UpdateID" value="@Model.UpdateID"/>
-        <input type="hidden" name="ContentTypeID" value="1" />
-        <input type="hidden" name="ContentTypeName" value="UNKNOWN" />
-        <div class="editor-label">
-            <label for="Title">
-                Title</label>
-        </div>
-        <div class="editor-field">
-            <input class="text-box single-line" id="Title" name="Title" type="text" value="" />
-        </div>
-        <div class="editor-label">
-            <label for="Date">
-                Date</label>
-        </div>
-        <div class="editor-field">
-            <input class="datepicker" data-date-format="dd/mm/yyyy" id="Date" name="Date" type="text" value="" />
-        </div>
-        <div class="editor-label">
-            <label for="Subtitle">
-                Subtitle</label>
-        </div>
-        <div class="editor-field">
-            <input class="text-box single-line" id="Subtitle" name="Subtitle" type="text" value="" />
-        </div>
-        <div class="editor-label">
-            <label for="Text">
-                Text</label>
-        </div>
-        <div class="editor-field">
-            <textarea id="Text" name="Text"></textarea>
-        </div>
-        <div class="editor-label">
-            <label for="Url">
-                Url</label>
-        </div>
-        <div class="editor-field">
-            <input class="text-box single-line" id="Url" name="Url" type="text" value="" />
-        </div>
-        <div class="editor-label">
-            <label for="Media">
-                Media</label>
-        </div>
-        <div class="editor-field">
-            <input class="text-box single-line" id="Media" name="Media" type="file" value="" />
-        </div>
-        <div class="editor-label">
-            <label for="Question">
-                Question</label>
-        </div>
-        <div class="editor-field">
-            <textarea id="Question" name="Question"></textarea>
-        </div>
-        <div class="editor-label">
-            <label for="Answer">
-                Answer</label>
-        </div>
-        <div class="editor-field">
-            <textarea id="Answer" name="Answer"></textarea>
-        </div>
-    </div>
-    <div class="modal-footer">
-        <input type="submit" class="btn"  class="btn btn-primary" value="Create" />
-    </div>
-    </form>
-</div>*@ <a href="#modalparagraph" role="button" class="btn" data-toggle="modal">Paragraph</a>
+<a href="#modalparagraph" role="button" class="btn" data-toggle="modal">Paragraph</a>
 <div id="modalparagraph" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="Add Content" aria-hidden="true">
     <form action="@Url.Action("ContentCreate", "Update")" method="POST"  enctype="multipart/form-data">
     <div class="modal-header">
@@ -129,32 +57,36 @@
         <h3 id="">
             Paragraph</h3>
     </div>
-    <div class="modal-body">
-        <input type="hidden" name="UpdateID" value="@Model.UpdateID"/>
-        <input type="hidden" name="ContentTypeID" value="2" />
-        <input type="hidden" name="ContentTypeName" value="PARAGRAPH" />
-        <div class="editor-label">
-            <label for="Title">
-                Title</label>
+        <div class="modal-body">
+
+            <input type="hidden" name="UpdateID" value="@Model.UpdateID"/>
+            <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+            <input type="hidden" name="ContentTypeID" value="2" />
+            <input type="hidden" name="ContentTypeName" value="PARAGRAPH" />
+            <div class="editor-label">
+                <label for="Title">
+                    Title</label>
+            </div>
+            <div class="editor-field">
+                <input class="text-box single-line" name="Title" type="text" value="" />
+            </div>
+            
+            <div class="editor-label">
+                <label for="Subtitle">
+                    Subtitle</label>
+            </div>
+            <div class="editor-field">
+                <input class="text-box single-line" name="Subtitle" type="text" value="" />
+            </div>
+            
+            <div class="editor-label">
+                <label for="Text">
+                    Text</label>
+            </div>
+            <div class="editor-field">
+                <textarea id="Text" name="Text"></textarea>
+            </div>
         </div>
-        <div class="editor-field">
-            <input class="text-box single-line" name="Title" type="text" value="" />
-        </div>
-        <div class="editor-field">
-            <input class="text-box single-line" name="Title" type="text" value="" />
-        </div>
-        <div class="editor-label">
-            <label for="Subtitle">
-                Subtitle</label>
-        </div>
-        <div class="editor-label">
-            <label for="Text">
-                Text</label>
-        </div>
-        <div class="editor-field">
-            <textarea id="Text" name="Text"></textarea>
-        </div>
-    </div>
     <div class="modal-footer">
         <input type="submit" class="btn"  class="btn btn-primary" value="Create" />
     </div>
@@ -169,24 +101,26 @@
         <h3 id="">
             Map</h3>
     </div>
-    <div class="modal-body">
-        <input type="hidden" name="UpdateID" value="@Model.UpdateID"/>
-        <input type="hidden" name="ContentTypeID" value="3" />
-        <input type="hidden" name="ContentTypeName" value="MAP" />
-        <div class="editor-label">
-            <label for="Title">
-                Address</label>
+        <div class="modal-body">
+        
+            <input type="hidden" name="UpdateID" value="@Model.UpdateID"/>
+            <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+            <input type="hidden" name="ContentTypeID" value="3" />
+            <input type="hidden" name="ContentTypeName" value="MAP" />
+            <div class="editor-label">
+                <label for="Title">
+                    Address</label>
+            </div>
+            <div class="editor-field">
+                <input class="text-box single-line" name="Title" type="text" value="" />
+            </div>
         </div>
-        <div class="editor-field">
-            <input class="text-box single-line" name="Title" type="text" value="" />
-        </div>
-    </div>
     <div class="modal-footer">
         <input type="submit" class="btn"  class="btn btn-primary" value="Create" />
     </div>
     </form>
 </div>
-<a href="#modallist" role="button" class="btn" data-toggle="modal">List Item</a>
+@*<a href="#modallist" role="button" class="btn" data-toggle="modal">List Item</a>
 <div id="modallist" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="Add List Item" aria-hidden="true">
     <form action="@Url.Action("ContentCreate", "Update")" method="POST"  enctype="multipart/form-data">
     <div class="modal-header">
@@ -197,6 +131,7 @@
     </div>
     <div class="modal-body">
         <input type="hidden" name="UpdateID" value="@Model.UpdateID"/>
+        <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
         <input type="hidden" name="ContentTypeID" value="4" />
         <input type="hidden" name="ContentTypeName" value="LIST" />
         <div class="editor-label">
@@ -211,7 +146,7 @@
         <input type="submit" class="btn"  class="btn btn-primary" value="Create" />
     </div>
     </form>
-</div>
+</div>*@
 <a href="#modalachievement" role="button" class="btn" data-toggle="modal">Achievement</a>
 <div id="modalachievement" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="Add Achievement" aria-hidden="true">
     <form action="@Url.Action("ContentCreate", "Update")" method="POST"  enctype="multipart/form-data">
@@ -221,32 +156,34 @@
         <h3 id="">
             Achievement</h3>
     </div>
-    <div class="modal-body">
-        <input type="hidden" name="UpdateID" value="@Model.UpdateID"/>
-        <input type="hidden" name="ContentTypeID" value="5" />
-        <input type="hidden" name="ContentTypeName" value="ACHIEVEMENT" />
-        <div class="editor-label">
-            <label for="Title">
-                Title</label>
+        <div class="modal-body">
+          
+            <input type="hidden" name="UpdateID" value="@Model.UpdateID"/>
+            <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+            <input type="hidden" name="ContentTypeID" value="5" />
+            <input type="hidden" name="ContentTypeName" value="ACHIEVEMENT" />
+            <div class="editor-label">
+                <label for="Title">
+                    Title</label>
+            </div>
+            <div class="editor-field">
+                <input class="text-box single-line" id="" name="Title" type="text" value="" />
+            </div>
+            <div class="editor-label">
+                <label for="Date">
+                    Date</label>
+            </div>
+            <div class="editor-field">
+                <input class="datepicker" data-date-format="dd/mm/yyyy" id="" name="Date" type="text" value="" />
+            </div>
+            <div class="editor-label">
+                <label for="Text">
+                    Description</label>
+            </div>
+            <div class="editor-field">
+                <textarea id="" name="Text"></textarea>
+            </div>
         </div>
-        <div class="editor-field">
-            <input class="text-box single-line" id="" name="Title" type="text" value="" />
-        </div>
-        <div class="editor-label">
-            <label for="Date">
-                Date</label>
-        </div>
-        <div class="editor-field">
-            <input class="datepicker" data-date-format="dd/mm/yyyy" id="" name="Date" type="text" value="" />
-        </div>
-        <div class="editor-label">
-            <label for="Text">
-                Description</label>
-        </div>
-        <div class="editor-field">
-            <textarea id="" name="Text"></textarea>
-        </div>
-    </div>
     <div class="modal-footer">
         <input type="submit" class="btn"  class="btn btn-primary" value="Create" />
     </div>
@@ -261,25 +198,27 @@
         <h3 id="">
             Photo</h3>
     </div>
-    <div class="modal-body">
-        <input type="hidden" name="UpdateID" value="@Model.UpdateID"/>
-        <input type="hidden" name="ContentTypeID" value="6" />
-        <input type="hidden" name="ContentTypeName" value="PHOTO" />
-        <div class="editor-label">
-            <label for="Title">
-                Caption</label>
+        <div class="modal-body">
+     
+            <input type="hidden" name="UpdateID" value="@Model.UpdateID"/>
+            <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+            <input type="hidden" name="ContentTypeID" value="6" />
+            <input type="hidden" name="ContentTypeName" value="PHOTO" />
+            <div class="editor-label">
+                <label for="Title">
+                    Caption</label>
+            </div>
+            <div class="editor-field">
+                <input class="text-box single-line" id="" name="Title" type="text" value="" />
+            </div>
+            <div class="editor-label">
+                <label for="Url">
+                    File</label>
+            </div>
+            <div class="editor-field">
+                <input class="text-box single-line" id="" name="Url" type="file" value="" />
+            </div>
         </div>
-        <div class="editor-field">
-            <input class="text-box single-line" id="" name="Title" type="text" value="" />
-        </div>
-        <div class="editor-label">
-            <label for="Url">
-                File</label>
-        </div>
-        <div class="editor-field">
-            <input class="text-box single-line" id="" name="Url" type="file" value="" />
-        </div>
-    </div>
     <div class="modal-footer">
         <input type="submit" class="btn"  class="btn btn-primary" value="Create" />
     </div>
@@ -294,25 +233,27 @@
         <h3 id="">
             Video</h3>
     </div>
-    <div class="modal-body">
-        <input type="hidden" name="UpdateID" value="@Model.UpdateID"/>
-        <input type="hidden" name="ContentTypeID" value="7" />
-        <input type="hidden" name="ContentTypeName" value="Video" />
-        <div class="editor-label">
-            <label for="Title">
-                Caption</label>
+        <div class="modal-body">
+          
+            <input type="hidden" name="UpdateID" value="@Model.UpdateID"/>
+            <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+            <input type="hidden" name="ContentTypeID" value="7" />
+            <input type="hidden" name="ContentTypeName" value="Video" />
+            <div class="editor-label">
+                <label for="Title">
+                    Caption</label>
+            </div>
+            <div class="editor-field">
+                <input class="text-box single-line" id="" name="Title" type="text" value="" />
+            </div>
+            <div class="editor-label">
+                <label for="Url">
+                    File</label>
+            </div>
+            <div class="editor-field">
+                <input class="text-box single-line" id="" name="Url" type="file" value="" />
+            </div>
         </div>
-        <div class="editor-field">
-            <input class="text-box single-line" id="" name="Title" type="text" value="" />
-        </div>
-        <div class="editor-label">
-            <label for="Url">
-                File</label>
-        </div>
-        <div class="editor-field">
-            <input class="text-box single-line" id="" name="Url" type="file" value="" />
-        </div>
-    </div>
     <div class="modal-footer">
         <input type="submit" class="btn"  class="btn btn-primary" value="Create" />
     </div>
@@ -327,25 +268,27 @@
         <h3 id="">
             Interview</h3>
     </div>
-    <div class="modal-body">
-        <input type="hidden" name="UpdateID" value="@Model.UpdateID"/>
-        <input type="hidden" name="ContentTypeID" value="8" />
-        <input type="hidden" name="ContentTypeName" value="INTERVIEW" />
-        <div class="editor-label">
-            <label for="Title">
-                Name</label>
+        <div class="modal-body">
+        
+            <input type="hidden" name="UpdateID" value="@Model.UpdateID"/>
+            <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+            <input type="hidden" name="ContentTypeID" value="8" />
+            <input type="hidden" name="ContentTypeName" value="INTERVIEW" />
+            <div class="editor-label">
+                <label for="Title">
+                    Name</label>
+            </div>
+            <div class="editor-field">
+                <input class="text-box single-line" id="" name="Title" type="text" value="" />
+            </div>
+            <div class="editor-label">
+                <label for="Text">
+                    Text</label>
+            </div>
+            <div class="editor-field">
+                <textarea id="" name="Text" class="wysiwyg" rows="12" style="width:100%;"></textarea>
+            </div>
         </div>
-        <div class="editor-field">
-            <input class="text-box single-line" id="" name="Title" type="text" value="" />
-        </div>
-        <div class="editor-label">
-            <label for="Text">
-                Text</label>
-        </div>
-        <div class="editor-field">
-            <textarea id="" name="Text"></textarea>
-        </div>
-    </div>
     <div class="modal-footer">
         <input type="submit" class="btn"  class="btn btn-primary" value="Create" />
     </div>
@@ -360,25 +303,27 @@
         <h3 id="">
             Question</h3>
     </div>
-    <div class="modal-body">
-        <input type="hidden" name="UpdateID" value="@Model.UpdateID"/>
-        <input type="hidden" name="ContentTypeID" value="9" />
-        <input type="hidden" name="ContentTypeName" value="QUESTION" />
-        <div class="editor-label">
-            <label for="Question">
-                Question</label>
+        <div class="modal-body">
+          
+            <input type="hidden" name="UpdateID" value="@Model.UpdateID"/>
+            <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+            <input type="hidden" name="ContentTypeID" value="9" />
+            <input type="hidden" name="ContentTypeName" value="QUESTION" />
+            <div class="editor-label">
+                <label for="Question">
+                    Question</label>
+            </div>
+            <div class="editor-field">
+                <textarea id="" name="Question" class="wysiwyg" rows="12" style="width:100%;"></textarea>
+            </div>
+            <div class="editor-label">
+                <label for="Answer">
+                    Answer</label>
+            </div>
+            <div class="editor-field">
+                <textarea id="" name="Answer" class="wysiwyg" rows="12" style="width:100%;"></textarea>
+            </div>
         </div>
-        <div class="editor-field">
-            <textarea id="" name="Question"></textarea>
-        </div>
-        <div class="editor-label">
-            <label for="Answer">
-                Answer</label>
-        </div>
-        <div class="editor-field">
-            <textarea id="" name="Answer"></textarea>
-        </div>
-    </div>
     <div class="modal-footer">
         <input type="submit" class="btn"  class="btn btn-primary" value="Create" />
     </div>
@@ -393,18 +338,20 @@
         <h3 id="">
             Quote</h3>
     </div>
-    <div class="modal-body">
-        <input type="hidden" name="UpdateID" value="@Model.UpdateID"/>
-        <input type="hidden" name="ContentTypeID" value="10" />
-        <input type="hidden" name="ContentTypeName" value="QUOTE" />
-        <div class="editor-label">
-            <label for="Text">
-                Quote</label>
+        <div class="modal-body">
+         
+            <input type="hidden" name="UpdateID" value="@Model.UpdateID"/>
+            <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+            <input type="hidden" name="ContentTypeID" value="10" />
+            <input type="hidden" name="ContentTypeName" value="QUOTE" />
+            <div class="editor-label">
+                <label for="Text">
+                    Quote</label>
+            </div>
+            <div class="editor-field">
+                <textarea id="" name="Text"></textarea>
+            </div>
         </div>
-        <div class="editor-field">
-            <textarea id="" name="Text"></textarea>
-        </div>
-    </div>
     <div class="modal-footer">
         <input type="submit" class="btn"  class="btn btn-primary" value="Create" />
     </div>
@@ -420,7 +367,9 @@
                 Link</h3>
         </div>
         <div class="modal-body">
+          
             <input type="hidden" name="UpdateID" value="@Model.UpdateID"/>
+            <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
             <input type="hidden" name="ContentTypeID" value="11" />
             <input type="hidden" name="ContentTypeName" value="LINK" />
             <div class="editor-label">
@@ -435,7 +384,7 @@
                     Url</label>
             </div>
             <div class="editor-field">
-                <input class="text-box single-line" id="" name="Url" type="text" value="http://" />
+                <input class="text-box single-line"  name="Url" type="text" value="http://" />
             </div>
         </div>
         <div class="modal-footer">
@@ -452,14 +401,16 @@
         <h3 id="">
             Html Block</h3>
     </div>
-    <div class="modal-body">
-        <input type="hidden" name="UpdateID" value="@Model.UpdateID"/>
-        <input type="hidden" name="ContentTypeID" value="12" />
-        <input type="hidden" name="ContentTypeName" value="HTML" />
-        <div>
-            <textarea id="" name="Text" class="wysiwyg" rows="12" style="width:100%;"></textarea>
+        <div class="modal-body">
+         
+            <input type="hidden" name="UpdateID" value="@Model.UpdateID"/>
+            <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+            <input type="hidden" name="ContentTypeID" value="12" />
+            <input type="hidden" name="ContentTypeName" value="HTML" />
+            <div>
+                <textarea id="" name="Text" class="wysiwyg" rows="12" style="width:100%;"></textarea>
+            </div>
         </div>
-    </div>
     <div class="modal-footer">
         <input type="submit" class="btn"  class="btn btn-primary" value="Create" />
     </div>
@@ -502,6 +453,8 @@
                 @*                @Html.ActionLink("Edit", "Edit", new { id=item.ContentID }) |
                 @Html.ActionLink("Details", "Details", new { id=item.ContentID }) |
                *@ @Html.ActionLink("Delete", "ContentDelete", new { id = item.ContentID, updateid = item.UpdateID })
+           | 
+                @{ /*Html.RenderPartial("_ContentEditor", item);*/ }
             </td>
             <td>
                 @Html.ActionLink("UP", "ContentUp", new { id = item.ContentID, updateid = item.UpdateID }) |

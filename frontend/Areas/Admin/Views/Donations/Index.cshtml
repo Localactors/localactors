@@ -41,7 +41,15 @@ else
         <th>
             Amount
         </th>
-     
+        <th>
+            Currency
+        </th>
+        <th>
+            PayPal Status
+        </th>
+        <th>
+            PayPal Transaction
+        </th>
         <th></th>
     </tr>
 
@@ -59,10 +67,22 @@ else
         <td>
             @Html.DisplayFor(modelItem => item.Amount)
         </td>
+         <td>
+            @Html.DisplayFor(modelItem => item.Currency)
+        </td>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.PP_Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PP_Transaction)
+        </td>
+       
   
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.InvestmentID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.InvestmentID })
+            @Html.ActionLink("Transactions","Index", "Transactions", new { donation=item.InvestmentID, projectid=item.ProjectID },new{})
+            @Html.ActionLink("Edit", "Edit", new { id=item.InvestmentID },new{}) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.InvestmentID },new{})
         </td>
     </tr>
 }

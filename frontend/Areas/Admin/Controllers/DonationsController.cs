@@ -12,35 +12,35 @@ namespace Localactors.webapp.Areas.Admin.Controllers
     [Authorize(Roles = "admin")]
     public class DonationsController : ControllerBase
     {
-     
 
         //
         // GET: /Admin/Donations/
 
-        public ViewResult Index(int projectid =0)
+        public ViewResult Index(int projectid = 0)
         {
             var donations = db.donations.Include("project").Include("user");
+      
             ViewBag.Project = db.projects.FirstOrDefault(x => x.ProjectID == projectid);
             return View(donations.ToList());
         }
 
-    
+
         //
         // GET: /Admin/Donations/Create
 
-        public ActionResult Create(int projectid=0)
+        public ActionResult Create(int projectid = 0)
         {
             ViewBag.Project = db.projects.FirstOrDefault(x => x.ProjectID == projectid);
             ViewBag.ProjectID = new SelectList(db.projects, "ProjectID", "Title");
             ViewBag.UserID = new SelectList(db.users, "UserID", "Role");
-            return View(new donation{ProjectID = projectid});
-        } 
+            return View(new donation { ProjectID = projectid });
+        }
 
         //
         // POST: /Admin/Donations/Create
 
         [HttpPost]
-        public ActionResult Create(donation donation, int projectid =0)
+        public ActionResult Create(donation donation, int projectid = 0)
         {
             if (ModelState.IsValid)
             {
@@ -54,7 +54,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
                 }
 
 
-                return RedirectToAction("Index");  
+                return RedirectToAction("Index");
             }
 
             ViewBag.Project = db.projects.FirstOrDefault(x => x.ProjectID == donation.ProjectID);
@@ -62,10 +62,10 @@ namespace Localactors.webapp.Areas.Admin.Controllers
             ViewBag.UserID = new SelectList(db.users, "UserID", "Role", donation.UserID);
             return View(donation);
         }
-        
+
         //
         // GET: /Admin/Donations/Edit/5
- 
+
         public ActionResult Edit(int id)
         {
             donation donation = db.donations.Single(d => d.InvestmentID == id);
@@ -96,7 +96,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
 
         //
         // GET: /Admin/Donations/Delete/5
- 
+
         public ActionResult Delete(int id)
         {
             donation donation = db.donations.Single(d => d.InvestmentID == id);
@@ -108,8 +108,8 @@ namespace Localactors.webapp.Areas.Admin.Controllers
         // POST: /Admin/Donations/Delete/5
 
         [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id,int projectid=0)
-        {            
+        public ActionResult DeleteConfirmed(int id, int projectid = 0)
+        {
             donation donation = db.donations.Single(d => d.InvestmentID == id);
             db.donations.DeleteObject(donation);
             db.SaveChanges();

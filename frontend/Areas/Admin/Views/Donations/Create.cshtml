@@ -75,6 +75,54 @@ else
             @Html.TextAreaFor(model => model.Description)
             @Html.ValidationMessageFor(model => model.Description)
         </div>
+        
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Currency)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Currency)
+            @Html.ValidationMessageFor(model => model.Currency)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PP_Email)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PP_Email)
+            @Html.ValidationMessageFor(model => model.PP_Email)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PP_Status)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PP_Status)
+            @Html.ValidationMessageFor(model => model.PP_Status)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PP_Transaction)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PP_Transaction)
+            @Html.ValidationMessageFor(model => model.PP_Transaction)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PP_Amount)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PP_Amount)
+            @Html.ValidationMessageFor(model => model.PP_Amount)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PP_Currency)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PP_Currency)
+            @Html.ValidationMessageFor(model => model.PP_Currency)
+        </div>
 
         <p>
             <input type="submit" class="btn"  value="Create" />

@@ -1,0 +1,141 @@
+﻿@model IEnumerable<Localactors.entities.user>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            Role
+        </th>
+        <th>
+            UserName
+        </th>
+        <th>
+            UserPassword
+        </th>
+        <th>
+            Name
+        </th>
+        <th>
+            Lastname
+        </th>
+        <th>
+            Bio
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            country
+        </th>
+        <th>
+            Enabled
+        </th>
+        <th>
+            Confirmed
+        </th>
+        <th>
+            ShouldChangePassword
+        </th>
+        <th>
+            Privacy
+        </th>
+        <th>
+            Newsletter
+        </th>
+        <th>
+            Reset
+        </th>
+        <th>
+            ResetEndDate
+        </th>
+        <th>
+            Email_Hash
+        </th>
+        <th>
+            DateJoined
+        </th>
+        <th>
+            DateLastLogin
+        </th>
+        <th>
+            Image
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Role)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserPassword)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Lastname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Bio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.country.Code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Enabled)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Confirmed)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ShouldChangePassword)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Privacy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Newsletter)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Reset)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ResetEndDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email_Hash)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateJoined)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateLastLogin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Image)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.UserID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.UserID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.UserID })
+        </td>
+    </tr>
+}
+
+</table>

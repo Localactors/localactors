@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Amazon.S3.Model;
 using Localactors.entities;
 
 namespace Localactors.webapp.Areas.Admin.Controllers
@@ -13,8 +16,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
     public class UpdateController : ControllerBase
     {
 
-        //
-        // GET: /Admin/Update/
+
 
         public ActionResult Index(int projectid = 0)
         {
@@ -27,13 +29,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
             return View(updates.OrderByDescending("Date").ToList());
         }
 
-        //
-        // GET: /Admin/Update/Details/5
-
-     
-
-        //
-        // GET: /Admin/Update/Create
+        
 
         public ActionResult Create(int projectid = 0)
         {
@@ -41,11 +37,10 @@ namespace Localactors.webapp.Areas.Admin.Controllers
 
             ViewBag.ProjectID = new SelectList(db.projects, "ProjectID", "Title");
             ViewBag.Project = db.projects.FirstOrDefault(x => x.ProjectID == projectid);
-            return View(new update() { ProjectID = projectid, Date = DateTime.Now,UserID = CurrentUser.UserID, DateCreated = DateTime.Now});
+            return View(new update() { ProjectID = projectid, Date = DateTime.Now, UserID = CurrentUser.UserID, DateCreated = DateTime.Now });
         }
 
-        //
-        // POST: /Admin/Update/Create
+
 
         [HttpPost]
         public ActionResult Create(update update, int projectid = 0)
@@ -65,8 +60,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
             return View(update);
         }
 
-        //
-        // GET: /Admin/Update/Edit/5
+
 
         public ActionResult Edit(int id)
         {
@@ -76,8 +70,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
             return View(update);
         }
 
-        //
-        // POST: /Admin/Update/Edit/5
+
 
         [HttpPost]
         public ActionResult Edit(update update)
@@ -94,8 +87,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
             return View(update);
         }
 
-        //
-        // GET: /Admin/Update/Delete/5
+
 
         public ActionResult Delete(int id)
         {
@@ -108,11 +100,13 @@ namespace Localactors.webapp.Areas.Admin.Controllers
         // POST: /Admin/Update/Delete/5
 
         [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id, int projectid =0) {
+        public ActionResult DeleteConfirmed(int id, int projectid = 0)
+        {
             var cts = db.update_content.Where(x => x.UpdateID == id);
             var cms = db.update_comment.Where(x => x.UpdateID == id);
 
-            foreach (var content in cts) {
+            foreach (var content in cts)
+            {
                 db.update_content.DeleteObject(content);
             }
 
@@ -126,8 +120,9 @@ namespace Localactors.webapp.Areas.Admin.Controllers
             db.SaveChanges();
 
             //comes from project
-            if (projectid >0) {
-                return RedirectToAction("Edit","Projects",new{id = projectid});
+            if (projectid > 0)
+            {
+                return RedirectToAction("Edit", "Projects", new { id = projectid });
             }
 
             return RedirectToAction("Index");
@@ -141,9 +136,48 @@ namespace Localactors.webapp.Areas.Admin.Controllers
         //*****************************************************************************//
 
         [ValidateInput(false)]
-        public ActionResult ContentCreate(update_content update_content) {
+        public ActionResult ContentCreate(update_content update_content, int ProjectID = 0)
+        {
+            //File Upload
+            if (Request.Files != null && Request.Files.Count > 0)
+            {
+                foreach (string keyname in Request.Files)
+                {
+                    HttpPostedFileBase file = Request.Files[keyname];
+                    if (file != null && file.ContentLength > 0 && !string.IsNullOrEmpty(file.FileName))
+                    {
+                        //file upload
+                        string ext = Path.GetExtension(file.FileName).ToLower();
+                        if (ext != ".png" && ext != ".jpg" && ext != ".jpeg" && ext != ".swf" && ext != ".fla")
+                        {
+                            ModelState.AddModelError(keyname, "Invalid file type");
+                            return RedirectToAction("Edit", "Update", new { id = update_content.UpdateID });
+                        }
+
+                        try
+                        {
+                            //ok, making the new filename
+                            string filepath = string.Format("projects/{0}/update_{1}/{2}", ProjectID, update_content.UpdateID, file.FileName);
+                            var request = new PutObjectRequest().WithBucketName(ConfigurationManager.AppSettings["AWSS3Bucket"]).WithKey(filepath);
+                            request.InputStream = file.InputStream;
+                            AmazonS3Client.PutObject(request);
+                            string address = ConfigurationManager.AppSettings["AWSS3BucketUrl"] + filepath;
+                            update_content.Media = address;
+                            update_content.Url = address;
+                        }
+                        catch (Exception ex)
+                        {
+                            ModelState.AddModelError(keyname, "Upload error: " + ex.Message);
+                            return RedirectToAction("Edit", "Update", new { id = update_content.UpdateID });
+                        }
+                    }
+                }
+            }
+
+
             int order = 100;
-            if (db.update_content.Any(x => x.UpdateID == update_content.UpdateID)) {
+            if (db.update_content.Any(x => x.UpdateID == update_content.UpdateID))
+            {
                 order = db.update_content.Where(x => x.UpdateID == update_content.UpdateID).Max(x => x.Order);
                 order = order + 1;
             }
@@ -161,7 +195,60 @@ namespace Localactors.webapp.Areas.Admin.Controllers
 
             return RedirectToAction("Edit", "Update", new { id = update_content.UpdateID });
         }
+        [ValidateInput(false)]
+        public ActionResult ContentEdit(update_content update_content, int ProjectID = 0)
+        {
+            //File Upload
+            if (Request.Files != null && Request.Files.Count > 0)
+            {
+                foreach (string keyname in Request.Files)
+                {
+                    HttpPostedFileBase file = Request.Files[keyname];
+                    if (file != null && file.ContentLength > 0 && !string.IsNullOrEmpty(file.FileName))
+                    {
+                        //file upload
+                        string ext = Path.GetExtension(file.FileName).ToLower();
+                        if (ext != ".png" && ext != ".jpg" && ext != ".jpeg" && ext != ".swf" && ext != ".fla")
+                        {
+                            ModelState.AddModelError(keyname, "Invalid file type");
+                            return RedirectToAction("Edit", "Update", new { id = update_content.UpdateID });
+                        }
 
+                        try
+                        {
+                            //ok, making the new filename
+                            string filepath = string.Format("projects/{0}/update_{1}/{2}", ProjectID, update_content.UpdateID, file.FileName);
+                            var request = new PutObjectRequest().WithBucketName(ConfigurationManager.AppSettings["AWSS3Bucket"]).WithKey(filepath);
+                            request.InputStream = file.InputStream;
+                            AmazonS3Client.PutObject(request);
+                            string address = ConfigurationManager.AppSettings["AWSS3BucketUrl"] + filepath;
+
+                            update_content.Media = address;
+                            update_content.Url = address;
+                        }
+                        catch (Exception ex)
+                        {
+                            ModelState.AddModelError(keyname, "Upload error: " + ex.Message);
+                            return RedirectToAction("Edit", "Update", new { id = update_content.UpdateID });
+                        }
+                    }
+                }
+            }
+
+            if (update_content.Date == null) update_content.Date = DateTime.Now;
+            update_content.DateCreated = DateTime.Now;
+            update_content.UserID = CurrentUser.UserID;
+
+            if (ModelState.IsValid)
+            {
+                db.update_content.Attach(update_content);
+                db.ObjectStateManager.ChangeObjectState(update_content, EntityState.Modified);
+                db.SaveChanges();
+                return RedirectToAction("Edit", "Update", new { id = update_content.UpdateID });
+            }
+
+            return RedirectToAction("Edit", "Update", new { id = update_content.UpdateID });
+        }
         public ActionResult ContentDelete(int id, int updateid)
         {
             var content = db.update_content.FirstOrDefault(x => x.ContentID == id);
@@ -178,15 +265,18 @@ namespace Localactors.webapp.Areas.Admin.Controllers
 
             //search for the swappable content
             update_content othercontent = null;
-            foreach (update_content updateContent in contents) {
-                if (updateContent.ContentID == id) {
+            foreach (update_content updateContent in contents)
+            {
+                if (updateContent.ContentID == id)
+                {
                     break;
                 }
                 othercontent = updateContent;
             }
 
             //swap
-            if (othercontent != null && othercontent.ContentID != content.ContentID) {
+            if (othercontent != null && othercontent.ContentID != content.ContentID)
+            {
                 int oldorder = content.Order;
                 content.Order = othercontent.Order;
                 othercontent.Order = oldorder;

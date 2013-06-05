@@ -1,8 +1,73 @@
-﻿@model Localactors.entities.user
+﻿@using System.Configuration
+@model Localactors.entities.user
 
 @{
     ViewBag.Title = "Edit";
 }
+
+<script type="text/javascript">
+
+    var awsbase = '@ConfigurationManager.AppSettings["AWSS3BucketUrl"]';
+    var baseurl = awsbase;
+
+
+    $(document).ready(function () {
+
+        $(".imageupload").disableValidation = true;
+        $(".imageupload").change(function () {
+            $("input").addClass("ignore").disableValidation = true;
+            $("form").disableValidation = true;
+            $("#mainform").submit();
+        });
+
+        $(".imagepreview").load(function () {
+            //console.log($(this));
+        });
+        $(".imagepreview").click(function () {
+            PreviewImage($(this).attr("src"));
+        });
+
+
+        $("input[type=file]").each(function () {
+            var input = $(this);
+            var name = input.attr("id");
+            var btn = $("<input type='button' value='upload'></input>");
+
+            input.after(btn);
+            input.css("display", "none");
+
+            btn.click(function () {
+                //console.log(input.attr("name"));
+                input.click();
+            });
+
+        });
+
+    });
+
+
+    PreviewImage = function (uri) {
+
+        var imageDialog = $("#dialog");
+        var imageTag = $('#image', imageDialog);
+        var uriParts = uri.split("/");
+
+        imageTag.attr('src', uri);
+
+        imageTag.load(function () {
+
+            $('#dialog').dialog({
+                zIndex: 9999,
+                modal: true,
+                resizable: true,
+                draggable: true,
+                width: 'auto',
+                title: uriParts[uriParts.length - 1]
+            });
+        });
+    };
+</script>
+
 <ul class="breadcrumb">
     <li><a href='@Url.Action("Index","Home")'>Home</a> <span class="divider">/</span></li>
     <li><a href="@Url.Action("Index","User")">Users</a> <span class="divider">/</span></li>
@@ -11,8 +76,8 @@
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
 
-@using (Html.BeginForm()) {
-    @Html.ValidationSummary(true)
+@using (Html.BeginForm("Edit", "User", FormMethod.Post, new {enctype = "multipart/form-data", id = "mainform"})) {
+    @Html.ValidationSummary(false)
     <fieldset>
         <legend>user</legend>
 
@@ -82,6 +147,24 @@
             @Html.DropDownList("CountryID", String.Empty)
             @Html.ValidationMessageFor(model => model.CountryID)
         </div>
+        
+        <div class="editor-label">
+             Image
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Image)
+            <input type="file" id="Image" name="Image" class="imageupload" />
+            @Html.ValidationMessageFor(model => model.Image)
+
+            @Html.ValidationMessage("Image")
+            @if (!string.IsNullOrEmpty(Model.Image))
+            {
+                <img src="@string.Format("{0}?v={1}", Model.Image, DateTime.Now.Ticks)" class="imagepreview" alt=""  />
+            }
+        </div>
+
+        <hr/>
+
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Enabled)
@@ -123,45 +206,22 @@
             @Html.ValidationMessageFor(model => model.Newsletter)
         </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Reset)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Reset)
-            @Html.ValidationMessageFor(model => model.Reset)
-        </div>
+   
+            @Html.HiddenFor(model => model.Reset)
+  
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ResetEndDate)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.ResetEndDate)
-            @Html.ValidationMessageFor(model => model.ResetEndDate)
-        </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Email_Hash)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Email_Hash)
-            @Html.ValidationMessageFor(model => model.Email_Hash)
-        </div>
+            @Html.HiddenFor(model => model.ResetEndDate)
+       
+   
+            @Html.HiddenFor(model => model.Email_Hash)
+      
+            @Html.HiddenFor(model => model.DateJoined)
+       
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.DateJoined)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.DateJoined)
-            @Html.ValidationMessageFor(model => model.DateJoined)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.DateLastLogin)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.DateLastLogin)
-            @Html.ValidationMessageFor(model => model.DateLastLogin)
-        </div>
+ 
+            @Html.HiddenFor(model => model.DateLastLogin)
+   
 
         <p>
             <input type="submit" class="btn"  value="Save" />

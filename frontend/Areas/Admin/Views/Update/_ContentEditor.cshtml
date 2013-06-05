@@ -1,0 +1,458 @@
+﻿@model Localactors.entities.update_content
+@if (Model.ContentTypeID == 2)
+{
+    var typename = "PARAGRAPH";    
+    <a href="#modal@(typename + Model.ContentID)" role="button" class="" data-toggle="modal">
+        Edit</a>
+    <div id="modal@(typename + Model.ContentID)" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="@(typename + Model.ContentID)" aria-hidden="true">
+        <form action="@Url.Action("ContentEdit", "Update")" method="POST"  enctype="multipart/form-data">
+        <input type="hidden" name="ContentID" value="@Model.ContentID"/>
+        <input type="hidden" name="UpdateID" value="@Model.UpdateID"/>
+        <input type="hidden" name="ProjectID" value="@Model.update.ProjectID"/>
+        <input type="hidden" name="ContentTypeID" value="@Model.ContentTypeID" />
+        <input type="hidden" name="ContentTypeName" value="@typename" />
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                ×</button>
+            <h3 id="">
+                @typename</h3>
+        </div>
+        <div class="modal-body">
+            <div class="editor-label">
+                <label for="Title">
+                    Title</label>
+            </div>
+            <div class="editor-field">
+                <input class="text-box single-line" name="Title" type="text" value="@Model.Title" />
+            </div>
+            <div class="editor-label">
+                <label for="Subtitle">
+                    Subtitle</label>
+            </div>
+            <div class="editor-field">
+                <input class="text-box single-line" name="Subtitle" type="text" value="@Model.Subtitle" />
+            </div>
+            <div class="editor-label">
+                <label for="Text">
+                    Text</label>
+            </div>
+            <div class="editor-field">
+                <textarea id="Text" name="Text">@Model.Text</textarea>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input type="submit" class="btn" class="btn btn-primary" value="Update" />
+        </div>
+        </form>
+    </div>
+}
+@if (Model.ContentTypeID == 3)
+{
+    var typename = "MAP";    
+    <a href="#modal@(typename + Model.ContentID)" role="button" class="" data-toggle="modal">
+        Edit</a>
+    <div id="modal@(typename + Model.ContentID)" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="@(typename + Model.ContentID)" aria-hidden="true">
+        <form action="@Url.Action("ContentEdit", "Update")" method="POST"  enctype="multipart/form-data">
+        <input type="hidden" name="ContentID" value="@Model.ContentID"/>
+        <input type="hidden" name="UpdateID" value="@Model.UpdateID"/>
+        <input type="hidden" name="ProjectID" value="@Model.update.ProjectID"/>
+        <input type="hidden" name="ContentTypeID" value="@Model.ContentTypeID" />
+        <input type="hidden" name="ContentTypeName" value="@typename" />
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                ×</button>
+            <h3 id="">
+                @typename</h3>
+        </div>
+        <div class="modal-body">
+            <div class="editor-label">
+                <label for="Title">
+                    Address</label>
+            </div>
+            <div class="editor-field">
+                <input class="text-box single-line" name="Title" type="text" value="@Model.Title" />
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input type="submit" class="btn" class="btn btn-primary" value="Update" />
+        </div>
+        </form>
+    </div>
+}
+@if (Model.ContentTypeID == 4)
+{
+    var typename = "LIST";    
+    <a href="#modal@(typename + Model.ContentID)" role="button" class="" data-toggle="modal">
+        Edit</a>
+    <div id="modal@(typename + Model.ContentID)" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="@(typename + Model.ContentID)" aria-hidden="true">
+        <form action="@Url.Action("ContentEdit", "Update")" method="POST"  enctype="multipart/form-data">
+        <input type="hidden" name="ContentID" value="@Model.ContentID"/>
+        <input type="hidden" name="UpdateID" value="@Model.UpdateID"/>
+        <input type="hidden" name="ProjectID" value="@Model.update.ProjectID"/>
+        <input type="hidden" name="ContentTypeID" value="@Model.ContentTypeID" />
+        <input type="hidden" name="ContentTypeName" value="@typename" />
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                ×</button>
+            <h3 id="">
+                @typename</h3>
+        </div>
+        <div class="modal-body">
+            <div class="editor-label">
+                <label for="Title">
+                    List Item</label>
+            </div>
+            <div class="editor-field">
+                <input class="text-box single-line" name="Title" type="text" value="@Model.Title" />
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input type="submit" class="btn" class="btn btn-primary" value="Update" />
+        </div>
+        </form>
+    </div>
+}
+@if (Model.ContentTypeID == 5)
+{
+    var typename = "ACHIEVEMENT";    
+    <a href="#modal@(typename + Model.ContentID)" role="button" class="" data-toggle="modal">
+        Edit</a>
+    <div id="modal@(typename + Model.ContentID)" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="@(typename + Model.ContentID)" aria-hidden="true">
+        <form action="@Url.Action("ContentEdit", "Update")" method="POST"  enctype="multipart/form-data">
+        <input type="hidden" name="ContentID" value="@Model.ContentID"/>
+        <input type="hidden" name="UpdateID" value="@Model.UpdateID"/>
+        <input type="hidden" name="ProjectID" value="@Model.update.ProjectID"/>
+        <input type="hidden" name="ContentTypeID" value="@Model.ContentTypeID" />
+        <input type="hidden" name="ContentTypeName" value="@typename" />
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                ×</button>
+            <h3 id="">
+                @typename</h3>
+        </div>
+        <div class="modal-body">
+            <div class="editor-label">
+                <label for="Title">
+                    Title</label>
+            </div>
+            <div class="editor-field">
+                <input class="text-box single-line" name="Title" type="text" value="@Model.Title" />
+            </div>
+            
+             <div class="editor-label">
+                <label for="Date">
+                    Date</label>
+            </div>
+            <div class="editor-field">
+                <input class="datepicker" data-date-format="dd/mm/yyyy" id="" name="Date" type="text" value="@Model.Date.Value.ToString("dd/mm/yyyy")" />
+            </div>
+            <div class="editor-label">
+                <label for="Text">
+                    Description</label>
+            </div>
+            <div class="editor-field">
+                <textarea id="" name="Text" class="wysiwyg" rows="12" style="width:100%;">@Model.Text</textarea>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <input type="submit" class="btn" class="btn btn-primary" value="Update" />
+        </div>
+        </form>
+    </div>
+}
+@if (Model.ContentTypeID == 6)
+{
+    var typename = "PHOTO";    
+    <a href="#modal@(typename + Model.ContentID)" role="button" class="" data-toggle="modal">
+        Edit</a>
+    <div id="modal@(typename + Model.ContentID)" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="@(typename + Model.ContentID)" aria-hidden="true">
+        <form action="@Url.Action("ContentEdit", "Update")" method="POST"  enctype="multipart/form-data">
+        <input type="hidden" name="ContentID" value="@Model.ContentID"/>
+        <input type="hidden" name="UpdateID" value="@Model.UpdateID"/>
+        <input type="hidden" name="ProjectID" value="@Model.update.ProjectID"/>
+        <input type="hidden" name="ContentTypeID" value="@Model.ContentTypeID" />
+        <input type="hidden" name="ContentTypeName" value="@typename" />
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                ×</button>
+            <h3 id="">
+                @typename</h3>
+        </div>
+        <div class="modal-body">
+            <div class="editor-label">
+                <label for="Title">
+                    Caption</label>
+            </div>
+            <div class="editor-field">
+                <input class="text-box single-line" name="Title" type="text" value="@Model.Title" />
+            </div>
+            
+             <div class="editor-label">
+                <label for="Url">
+                    File</label>
+            </div>
+            <div class="editor-field">
+                <input class="text-box single-line" id="" name="Url" type="file" value="" />
+            </div>
+            
+            @if (!string.IsNullOrEmpty(Model.Url))
+            {
+                <img src="@string.Format("{0}?v={1}", Model.Url, DateTime.Now.Ticks)" class="imagepreview" alt=""  />
+            }
+
+        </div>
+        <div class="modal-footer">
+            <input type="submit" class="btn" class="btn btn-primary" value="Update" />
+        </div>
+        </form>
+    </div>
+}
+@if (Model.ContentTypeID == 7)
+{
+    var typename = "VIDEO";    
+    <a href="#modal@(typename + Model.ContentID)" role="button" class="" data-toggle="modal">
+        Edit</a>
+    <div id="modal@(typename + Model.ContentID)" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="@(typename + Model.ContentID)" aria-hidden="true">
+        <form action="@Url.Action("ContentEdit", "Update")" method="POST"  enctype="multipart/form-data">
+        <input type="hidden" name="ContentID" value="@Model.ContentID"/>
+        <input type="hidden" name="UpdateID" value="@Model.UpdateID"/>
+        <input type="hidden" name="ProjectID" value="@Model.update.ProjectID"/>
+        <input type="hidden" name="ContentTypeID" value="@Model.ContentTypeID" />
+        <input type="hidden" name="ContentTypeName" value="@typename" />
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                ×</button>
+            <h3 id="">
+                @typename</h3>
+        </div>
+        <div class="modal-body">
+            <div class="editor-label">
+                <label for="Title">
+                    Caption</label>
+            </div>
+            <div class="editor-field">
+                <input class="text-box single-line" name="Title" type="text" value="@Model.Title" />
+            </div>
+            
+             <div class="editor-label">
+                <label for="Url">
+                    Video</label>
+            </div>
+            <div class="editor-field">
+                <input class="text-box single-line" id="" name="Url" type="file" value="" />
+            </div>
+            
+            @if (!string.IsNullOrEmpty(Model.Url))
+            {
+                <video autoplay="NO" buffered="NO" controls="YES" height="120px" width="240px" 
+                src="@string.Format("{0}?v={1}", Model.Url, DateTime.Now.Ticks)"></video>
+            }
+
+        </div>
+        <div class="modal-footer">
+            <input type="submit" class="btn" class="btn btn-primary" value="Update" />
+        </div>
+        </form>
+    </div>
+}
+@if (Model.ContentTypeID == 8)
+{
+    var typename = "INTERVIEW";    
+    <a href="#modal@(typename + Model.ContentID)" role="button" class="" data-toggle="modal">
+        Edit</a>
+    <div id="modal@(typename + Model.ContentID)" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="@(typename + Model.ContentID)" aria-hidden="true">
+        <form action="@Url.Action("ContentEdit", "Update")" method="POST"  enctype="multipart/form-data">
+        <input type="hidden" name="ContentID" value="@Model.ContentID"/>
+        <input type="hidden" name="UpdateID" value="@Model.UpdateID"/>
+        <input type="hidden" name="ProjectID" value="@Model.update.ProjectID"/>
+        <input type="hidden" name="ContentTypeID" value="@Model.ContentTypeID" />
+        <input type="hidden" name="ContentTypeName" value="@typename" />
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                ×</button>
+            <h3 id="">
+                @typename</h3>
+        </div>
+        <div class="modal-body">
+            <div class="editor-label">
+                <label for="Title">
+                    Name</label>
+            </div>
+            <div class="editor-field">
+                <input class="text-box single-line" name="Title" type="text" value="@Model.Title" />
+            </div>
+    
+            <div class="editor-label">
+                <label for="Text">
+                    Text</label>
+            </div>
+            <div class="editor-field">
+                <textarea id="" name="Text" class="wysiwyg" rows="12" style="width:100%;">@Model.Text</textarea>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <input type="submit" class="btn" class="btn btn-primary" value="Update" />
+        </div>
+        </form>
+    </div>
+}
+@if (Model.ContentTypeID == 9)
+{
+    var typename = "QUESTION";    
+    <a href="#modal@(typename + Model.ContentID)" role="button" class="" data-toggle="modal">
+        Edit</a>
+    <div id="modal@(typename + Model.ContentID)" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="@(typename + Model.ContentID)" aria-hidden="true">
+        <form action="@Url.Action("ContentEdit", "Update")" method="POST"  enctype="multipart/form-data">
+        <input type="hidden" name="ContentID" value="@Model.ContentID"/>
+        <input type="hidden" name="UpdateID" value="@Model.UpdateID"/>
+        <input type="hidden" name="ProjectID" value="@Model.update.ProjectID"/>
+        <input type="hidden" name="ContentTypeID" value="@Model.ContentTypeID" />
+        <input type="hidden" name="ContentTypeName" value="@typename" />
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                ×</button>
+            <h3 id="">
+                @typename</h3>
+        </div>
+        <div class="modal-body">
+            <div class="editor-label">
+                <label for="Question">
+                    Question</label>
+            </div>
+            <div class="editor-field">
+                <textarea id="" name="Question" class="wysiwyg" rows="12" style="width:100%;">@Model.Question</textarea>
+            </div>
+            <div class="editor-label">
+                <label for="Answer">
+                    Answer</label>
+            </div>
+            <div class="editor-field">
+                <textarea id="" name="Answer" class="wysiwyg" rows="12" style="width:100%;">@Model.Answer</textarea>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <input type="submit" class="btn" class="btn btn-primary" value="Update" />
+        </div>
+        </form>
+    </div>
+}
+@if (Model.ContentTypeID == 10)
+{
+    var typename = "QUOTE";    
+    <a href="#modal@(typename + Model.ContentID)" role="button" class="" data-toggle="modal">
+        Edit</a>
+    <div id="modal@(typename + Model.ContentID)" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="@(typename + Model.ContentID)" aria-hidden="true">
+        <form action="@Url.Action("ContentEdit", "Update")" method="POST"  enctype="multipart/form-data">
+        <input type="hidden" name="ContentID" value="@Model.ContentID"/>
+        <input type="hidden" name="UpdateID" value="@Model.UpdateID"/>
+        <input type="hidden" name="ProjectID" value="@Model.update.ProjectID"/>
+        <input type="hidden" name="ContentTypeID" value="@Model.ContentTypeID" />
+        <input type="hidden" name="ContentTypeName" value="@typename" />
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                ×</button>
+            <h3 id="">
+                @typename</h3>
+        </div>
+        <div class="modal-body">
+          
+           
+            <div class="editor-label">
+                <label for="Text">
+                    Quote</label>
+            </div>
+            <div class="editor-field">
+                <textarea id="Text" name="Text"  class="wysiwyg" rows="12" style="width:100%;">@Model.Text</textarea>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input type="submit" class="btn" class="btn btn-primary" value="Update" />
+        </div>
+        </form>
+    </div>
+}
+@if (Model.ContentTypeID == 11)
+{
+    var typename = "LINK";    
+    <a href="#modal@(typename + Model.ContentID)" role="button" class="" data-toggle="modal">
+        Edit</a>
+    <div id="modal@(typename + Model.ContentID)" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="@(typename + Model.ContentID)" aria-hidden="true">
+        <form action="@Url.Action("ContentEdit", "Update")" method="POST"  enctype="multipart/form-data">
+        <input type="hidden" name="ContentID" value="@Model.ContentID"/>
+        <input type="hidden" name="UpdateID" value="@Model.UpdateID"/>
+        <input type="hidden" name="ProjectID" value="@Model.update.ProjectID"/>
+        <input type="hidden" name="ContentTypeID" value="@Model.ContentTypeID" />
+        <input type="hidden" name="ContentTypeName" value="@typename" />
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                ×</button>
+            <h3 id="">
+                @typename</h3>
+        </div>
+        <div class="modal-body">
+            <div class="editor-label">
+                <label for="Title">
+                    Link Text</label>
+            </div>
+            <div class="editor-field">
+                <input class="text-box single-line" name="Title" type="text" value="@Model.Title" />
+            </div>
+            
+             <div class="editor-label">
+                <label for="Url">
+                    Link Url</label>
+            </div>
+            <div class="editor-field">
+                <input class="text-box single-line" id="" name="Url" type="file" value="" />
+            </div>
+            
+            @if (!string.IsNullOrEmpty(Model.Url))
+            {
+                <div>link: <a href="@string.Format("{0}", Model.Url)" target="_blank">@Model.Title</a></div>
+            }
+
+        </div>
+        <div class="modal-footer">
+            <input type="submit" class="btn" class="btn btn-primary" value="Update" />
+        </div>
+        </form>
+    </div>
+}
+@if (Model.ContentTypeID == 12)
+{
+    var typename = "HTML";    
+    <a href="#modal@(typename + Model.ContentID)" role="button" class="" data-toggle="modal">
+        Edit</a>
+    <div id="modal@(typename + Model.ContentID)" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="@(typename + Model.ContentID)" aria-hidden="true">
+        <form action="@Url.Action("ContentEdit", "Update")" method="POST"  enctype="multipart/form-data">
+        <input type="hidden" name="ContentID" value="@Model.ContentID"/>
+        <input type="hidden" name="UpdateID" value="@Model.UpdateID"/>
+        <input type="hidden" name="ProjectID" value="@Model.update.ProjectID"/>
+        <input type="hidden" name="ContentTypeID" value="@Model.ContentTypeID" />
+        <input type="hidden" name="ContentTypeName" value="@typename" />
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                ×</button>
+            <h3 id="">
+                @typename</h3>
+        </div>
+        <div class="modal-body">
+          
+           
+            <div class="editor-label">
+                <label for="Text">
+                    Html Block</label>
+            </div>
+            <div class="editor-field">
+                <textarea id="Text" name="Text" class="wysiwyg" rows="12" style="width:100%;">@Model.Text</textarea>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input type="submit" class="btn" class="btn btn-primary" value="Update" />
+        </div>
+        </form>
+    </div>
+}

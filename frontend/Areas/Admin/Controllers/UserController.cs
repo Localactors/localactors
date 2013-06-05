@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Amazon.S3.Model;
 using Localactors.entities;
 
 namespace Localactors.webapp.Areas.Admin.Controllers
@@ -43,6 +46,50 @@ namespace Localactors.webapp.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Create(user user)
         {
+            if (Request.Files != null && Request.Files.Count > 0)
+            {
+                foreach (string keyname in Request.Files)
+                {
+                    HttpPostedFileBase file = Request.Files[keyname];
+                    if (file != null && file.ContentLength > 0 && !string.IsNullOrEmpty(file.FileName))
+                    {
+                        //file upload
+                        string ext = Path.GetExtension(file.FileName).ToLower();
+                        if (ext != ".png" && ext != ".jpg" && ext != ".jpeg" && ext != ".swf" && ext != ".fla")
+                        {
+                            ModelState.AddModelError(keyname, "Invalid file type");
+                        }
+                        else
+                        {
+
+                            try
+                            {
+                                //ok, making the new filename
+                                string filepath = string.Format("projects/{0}", file.FileName);
+                                var request = new PutObjectRequest().WithBucketName(ConfigurationManager.AppSettings["AWSS3Bucket"]).WithKey(filepath);
+                                request.InputStream = file.InputStream;
+                                AmazonS3Client.PutObject(request);
+
+                                string address = ConfigurationManager.AppSettings["AWSS3BucketUrl"] + filepath;
+
+                                ModelState.Remove(keyname);
+                                ModelState.Add(keyname, new ModelState());
+                                ModelState.SetModelValue(keyname, new ValueProviderResult(address, address, null));
+                            }
+                            catch (Exception ex)
+                            {
+                                ModelState.AddModelError(keyname, "Upload error: " + ex.Message);
+
+                            }
+                        }
+
+                        ViewBag.CountryID = new SelectList(db.countries, "CountryID", "Code", user.CountryID);
+                        ViewBag.Role = new SelectList(db.user_roles, "RoleName", "RoleName");
+                        return View(user);
+                    }
+                }
+            }
+
             user.DateJoined = DateTime.Now;
             user.DateLastLogin = DateTime.Now;
 
@@ -74,6 +121,52 @@ namespace Localactors.webapp.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Edit(user user)
         {
+            if (Request.Files != null && Request.Files.Count > 0)
+            {
+                foreach (string keyname in Request.Files)
+                {
+                    HttpPostedFileBase file = Request.Files[keyname];
+                    if (file != null && file.ContentLength > 0 && !string.IsNullOrEmpty(file.FileName))
+                    {
+
+                        //file upload
+                        string ext = Path.GetExtension(file.FileName).ToLower();
+                        if (ext != ".png" && ext != ".jpg" && ext != ".jpeg" && ext != ".swf" && ext != ".fla")
+                        {
+                            ModelState.AddModelError(keyname, "Invalid file type");
+                        }
+                        else
+                        {
+
+                            try
+                            {
+                                //ok, making the new filename
+                                string filepath = string.Format("users/{0}", file.FileName);
+
+
+                                var request = new PutObjectRequest().WithBucketName(ConfigurationManager.AppSettings["AWSS3Bucket"]).WithKey(filepath);
+                                request.InputStream = file.InputStream;
+                                AmazonS3Client.PutObject(request);
+
+                                string address = ConfigurationManager.AppSettings["AWSS3BucketUrl"] + filepath;
+
+                                ModelState.Remove(keyname);
+                                ModelState.Add(keyname, new ModelState());
+                                ModelState.SetModelValue(keyname, new ValueProviderResult(address, address, null));
+                            }
+                            catch (Exception ex)
+                            {
+                                ModelState.AddModelError(keyname, "Upload error: " + ex.Message);
+                            }
+                        }
+
+                        ViewBag.CountryID = new SelectList(db.countries, "CountryID", "Code", user.CountryID);
+                        ViewBag.Role = new SelectList(db.user_roles, "RoleName", "RoleName", user.Role);
+                        return View(user);
+                    }
+                }
+            }
+
             if (ModelState.IsValid)
             {
                 db.users.Attach(user);

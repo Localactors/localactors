@@ -1,0 +1,141 @@
+﻿@model Localactors.entities.transaction
+@{
+    ViewBag.Title = "Edit";
+}
+<ul class="breadcrumb">
+    <li><a href='@Url.Action("Index", "Home")'>Home</a> <span class="divider">/</span></li>
+    <li><a href='@Url.Action("Index", "projects")'>Projects</a> <span class="divider">/</span></li>
+    <li><a href="@Url.Action("Edit", "projects", new { id = Model.donation.project.ProjectID })">@Model.donation.project.Title</a><span                                                                                                             class="divider">/</span> </li>
+    <li><a href="@Url.Action("Index", "Donations", new { id = Model.donation.project.ProjectID })"> Donations</a> <span class="divider">/</span></li>
+    <li><a href='@Url.Action("Edit", "Donations", new { id = Model.donation.InvestmentID })'>@Model.donation.InvestmentID</a> <span class="divider">/</span></li>
+    <li><a href='@Url.Action("Index", "Transactions", new { donationid = Model.donation.InvestmentID })'> Transactions</a> <span class="divider">/</span></li>
+    <li class="active"><a href='@Url.Action("Edit", "Transactions", new { id = Model.TransactionID })'>@Model.TransactionID</a></li>
+</ul>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>transaction</legend>
+        @Html.HiddenFor(model => model.TransactionID)
+        @Html.HiddenFor(model => model.DonationID)
+        
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TransactionType)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TransactionType)
+            @Html.ValidationMessageFor(model => model.TransactionType)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TransactionStatus)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TransactionStatus)
+            @Html.ValidationMessageFor(model => model.TransactionStatus)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.GrossAmount)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.GrossAmount)
+            @Html.ValidationMessageFor(model => model.GrossAmount)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TaxAmount)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TaxAmount)
+            @Html.ValidationMessageFor(model => model.TaxAmount)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Currency)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Currency)
+            @Html.ValidationMessageFor(model => model.Currency)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PaymentStatus)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PaymentStatus)
+            @Html.ValidationMessageFor(model => model.PaymentStatus)
+        </div>
+        
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PendingReason)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PendingReason)
+            @Html.ValidationMessageFor(model => model.PendingReason)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TransactionCode)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TransactionCode)
+            @Html.ValidationMessageFor(model => model.TransactionCode)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TransactionSignature)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TransactionSignature)
+            @Html.ValidationMessageFor(model => model.TransactionSignature)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SenderID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SenderID)
+            @Html.ValidationMessageFor(model => model.SenderID)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SenderEmail)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SenderEmail)
+            @Html.ValidationMessageFor(model => model.SenderEmail)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ReceiverID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ReceiverID)
+            @Html.ValidationMessageFor(model => model.ReceiverID)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ReceiverEmail)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ReceiverEmail)
+            @Html.ValidationMessageFor(model => model.ReceiverEmail)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ItemName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ItemName)
+            @Html.ValidationMessageFor(model => model.ItemName)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ItemNumber)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ItemNumber)
+            @Html.ValidationMessageFor(model => model.ItemNumber)
+        </div>
+        
+        <p>
+            <input type="submit" value="Save" class="btn" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index",new{donationid=Model.DonationID},new{@class="btn"})
+</div>

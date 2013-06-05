@@ -35,6 +35,9 @@ namespace Localactors
 
         [DataType(DataType.MultilineText)]
         public string Location;
+
+        [Required]
+        public int Image;
     }
 
     [MetadataType(typeof(user))]
@@ -76,6 +79,7 @@ namespace Localactors
         public int CountryID;
 
 
+        public int Image;
     }
 
     [MetadataType(typeof(user_roles))]
@@ -216,7 +220,7 @@ namespace Localactors
     [MetadataType(typeof(update_content))]
     public class update_content_MetaData
     {
-        public int ContentID;
+        //public int ContentID;
 
         [Required]
         public int UpdateID;

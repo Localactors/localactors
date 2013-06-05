@@ -135,6 +135,7 @@
     <Compile Include="Areas\Admin\Controllers\MailinglistController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProjectsController.cs" />
     <Compile Include="Areas\Admin\Controllers\TagController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TransactionsController.cs" />
     <Compile Include="Areas\Admin\Controllers\UpdateContentsController.cs" />
     <Compile Include="Areas\Admin\Controllers\UpdateContentTypesController.cs" />
     <Compile Include="Areas\Admin\Controllers\UpdateController.cs" />
@@ -142,9 +143,11 @@
     <Compile Include="Areas\Admin\Controllers\UserRolesController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CommentsController.cs" />
+    <Compile Include="Controllers\DonationController.cs" />
     <Compile Include="Controllers\GuestbookController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
+    <Compile Include="Controllers\PublisherController.cs" />
     <Compile Include="Controllers\SupporterController.cs" />
     <Compile Include="Helper\AttachmentResult.cs" />
     <Compile Include="Helper\DownloadResult.cs" />
@@ -171,6 +174,7 @@
     <Compile Include="Models\Account\SettingsModel.cs" />
     <Compile Include="Models\Account\SubscribeModel.cs" />
     <Compile Include="Models\metadata.cs" />
+    <Compile Include="Models\DonationDetails.cs" />
     <Compile Include="Models\old-Team\TeamModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -566,6 +570,7 @@
     <Content Include="Content\img\glyphicons-halflings-white.png" />
     <Content Include="Content\img\glyphicons-halflings.png" />
     <Content Include="favicon.png" />
+    <Content Include="favicon_base.gif" />
     <Content Include="Global.asax" />
     <Content Include="robots.txt" />
     <Content Include="Scripts\320.js" />
@@ -602,6 +607,7 @@
     <Content Include="Scripts\locales\bootstrap-wysihtml5.ua-UA.js" />
     <Content Include="Scripts\locales\bootstrap-wysihtml5.zh-CN.js" />
     <Content Include="Scripts\locales\bootstrap-wysihtml5.zh-TW.js" />
+    <Content Include="Scripts\paypal-button.min.js" />
     <Content Include="Scripts\site2.js" />
     <Content Include="Scripts\html5shiv-printshiv.js" />
     <Content Include="Scripts\html5shiv.js" />
@@ -862,6 +868,9 @@
     <Content Include="Areas\Admin\Views\Mailinglist\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Mailinglist\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Country\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Update\_ContentEditor.cshtml" />
+    <Content Include="Areas\Admin\Views\Transactions\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Transactions\Edit.cshtml" />
     <None Include="Content\fonts\droid-sans\droidsans-bold-webfont.eot" />
     <None Include="Content\fonts\droid-sans\droidsans-bold-webfont.ttf" />
     <None Include="Content\fonts\droid-sans\droidsans-bold-webfont.woff" />
@@ -888,9 +897,6 @@
     <Content Include="Views\Home\fourofour.cshtml" />
     <Content Include="Views\Projects\Index.cshtml" />
     <Content Include="Views\Projects\Details.cshtml" />
-    <Content Include="Views\Projects\Create.cshtml" />
-    <Content Include="Views\Projects\Edit.cshtml" />
-    <Content Include="Views\Projects\Delete.cshtml" />
     <Content Include="Views\Supporter\Index.cshtml" />
     <Content Include="Views\Supporter\Details.cshtml" />
     <Content Include="Views\Supporter\Create.cshtml" />
@@ -921,6 +927,10 @@
     <Content Include="Views\Home\Guidelines.cshtml" />
     <Content Include="Views\Home\OurApproach.cshtml" />
     <Content Include="Views\Home\HowTo.cshtml" />
+    <Content Include="Views\Donation\Index.cshtml" />
+    <Content Include="Views\Donation\Return.cshtml" />
+    <Content Include="Views\Publisher\Index.cshtml" />
+    <Content Include="Views\Publisher\Details.cshtml" />
     <None Include="_bin_deployableAssemblies\it\Microsoft.Web.Infrastructure.resources.dll" />
     <None Include="_bin_deployableAssemblies\Microsoft.Web.Infrastructure.dll" />
     <None Include="_bin_deployableAssemblies\it\System.Web.WebPages.Razor.resources.dll" />
