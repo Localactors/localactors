@@ -3,24 +3,33 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.Entity;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Amazon.S3;
 using Amazon.S3.Model;
 using Localactors.entities;
+using System.Drawing;
 
 namespace Localactors.webapp.Controllers
 { 
     public class ProjectsController : ControllerBase
     {
 
-        public ViewResult Index()
+        public ViewResult Index(string tag = null)
         {
             var projects = db.projects
                 .Include("country")
                 .Include("user")
-                .Include("tags");
+                .Include("tags").AsQueryable();
+
+            if(tag!=null) {
+                //projects = db.tags.Where(x => x.Name.ToLower() == tag.ToLower()).SelectMany(x => x.projects).Distinct().ToList();
+                projects = projects.Where(x => x.tags.Any(y => y.Name == tag));
+            }
+
             return View(projects.ToList());
         }
 
@@ -86,18 +95,30 @@ namespace Localactors.webapp.Controllers
 
                             try
                             {
-                                //ok, making the new filename
-                                string filepath = string.Format("projects/{0}/guestbook/{1}",model.ProjectID, file.FileName);
-                                var request = new PutObjectRequest().WithBucketName(ConfigurationManager.AppSettings["AWSS3Bucket"]).WithKey(filepath);
-                                request.InputStream = file.InputStream;
-                                AmazonS3Client.PutObject(request);
+                                using (Image tmp = Image.FromStream(file.InputStream)) {
+                                    //resize+crop
+                                    int width = int.Parse(ConfigurationManager.AppSettings["Image_Guestbook_Width"]);
+                                    int height = int.Parse(ConfigurationManager.AppSettings["Image_Guestbook_Height"]);
+                                    string name = file.FileName + ".jpg";
+                                    string filepath = string.Format("projects/{0}/guestbook/{1}", model.ProjectID, file.FileName);
+                                    string address = ConfigurationManager.AppSettings["AWSS3BucketUrl"] + filepath;
 
-                                string address = ConfigurationManager.AppSettings["AWSS3BucketUrl"] + filepath;
+                                    //send
+                                    using (Image resized = tmp.GetResizedImage(width, height, true)) {
+                                        var request = new PutObjectRequest().WithBucketName(ConfigurationManager.AppSettings["AWSS3Bucket"]).WithKey(filepath);
+                                        using (MemoryStream buffer = new MemoryStream()) {
+                                            resized.Save(buffer, ImageHelper.GetJpgEncoder(), ImageHelper.GetJpgEncoderParameters(80));
+                                            request.InputStream = buffer;
+                                            AmazonS3Client s3Client = new AmazonS3Client();
+                                            s3Client.PutObject(request);
+                                        }
+                                    }
 
-                                ModelState.Remove(keyname);
-                                ModelState.Add(keyname, new ModelState());
-                                ModelState.SetModelValue(keyname, new ValueProviderResult(address, address, null));
-                                model.Picture = address;
+                                    ModelState.Remove(keyname);
+                                    ModelState.Add(keyname, new ModelState());
+                                    ModelState.SetModelValue(keyname, new ValueProviderResult(address, address, null));
+                                    model.Picture = address;
+                                }
                             }
                             catch (Exception ex)
                             {

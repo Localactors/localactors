@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.Entity;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Amazon.S3;
 using Amazon.S3.Model;
 using Localactors.entities;
 
@@ -64,13 +66,34 @@ namespace Localactors.webapp.Areas.Admin.Controllers
                         string ext = Path.GetExtension(file.FileName).ToLower();
                         if (ext == ".png" || ext == ".jpg" || ext == ".jpeg" || ext == ".gif") {
                             try {
-                                //ok, making the new filename
-                                string filepath = string.Format("projects/{0}/photo/{1}", project_photo.ProjectID, file.FileName);
-                                var request = new PutObjectRequest().WithBucketName(ConfigurationManager.AppSettings["AWSS3Bucket"]).WithKey(filepath);
-                                request.InputStream = file.InputStream;
-                                AmazonS3Client.PutObject(request);
-                                string address = ConfigurationManager.AppSettings["AWSS3BucketUrl"] + filepath;
-                                project_photo.Url = address;
+                                using (Image tmp = Image.FromStream(file.InputStream))
+                                {
+                                    //resize+crop
+                                    int width = int.Parse(ConfigurationManager.AppSettings["Image_Gallery_Width"]);
+                                    int height = int.Parse(ConfigurationManager.AppSettings["Image_Gallery_Height"]);
+                                    string name = file.FileName + ".jpg";
+                                    string filepath = string.Format("projects/{0}/photos/{1}", project_photo.ProjectID, name);
+                                    string address = ConfigurationManager.AppSettings["AWSS3BucketUrl"] + filepath;
+
+                                    //send
+                                    using (Image resized = tmp.GetResizedImage(width, height, true))
+                                    {
+                                        var request = new PutObjectRequest().WithBucketName(ConfigurationManager.AppSettings["AWSS3Bucket"]).WithKey(filepath);
+                                        using (MemoryStream buffer = new MemoryStream())
+                                        {
+                                            resized.Save(buffer, ImageHelper.GetJpgEncoder(), ImageHelper.GetJpgEncoderParameters(80));
+                                            request.InputStream = buffer;
+                                            AmazonS3Client s3Client = new AmazonS3Client();
+                                            s3Client.PutObject(request);
+                                        }
+                                    }
+
+                                    ModelState.Remove(keyname);
+                                    ModelState.Add(keyname, new ModelState());
+                                    ModelState.SetModelValue(keyname, new ValueProviderResult(address, address, null));
+                                    project_photo.Url = address;
+
+                                }
                             }
                             catch (Exception ex) {
                                 ModelState.AddModelError(keyname, "Upload error: " + ex.Message);
@@ -139,13 +162,34 @@ namespace Localactors.webapp.Areas.Admin.Controllers
 
                         try
                         {
-                            //ok, making the new filename
-                            string filepath = string.Format("projects/{0}/photo/{1}", project_photo.ProjectID, file.FileName);
-                            var request = new PutObjectRequest().WithBucketName(ConfigurationManager.AppSettings["AWSS3Bucket"]).WithKey(filepath);
-                            request.InputStream = file.InputStream;
-                            AmazonS3Client.PutObject(request);
-                            string address = ConfigurationManager.AppSettings["AWSS3BucketUrl"] + filepath;
-                            project_photo.Url = address;
+                            using (Image tmp = Image.FromStream(file.InputStream))
+                            {
+                                //resize+crop
+                                int width = int.Parse(ConfigurationManager.AppSettings["Image_Gallery_Width"]);
+                                int height = int.Parse(ConfigurationManager.AppSettings["Image_Gallery_Height"]);
+                                string name = file.FileName + ".jpg";
+                                string filepath = string.Format("projects/{0}/photos/{1}", project_photo.ProjectID, name);
+                                string address = ConfigurationManager.AppSettings["AWSS3BucketUrl"] + filepath;
+
+                                //send
+                                using (Image resized = tmp.GetResizedImage(width, height, true))
+                                {
+                                    var request = new PutObjectRequest().WithBucketName(ConfigurationManager.AppSettings["AWSS3Bucket"]).WithKey(filepath);
+                                    using (MemoryStream buffer = new MemoryStream())
+                                    {
+                                        resized.Save(buffer, ImageHelper.GetJpgEncoder(), ImageHelper.GetJpgEncoderParameters(80));
+                                        request.InputStream = buffer;
+                                        AmazonS3Client s3Client = new AmazonS3Client();
+                                        s3Client.PutObject(request);
+                                    }
+                                }
+
+                                ModelState.Remove(keyname);
+                                ModelState.Add(keyname, new ModelState());
+                                ModelState.SetModelValue(keyname, new ValueProviderResult(address, address, null));
+                                project_photo.Url = address;
+
+                            }
                         }
                         catch (Exception ex)
                         {

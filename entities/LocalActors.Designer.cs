@@ -3265,6 +3265,30 @@ namespace Localactors.entities
         private global::System.DateTime _DateCreated;
         partial void OnDateCreatedChanging(global::System.DateTime value);
         partial void OnDateCreatedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Intro
+        {
+            get
+            {
+                return _Intro;
+            }
+            set
+            {
+                OnIntroChanging(value);
+                ReportPropertyChanging("Intro");
+                _Intro = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Intro");
+                OnIntroChanged();
+            }
+        }
+        private global::System.String _Intro;
+        partial void OnIntroChanging(global::System.String value);
+        partial void OnIntroChanged();
 
         #endregion
 

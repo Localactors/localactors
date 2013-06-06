@@ -148,8 +148,7 @@
     <Compile Include="Controllers\GuestbookController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
-    <Compile Include="Controllers\PublisherController.cs" />
-    <Compile Include="Controllers\SupporterController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Helper\AttachmentResult.cs" />
     <Compile Include="Helper\DownloadResult.cs" />
     <Compile Include="Helper\HtmlAttributeEncodingNot.cs" />
@@ -174,6 +173,7 @@
     <Compile Include="Models\Account\ResetPasswordRequestModel.cs" />
     <Compile Include="Models\Account\SettingsModel.cs" />
     <Compile Include="Models\Account\SubscribeModel.cs" />
+    <Compile Include="Models\ImageHelper.cs" />
     <Compile Include="Models\metadata.cs" />
     <Compile Include="Models\DonationDetails.cs" />
     <Compile Include="Models\old-Team\TeamModel.cs" />
@@ -902,11 +902,6 @@
     <Content Include="Views\Home\fourofour.cshtml" />
     <Content Include="Views\Projects\Index.cshtml" />
     <Content Include="Views\Projects\Details.cshtml" />
-    <Content Include="Views\Supporter\Index.cshtml" />
-    <Content Include="Views\Supporter\Details.cshtml" />
-    <Content Include="Views\Supporter\Create.cshtml" />
-    <Content Include="Views\Supporter\Edit.cshtml" />
-    <Content Include="Views\Supporter\Delete.cshtml" />
     <Content Include="Views\Comments\Index.cshtml" />
     <Content Include="Views\Comments\Details.cshtml" />
     <Content Include="Views\Comments\Create.cshtml" />
@@ -934,8 +929,12 @@
     <Content Include="Views\Home\HowTo.cshtml" />
     <Content Include="Views\Donation\Index.cshtml" />
     <Content Include="Views\Donation\Return.cshtml" />
-    <Content Include="Views\Publisher\Index.cshtml" />
-    <Content Include="Views\Publisher\Details.cshtml" />
+    <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\Profile\Details.cshtml" />
+    <Content Include="Views\Profile\Feed.cshtml" />
+    <Content Include="Views\Profile\_Single_Update.cshtml" />
+    <Content Include="Views\Profile\_Update_Content.cshtml" />
+    <Content Include="Views\Profile\_Updates.cshtml" />
     <None Include="_bin_deployableAssemblies\it\Microsoft.Web.Infrastructure.resources.dll" />
     <None Include="_bin_deployableAssemblies\Microsoft.Web.Infrastructure.dll" />
     <None Include="_bin_deployableAssemblies\it\System.Web.WebPages.Razor.resources.dll" />

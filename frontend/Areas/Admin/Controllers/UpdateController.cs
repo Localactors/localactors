@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.Entity;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Amazon.S3;
 using Amazon.S3.Model;
 using Localactors.entities;
 
@@ -148,7 +150,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
                     {
                         //file upload
                         string ext = Path.GetExtension(file.FileName).ToLower();
-                        if (ext != ".png" && ext != ".jpg" && ext != ".jpeg" && ext != ".swf" && ext != ".fla")
+                        if (ext != ".png" && ext != ".jpg" && ext != ".jpeg" && ext != ".swf" && ext != ".fla" && ext!=".mov" && ext!= ".avi")
                         {
                             ModelState.AddModelError(keyname, "Invalid file type");
                             return RedirectToAction("Edit", "Update", new { id = update_content.UpdateID });
@@ -156,14 +158,47 @@ namespace Localactors.webapp.Areas.Admin.Controllers
 
                         try
                         {
-                            //ok, making the new filename
-                            string filepath = string.Format("projects/{0}/update_{1}/{2}", ProjectID, update_content.UpdateID, file.FileName);
-                            var request = new PutObjectRequest().WithBucketName(ConfigurationManager.AppSettings["AWSS3Bucket"]).WithKey(filepath);
-                            request.InputStream = file.InputStream;
-                            AmazonS3Client.PutObject(request);
-                            string address = ConfigurationManager.AppSettings["AWSS3BucketUrl"] + filepath;
-                            update_content.Media = address;
-                            update_content.Url = address;
+                            if (ext == ".png" || ext == ".jpg" || ext == ".jpeg") {
+                                using (Image tmp = Image.FromStream(file.InputStream)) {
+                                    //resize+crop
+                                    int width = int.Parse(ConfigurationManager.AppSettings["Image_Update_Width"]);
+                                    int height = int.Parse(ConfigurationManager.AppSettings["Image_Update_Height"]);
+                                    string name = file.FileName + ".jpg";
+                                    string filepath = string.Format("projects/{0}/update_{1}/{2}", ProjectID, update_content.UpdateID, name);
+                                    string address = ConfigurationManager.AppSettings["AWSS3BucketUrl"] + filepath;
+
+                                    //send
+                                    using (Image resized = tmp.GetResizedImage(width, height, true)) {
+                                        var request = new PutObjectRequest().WithBucketName(ConfigurationManager.AppSettings["AWSS3Bucket"]).WithKey(filepath);
+                                        using (MemoryStream buffer = new MemoryStream()) {
+                                            resized.Save(buffer, ImageHelper.GetJpgEncoder(), ImageHelper.GetJpgEncoderParameters(80));
+                                            request.InputStream = buffer;
+                                            AmazonS3Client s3Client = new AmazonS3Client();
+                                            s3Client.PutObject(request);
+                                        }
+                                    }
+
+                                    ModelState.Remove(keyname);
+                                    ModelState.Add(keyname, new ModelState());
+                                    ModelState.SetModelValue(keyname, new ValueProviderResult(address, address, null));
+                                    update_content.Media = address;
+                                    update_content.Url = address;
+                                }
+                            }else {
+                                //ok, making the new filename
+                                string filepath = string.Format("projects/{0}/update_{1}/{2}", ProjectID, update_content.UpdateID, file.FileName);
+                                var request = new PutObjectRequest().WithBucketName(ConfigurationManager.AppSettings["AWSS3Bucket"]).WithKey(filepath);
+                                request.InputStream = file.InputStream;
+                                AmazonS3Client.PutObject(request);
+                                string address = ConfigurationManager.AppSettings["AWSS3BucketUrl"] + filepath;
+
+                                ModelState.Remove(keyname);
+                                ModelState.Add(keyname, new ModelState());
+                                ModelState.SetModelValue(keyname, new ValueProviderResult(address, address, null));
+                                update_content.Media = address;
+                                update_content.Url = address;
+                            }
+
                         }
                         catch (Exception ex)
                         {
@@ -216,15 +251,52 @@ namespace Localactors.webapp.Areas.Admin.Controllers
 
                         try
                         {
-                            //ok, making the new filename
-                            string filepath = string.Format("projects/{0}/update_{1}/{2}", ProjectID, update_content.UpdateID, file.FileName);
-                            var request = new PutObjectRequest().WithBucketName(ConfigurationManager.AppSettings["AWSS3Bucket"]).WithKey(filepath);
-                            request.InputStream = file.InputStream;
-                            AmazonS3Client.PutObject(request);
-                            string address = ConfigurationManager.AppSettings["AWSS3BucketUrl"] + filepath;
+                            if (ext == ".png" || ext == ".jpg" || ext == ".jpeg")
+                            {
+                                using (Image tmp = Image.FromStream(file.InputStream))
+                                {
+                                    //resize+crop
+                                    int width = int.Parse(ConfigurationManager.AppSettings["Image_Update_Width"]);
+                                    int height = int.Parse(ConfigurationManager.AppSettings["Image_Update_Height"]);
+                                    string name = file.FileName + ".jpg";
+                                    string filepath = string.Format("projects/{0}/update_{1}/{2}", ProjectID, update_content.UpdateID, name);
+                                    string address = ConfigurationManager.AppSettings["AWSS3BucketUrl"] + filepath;
 
-                            update_content.Media = address;
-                            update_content.Url = address;
+                                    //send
+                                    using (Image resized = tmp.GetResizedImage(width, height, true))
+                                    {
+                                        var request = new PutObjectRequest().WithBucketName(ConfigurationManager.AppSettings["AWSS3Bucket"]).WithKey(filepath);
+                                        using (MemoryStream buffer = new MemoryStream())
+                                        {
+                                            resized.Save(buffer, ImageHelper.GetJpgEncoder(), ImageHelper.GetJpgEncoderParameters(80));
+                                            request.InputStream = buffer;
+                                            AmazonS3Client s3Client = new AmazonS3Client();
+                                            s3Client.PutObject(request);
+                                        }
+                                    }
+
+                                    ModelState.Remove(keyname);
+                                    ModelState.Add(keyname, new ModelState());
+                                    ModelState.SetModelValue(keyname, new ValueProviderResult(address, address, null));
+                                    update_content.Media = address;
+                                    update_content.Url = address;
+                                }
+                            }
+                            else
+                            {
+                                //ok, making the new filename
+                                string filepath = string.Format("projects/{0}/update_{1}/{2}", ProjectID, update_content.UpdateID, file.FileName);
+                                var request = new PutObjectRequest().WithBucketName(ConfigurationManager.AppSettings["AWSS3Bucket"]).WithKey(filepath);
+                                request.InputStream = file.InputStream;
+                                AmazonS3Client.PutObject(request);
+                                string address = ConfigurationManager.AppSettings["AWSS3BucketUrl"] + filepath;
+
+                                ModelState.Remove(keyname);
+                                ModelState.Add(keyname, new ModelState());
+                                ModelState.SetModelValue(keyname, new ValueProviderResult(address, address, null));
+                                update_content.Media = address;
+                                update_content.Url = address;
+                            }
                         }
                         catch (Exception ex)
                         {

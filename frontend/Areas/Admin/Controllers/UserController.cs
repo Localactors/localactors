@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.Entity;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Amazon.S3;
 using Amazon.S3.Model;
 using Localactors.entities;
 
@@ -64,17 +66,36 @@ namespace Localactors.webapp.Areas.Admin.Controllers
 
                             try
                             {
-                                //ok, making the new filename
-                                string filepath = string.Format("projects/{0}", file.FileName);
-                                var request = new PutObjectRequest().WithBucketName(ConfigurationManager.AppSettings["AWSS3Bucket"]).WithKey(filepath);
-                                request.InputStream = file.InputStream;
-                                AmazonS3Client.PutObject(request);
 
-                                string address = ConfigurationManager.AppSettings["AWSS3BucketUrl"] + filepath;
+                                using (Image tmp = Image.FromStream(file.InputStream))
+                                {
+                                    //resize+crop
+                                    int width = int.Parse(ConfigurationManager.AppSettings["Image_User_Width"]);
+                                    int height = int.Parse(ConfigurationManager.AppSettings["Image_User_Height"]);
+                                    string name = file.FileName + ".jpg";
+                                    string filepath = string.Format("users/{0}", name);
+                                    string address = ConfigurationManager.AppSettings["AWSS3BucketUrl"] + filepath;
 
-                                ModelState.Remove(keyname);
-                                ModelState.Add(keyname, new ModelState());
-                                ModelState.SetModelValue(keyname, new ValueProviderResult(address, address, null));
+                                    //send
+                                    using (Image resized = tmp.GetResizedImage(width, height, true))
+                                    {
+                                        var request = new PutObjectRequest().WithBucketName(ConfigurationManager.AppSettings["AWSS3Bucket"]).WithKey(filepath);
+                                        using (MemoryStream buffer = new MemoryStream())
+                                        {
+                                            resized.Save(buffer, ImageHelper.GetJpgEncoder(), ImageHelper.GetJpgEncoderParameters(80));
+                                            request.InputStream = buffer;
+                                            AmazonS3Client s3Client = new AmazonS3Client();
+                                            s3Client.PutObject(request);
+                                        }
+                                    }
+
+                                    ModelState.Remove(keyname);
+                                    ModelState.Add(keyname, new ModelState());
+                                    ModelState.SetModelValue(keyname, new ValueProviderResult(address, address, null));
+                                    user.Image = address;
+                                }
+
+
                             }
                             catch (Exception ex)
                             {
@@ -140,19 +161,33 @@ namespace Localactors.webapp.Areas.Admin.Controllers
 
                             try
                             {
-                                //ok, making the new filename
-                                string filepath = string.Format("users/{0}", file.FileName);
+                                using (Image tmp = Image.FromStream(file.InputStream))
+                                {
+                                    //resize+crop
+                                    int width = int.Parse(ConfigurationManager.AppSettings["Image_User_Width"]);
+                                    int height = int.Parse(ConfigurationManager.AppSettings["Image_User_Height"]);
+                                    string name = file.FileName + ".jpg";
+                                    string filepath = string.Format("users/{0}", name);
+                                    string address = ConfigurationManager.AppSettings["AWSS3BucketUrl"] + filepath;
 
+                                    //send
+                                    using (Image resized = tmp.GetResizedImage(width, height, true))
+                                    {
+                                        var request = new PutObjectRequest().WithBucketName(ConfigurationManager.AppSettings["AWSS3Bucket"]).WithKey(filepath);
+                                        using (MemoryStream buffer = new MemoryStream())
+                                        {
+                                            resized.Save(buffer, ImageHelper.GetJpgEncoder(), ImageHelper.GetJpgEncoderParameters(80));
+                                            request.InputStream = buffer;
+                                            AmazonS3Client s3Client = new AmazonS3Client();
+                                            s3Client.PutObject(request);
+                                        }
+                                    }
 
-                                var request = new PutObjectRequest().WithBucketName(ConfigurationManager.AppSettings["AWSS3Bucket"]).WithKey(filepath);
-                                request.InputStream = file.InputStream;
-                                AmazonS3Client.PutObject(request);
-
-                                string address = ConfigurationManager.AppSettings["AWSS3BucketUrl"] + filepath;
-
-                                ModelState.Remove(keyname);
-                                ModelState.Add(keyname, new ModelState());
-                                ModelState.SetModelValue(keyname, new ValueProviderResult(address, address, null));
+                                    ModelState.Remove(keyname);
+                                    ModelState.Add(keyname, new ModelState());
+                                    ModelState.SetModelValue(keyname, new ValueProviderResult(address, address, null));
+                                    user.Image = address;
+                                }
                             }
                             catch (Exception ex)
                             {
