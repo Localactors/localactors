@@ -11,6 +11,7 @@
 
 
         @Html.HiddenFor(model => model.InvestmentID)
+        <input type="hidden" name="projectid" value="@ViewBag.projectid"/>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Description)
@@ -26,6 +27,3 @@
 
 }
 
-<div>
-    @Html.ActionLink("Back to Your Donations", "Index")
-</div>

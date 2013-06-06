@@ -69,7 +69,7 @@ namespace Localactors.webapp.Controllers
         }
 
         [Authorize(Roles = "supporter,admin,publisher")]
-        public ActionResult Return()
+        public ActionResult Return(int projectid=0)
         {
             /*
              * mc_gross=1.00
@@ -123,15 +123,16 @@ namespace Localactors.webapp.Controllers
                 donation.Amount = t.donation.Amount;
                 donation.Currency = t.donation.Currency;
                 donation.Description = t.donation.Description;
+                ViewBag.projectid = projectid;
                 return View(donation);
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index","Projects");
         }
 
         [HttpPost]
         [Authorize(Roles = "supporter,admin,publisher")]
-        public ActionResult Return(DonationDetails model)
+        public ActionResult Return(DonationDetails model,int projectid=0)
         {
 
             donation donation = db.donations.FirstOrDefault(x => x.InvestmentID == model.InvestmentID && x.user.UserName.ToLower() == User.Identity.Name.ToLower());
@@ -139,7 +140,12 @@ namespace Localactors.webapp.Controllers
                 donation.Description = model.Description;
                 db.SaveChanges();
             }
-            return RedirectToAction("Index");
+
+            if(projectid>0) {
+                return RedirectToAction("Details", "Projects", new{id=projectid});
+            }
+
+            return RedirectToAction("Index", "Projects");
         }
 
 
