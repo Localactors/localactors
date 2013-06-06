@@ -14,7 +14,7 @@ namespace Localactors.webapp.Controllers
 
         public ViewResult Index()
         {
-            var projects = db.projects.Include("country").Include("user");
+            var projects = db.projects.Include("country").Include("user").Include("project_photo");
             return View(projects.ToList());
         }
 
@@ -23,7 +23,7 @@ namespace Localactors.webapp.Controllers
 
         public ViewResult Details(int id)
         {
-            project project = db.projects.Single(p => p.ProjectID == id);
+            project project = db.projects.Include("country").Include("user").Include("project_photo").Single(p => p.ProjectID == id);
             return View(project);
         }
 

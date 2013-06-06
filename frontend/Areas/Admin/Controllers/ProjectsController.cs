@@ -95,7 +95,14 @@ namespace Localactors.webapp.Areas.Admin.Controllers
  
         public ActionResult Edit(int id)
         {
-            project project = db.projects.Single(p => p.ProjectID == id);
+            project project = db.projects
+                .Include("tags")
+                .Include("project_photo")
+                .Include("updates")
+                .Include("donations")
+                .Include("achievements")
+                .Single(p => p.ProjectID == id);
+
             ViewBag.Supporters = new SelectList(db.users.Where(x => x.Role == "admin" || x.Role == "supporter"), "UserID", "UserName");
             ViewBag.CountryID = new SelectList(db.countries, "CountryID", "Code", project.CountryID);
             ViewBag.UserID = new SelectList(db.users.Where(x => x.Role == "admin" || x.Role == "publisher"), "UserID", "UserName", project.UserID);

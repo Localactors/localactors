@@ -20,7 +20,7 @@ body > .navbar .brand:hover {
 .editor-field{ float:left;width: 300px;}
 .display-label{ float:left;width: 160px;clear: left;display: inline-block;padding: 5px;text-align: left;font-weight: bold;color: #999;}
 .display-field{ float:left;width: 500px;display: inline-block;padding: 5px;}
-.field-validation-valid{ color: red;display: block;clear: both;}
+.field-validation-valid, .input-validation-error, .field-validation-error{ color: red;display: block;clear: both;}
 fieldset{ margin: 5px;padding: 5px;}
 .text-box{}
 .single-line{}

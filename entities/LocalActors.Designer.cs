@@ -37,6 +37,7 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("localactorsModel", "FK_project_user", "user", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.user), "project", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.project), true)]
 [assembly: EdmRelationshipAttribute("localactorsModel", "project_tag", "project", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.project), "tag", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.tag))]
 [assembly: EdmRelationshipAttribute("localactorsModel", "user_follow_project", "project", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.project), "user", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.user))]
+[assembly: EdmRelationshipAttribute("localactorsModel", "FK_project_photo_project", "project", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.project), "project_photo", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.project_photo), true)]
 
 #endregion
 
@@ -311,6 +312,22 @@ namespace Localactors.entities
             }
         }
         private ObjectSet<project> _projects;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<project_photo> project_photo
+        {
+            get
+            {
+                if ((_project_photo == null))
+                {
+                    _project_photo = base.CreateObjectSet<project_photo>("project_photo");
+                }
+                return _project_photo;
+            }
+        }
+        private ObjectSet<project_photo> _project_photo;
 
         #endregion
 
@@ -426,6 +443,14 @@ namespace Localactors.entities
         public void AddToprojects(project project)
         {
             base.AddObject("projects", project);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the project_photo EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToproject_photo(project_photo project_photo)
+        {
+            base.AddObject("project_photo", project_photo);
         }
 
         #endregion
@@ -1976,6 +2001,28 @@ namespace Localactors.entities
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("localactorsModel", "FK_project_photo_project", "project_photo")]
+        public EntityCollection<project_photo> project_photo
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<project_photo>("localactorsModel.FK_project_photo_project", "project_photo");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<project_photo>("localactorsModel.FK_project_photo_project", "project_photo", value);
+                }
+            }
+        }
 
         #endregion
 
@@ -2236,6 +2283,183 @@ namespace Localactors.entities
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<project>("localactorsModel.FK_project_guestbook_project", "project", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="localactorsModel", Name="project_photo")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class project_photo : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new project_photo object.
+        /// </summary>
+        /// <param name="photoID">Initial value of the PhotoID property.</param>
+        /// <param name="projectID">Initial value of the ProjectID property.</param>
+        /// <param name="url">Initial value of the Url property.</param>
+        /// <param name="caption">Initial value of the Caption property.</param>
+        public static project_photo Createproject_photo(global::System.Int32 photoID, global::System.Int32 projectID, global::System.String url, global::System.String caption)
+        {
+            project_photo project_photo = new project_photo();
+            project_photo.PhotoID = photoID;
+            project_photo.ProjectID = projectID;
+            project_photo.Url = url;
+            project_photo.Caption = caption;
+            return project_photo;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 PhotoID
+        {
+            get
+            {
+                return _PhotoID;
+            }
+            set
+            {
+                if (_PhotoID != value)
+                {
+                    OnPhotoIDChanging(value);
+                    ReportPropertyChanging("PhotoID");
+                    _PhotoID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("PhotoID");
+                    OnPhotoIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _PhotoID;
+        partial void OnPhotoIDChanging(global::System.Int32 value);
+        partial void OnPhotoIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ProjectID
+        {
+            get
+            {
+                return _ProjectID;
+            }
+            set
+            {
+                OnProjectIDChanging(value);
+                ReportPropertyChanging("ProjectID");
+                _ProjectID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ProjectID");
+                OnProjectIDChanged();
+            }
+        }
+        private global::System.Int32 _ProjectID;
+        partial void OnProjectIDChanging(global::System.Int32 value);
+        partial void OnProjectIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Url
+        {
+            get
+            {
+                return _Url;
+            }
+            set
+            {
+                OnUrlChanging(value);
+                ReportPropertyChanging("Url");
+                _Url = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Url");
+                OnUrlChanged();
+            }
+        }
+        private global::System.String _Url;
+        partial void OnUrlChanging(global::System.String value);
+        partial void OnUrlChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Caption
+        {
+            get
+            {
+                return _Caption;
+            }
+            set
+            {
+                OnCaptionChanging(value);
+                ReportPropertyChanging("Caption");
+                _Caption = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Caption");
+                OnCaptionChanged();
+            }
+        }
+        private global::System.String _Caption;
+        partial void OnCaptionChanging(global::System.String value);
+        partial void OnCaptionChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("localactorsModel", "FK_project_photo_project", "project")]
+        public project project
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<project>("localactorsModel.FK_project_photo_project", "project").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<project>("localactorsModel.FK_project_photo_project", "project").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<project> projectReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<project>("localactorsModel.FK_project_photo_project", "project");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<project>("localactorsModel.FK_project_photo_project", "project", value);
                 }
             }
         }

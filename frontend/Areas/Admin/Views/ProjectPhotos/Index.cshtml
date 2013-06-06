@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Localactors.entities.project_photo>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<ul class="breadcrumb">
+    <li><a href='@Url.Action("Index","Home")'>Home</a> <span class="divider">/</span></li>
+    @if (@ViewBag.Project != null)
+    {
+        <li><a href='@Url.Action("Index", "projects")'>Projects</a> <span class="divider">/</span></li>
+        <li><a href="@Url.Action("Edit", "Projects", new { id = @ViewBag.Project.ProjectID })">@ViewBag.Project.Title</a> <span class="divider">/</span> </li>
+        <li class="active"><a href="@Url.Action("Index", "ProjectPhotos", new { projectid = @ViewBag.Project.ProjectID })">Photos</a> </li>
+    }
+    else {
+        <li class="active"><a href="@Url.Action("Index", "ProjectPhotos")">Photos</a> </li>
+    }
+</ul>
+
+<p>
+     @Html.ActionLink("Create New", "Create", new { }, new { @class = "btn" })
+</p>
+<table class="table table-condensed table-striped table-bordered">
+    <tr>
+        <th></th>
+        <th>
+            project
+        </th>
+        <th>
+            Url
+        </th>
+        <th>
+            Caption
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            <img src="@item.Url" alt="@item.Caption" width="128px" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.project.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Url)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Caption)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.PhotoID }, new { }) |
+            @Html.ActionLink("Details", "Details", new { id = item.PhotoID }, new { }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.PhotoID }, new { })
+        </td>
+    </tr>
+}
+
+</table>

@@ -62,7 +62,10 @@
             @Model.Description
         </p>
     </div>
-    <img alt='@Model.Title' src='@Model.Image'>
+    <img alt='@Model.Title' src='@Model.Image' />
+    @foreach(var item in Model.project_photo) {
+        <img alt='@item.Caption' src='@item.Url' />
+    }
     @*
     <img alt='Rosella01' src='content/images/rosella01.jpg'>
     <img alt='Rosella02' src='content/images/rosella02.jpg'>
