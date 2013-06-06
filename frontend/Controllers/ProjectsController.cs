@@ -50,6 +50,20 @@ namespace Localactors.webapp.Controllers
             return View(project);
         }
 
+        public ViewResult Updates(int id)
+        {
+            project project = db.projects
+                .Include("country")
+                .Include("user")
+                .Include("project_guestbook")
+                .Include("project_photo")
+                .Include("tags")
+                .Include("updates")
+                .Include("achievements")
+                .Single(p => p.ProjectID == id);
+            return View(project);
+        }
+
 
         [HttpPost]
         [Authorize(Roles="supporter,publisher,admin")]

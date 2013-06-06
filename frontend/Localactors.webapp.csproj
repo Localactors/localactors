@@ -935,6 +935,7 @@
     <Content Include="Views\Profile\_Single_Update.cshtml" />
     <Content Include="Views\Profile\_Update_Content.cshtml" />
     <Content Include="Views\Profile\_Updates.cshtml" />
+    <Content Include="Views\Projects\Updates.cshtml" />
     <None Include="_bin_deployableAssemblies\it\Microsoft.Web.Infrastructure.resources.dll" />
     <None Include="_bin_deployableAssemblies\Microsoft.Web.Infrastructure.dll" />
     <None Include="_bin_deployableAssemblies\it\System.Web.WebPages.Razor.resources.dll" />
