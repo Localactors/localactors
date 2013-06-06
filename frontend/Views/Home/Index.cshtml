@@ -138,7 +138,7 @@
         <hr class='spacer-projects' />
         <div class='cover-projects'>
             <p class='info-project-track'>
-                <span class="number">@((project.DateEnd - DateTime.Now).Days)</span> days / <span
+                <span class="number">@((DateTime.Now - project.DateEnd).Days)</span> days / <span
                     class="number">&#128; @project.donations.Sum(x => x.Amount)</span> raised of <span
                         class="number">&#128; @project.Target</span> pledged / <span class="number">@project.donations.Select(x=>x.UserID).Distinct().Count()</span>
                 supporters

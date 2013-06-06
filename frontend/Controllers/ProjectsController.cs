@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Amazon.S3.Model;
 using Localactors.entities;
 
 namespace Localactors.webapp.Controllers
@@ -14,7 +17,10 @@ namespace Localactors.webapp.Controllers
 
         public ViewResult Index()
         {
-            var projects = db.projects.Include("country").Include("user").Include("project_photo");
+            var projects = db.projects
+                .Include("country")
+                .Include("user")
+                .Include("tags");
             return View(projects.ToList());
         }
 
@@ -23,87 +29,97 @@ namespace Localactors.webapp.Controllers
 
         public ViewResult Details(int id)
         {
-            project project = db.projects.Include("country").Include("user").Include("project_photo").Single(p => p.ProjectID == id);
+            project project = db.projects
+                .Include("country")
+                .Include("user")
+                .Include("project_guestbook")
+                .Include("project_photo")
+                .Include("tags")
+                .Include("updates")
+                .Include("achievements")
+                .Single(p => p.ProjectID == id);
             return View(project);
         }
 
-        ////
-        //// GET: /Projects/Create
 
-        //public ActionResult Create()
-        //{
-        //    ViewBag.CountryID = new SelectList(db.countries, "CountryID", "Code");
-        //    ViewBag.UserID = new SelectList(db.users, "UserID", "Role");
-        //    return View();
-        //} 
+        [HttpPost]
+        [Authorize(Roles="supporter,publisher,admin")]
+        public ActionResult GuestbookCreate(project_guestbook model)
+        {
+            project project = db.projects
+                .Include("country")
+                .Include("user")
+                .Include("project_guestbook")
+                .Include("project_photo")
+                .Include("tags")
+                .Include("updates")
+                .Include("achievements")
+                .Single(p => p.ProjectID == model.ProjectID);
 
-        ////
-        //// POST: /Projects/Create
+            model.UserID = CurrentUser.UserID;
+            model.Date = DateTime.Now;
 
-        //[HttpPost]
-        //public ActionResult Create(project project)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.projects.AddObject(project);
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");  
-        //    }
+            ModelState.Remove("UserID");
+            ModelState.Add("UserID", new ModelState());
+            ModelState.SetModelValue("UserID", new ValueProviderResult(CurrentUser.UserID, CurrentUser.UserID.ToString(), null));
 
-        //    ViewBag.CountryID = new SelectList(db.countries, "CountryID", "Code", project.CountryID);
-        //    ViewBag.UserID = new SelectList(db.users, "UserID", "Role", project.UserID);
-        //    return View(project);
-        //}
+            ModelState.Remove("Date");
+            ModelState.Add("Date", new ModelState());
+            ModelState.SetModelValue("Date", new ValueProviderResult(DateTime.Now, DateTime.Now.ToString(), null));
+
+
+            if (Request.Files != null && Request.Files.Count > 0)
+            {
+                foreach (string keyname in Request.Files)
+                {
+                    HttpPostedFileBase file = Request.Files[keyname];
+                    if (file != null && file.ContentLength > 0 && !string.IsNullOrEmpty(file.FileName))
+                    {
+                        //file upload
+                        string ext = Path.GetExtension(file.FileName).ToLower();
+                        if (ext != ".png" && ext != ".jpg" && ext != ".jpeg" && ext != ".swf" && ext != ".fla")
+                        {
+                            ModelState.AddModelError(keyname, "Invalid file type");
+                        }
+                        else
+                        {
+
+                            try
+                            {
+                                //ok, making the new filename
+                                string filepath = string.Format("projects/{0}/guestbook/{1}",model.ProjectID, file.FileName);
+                                var request = new PutObjectRequest().WithBucketName(ConfigurationManager.AppSettings["AWSS3Bucket"]).WithKey(filepath);
+                                request.InputStream = file.InputStream;
+                                AmazonS3Client.PutObject(request);
+
+                                string address = ConfigurationManager.AppSettings["AWSS3BucketUrl"] + filepath;
+
+                                ModelState.Remove(keyname);
+                                ModelState.Add(keyname, new ModelState());
+                                ModelState.SetModelValue(keyname, new ValueProviderResult(address, address, null));
+                                model.Picture = address;
+                            }
+                            catch (Exception ex)
+                            {
+                                ModelState.AddModelError(keyname, "Upload error: " + ex.Message);
+
+                            }
+                        }
+
+                    }
+                }
+            }
+
+            if (ModelState.IsValid)
+            {
+                project.project_guestbook.Add(model);
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Details", new {id = model.ProjectID});
+            return View("Details", project);
+        }
         
-        ////
-        //// GET: /Projects/Edit/5
- 
-        //public ActionResult Edit(int id)
-        //{
-        //    project project = db.projects.Single(p => p.ProjectID == id);
-        //    ViewBag.CountryID = new SelectList(db.countries, "CountryID", "Code", project.CountryID);
-        //    ViewBag.UserID = new SelectList(db.users, "UserID", "Role", project.UserID);
-        //    return View(project);
-        //}
-
-        ////
-        //// POST: /Projects/Edit/5
-
-        //[HttpPost]
-        //public ActionResult Edit(project project)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.projects.Attach(project);
-        //        db.ObjectStateManager.ChangeObjectState(project, EntityState.Modified);
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        //    ViewBag.CountryID = new SelectList(db.countries, "CountryID", "Code", project.CountryID);
-        //    ViewBag.UserID = new SelectList(db.users, "UserID", "Role", project.UserID);
-        //    return View(project);
-        //}
-
-        ////
-        //// GET: /Projects/Delete/5
- 
-        //public ActionResult Delete(int id)
-        //{
-        //    project project = db.projects.Single(p => p.ProjectID == id);
-        //    return View(project);
-        //}
-
-        ////
-        //// POST: /Projects/Delete/5
-
-        //[HttpPost, ActionName("Delete")]
-        //public ActionResult DeleteConfirmed(int id)
-        //{            
-        //    project project = db.projects.Single(p => p.ProjectID == id);
-        //    db.projects.DeleteObject(project);
-        //    db.SaveChanges();
-        //    return RedirectToAction("Index");
-        //}
 
         protected override void Dispose(bool disposing)
         {
