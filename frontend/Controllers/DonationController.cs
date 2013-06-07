@@ -194,7 +194,11 @@ namespace Localactors.webapp.Controllers
                 decimal.TryParse(mc_gross, out amount);
                 decimal taxamount = 0;
                 decimal.TryParse(tax, out taxamount);
+
+                //user
                 user user = db.users.FirstOrDefault(x => x.UserName == custom);
+                //project
+                project project = db.projects.FirstOrDefault(x => x.ProjectID == projectid);
 
                 //3: create donation
                 donation d = new donation();
@@ -232,6 +236,12 @@ namespace Localactors.webapp.Controllers
                 t.TransactionSignature = verify_sign;
                 t.TransactionStatus = status;
                 t.TransactionType = "PP";
+
+                //5: add follower
+                if(project!=null) {
+                    if(!user.followedProjects.Any(x=>x.ProjectID == projectid))
+                        user.followedProjects.Add(project);
+                }
 
                 db.SaveChanges();
 

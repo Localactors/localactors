@@ -1,70 +1,16 @@
 ﻿@model Localactors.webapp.Controllers.ProfileModel
-
 @{
-    ViewBag.Title = "Feed";
+    ViewBag.Title = "User Feed";
 }
 
+@foreach (update item in Model.updates.OrderByDescending(x=>x.Date))
+{
+    Html.RenderPartial("_Single_Update", item);
+}
 
-
-<div id='profile-bar'>
-    <div id='header-profile'>
-        <div id='donor'>
-            <img alt='' class='photo-donor' src='@Model.user.Image'>
-            <div class='container'>
-                <h3 class='name'>@Model.user.Name @Model.user.Lastname</h3>
-                <a href='#'>Settings</a>
-            </div>
-        </div>
-        <div id='projects-supported'>
-            <hr class='spacer-profile'>
-            <div class='container'>
-                <div id='supported'>
-                    <h3>
-                        <span class="number">@Model.projects.Count()</span> supported projects
-                    </h3>
-                </div>
-                <div id='donation'>
-                    <a href='#'>
-                        <span class="number">&#128; @Model.donations.Sum(x=>x.Amount)</span> donated
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div id='updates'>
-            <hr class='spacer-profile'>
-            <div class='container'>
-                <a href='#'>updates</a>
-            </div>
-        </div>
-        <div id='logout'>
-            <div class='container'>
-                <a href='@Url.Action("Logout","Account")'>Logout</a>
-            </div>
-        </div>
-    </div>
-    <ul id='supported_list'>
-        <hr class='spacer-projects-top' />
-        <a class='close' href='/profile_bar.html'>close</a>
-        @foreach (project item in Model.projects) {
-            var pid = item.ProjectID;
-            
-            <li>
-                <img alt='' class='photo-project' src='@item.Image'>
-                <div class='container-title'>
-                    <a href='@Url.Action("Details","Projects",new{id=pid})'>@item.Title</a>
-                    <div class='location'>
-                        <div class='icon-where'></div>
-                        <h2>@item.Location</h2>
-                    </div>
-                </div>
-                <div class='donation-money'>
-                    <h2>
-                        <span class="number">&#128; @Model.donations.Where(x=>x.ProjectID == pid).Sum(x=>x.Amount)</span> donated
-                    </h2>
-                </div>
-            </li>
-        }
-     
-    </ul>
+<div class="pager">
+    @if(ViewBag.page>1) {
+        <a href="@Url.Action("Feed",new{page=ViewBag.page-1})" class="previous">Previous</a>  
+    }
+    <a href="@Url.Action("Feed", new { page = ViewBag.page + 1 })" class="next">Next</a>
 </div>
-@{Html.RenderPartial("_Updates",Model.updates);}

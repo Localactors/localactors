@@ -1987,7 +1987,7 @@ namespace Localactors.entities
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("localactorsModel", "user_follow_project", "user")]
-        public EntityCollection<user> users
+        public EntityCollection<user> followers
         {
             get
             {
@@ -5024,7 +5024,7 @@ namespace Localactors.entities
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("localactorsModel", "user_follow_project", "project")]
-        public EntityCollection<project> projects1
+        public EntityCollection<project> followedProjects
         {
             get
             {

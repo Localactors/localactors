@@ -1,0 +1,43 @@
+﻿@using System.Configuration
+@model Localactors.entities.project
+@{
+    var PP_URL = Url.Content("~/Scripts/paypal-button.min.js") + "?merchant=" + ConfigurationManager.AppSettings["PP_MerchantAccountId"];
+}
+
+<!--Project Description-->
+<div id='single_project'>
+    <hr class='spine top'>
+    <div class='container-main'>
+        <h1 class='title'>
+            @Model.Title</h1>
+        <div class='icon-where'>
+        </div>
+        <h2 class='subtitle'>
+            @Model.Location</h2>
+        <p>
+            @Model.Description
+        </p>
+    </div>
+    <img alt='@Model.Title' src='@Model.Image' />
+
+   
+    @if (User.Identity.IsAuthenticated) {
+        <div class='container-main'>
+            <script src="@PP_URL"
+                    data-button="donate" 
+                    data-name="Project" 
+                    data-number="1" 
+                    data-custom="@User.Identity.Name"
+                    data-currency="@ConfigurationManager.AppSettings["PP_Currency"]"
+                    data-callback="@ConfigurationManager.AppSettings["PP_Callback"]" 
+                @if (@ConfigurationManager.AppSettings["PP_environment"] == "sandbox") {
+                    <text>data-env = "sandbox"</text>
+                }
+                    data-return="@Url.AbsoluteAction("return", "donation", new {projectid = Model.ProjectID})"
+                > </script>
+        </div>
+    }
+    
+
+</div>
+

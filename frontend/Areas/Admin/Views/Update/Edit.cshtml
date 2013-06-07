@@ -95,7 +95,7 @@
             </div>
         </div>
     <div class="modal-footer">
-        <input type="submit" class="btn"  class="btn btn-primary" value="Create" />
+        <input type="submit" class="btn btn-primary" value="Create" />
     </div>
     </form>
 </div>
@@ -119,11 +119,11 @@
                     Address</label>
             </div>
             <div class="editor-field">
-                <input class="text-box single-line" name="Title" type="text" value="" />
+                <textarea id="" name="Text">@Model.Text</textarea>
             </div>
         </div>
     <div class="modal-footer">
-        <input type="submit" class="btn"  class="btn btn-primary" value="Create" />
+        <input type="submit" class="btn btn-primary" value="Create" />
     </div>
     </form>
 </div>
@@ -150,7 +150,7 @@
         </div>
     </div>
     <div class="modal-footer">
-        <input type="submit" class="btn"  class="btn btn-primary" value="Create" />
+        <input type="submit" class="btn btn-primary" value="Create" />
     </div>
     </form>
 </div>*@
@@ -192,7 +192,7 @@
             </div>
         </div>
     <div class="modal-footer">
-        <input type="submit" class="btn"  class="btn btn-primary" value="Create" />
+        <input type="submit" class="btn btn-primary" value="Create" />
     </div>
     </form>
 </div>
@@ -213,7 +213,7 @@
             <input type="hidden" name="ContentTypeName" value="PHOTO" />
             <div class="editor-label">
                 <label for="Title">
-                    Caption</label>
+                    Title</label>
             </div>
             <div class="editor-field">
                 <input class="text-box single-line" id="" name="Title" type="text" value="" />
@@ -222,12 +222,19 @@
                 <label for="Url">
                     File</label>
             </div>
+             <div class="editor-label">
+                <label for="Text">
+                    Caption</label>
+            </div>
+            <div class="editor-field">
+                <textarea id="" name="Text"></textarea>
+            </div>
             <div class="editor-field">
                 <input class="text-box single-line" id="" name="Url" type="file" value="" />
             </div>
         </div>
     <div class="modal-footer">
-        <input type="submit" class="btn"  class="btn btn-primary" value="Create" />
+        <input type="submit" class="btn btn-primary" value="Create" />
     </div>
     </form>
 </div>
@@ -262,7 +269,7 @@
             </div>
         </div>
     <div class="modal-footer">
-        <input type="submit" class="btn"  class="btn btn-primary" value="Create" />
+        <input type="submit" class="btn btn-primary" value="Create" />
     </div>
     </form>
 </div>
@@ -281,23 +288,40 @@
             <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
             <input type="hidden" name="ContentTypeID" value="8" />
             <input type="hidden" name="ContentTypeName" value="INTERVIEW" />
-            <div class="editor-label">
+           <div class="editor-label">
                 <label for="Title">
-                    Name</label>
+                    Interviewer Name</label>
             </div>
             <div class="editor-field">
-                <input class="text-box single-line" id="" name="Title" type="text" value="" />
+                <input class="text-box single-line" name="Title" type="text" value="" />
             </div>
+    
             <div class="editor-label">
-                <label for="Text">
-                    Text</label>
+                <label for="Question">
+                    Question</label>
             </div>
             <div class="editor-field">
-                <textarea id="" name="Text" class="wysiwyg" rows="12" style="width:100%;"></textarea>
+                <textarea id="" name="Question" ></textarea>
+            </div>
+            
+            <div class="editor-label">
+                <label for="Subtitle">
+                    Interviewee Name</label>
+            </div>
+            <div class="editor-field">
+                <input class="text-box single-line" name="Subtitle" type="text" value="" />
+            </div>
+
+            <div class="editor-label">
+                <label for="Answer">
+                    Answer</label>
+            </div>
+            <div class="editor-field">
+                <textarea id="" name="Answer"></textarea>
             </div>
         </div>
     <div class="modal-footer">
-        <input type="submit" class="btn"  class="btn btn-primary" value="Create" />
+        <input type="submit" class="btn btn-primary" value="Create" />
     </div>
     </form>
 </div>
@@ -332,7 +356,7 @@
             </div>
         </div>
     <div class="modal-footer">
-        <input type="submit" class="btn"  class="btn btn-primary" value="Create" />
+        <input type="submit" class="btn btn-primary" value="Create" />
     </div>
     </form>
 </div>
@@ -351,6 +375,15 @@
             <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
             <input type="hidden" name="ContentTypeID" value="10" />
             <input type="hidden" name="ContentTypeName" value="QUOTE" />
+            
+             <div class="editor-label">
+                <label for="Title">
+                    Author</label>
+            </div>
+            <div class="editor-field">
+                <input class="text-box single-line" name="Title" type="text" value="@Model.Title" />
+            </div>
+
             <div class="editor-label">
                 <label for="Text">
                     Quote</label>
@@ -360,7 +393,7 @@
             </div>
         </div>
     <div class="modal-footer">
-        <input type="submit" class="btn"  class="btn btn-primary" value="Create" />
+        <input type="submit"  class="btn btn-primary" value="Create" />
     </div>
     </form>
 </div>
@@ -395,7 +428,7 @@
             </div>
         </div>
         <div class="modal-footer">
-            <input type="submit" class="btn"  class="btn btn-primary" value="Create" />
+            <input type="submit" class="btn btn-primary" value="Create" />
         </div>
     </form>
 </div>
@@ -419,7 +452,7 @@
             </div>
         </div>
     <div class="modal-footer">
-        <input type="submit" class="btn"  class="btn btn-primary" value="Create" />
+        <input type="submit" class="btn btn-primary" value="Create" />
     </div>
     </form>
 </div>

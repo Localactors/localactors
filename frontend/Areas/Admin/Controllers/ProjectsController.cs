@@ -19,7 +19,6 @@ namespace Localactors.webapp.Areas.Admin.Controllers
     public class ProjectsController : ControllerBase
     {
       
-
         public ViewResult Index()
         {
             var projects = db.projects.Include("country").Include("user");
@@ -36,7 +35,12 @@ namespace Localactors.webapp.Areas.Admin.Controllers
         {
             ViewBag.CountryID = new SelectList(db.countries, "CountryID", "Code");
             ViewBag.UserID = new SelectList(db.users.Where(x => x.Role == "admin" || x.Role == "publisher"), "UserID", "UserName");
-            return View();
+            var model = new project();
+            model.Date = DateTime.Now;
+            model.DateStart = DateTime.Now;
+            model.DateEnd = DateTime.Now.AddDays(60);
+            model.Target = 1000;
+            return View(model);
         } 
         [HttpPost]
         public ActionResult Create(project project)

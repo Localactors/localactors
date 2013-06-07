@@ -70,7 +70,7 @@
                     Address</label>
             </div>
             <div class="editor-field">
-                <input class="text-box single-line" name="Title" type="text" value="@Model.Title" />
+                <textarea id="" name="Text">@Model.Text</textarea>
             </div>
         </div>
         <div class="modal-footer">
@@ -182,19 +182,28 @@
         <div class="modal-body">
             <div class="editor-label">
                 <label for="Title">
-                    Caption</label>
+                    Title</label>
             </div>
             <div class="editor-field">
                 <input class="text-box single-line" name="Title" type="text" value="@Model.Title" />
             </div>
             
-             <div class="editor-label">
+            <div class="editor-label">
+                <label for="Text">
+                    Caption</label>
+            </div>
+            <div class="editor-field">
+                <textarea id="" name="Text">@Model.Text</textarea>
+            </div>
+
+            <div class="editor-label">
                 <label for="Url">
                     File</label>
             </div>
             <div class="editor-field">
                 <input class="text-box single-line" id="" name="Url" type="file" value="" />
             </div>
+
             
             @if (!string.IsNullOrEmpty(Model.Url))
             {
@@ -277,18 +286,34 @@
         <div class="modal-body">
             <div class="editor-label">
                 <label for="Title">
-                    Name</label>
+                    Interviewer Name</label>
             </div>
             <div class="editor-field">
                 <input class="text-box single-line" name="Title" type="text" value="@Model.Title" />
             </div>
     
             <div class="editor-label">
-                <label for="Text">
-                    Text</label>
+                <label for="Question">
+                    Question</label>
             </div>
             <div class="editor-field">
-                <textarea id="" name="Text" class="wysiwyg" rows="12" style="width:100%;">@Model.Text</textarea>
+                <textarea id="" name="Question" >@Model.Question</textarea>
+            </div>
+            
+            <div class="editor-label">
+                <label for="Subtitle">
+                    Interviewee Name</label>
+            </div>
+            <div class="editor-field">
+                <input class="text-box single-line" name="Subtitle" type="text" value="@Model.Subtitle" />
+            </div>
+
+            <div class="editor-label">
+                <label for="Answer">
+                    Answer</label>
+            </div>
+            <div class="editor-field">
+                <textarea id="" name="Answer">@Model.Answer</textarea>
             </div>
 
         </div>
@@ -359,6 +384,13 @@
         </div>
         <div class="modal-body">
           
+          <div class="editor-label">
+                <label for="Title">
+                    Author</label>
+            </div>
+            <div class="editor-field">
+                <input class="text-box single-line" name="Title" type="text" value="@Model.Title" />
+            </div>
            
             <div class="editor-label">
                 <label for="Text">

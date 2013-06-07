@@ -1,0 +1,114 @@
+﻿@model Localactors.entities.update_content
+
+@if (Model.ContentTypeID == 2)
+{
+    <div class='paragraph'>
+        <div class="title">@Model.Title</div>
+        <div class="subtitle">@Model.Subtitle</div>
+        <p>@Model.Text</p>
+    </div>
+}
+@if (Model.ContentTypeID == 3)
+{
+    <div class='map'>
+        @Model.Text
+    </div>
+}
+@if (Model.ContentTypeID == 4)
+{
+    <div class="listitem">@Model.Title</div>
+}
+@if (Model.ContentTypeID == 5)
+{
+@*        var typename = "ACHIEVEMENT";    *@
+    <div class='achievement'>
+        <div class="title">@Model.Title</div>
+        <div class="date">@Model.Date.Value.ToString("dd/mm/yyyy")</div>
+        <p>@Model.Text</p>
+    </div>
+}
+@if (Model.ContentTypeID == 6)
+{
+    <div class='photo'>
+        <img alt='@Model.Title' class='photo-update' src='@Model.Url'>
+        <div class='description'>
+            <div class='arrow'>
+            </div>
+            <p>
+                @Model.Text
+            </p>
+        </div>
+    </div>
+}
+@if (Model.ContentTypeID == 7)
+{
+    <div class='video'>
+        <video controls>
+                  <source src="@Model.Url">
+                Your browser does not support the video tag.
+                </video>
+        <div class='description'>
+            <div class='arrow'>
+            </div>
+            <p>
+                @Model.Title
+            </p>
+        </div>
+    </div>
+}
+@if (Model.ContentTypeID == 8)
+{
+    <div class='interview'>
+        <div class='question'>
+            <div class='name'>
+                <h4>
+                    @Model.Title</h4>
+            </div>
+            <p>
+                @Model.Question
+            </p>
+        </div>
+        <div class='answer'>
+            <div class='name'>
+                <h4>
+                    @Model.Subtitle</h4>
+            </div>
+            <p>
+                @Model.Answer
+            </p>
+        </div>
+    </div>
+}
+@if (Model.ContentTypeID == 9)
+{
+    <div class='qa'>
+        <p>
+            <span class="question">@Model.Question</span> @Model.Answer
+        </p>
+    </div>
+}
+@if (Model.ContentTypeID == 10)
+{
+    <div class='quote'>
+        <p class='name'>
+            @Model.Title
+        </p>
+        <p class='quote'>
+            <span class="quotation">“</span>@Model.Text”
+        </p>
+    </div>
+    <div class='clear'>
+    </div>
+}
+@if (Model.ContentTypeID == 11)
+{
+    <div class="link">
+        <a href="@Model.Url">@Model.Title</a>
+    </div>
+}
+@if (Model.ContentTypeID == 12)
+{
+    <div class='generic'>
+        <p>@Model.Text</p>
+    </div>
+}

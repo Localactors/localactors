@@ -1,6 +1,6 @@
 ﻿@if (Request.IsAuthenticated)
 {                      
-    <a href="@Url.Action("Index", "Supporter")">@User.Identity.Name</a>
+    <a href="@Url.Action("Feed", "Profile")">@User.Identity.Name</a>
     <a href="@Url.Action("Logout", "Account")">Esci</a> 
 }
 else

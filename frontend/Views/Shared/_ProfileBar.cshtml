@@ -1,0 +1,64 @@
+﻿@model Localactors.entities.user
+
+@if (Model != null) {
+    <div id='profile-bar'>
+        <div id='header-profile'>
+            <div id='donor'>
+                <img alt='' class='photo-donor' src='@Model.Image'>
+                <div class='container'>
+                    <h3 class='name'>
+                        @Model.Name @Model.Lastname</h3>
+                    <a href='@Url.Action("Settings","Profile")'>Settings</a>
+                </div>
+            </div>
+            <div id='projects-supported'>
+                <hr class='spacer-profile'>
+                <div class='container'>
+                    <div id='supported'>
+                        <h3>
+                            <span class="number">@Model.donations.Select(x => x.ProjectID).Distinct().Count()</span> supported projects
+                        </h3>
+                    </div>
+                    <div id='donation'>
+                        <a href='#' id=""><span class="number">&#128; @Model.donations.Sum(x => x.Amount)</span> donated
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div id='updates'>
+                <hr class='spacer-profile'>
+                <div class='container'>
+                    <a href='@Url.Action("Feed", "Profile")'>updates</a>
+                </div>
+            </div>
+            <div id='logout'>
+                <div class='container'>
+                    <a href='@Url.Action("Logout", "Account")'>Logout</a>
+                </div>
+            </div>
+        </div>
+
+        <ul id='supported_list' style="display:none;overflow: auto;">
+            <hr class='spacer-projects-top' />
+            <a class='close' href='#' id="">close</a>
+            @foreach (var donation in Model.donations) {
+                <li>
+                    <img alt='' class='photo-project' src='@donation.project.Image'>
+                    <div class='container-title'>
+                        <a href='@Url.Action("Details","Projects",new{id=donation.project.ProjectID})'>@donation.project.Title</a>
+                        <div class='location'>
+                            <div class='icon-where'></div>
+                            <h2>@donation.project.Location</h2>
+                        </div>
+                    </div>
+                    <div class='donation-money'>
+                        <h2>
+                            <span class="number">&#128; @donation.Amount</span> donated
+                        </h2>
+                    </div>
+                </li>
+            }
+        </ul>
+
+    </div>
+}

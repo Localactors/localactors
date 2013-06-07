@@ -28,6 +28,7 @@
     </script>
     <section class='page'>
         @{Html.RenderPartial("_Header");}
+        @{Html.RenderAction("ProfileBar","Profile",new{username=User.Identity.Name});}
         @RenderBody()
         @{Html.RenderPartial("_Footer");}
     </section>
@@ -43,5 +44,6 @@
     <script src="@Url.Content("~/scripts/vendor/yepnope.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/scripts/vendor/enquire/dist/enquire.min.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/scripts/application.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/scripts/site2.js")" type="text/javascript"></script>
 </body>
 </html>

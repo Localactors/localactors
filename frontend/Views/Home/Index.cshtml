@@ -82,20 +82,20 @@
                 <li><a href='@Url.Action("CallForProjects", "Home")' lang='tr'>Yeni projeler arıyoruz!</a>
                 </li>
                 <li><a href='@Url.Action("CallForProjects", "Home")' lang='fr'>Avez vous des nouveaux
-                    projets?</a> </li>
+                        projets?</a> </li>
                 <li><a dir='rtl' href='@Url.Action("CallForProjects", "Home")' lang='ar'>نحن نبحث عن
-                    مشاريع جديدة</a> </li>
+                        مشاريع جديدة</a> </li>
                 <li><a href='@Url.Action("CallForProjects", "Home")' lang='zh'>期待合作</a> </li>
                 <li><a href='@Url.Action("CallForProjects", "Home")' lang='cs'>Hledame nove projekty</a>
                 </li>
                 <li><a href='@Url.Action("CallForProjects", "Home")' lang='pl'>Masz nowy projekt ? Podziel
-                    sie z nami !</a> </li>
+                        sie z nami !</a> </li>
                 <li><a href='@Url.Action("CallForProjects", "Home")' lang='hu'>Uj projekteket keresunk!</a>
                 </li>
                 <li><a href='@Url.Action("CallForProjects", "Home")' lang='de'>Wir suchen neue Projekte!</a>
                 </li>
                 <li><a href='@Url.Action("CallForProjects", "Home")' lang='nl'>We zijn op zoek naar nieuwe
-                    projecten!</a> </li>
+                        projecten!</a> </li>
             </ul>
         </div>
     </div>
@@ -103,6 +103,7 @@
     </div>
     <hr class='spacer-home'>
 </div>
+
 <div id='explanation'>
     <ul>
         <li>
@@ -118,7 +119,7 @@
     <ul class='publisher-list'>
         @foreach (user publisher in Model.publishers)
         {
-            <li class='publisher'><a href='@Url.Action("Details", "Publisher", new { id = publisher.UserID })'>
+            <li class='publisher'><a href='@Url.Action("Details", "Profile", new { id = publisher.UserID })'>
                 <img src="@publisher.Image" alt="@publisher.Name @publisher.Lastname" />
                 <span>@publisher.Name @publisher.Lastname</span> </a></li>
         }
