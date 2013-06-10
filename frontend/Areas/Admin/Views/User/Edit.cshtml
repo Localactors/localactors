@@ -102,6 +102,8 @@
 
         @Html.HiddenFor(model => model.UserPassword)
 
+        <hr/>
+
         <div class="editor-label">
             @Html.LabelFor(model => model.Name)
         </div>
@@ -157,8 +159,66 @@
             }
         </div>
 
-        <hr/>
+       <hr/>
+        
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Contact_Blog,"Blog Url")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Contact_Blog)
+            @Html.ValidationMessageFor(model => model.Contact_Blog)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Contact_Email,"Contact Email")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Contact_Email)
+            @Html.ValidationMessageFor(model => model.Contact_Email)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Contact_Facebook,"Facebook")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Contact_Facebook)
+            @Html.ValidationMessageFor(model => model.Contact_Facebook)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Contact_Linkedin,"Linkedin")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Contact_Linkedin)
+            @Html.ValidationMessageFor(model => model.Contact_Linkedin)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Contact_Skype,"Skype Name")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Contact_Skype)
+            @Html.ValidationMessageFor(model => model.Contact_Skype)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Contact_Tel,"Contact Telephone")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Contact_Tel)
+            @Html.ValidationMessageFor(model => model.Contact_Tel)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Contact_Twitter,"Twitter")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Contact_Twitter)
+            @Html.ValidationMessageFor(model => model.Contact_Twitter)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Contact_Web,"Website")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Contact_Web)
+            @Html.ValidationMessageFor(model => model.Contact_Web)
+        </div>
 
+        <hr/>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Enabled)

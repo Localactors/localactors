@@ -5,7 +5,7 @@
 
 @foreach (update item in Model.updates.OrderByDescending(x=>x.Date))
 {
-    Html.RenderPartial("_Single_Update", item);
+    {Html.RenderPartial("_Project_Update", item);}
 }
 
 <div class="pager">

@@ -213,7 +213,7 @@ namespace Localactors.webapp.Controllers
 
 
             FormsAuthentication.SetAuthCookie(model.Email, true);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Settings", "Profile");
 
         }
         [HttpGet]

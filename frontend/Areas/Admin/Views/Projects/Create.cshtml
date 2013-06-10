@@ -83,6 +83,7 @@
         <legend>project</legend>
         
       
+      
 
         <div class="editor-label">
             @Html.LabelFor(model => model.UserID, "user")
@@ -92,6 +93,43 @@
             @Html.ValidationMessageFor(model => model.UserID)
         </div>
         
+        <hr/>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AgancyName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AgancyName)
+            @Html.ValidationMessageFor(model => model.AgancyName)
+        </div>
+        
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AgencyWebsite)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AgencyWebsite)
+            @Html.ValidationMessageFor(model => model.AgencyWebsite)
+        </div>
+        
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AgencyLogo)
+        </div>
+        <div class="editor-field">
+             @Html.EditorFor(model => model.AgencyLogo)
+            <input type="file" id="AgencyLogo" name="AgencyLogo" class="imageupload" />
+            @Html.ValidationMessageFor(model => model.AgencyLogo)
+            <img src="@string.Format("{0}?v={1}", Model.AgencyLogo, DateTime.Now.Ticks)" class="imagepreview" alt=""  />
+        </div>
+        
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AgencyObjective)
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.AgencyObjective)
+            @Html.ValidationMessageFor(model => model.AgencyObjective)
+        </div>
+
+        <hr/>
         
         <div class="editor-label">
             @Html.LabelFor(model => model.CountryID, "country")
@@ -134,6 +172,14 @@
             @Html.TextAreaFor(model => model.Description)
             @Html.ValidationMessageFor(model => model.Description)
         </div>
+         <div class="editor-label">
+            @Html.LabelFor(model => model.ProjectPlan)
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.ProjectPlan)
+            @Html.ValidationMessageFor(model => model.ProjectPlan)
+        </div>
+
         
         
         <div class="editor-label">
@@ -150,6 +196,31 @@
         </div>
 
         <hr/>
+        
+          <div class="editor-label">
+            @Html.LabelFor(model => model.Twitter)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Twitter)
+            @Html.ValidationMessageFor(model => model.Twitter)
+        </div>
+          <div class="editor-label">
+            @Html.LabelFor(model => model.Facebook)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Facebook)
+            @Html.ValidationMessageFor(model => model.Facebook)
+        </div>
+          <div class="editor-label">
+            @Html.LabelFor(model => model.Blog)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Blog)
+            @Html.ValidationMessageFor(model => model.Blog)
+        </div>  
+       
+        <hr/>
+
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Date)

@@ -1,10 +1,11 @@
 ﻿@using System.Configuration
 @model Localactors.entities.project
 @{
-    ViewBag.Title = "Updates";
-    var PP_URL = Url.Content("~/Scripts/paypal-button.min.js") + "?merchant=" + ConfigurationManager.AppSettings["PP_MerchantAccountId"];
+    ViewBag.Title = "Project Details";
 }
-@{Html.RenderPartial("_Project_Single_Header", Model);}
+
+@{Html.RenderPartial("_Project_Header", Model);}
+
 <div id='project-update-tab'>
     <ul class='tab'>
         <li><a href='@Url.Action("Updates","Projects",new{id=Model.ProjectID})'>Update</a> </li>
@@ -16,10 +17,11 @@
 </div>
 
 <div id='update-body'>
-    @{Html.RenderPartial("_Project_Update_Header", Model);}
-     @foreach (var item in Model.project_photo)
-    {
-        <img alt='@item.Caption' src='@item.Url' />
-    }
-  
+    @{Html.RenderPartial("_Project_Sidebar", Model);}
+    <div class="photos">
+        @foreach (var item in Model.project_photo)
+        {
+            <img alt='@item.Caption' src='@item.Url' />
+        }
+    </div>
 </div>

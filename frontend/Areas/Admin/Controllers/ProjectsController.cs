@@ -225,8 +225,40 @@ namespace Localactors.webapp.Areas.Admin.Controllers
 
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
-        {            
+        {
             project project = db.projects.Single(p => p.ProjectID == id);
+
+            //{
+            //    var list = project.updates.SelectMany(x => x.update_content);
+            //    foreach (var item in list)
+            //        db.update_content.DeleteObject(item);
+            //}
+
+            //var list = project.updates.SelectMany(x => x.update_content);
+            //foreach (var item in project.updates.SelectMany(x => x.update_comment))
+            //    db.update_comment.DeleteObject(item);
+
+            //foreach (var item in project.updates)
+            //    db.updates.DeleteObject(item);
+
+            //foreach (var item in project.tags)
+            //    project.tags.Remove(item);
+
+            //foreach (var item in project.project_photo)
+            //    project.project_photo.Remove(item);
+
+            //foreach (var item in project.donations)
+            //    project.donations.Remove(item);
+
+            //foreach (var item in project.achievements)
+            //    project.achievements.Remove(item);
+
+            //foreach (var item in project.followers)
+            //    project.followers.Remove(item);
+
+            //foreach (var item in project.project_guestbook)
+            //    project.project_guestbook.Remove(item);
+
             db.projects.DeleteObject(project);
             db.SaveChanges();
             return RedirectToAction("Index");

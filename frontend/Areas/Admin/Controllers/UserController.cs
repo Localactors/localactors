@@ -99,7 +99,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
                             }
                             catch (Exception ex)
                             {
-                                ModelState.AddModelError(keyname, "Upload error: " + ex.Message);
+                                ModelState.AddModelError(keyname, "Upload error: " + ex.Message + " // " + ex.InnerException.Message);
 
                             }
                         }
@@ -111,11 +111,49 @@ namespace Localactors.webapp.Areas.Admin.Controllers
                 }
             }
 
-            user.DateJoined = DateTime.Now;
-            user.DateLastLogin = DateTime.Now;
+
+            var usr = db.users.FirstOrDefault(x => x.Email.ToLower() == user.Email.ToLower());
+            if (usr != null)
+            {
+                ModelState.AddModelError("Email", "Indirizzo Email gia registrato");
+                return View(user);
+            }
+
 
             if (ModelState.IsValid) {
-                db.users.AddObject(user);
+
+                string key = computeHash(DateTime.Now.ToString("dd/MM/yyHHmmss") + user.Email);
+                user newuser = new user
+                {
+                    UserPassword = computeHash(user.UserPassword.ToUpper()),
+                    UserName = user.Email.ToLower(),
+                    Name = user.Name,
+                    Lastname = user.Lastname,
+                    Bio = user.Bio,
+                    Image = user.Image,
+                    Email = user.Email,
+                    CountryID = user.CountryID,
+                    DateJoined = DateTime.Now,
+                    DateLastLogin = DateTime.Now,
+                    Enabled = true,
+                    Confirmed = false,
+                    Reset = false,
+                    Privacy = true,
+                    Role = user.Role,
+                    Email_Hash = key,
+                    Newsletter = user.Newsletter,
+
+                    Contact_Blog = user.Contact_Blog,
+                    Contact_Email = user.Contact_Email,
+                    Contact_Facebook = user.Contact_Facebook,
+                    Contact_Linkedin = user.Contact_Linkedin,
+                    Contact_Skype = user.Contact_Skype,
+                    Contact_Tel = user.Contact_Tel,
+                    Contact_Twitter = user.Contact_Twitter,
+                    Contact_Web = user.Contact_Web
+                };
+
+                db.users.AddObject(newuser);
                 db.SaveChanges();
                 return RedirectToAction("Index");  
             }
@@ -191,7 +229,8 @@ namespace Localactors.webapp.Areas.Admin.Controllers
                             }
                             catch (Exception ex)
                             {
-                                ModelState.AddModelError(keyname, "Upload error: " + ex.Message);
+                                ModelState.AddModelError(keyname, "Upload error: " + ex.Message + " // " + ex.InnerException.Message);
+
                             }
                         }
 
@@ -202,8 +241,10 @@ namespace Localactors.webapp.Areas.Admin.Controllers
                 }
             }
 
-            if (ModelState.IsValid)
-            {
+            if (ModelState.IsValid) {
+                user.UserPassword = computeHash(user.UserPassword.ToUpper());
+                user.UserName = user.Email;
+
                 db.users.Attach(user);
                 db.ObjectStateManager.ChangeObjectState(user, EntityState.Modified);
                 db.SaveChanges();

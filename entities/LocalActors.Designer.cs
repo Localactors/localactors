@@ -1788,6 +1788,198 @@ namespace Localactors.entities
         private global::System.Int32 _Target;
         partial void OnTargetChanging(global::System.Int32 value);
         partial void OnTargetChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ProjectPlan
+        {
+            get
+            {
+                return _ProjectPlan;
+            }
+            set
+            {
+                OnProjectPlanChanging(value);
+                ReportPropertyChanging("ProjectPlan");
+                _ProjectPlan = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("ProjectPlan");
+                OnProjectPlanChanged();
+            }
+        }
+        private global::System.String _ProjectPlan;
+        partial void OnProjectPlanChanging(global::System.String value);
+        partial void OnProjectPlanChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String AgancyName
+        {
+            get
+            {
+                return _AgancyName;
+            }
+            set
+            {
+                OnAgancyNameChanging(value);
+                ReportPropertyChanging("AgancyName");
+                _AgancyName = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("AgancyName");
+                OnAgancyNameChanged();
+            }
+        }
+        private global::System.String _AgancyName;
+        partial void OnAgancyNameChanging(global::System.String value);
+        partial void OnAgancyNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String AgencyLogo
+        {
+            get
+            {
+                return _AgencyLogo;
+            }
+            set
+            {
+                OnAgencyLogoChanging(value);
+                ReportPropertyChanging("AgencyLogo");
+                _AgencyLogo = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("AgencyLogo");
+                OnAgencyLogoChanged();
+            }
+        }
+        private global::System.String _AgencyLogo;
+        partial void OnAgencyLogoChanging(global::System.String value);
+        partial void OnAgencyLogoChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String AgencyWebsite
+        {
+            get
+            {
+                return _AgencyWebsite;
+            }
+            set
+            {
+                OnAgencyWebsiteChanging(value);
+                ReportPropertyChanging("AgencyWebsite");
+                _AgencyWebsite = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("AgencyWebsite");
+                OnAgencyWebsiteChanged();
+            }
+        }
+        private global::System.String _AgencyWebsite;
+        partial void OnAgencyWebsiteChanging(global::System.String value);
+        partial void OnAgencyWebsiteChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String AgencyObjective
+        {
+            get
+            {
+                return _AgencyObjective;
+            }
+            set
+            {
+                OnAgencyObjectiveChanging(value);
+                ReportPropertyChanging("AgencyObjective");
+                _AgencyObjective = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("AgencyObjective");
+                OnAgencyObjectiveChanged();
+            }
+        }
+        private global::System.String _AgencyObjective;
+        partial void OnAgencyObjectiveChanging(global::System.String value);
+        partial void OnAgencyObjectiveChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Twitter
+        {
+            get
+            {
+                return _Twitter;
+            }
+            set
+            {
+                OnTwitterChanging(value);
+                ReportPropertyChanging("Twitter");
+                _Twitter = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Twitter");
+                OnTwitterChanged();
+            }
+        }
+        private global::System.String _Twitter;
+        partial void OnTwitterChanging(global::System.String value);
+        partial void OnTwitterChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Facebook
+        {
+            get
+            {
+                return _Facebook;
+            }
+            set
+            {
+                OnFacebookChanging(value);
+                ReportPropertyChanging("Facebook");
+                _Facebook = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Facebook");
+                OnFacebookChanged();
+            }
+        }
+        private global::System.String _Facebook;
+        partial void OnFacebookChanging(global::System.String value);
+        partial void OnFacebookChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Blog
+        {
+            get
+            {
+                return _Blog;
+            }
+            set
+            {
+                OnBlogChanging(value);
+                ReportPropertyChanging("Blog");
+                _Blog = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Blog");
+                OnBlogChanged();
+            }
+        }
+        private global::System.String _Blog;
+        partial void OnBlogChanging(global::System.String value);
+        partial void OnBlogChanged();
 
         #endregion
 
@@ -4841,6 +5033,198 @@ namespace Localactors.entities
         private global::System.String _Image;
         partial void OnImageChanging(global::System.String value);
         partial void OnImageChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Contact_Blog
+        {
+            get
+            {
+                return _Contact_Blog;
+            }
+            set
+            {
+                OnContact_BlogChanging(value);
+                ReportPropertyChanging("Contact_Blog");
+                _Contact_Blog = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Contact_Blog");
+                OnContact_BlogChanged();
+            }
+        }
+        private global::System.String _Contact_Blog;
+        partial void OnContact_BlogChanging(global::System.String value);
+        partial void OnContact_BlogChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Contact_Email
+        {
+            get
+            {
+                return _Contact_Email;
+            }
+            set
+            {
+                OnContact_EmailChanging(value);
+                ReportPropertyChanging("Contact_Email");
+                _Contact_Email = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Contact_Email");
+                OnContact_EmailChanged();
+            }
+        }
+        private global::System.String _Contact_Email;
+        partial void OnContact_EmailChanging(global::System.String value);
+        partial void OnContact_EmailChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Contact_Linkedin
+        {
+            get
+            {
+                return _Contact_Linkedin;
+            }
+            set
+            {
+                OnContact_LinkedinChanging(value);
+                ReportPropertyChanging("Contact_Linkedin");
+                _Contact_Linkedin = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Contact_Linkedin");
+                OnContact_LinkedinChanged();
+            }
+        }
+        private global::System.String _Contact_Linkedin;
+        partial void OnContact_LinkedinChanging(global::System.String value);
+        partial void OnContact_LinkedinChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Contact_Twitter
+        {
+            get
+            {
+                return _Contact_Twitter;
+            }
+            set
+            {
+                OnContact_TwitterChanging(value);
+                ReportPropertyChanging("Contact_Twitter");
+                _Contact_Twitter = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Contact_Twitter");
+                OnContact_TwitterChanged();
+            }
+        }
+        private global::System.String _Contact_Twitter;
+        partial void OnContact_TwitterChanging(global::System.String value);
+        partial void OnContact_TwitterChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Contact_Facebook
+        {
+            get
+            {
+                return _Contact_Facebook;
+            }
+            set
+            {
+                OnContact_FacebookChanging(value);
+                ReportPropertyChanging("Contact_Facebook");
+                _Contact_Facebook = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Contact_Facebook");
+                OnContact_FacebookChanged();
+            }
+        }
+        private global::System.String _Contact_Facebook;
+        partial void OnContact_FacebookChanging(global::System.String value);
+        partial void OnContact_FacebookChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Contact_Web
+        {
+            get
+            {
+                return _Contact_Web;
+            }
+            set
+            {
+                OnContact_WebChanging(value);
+                ReportPropertyChanging("Contact_Web");
+                _Contact_Web = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Contact_Web");
+                OnContact_WebChanged();
+            }
+        }
+        private global::System.String _Contact_Web;
+        partial void OnContact_WebChanging(global::System.String value);
+        partial void OnContact_WebChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Contact_Skype
+        {
+            get
+            {
+                return _Contact_Skype;
+            }
+            set
+            {
+                OnContact_SkypeChanging(value);
+                ReportPropertyChanging("Contact_Skype");
+                _Contact_Skype = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Contact_Skype");
+                OnContact_SkypeChanged();
+            }
+        }
+        private global::System.String _Contact_Skype;
+        partial void OnContact_SkypeChanging(global::System.String value);
+        partial void OnContact_SkypeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Contact_Tel
+        {
+            get
+            {
+                return _Contact_Tel;
+            }
+            set
+            {
+                OnContact_TelChanging(value);
+                ReportPropertyChanging("Contact_Tel");
+                _Contact_Tel = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Contact_Tel");
+                OnContact_TelChanged();
+            }
+        }
+        private global::System.String _Contact_Tel;
+        partial void OnContact_TelChanging(global::System.String value);
+        partial void OnContact_TelChanged();
 
         #endregion
 

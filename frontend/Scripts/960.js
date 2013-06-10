@@ -11,8 +11,8 @@ function changeLanguage (arLanguages)
 }
 
 $(document).ready(function() {
-	$( "#sections_accordion" ).accordion({ header: "header", collapsible: true, heightStyle: "content", active: false  });
-	$( "#faq_accordion" ).accordion({ header: "h3", collapsible: true, heightStyle: "content", active: false  });
+	// $( "#sections_accordion" ).accordion({ header: "header", collapsible: true, heightStyle: "content", active: false  });
+	// $( "#faq_accordion" ).accordion({ header: "h3", collapsible: true, heightStyle: "content", active: false  });
 
 	var objLanguages =  $('.banner-container .banner-call ul li');
 

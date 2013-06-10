@@ -17,6 +17,9 @@
             user
         </th>
         <th>
+            Agency
+        </th>
+        <th>
             Title
         </th>
 
@@ -42,6 +45,9 @@
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.user.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AgancyName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Title)

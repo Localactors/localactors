@@ -15,28 +15,41 @@
             <script src='http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-504e04fd25d63caa'
                 type='text/javascript'></script>
         </div>
-        <div class='local'>
-            <hr class='spacer-prefooter'>
-            <div class='spiegazione'>
-                <h2>
-                    HOW MANY LOCAL ACTORS IN OUR COMMUNITY?</h2>
-                <p>
-                    help us grow, become a local actor!</p>
-            </div>
-            <div class='join'>
-                <div class='clear-box'>
+        @if (!User.Identity.IsAuthenticated)
+        {
+            <div class='local'>
+                <hr class='spacer-prefooter'>
+                <div class='spiegazione'>
+                    <h2>
+                        HOW MANY LOCAL ACTORS IN OUR COMMUNITY?</h2>
+                    <p>
+                        help us grow, become a local actor!</p>
                 </div>
-                <div class='button_container'>
-                    <div class='corner_left'>
+                <div class='join'>
+                    <div class='clear-box'>
                     </div>
-                    <h4 class='buttons yellow_button'>
-                        <a href='#'>Join!</a>
-                    </h4>
-                    <div class='corner_right'>
+                    <div class='button_container'>
+                        <div class='corner_left'>
+                        </div>
+                        <h4 class='buttons yellow_button'>
+                            <a href='@Url.Action("Subscribe", "Account")'>Join!</a>
+                        </h4>
+                        <div class='corner_right'>
+                        </div>
+                    </div>  
+                  &nbsp;
+                    <div class='button_container'>
+                        <div class='corner_left'>
+                        </div>
+                        <h4 class='buttons yellow_button'>
+                            <a href='@Url.Action("Login", "Account")'>Login</a>
+                        </h4>
+                        <div class='corner_right'>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        }
     </div>
     <hr class='spacer-footer'>
     <div class='blue'>
@@ -48,7 +61,7 @@
                     (function (w, d) {
                         var loader = function () {
                             var s = d.createElement("script"),
-                tag = d.getElementsByTagName("script")[0]; s.src = "http://cdn.iubenda.com/iubenda.js";
+              tag = d.getElementsByTagName("script")[0]; s.src = "http://cdn.iubenda.com/iubenda.js";
                             tag.parentNode.insertBefore(s, tag);
                         }; if (w.addEventListener) { w.addEventListener("load", loader, false); }
                         else if (w.attachEvent) { w.attachEvent("unload", loader); } else { w.onload = loader; }

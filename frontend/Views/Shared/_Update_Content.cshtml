@@ -5,13 +5,13 @@
     <div class='paragraph'>
         <div class="title">@Model.Title</div>
         <div class="subtitle">@Model.Subtitle</div>
-        <p>@Model.Text</p>
+        <p>@Html.Raw(Model.Text)</p>
     </div>
 }
 @if (Model.ContentTypeID == 3)
 {
     <div class='map'>
-        @Model.Text
+        @Html.Raw(Model.Text)
     </div>
 }
 @if (Model.ContentTypeID == 4)
@@ -24,7 +24,7 @@
     <div class='achievement'>
         <div class="title">@Model.Title</div>
         <div class="date">@Model.Date.Value.ToString("dd/mm/yyyy")</div>
-        <p>@Model.Text</p>
+        <p>@Html.Raw(Model.Text)</p>
     </div>
 }
 @if (Model.ContentTypeID == 6)
@@ -35,7 +35,7 @@
             <div class='arrow'>
             </div>
             <p>
-                @Model.Text
+                @Html.Raw(Model.Text)
             </p>
         </div>
     </div>
@@ -83,7 +83,7 @@
 {
     <div class='qa'>
         <p>
-            <span class="question">@Model.Question</span> @Model.Answer
+            <span class="question">@Html.Raw(Model.Question)</span> @Html.Raw(Model.Answer)
         </p>
     </div>
 }
@@ -94,7 +94,7 @@
             @Model.Title
         </p>
         <p class='quote'>
-            <span class="quotation">“</span>@Model.Text”
+            <span class="quotation">“</span>@Html.Raw(Model.Text)”
         </p>
     </div>
     <div class='clear'>
@@ -109,6 +109,6 @@
 @if (Model.ContentTypeID == 12)
 {
     <div class='generic'>
-        <p>@Model.Text</p>
+        <p>@Html.Raw(Model.Text)</p>
     </div>
 }

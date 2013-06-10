@@ -5,7 +5,7 @@
     ViewBag.Title = "Ask a Question";
 }
 
-@{Html.RenderPartial("_Project_Single_Header", Model);}
+@{Html.RenderPartial("_Project_Header", Model);}
 <div id='project-update-tab'>
     <ul class='tab'>
         <li><a href='@Url.Action("Updates","Projects",new{id=Model.ProjectID})'>Update</a> </li>
@@ -14,4 +14,9 @@
         <li class='active'><a href='@Url.Action("Ask","Projects",new{id=Model.ProjectID})'>Ask a Question</a> </li>
     </ul>
     <hr class='tab-line'>
+</div>
+<div id='update-body'>
+    @{Html.RenderPartial("_Project_Sidebar", Model);}
+
+
 </div>

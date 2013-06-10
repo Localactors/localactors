@@ -1,0 +1,54 @@
+﻿@using System.Configuration
+@model Localactors.entities.project
+<ul id='info-project'>
+    <li>
+        <h2>@((DateTime.Now - Model.DateEnd).Days)</h2>
+        <h3>
+            Days
+        </h3>
+    </li>
+    <li>
+        <h2>
+            @Model.donations.Select(x => x.UserID).Distinct().Count()
+        </h2>
+        <h3>
+            Supporters
+        </h3>
+    </li>
+    <li class='money'>
+        <h2>
+            <span class="euro">&#128;</span> @Model.donations.Sum(x => x.Amount)
+        </h2>
+        <h3>
+            Raised of <span class="total">&#128; @Model.Target</span> pledged
+        </h3>
+    </li>
+    <li class='achieved'>
+        <div class='worm'>
+        </div>
+        <ul id='project-step'>
+            @{var counter = 0;}
+            @foreach (var achievement in Model.achievements.OrderBy(x => x.Date))
+            {
+                counter++;
+                <li>
+                    <hr class='step'>
+                    <div class='main-container'>
+                        <h4 class='number'>
+                            @counter.
+                        </h4>
+                        <div class='step-container'>
+                            <h3 class='step'>
+                                @achievement.Title
+                            </h3>
+                            <h3 class='money'>
+                                &#128; @achievement.Goal
+                            </h3>
+                        </div>
+                    </div>
+                </li>
+            }
+        </ul>
+    </li>
+    <hr class='info-spacer' />
+</ul>

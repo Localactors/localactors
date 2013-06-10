@@ -2,7 +2,16 @@
 https://localactors.signin.aws.amazon.com/console
 
 User Name,Access Key Id,Secret Access Key
-diego,AKIAJP463XIAXHW6V3LA,Ua8XHQlNDmKKXYYeYquPJuCaZdJTAeaQ/2cITVUV
+diego.localactors,AKIAIAC3LYWOP5WTVPLQ,6zMdFsOBR1HOktEbLAjwH0D2snefogyJsUS/5wMD
 
-User Name,Password,Direct Signin Link
-diego,(#tgP#tHUAVE,https://localactors.signin.aws.amazon.com/console
+
+
+    diego.localactors
+    Access Key ID: AKIAIWHU7LFE7JD3VK7Q
+    Secret Access Key: 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
+
+
+
+https://localactors.signin.aws.amazon.com/console
+diego.localactors
+l0c4l4ct0r5

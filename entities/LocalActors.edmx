@@ -176,6 +176,14 @@
           <Property Name="Location" Type="varchar" MaxLength="255" />
           <Property Name="Image" Type="varchar" MaxLength="255" />
           <Property Name="Cover" Type="bool" Nullable="false" />
+          <Property Name="ProjectPlan" Type="text" />
+          <Property Name="AgancyName" Type="varchar" MaxLength="255" />
+          <Property Name="AgencyLogo" Type="varchar" MaxLength="255" />
+          <Property Name="AgencyWebsite" Type="varchar" MaxLength="255" />
+          <Property Name="AgencyObjective" Type="text" />
+          <Property Name="Twitter" Type="varchar" MaxLength="50" />
+          <Property Name="Facebook" Type="varchar" MaxLength="255" />
+          <Property Name="Blog" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="project_guestbook">
           <Key>
@@ -306,6 +314,14 @@
           <Property Name="Reset" Type="bool" Nullable="false" />
           <Property Name="ResetEndDate" Type="datetime" />
           <Property Name="Email_Hash" Type="varchar" MaxLength="100" />
+          <Property Name="Contact_Blog" Type="varchar" MaxLength="255" />
+          <Property Name="Contact_Email" Type="varchar" MaxLength="255" />
+          <Property Name="Contact_Linkedin" Type="varchar" MaxLength="255" />
+          <Property Name="Contact_Twitter" Type="varchar" MaxLength="50" />
+          <Property Name="Contact_Facebook" Type="varchar" MaxLength="255" />
+          <Property Name="Contact_Web" Type="varchar" MaxLength="255" />
+          <Property Name="Contact_Skype" Type="varchar" MaxLength="50" />
+          <Property Name="Contact_Tel" Type="varchar" MaxLength="20" />
           <Property Name="DateJoined" Type="datetime" />
           <Property Name="DateLastLogin" Type="datetime" />
           <Property Name="Image" Type="varchar" MaxLength="255" />
@@ -455,7 +471,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_project_user">
-          <End Role="user" Type="localactorsModel.Store.user" Multiplicity="1" />
+          <End Role="user" Type="localactorsModel.Store.user" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="project" Type="localactorsModel.Store.project" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="user">
@@ -823,6 +841,14 @@
           <NavigationProperty Name="donations" Relationship="localactorsModel.FK_donation_user" FromRole="user" ToRole="donation" />
           <NavigationProperty Name="projects" Relationship="localactorsModel.FK_project_user" FromRole="user" ToRole="project" />
           <NavigationProperty Name="followedProjects" Relationship="localactorsModel.user_follow_project" FromRole="user" ToRole="project" />
+          <Property Type="String" Name="Contact_Blog" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Contact_Email" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Contact_Linkedin" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Contact_Twitter" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Contact_Facebook" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Contact_Web" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Contact_Skype" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Contact_Tel" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_user_country">
           <End Type="localactorsModel.country" Role="country" Multiplicity="0..1" />
@@ -1030,6 +1056,14 @@
           <NavigationProperty Name="followers" Relationship="localactorsModel.user_follow_project" FromRole="project" ToRole="user" />
           <Property Type="Int32" Name="Target" Nullable="false" />
           <NavigationProperty Name="project_photo" Relationship="localactorsModel.FK_project_photo_project" FromRole="project" ToRole="project_photo" />
+          <Property Type="String" Name="ProjectPlan" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="AgancyName" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="AgencyLogo" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="AgencyWebsite" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="AgencyObjective" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Twitter" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Facebook" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Blog" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_achievement_project">
           <End Type="localactorsModel.project" Role="project" Multiplicity="1" />
@@ -1238,6 +1272,14 @@
           <EntitySetMapping Name="users">
             <EntityTypeMapping TypeName="localactorsModel.user">
               <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="Contact_Tel" ColumnName="Contact_Tel" />
+                <ScalarProperty Name="Contact_Skype" ColumnName="Contact_Skype" />
+                <ScalarProperty Name="Contact_Web" ColumnName="Contact_Web" />
+                <ScalarProperty Name="Contact_Facebook" ColumnName="Contact_Facebook" />
+                <ScalarProperty Name="Contact_Twitter" ColumnName="Contact_Twitter" />
+                <ScalarProperty Name="Contact_Linkedin" ColumnName="Contact_Linkedin" />
+                <ScalarProperty Name="Contact_Email" ColumnName="Contact_Email" />
+                <ScalarProperty Name="Contact_Blog" ColumnName="Contact_Blog" />
                 <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="DateLastLogin" ColumnName="DateLastLogin" />
                 <ScalarProperty Name="DateJoined" ColumnName="DateJoined" />
@@ -1325,6 +1367,14 @@
           <EntitySetMapping Name="projects">
             <EntityTypeMapping TypeName="localactorsModel.project">
               <MappingFragment StoreEntitySet="project">
+                <ScalarProperty Name="Blog" ColumnName="Blog" />
+                <ScalarProperty Name="Facebook" ColumnName="Facebook" />
+                <ScalarProperty Name="Twitter" ColumnName="Twitter" />
+                <ScalarProperty Name="AgencyObjective" ColumnName="AgencyObjective" />
+                <ScalarProperty Name="AgencyWebsite" ColumnName="AgencyWebsite" />
+                <ScalarProperty Name="AgencyLogo" ColumnName="AgencyLogo" />
+                <ScalarProperty Name="AgancyName" ColumnName="AgancyName" />
+                <ScalarProperty Name="ProjectPlan" ColumnName="ProjectPlan" />
                 <ScalarProperty Name="Target" ColumnName="Target" />
                 <ScalarProperty Name="Cover" ColumnName="Cover" />
                 <ScalarProperty Name="Image" ColumnName="Image" />

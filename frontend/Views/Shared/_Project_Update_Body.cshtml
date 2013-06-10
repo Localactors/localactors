@@ -1,0 +1,42 @@
+﻿@using System.Configuration
+@model update
+<div class='single-update-body'>
+    @foreach (update_content content in Model.update_content)
+    {
+        { Html.RenderPartial("_Update_Content", content); }
+    }
+    <div class='comments-container'>
+        <a name="comments" id="comments" />
+        <h4>
+            Comments</h4>
+        @foreach (var item in Model.update_comment)
+        {
+            <div>
+                from: @item.user.UserName</div>
+            <div>
+                date: @item.Date</div>
+            <div>@item.Text</div>
+            <br />
+        }
+        @if (User.Identity.IsAuthenticated)
+        {
+            using (Html.BeginForm("CommentCreate", "Projects", FormMethod.Post, new { enctype = "multipart/form-data", id = "", @class = "commentform" }))
+            {
+            <input type="hidden" name="UpdateID" value="@Model.UpdateID"/>
+            <input type="hidden" name="UserID" value="@User.Identity"/>
+            <input type="hidden" name="Date" value="@DateTime.Now.ToShortDateString()"/>
+            <div class="editor-label">
+                Text
+            </div>
+            <div class="editor-field">
+                @Html.TextArea("Text")
+                @Html.ValidationMessage("Text")
+            </div>
+
+            <p>
+                <input type="submit" class="btn" value="Create" />
+            </p>
+            }
+        }
+    </div>
+</div>

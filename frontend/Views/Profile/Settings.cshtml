@@ -32,16 +32,8 @@
             @Html.LabelFor(model => model.Bio)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Bio)
+            @Html.TextAreaFor(model => model.Bio)
             @Html.ValidationMessageFor(model => model.Bio)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Newsletter)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Newsletter)
-            @Html.ValidationMessageFor(model => model.Newsletter)
         </div>
 
 
@@ -50,15 +42,81 @@
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.Image)
+            <input type="file" id="Image" name="Image" class="imageupload" />
             @Html.ValidationMessageFor(model => model.Image)
+
+            @Html.ValidationMessage("Image")
+            @if (!string.IsNullOrEmpty(Model.Image))
+            {
+                <img src="@string.Format("{0}?v={1}", Model.Image, DateTime.Now.Ticks)" class="imagepreview" alt=""  />
+            }
         </div>
+        
+       <hr/>
+        
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Contact_Blog,"Blog Url")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Contact_Blog)
+            @Html.ValidationMessageFor(model => model.Contact_Blog)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Contact_Email,"Contact Email")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Contact_Email)
+            @Html.ValidationMessageFor(model => model.Contact_Email)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Contact_Facebook,"Facebook")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Contact_Facebook)
+            @Html.ValidationMessageFor(model => model.Contact_Facebook)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Contact_Linkedin,"Linkedin")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Contact_Linkedin)
+            @Html.ValidationMessageFor(model => model.Contact_Linkedin)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Contact_Skype,"Skype Name")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Contact_Skype)
+            @Html.ValidationMessageFor(model => model.Contact_Skype)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Contact_Tel,"Contact Telephone")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Contact_Tel)
+            @Html.ValidationMessageFor(model => model.Contact_Tel)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Contact_Twitter,"Twitter")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Contact_Twitter)
+            @Html.ValidationMessageFor(model => model.Contact_Twitter)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Contact_Web,"Website")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Contact_Web)
+            @Html.ValidationMessageFor(model => model.Contact_Web)
+        </div>
+
+        <hr/>
+        
+
 
         <p>
             <input type="submit" value="Save" />
         </p>
     </fieldset>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

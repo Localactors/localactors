@@ -1,6 +1,6 @@
 ﻿@model Localactors.entities.user
-
-@if (Model != null) {
+@if (Model != null)
+{
     <div id='profile-bar'>
         <div id='header-profile'>
             <div id='donor'>
@@ -8,7 +8,7 @@
                 <div class='container'>
                     <h3 class='name'>
                         @Model.Name @Model.Lastname</h3>
-                    <a href='@Url.Action("Settings","Profile")'>Settings</a>
+                    <a href='@Url.Action("Settings", "Profile")'>Settings</a>
                 </div>
             </div>
             <div id='projects-supported'>
@@ -16,12 +16,13 @@
                 <div class='container'>
                     <div id='supported'>
                         <h3>
-                            <span class="number">@Model.donations.Select(x => x.ProjectID).Distinct().Count()</span> supported projects
+                            <span class="number">@Model.donations.Select(x => x.ProjectID).Distinct().Count()</span>
+                            supported projects
                         </h3>
                     </div>
                     <div id='donation'>
-                        <a href='#' id=""><span class="number">&#128; @Model.donations.Sum(x => x.Amount)</span> donated
-                        </a>
+                        <a href='@Url.Action("Index", "Donation")' id=""><span class="number">&#128; @Model.donations.Sum(x => x.Amount)</span>
+                            donated </a>
                     </div>
                 </div>
             </div>
@@ -37,28 +38,33 @@
                 </div>
             </div>
         </div>
-
-        <ul id='supported_list' style="display:none;overflow: auto;">
+        <ul id='supported_list' style="display: none; overflow: auto;">
             <hr class='spacer-projects-top' />
             <a class='close' href='#' id="">close</a>
-            @foreach (var donation in Model.donations) {
+            @foreach (project project in Model.donations.Select(x => x.project))
+            {
                 <li>
-                    <img alt='' class='photo-project' src='@donation.project.Image'>
+                    <img alt='' class='photo-project' src='@project.Image'>
                     <div class='container-title'>
-                        <a href='@Url.Action("Details","Projects",new{id=donation.project.ProjectID})'>@donation.project.Title</a>
+                        <a href='@Url.Action("Details", "Projects", new { id = project.ProjectID })'>@project.Title</a>
                         <div class='location'>
-                            <div class='icon-where'></div>
-                            <h2>@donation.project.Location</h2>
+                            <div class='icon-where'>
+                            </div>
+                            <h2>@project.Location</h2>
                         </div>
                     </div>
                     <div class='donation-money'>
-                        <h2>
-                            <span class="number">&#128; @donation.Amount</span> donated
-                        </h2>
+                        @foreach (donation donation in Model.donations.Where(x => x.ProjectID == project.ProjectID))
+                        {
+                            <h2>
+                                <span class="number">&#128; donation.Amount</span> donated
+                            </h2>
+                            <h3 class='date'>
+                                on donation.Date.ToShortLongString()</h3>
+                        }
                     </div>
                 </li>
             }
         </ul>
-
     </div>
 }
