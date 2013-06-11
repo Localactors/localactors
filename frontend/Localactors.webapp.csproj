@@ -143,9 +143,7 @@
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserRolesController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\DonationController.cs" />
-    <Compile Include="Controllers\GuestbookController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
@@ -154,6 +152,7 @@
     <Compile Include="Helper\HtmlAttributeEncodingNot.cs" />
     <Compile Include="Helper\JsonNetResult.cs" />
     <Compile Include="Helper\RssFeedResult.cs" />
+    <Compile Include="Models\AskQuestion.cs" />
     <Compile Include="Models\ControllerBase.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -944,7 +943,7 @@
     <Content Include="Views\Shared\_Project_Sidebar.cshtml" />
     <Content Include="Views\Shared\_Project_Update_Header.cshtml" />
     <Content Include="Views\Shared\_Project_Updates.cshtml" />
-    <None Include="Views\Shared\_Project_Update_Body.cshtml" />
+    <Content Include="Views\Shared\_Project_Update_Content.cshtml" />
     <None Include="_bin_deployableAssemblies\it\Microsoft.Web.Infrastructure.resources.dll" />
     <None Include="_bin_deployableAssemblies\Microsoft.Web.Infrastructure.dll" />
     <None Include="_bin_deployableAssemblies\it\System.Web.WebPages.Razor.resources.dll" />

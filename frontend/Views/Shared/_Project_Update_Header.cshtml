@@ -16,7 +16,7 @@
             <div class='comments'>
                 <div class='arrow'>
                 </div>
-                <a href='#comments'>@Model.update_comment.Count Comments</a>
+                <a href='#comments-@Model.ProjectID'>@Model.update_comment.Count Comments</a>
             </div>
             <div class='share'>
                 <div class='arrow'>
@@ -24,22 +24,28 @@
                 <a href='#'>Share</a>
             </div>
         </div>
+        
         <div class='update-headline-container'>
             <div class='main-container'>
                 <p class='info-project-track'>
                     <span class="number">@((Model.Date - Model.project.DateEnd).Days)</span> days /
                     <span class="number">&#128; @Model.project.donations.Where(x => x.Date <= Model.Date).Sum(x => x.Amount)</span>
                     raised of <span class="number">&#128; @Model.project.Target</span> pledged / <span
-                        class="number">@Model.project.donations.Where(x => x.Date <= Model.Date).Select(x => x.UserID).Distinct().Count()</span>
+                                                                                                     class="number">@Model.project.donations.Where(x => x.Date <= Model.Date).Select(x => x.UserID).Distinct().Count()</span>
                     supporters
                 </p>
                 <div class='clear'>
                 </div>
+                
                 <h1 class='title-update'>
-                    @Model.Title
+                    <a href="@Url.Action("Details","Projects",new{id=Model.ProjectID})">
+                        @Model.Title
+                    </a>
                 </h1>
+              
             </div>
         </div>
+       
         <div class='intro-update-container'>
             <p class='intro'>
                 @Model.Intro

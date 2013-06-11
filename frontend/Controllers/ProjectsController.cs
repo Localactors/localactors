@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Data;
-using System.Data.Entity;
-using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -18,7 +14,7 @@ namespace Localactors.webapp.Controllers
     public class ProjectsController : ControllerBase
     {
 
-
+        [OutputCache(VaryByParam = "*", Duration = 60)]
         public ViewResult Index(string tag = null)
         {
             var projects = db.projects
@@ -33,9 +29,8 @@ namespace Localactors.webapp.Controllers
             return View(projects.ToList());
         }
 
-        //
-        // GET: /Projects/Details/5
-
+   
+        [OutputCache(VaryByParam = "*", Duration = 60)]
         public ViewResult Details(int id)
         {
             project project = db.projects
@@ -64,21 +59,28 @@ namespace Localactors.webapp.Controllers
             return View(project);
         }
 
+        [OutputCache(VaryByParam = "*",Duration = 60)]
         public ViewResult Updates(int id)
         {
             project project = db.projects
-                .Include("country")
+                //.Include("country")
                 .Include("user")
-                .Include("project_guestbook")
-                .Include("project_photo")
+                //.Include("project_guestbook")
+                //.Include("project_photo")
                 .Include("tags")
                 .Include("updates")
-                .Include("achievements")
-                .Single(p => p.ProjectID == id);
+                //.Include("achievements")
+                .FirstOrDefault(p => p.ProjectID == id);
+
             return View(project);
         }
 
-        public ViewResult Ask(int id)
+        public class AskModel {
+            public AskQuestion Question { get; set; }
+            public project Project { get; set; }
+        }
+        [OutputCache(VaryByParam = "*", Duration = 60)]
+        public ActionResult Ask(int id)
         {
             project project = db.projects
                 .Include("country")
@@ -89,7 +91,31 @@ namespace Localactors.webapp.Controllers
                 .Include("updates")
                 .Include("achievements")
                 .Single(p => p.ProjectID == id);
-            return View(project);
+            return View(new AskModel() { Project = project, Question = new AskQuestion(){ProjectID = id,ProjectName = project.Title,UserName = User.Identity.Name} });
+        }
+        [HttpPost]
+        public ActionResult Ask(AskQuestion question)
+        {
+            project project = db.projects
+                .Include("country")
+                .Include("user")
+                .Include("project_guestbook")
+                .Include("project_photo")
+                .Include("tags")
+                .Include("updates")
+                .Include("achievements")
+                .Single(p => p.ProjectID == question.ProjectID);
+
+            AskModel ask = new AskModel() { Project = project, Question = question };
+
+            if(ModelState.IsValid) {
+                //send email
+                string body = string.Format("From: {0}\r\nName (if loggedin): {1}\r\nProject: {2}\r\nProjectID: {3}\r\n\r\nQuestion: {4}",question.Email, question.UserName,question.ProjectName,question.ProjectID,question.Question );
+                SendMailAws(ConfigurationManager.AppSettings["Email_Info"], "Question about project: " + question.ProjectName, body);
+                return RedirectToAction("Details", "Projects", new {id = question.ProjectID});
+            }
+
+            return View(ask);
         }
 
         [Authorize(Roles = "supporter,publisher,admin")]

@@ -16,6 +16,7 @@ using Localactors.entities;
 namespace Localactors.webapp.Areas.Admin.Controllers
 {
     [Authorize(Roles = "admin")]
+    [ValidateInput(false)]
     public class ProjectsController : ControllerBase
     {
       

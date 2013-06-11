@@ -21,9 +21,7 @@ using System.Xml.Serialization;
 
 [assembly: EdmRelationshipAttribute("localactorsModel", "FK_user_country", "country", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Localactors.entities.country), "user", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.user), true)]
 [assembly: EdmRelationshipAttribute("localactorsModel", "FK_project_guestbook_user", "user", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.user), "project_guestbook", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.project_guestbook), true)]
-[assembly: EdmRelationshipAttribute("localactorsModel", "FK_update_comment_update", "update", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.update), "update_comment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.update_comment), true)]
 [assembly: EdmRelationshipAttribute("localactorsModel", "FK_update_content_update", "update", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.update), "update_content", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.update_content), true)]
-[assembly: EdmRelationshipAttribute("localactorsModel", "FK_update_comment_user", "user", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.user), "update_comment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.update_comment), true)]
 [assembly: EdmRelationshipAttribute("localactorsModel", "FK_update_content_update_content_type", "update_content_type", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.update_content_type), "update_content", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.update_content), true)]
 [assembly: EdmRelationshipAttribute("localactorsModel", "FK_update_user", "user", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.user), "update", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.update), true)]
 [assembly: EdmRelationshipAttribute("localactorsModel", "FK_update_content_user", "user", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.user), "update_content", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.update_content), true)]
@@ -38,6 +36,8 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("localactorsModel", "project_tag", "project", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.project), "tag", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.tag))]
 [assembly: EdmRelationshipAttribute("localactorsModel", "user_follow_project", "project", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.project), "user", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.user))]
 [assembly: EdmRelationshipAttribute("localactorsModel", "FK_project_photo_project", "project", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.project), "project_photo", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.project_photo), true)]
+[assembly: EdmRelationshipAttribute("localactorsModel", "FK_update_comment_update", "update", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.update), "update_comment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.update_comment), true)]
+[assembly: EdmRelationshipAttribute("localactorsModel", "FK_update_comment_user", "user", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.user), "update_comment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.update_comment), true)]
 
 #endregion
 
@@ -168,22 +168,6 @@ namespace Localactors.entities
             }
         }
         private ObjectSet<update> _updates;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<update_comment> update_comment
-        {
-            get
-            {
-                if ((_update_comment == null))
-                {
-                    _update_comment = base.CreateObjectSet<update_comment>("update_comment");
-                }
-                return _update_comment;
-            }
-        }
-        private ObjectSet<update_comment> _update_comment;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -328,6 +312,22 @@ namespace Localactors.entities
             }
         }
         private ObjectSet<project_photo> _project_photo;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<update_comment> update_comment
+        {
+            get
+            {
+                if ((_update_comment == null))
+                {
+                    _update_comment = base.CreateObjectSet<update_comment>("update_comment");
+                }
+                return _update_comment;
+            }
+        }
+        private ObjectSet<update_comment> _update_comment;
 
         #endregion
 
@@ -371,14 +371,6 @@ namespace Localactors.entities
         public void AddToupdates(update update)
         {
             base.AddObject("updates", update);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the update_comment EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToupdate_comment(update_comment update_comment)
-        {
-            base.AddObject("update_comment", update_comment);
         }
     
         /// <summary>
@@ -451,6 +443,14 @@ namespace Localactors.entities
         public void AddToproject_photo(project_photo project_photo)
         {
             base.AddObject("project_photo", project_photo);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the update_comment EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToupdate_comment(update_comment update_comment)
+        {
+            base.AddObject("update_comment", update_comment);
         }
 
         #endregion
@@ -3493,28 +3493,6 @@ namespace Localactors.entities
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("localactorsModel", "FK_update_comment_update", "update_comment")]
-        public EntityCollection<update_comment> update_comment
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<update_comment>("localactorsModel.FK_update_comment_update", "update_comment");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<update_comment>("localactorsModel.FK_update_comment_update", "update_comment", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("localactorsModel", "FK_update_content_update", "update_content")]
         public EntityCollection<update_content> update_content
         {
@@ -3606,6 +3584,28 @@ namespace Localactors.entities
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("localactorsModel", "FK_update_comment_update", "update_comment")]
+        public EntityCollection<update_comment> update_comment
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<update_comment>("localactorsModel.FK_update_comment_update", "update_comment");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<update_comment>("localactorsModel.FK_update_comment_update", "update_comment", value);
+                }
+            }
+        }
 
         #endregion
 
@@ -3628,17 +3628,13 @@ namespace Localactors.entities
         /// <param name="updateID">Initial value of the UpdateID property.</param>
         /// <param name="userID">Initial value of the UserID property.</param>
         /// <param name="date">Initial value of the Date property.</param>
-        /// <param name="text">Initial value of the Text property.</param>
-        /// <param name="picture">Initial value of the Picture property.</param>
-        public static update_comment Createupdate_comment(global::System.Int32 commentID, global::System.Int32 updateID, global::System.Int32 userID, global::System.DateTime date, global::System.String text, global::System.String picture)
+        public static update_comment Createupdate_comment(global::System.Int32 commentID, global::System.Int32 updateID, global::System.Int32 userID, global::System.DateTime date)
         {
             update_comment update_comment = new update_comment();
             update_comment.CommentID = commentID;
             update_comment.UpdateID = updateID;
             update_comment.UserID = userID;
             update_comment.Date = date;
-            update_comment.Text = text;
-            update_comment.Picture = picture;
             return update_comment;
         }
 
@@ -3748,7 +3744,7 @@ namespace Localactors.entities
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String Text
         {
@@ -3760,7 +3756,7 @@ namespace Localactors.entities
             {
                 OnTextChanging(value);
                 ReportPropertyChanging("Text");
-                _Text = StructuralObject.SetValidValue(value, false);
+                _Text = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("Text");
                 OnTextChanged();
             }
@@ -3772,7 +3768,7 @@ namespace Localactors.entities
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String Picture
         {
@@ -3784,7 +3780,7 @@ namespace Localactors.entities
             {
                 OnPictureChanging(value);
                 ReportPropertyChanging("Picture");
-                _Picture = StructuralObject.SetValidValue(value, false);
+                _Picture = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("Picture");
                 OnPictureChanged();
             }
@@ -5297,28 +5293,6 @@ namespace Localactors.entities
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("localactorsModel", "FK_update_comment_user", "update_comment")]
-        public EntityCollection<update_comment> update_comment
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<update_comment>("localactorsModel.FK_update_comment_user", "update_comment");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<update_comment>("localactorsModel.FK_update_comment_user", "update_comment", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("localactorsModel", "FK_update_user", "update")]
         public EntityCollection<update> updates
         {
@@ -5419,6 +5393,28 @@ namespace Localactors.entities
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<project>("localactorsModel.user_follow_project", "project", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("localactorsModel", "FK_update_comment_user", "update_comment")]
+        public EntityCollection<update_comment> update_comment
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<update_comment>("localactorsModel.FK_update_comment_user", "update_comment");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<update_comment>("localactorsModel.FK_update_comment_user", "update_comment", value);
                 }
             }
         }

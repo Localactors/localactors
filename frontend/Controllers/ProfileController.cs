@@ -25,19 +25,21 @@ namespace Localactors.webapp.Controllers
     public class ProfileController : ControllerBase
     {
         [ChildActionOnly]
-        [OutputCache(Duration = 60, VaryByParam = "username")]
+        [OutputCache(Duration = 60, VaryByParam = "*")]
         public PartialViewResult ProfileBar(string username) {
             var user = db.users.FirstOrDefault(x => x.UserName == username);
 
             return PartialView("_ProfileBar", user);
         }
 
+        [OutputCache(VaryByParam = "*", Duration = 60)]
         public ViewResult Index()
         {
             var users = db.users.Include("country");
             return View(users.ToList());
         }
 
+        [OutputCache(VaryByParam = "*", Duration = 60)]
         public ViewResult Details(int id)
         {
             user user = db.users.Single(u => u.UserID == id);
@@ -60,6 +62,17 @@ namespace Localactors.webapp.Controllers
             model.updates = model.user.followedProjects.SelectMany(x => x.updates).OrderByDescending(x => x.UpdateID).Skip(skip).Take(take).ToList();
 
             ViewBag.page = page;
+            ViewBag.hasnext = model.updates.Count >= pagesize;
+
+            //add some updates if there are less than pagesize, but leave the pager disabled :)
+            if (model.updates.Count < pagesize) {
+                int many = pagesize - model.updates.Count;
+                if(many >0) {
+                    var add = db.updates.Except(model.updates).OrderByDescending("UpdateID").Take(many);
+                    model.updates.AddRange(add);
+                }
+            }
+
             return View(model);
         }
 
