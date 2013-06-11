@@ -2068,7 +2068,7 @@ section.page {
   section.page #description {
     -ms-word-break: break-all;
     word-break: break-all;
-    word-break: break-word;
+
     -webkit-hyphens: auto;
     -moz-hyphens: auto;
     hyphens: auto; }
@@ -2402,7 +2402,7 @@ section.page {
         display: inline;
         -ms-word-break: break-all;
         word-break: break-all;
-        word-break: break-word;
+     
         -webkit-hyphens: auto;
         -moz-hyphens: auto;
         hyphens: auto;
@@ -2429,7 +2429,7 @@ section.page {
           display: inline;
           color: #6045ff;
           text-transform: uppercase;
-          whitespace: nowrap;
+          white-space: nowrap;
           font-size: 0.75em;
           line-height: 1.25em;
           letter-spacing: 0.1em;
@@ -2722,7 +2722,7 @@ footer {
           display: inline;
           color: #6045ff;
           text-transform: uppercase;
-          whitespace: nowrap;
+          white-space: nowrap;
           font-size: 0.75em;
           line-height: 1.25em;
           letter-spacing: 0.1em;
