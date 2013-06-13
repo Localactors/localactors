@@ -1,28 +1,49 @@
-﻿@model IEnumerable<Localactors.entities.user>
-
+﻿@model Localactors.webapp.Controllers.LocalactorsModel
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Localactors";
 }
-
-<table>
-  
-@foreach (var item in Model) {
-    <tr>
-       
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Lastname)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Bio)
-        </td>
-
-        <td>
-            @Html.ActionLink("Details", "Details", new { id=item.UserID }) 
-        </td>
-    </tr>
-}
-
-</table>
+<div id='localactors'>
+    <ul>
+        <li>
+            <h2>
+                meet the local actors / <span>publishers</span>
+            </h2>
+            <p>
+                We all know where the need is. We look for opportunity to be of use and there is
+                no better way than help locally.
+            </p>
+        </li>
+    </ul>
+    <ul class='publisher-list'>
+        @foreach (var item in Model.publishers)
+        {
+            var project = item.projects.FirstOrDefault();
+            <li class='publisher'><a href='@(project != null ? Url.Action("Updates", "Projects", new { id = project.ProjectID }) : "#")'>
+                <img src="@item.Image" />
+                <span>@item.Name @item.Lastname</span> </a></li>
+        }
+    </ul>
+    <div class='clear'>
+    </div>
+    <hr class='spacer-localactors'>
+    <ul>
+        <li>
+            <h2>
+                meet the local actors / <span>supporters</span>
+            </h2>
+            <p>
+                Placeholder description paragraph explaining who supporters are and what they do.
+            </p>
+        </li>
+    </ul>
+    <ul class='publisher-list'>
+        @foreach (var item in Model.supporters)
+        {
+            <li class='publisher'><a href=''>
+                <img src="@item.Image" />
+                <span>@item.Name @item.Lastname</span> </a></li>
+        }
+    </ul>
+    <div class='clear'>
+    </div>
+</div>

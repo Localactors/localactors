@@ -8,9 +8,9 @@
         </h3>
     </li>
     <li>
-        <h2>
+        <a class='donors' href='@Url.Action("Index","Profile")'>
             @Model.donations.Select(x => x.UserID).Distinct().Count()
-        </h2>
+        </a>
         <h3>
             Supporters
         </h3>
@@ -23,6 +23,7 @@
             Raised of <span class="total">&#128; @Model.Target</span> pledged
         </h3>
     </li>
+
     <li class='achieved'>
         <div class='worm'>
         </div>
@@ -39,7 +40,7 @@
                         </h4>
                         <div class='step-container'>
                             <h3 class='step'>
-                                @achievement.Title
+                                @Html.Raw(achievement.Title)
                             </h3>
                             <h3 class='money'>
                                 &#128; @achievement.Goal

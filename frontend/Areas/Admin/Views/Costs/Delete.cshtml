@@ -1,0 +1,46 @@
+﻿@model Localactors.entities.project_cost
+@{
+    ViewBag.Title = "Delete";
+}
+<ul class="breadcrumb">
+    <li><a href='@Url.Action("Index", "Home")'>Home</a> <span class="divider">/</span></li>
+    <li><a href='@Url.Action("Index", "projects")'>Projects</a> <span class="divider">/</span></li>
+    <li><a href="@Url.Action("Edit", "projects", new { id = ViewBag.Project.ProjectID })">@ViewBag.Project.Title</a>
+        <span class="divider">/</span> </li>
+        <li>Project Plan <span class="divider">/</span> </li>
+    <li class="active"><a href='@Url.Action("delete", "Costs", new { id = Model.CostID })'>@Model.Title
+        (delete) </a></li>
+</ul>
+<h3>
+    Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>project_cost</legend>
+    <div class="display-label">
+        project</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.project.Title)
+    </div>
+    <div class="display-label">
+        Date</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Date)
+    </div>
+    <div class="display-label">
+        Title</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Title)
+    </div>
+    <div class="display-label">
+        Goal</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Goal)
+    </div>
+</fieldset>
+@using (Html.BeginForm())
+{
+    <p>
+        <input type="submit" value="Delete" />
+        |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

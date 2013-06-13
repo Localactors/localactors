@@ -1,55 +1,56 @@
 ﻿@using System.Configuration
 @model Localactors.webapp.Controllers.ProjectsController.AskModel
-           
 @{
     ViewBag.Title = Model.Project.Title + ": Ask a Question";
 }
-
 @{Html.RenderPartial("_Project_Header", Model.Project);}
 <div id='project-update-tab'>
     <ul class='tab'>
-        <li><a href='@Url.Action("Updates","Projects",new{id=Model.Project.ProjectID})'>Update</a> </li>
-        <li><a href='@Url.Action("Details", "Projects", new { id = Model.Project.ProjectID })'>Project Details</a> </li>
-        <li><a href='@Url.Action("Guestbook", "Projects", new { id = Model.Project.ProjectID })'>Guestbook</a> </li>
-        <li class='active'><a href='@Url.Action("Ask", "Projects", new { id = Model.Project.ProjectID })'>Ask a Question</a> </li>
+        <li><a href='@Url.Action("Updates", "Projects", new { id = Model.Project.ProjectID })'>
+            Update <span class="number">(@Model.Project.updates.Count)</span> </a> </li>
+        <li><a href='@Url.Action("Details", "Projects", new { id = Model.Project.ProjectID })'>
+            Project Details</a> </li>
+        <li><a href='@Url.Action("Guestbook", "Projects", new { id = Model.Project.ProjectID })'>
+            Guestbook  <span class="number">(@Model.Project.project_guestbook.Count)</span></a> </li>
+        <li class='active'><a href='@Url.Action("Ask", "Projects", new { id = Model.Project.ProjectID })'>
+            Ask a Question</a> </li>
     </ul>
     <hr class='tab-line'>
 </div>
 <div id='update-body'>
     @{Html.RenderPartial("_Project_Sidebar", Model.Project);}
+    <div id='ask_question'>
+        <h3>
+            Ask a question:
+        </h3>
+        @using (Html.BeginForm("Ask", "Projects", FormMethod.Post, new { enctype = "multipart/form-data", id = "mainform" }))
+        {
+            @Html.ValidationSummary(true)
 
-    
- 
+            @Html.HiddenFor(model => model.Question.ProjectID)
+            @Html.HiddenFor(model => model.Question.ProjectName)
+            @Html.HiddenFor(model => model.Question.UserName)
 
-@using (Html.BeginForm("Ask", "Projects", FormMethod.Post, new { enctype = "multipart/form-data", id = "mainform" })) {
-    @Html.ValidationSummary(true)
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Question.Email)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Question.Email)
+                @Html.ValidationMessageFor(model => model.Question.Email)
+            </div>
 
-        @Html.HiddenFor(model => model.Question.ProjectID)
-        @Html.HiddenFor(model => model.Question.ProjectName)
-        @Html.HiddenFor(model => model.Question.UserName)
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Question.Question)
+            </div>
+            <div class="editor-field">
+                @Html.TextAreaFor(model => model.Question.Question)
+                @Html.ValidationMessageFor(model => model.Question.Question)
+            </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Question.Email)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Question.Email)
-            @Html.ValidationMessageFor(model => model.Question.Email)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Question.Question)
-        </div>
-        <div class="editor-field">
-            @Html.TextAreaFor(model => model.Question.Question)
-            @Html.ValidationMessageFor(model => model.Question.Question)
-        </div>
-
-        <p>
-            <input type="submit" value="Ask" />
-        </p>
+            <p>
+                <input type="submit" value="Ask" />
+            </p>
    
-}
-
-    
-
+        }
+    </div>
 </div>

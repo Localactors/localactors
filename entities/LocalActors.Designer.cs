@@ -38,6 +38,8 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("localactorsModel", "FK_project_photo_project", "project", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.project), "project_photo", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.project_photo), true)]
 [assembly: EdmRelationshipAttribute("localactorsModel", "FK_update_comment_update", "update", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.update), "update_comment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.update_comment), true)]
 [assembly: EdmRelationshipAttribute("localactorsModel", "FK_update_comment_user", "user", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.user), "update_comment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.update_comment), true)]
+[assembly: EdmRelationshipAttribute("localactorsModel", "FK_plan_project", "project", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.project), "project_plan", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.project_plan), true)]
+[assembly: EdmRelationshipAttribute("localactorsModel", "FK_cost_project", "project", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.project), "project_cost", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.project_cost), true)]
 
 #endregion
 
@@ -328,6 +330,38 @@ namespace Localactors.entities
             }
         }
         private ObjectSet<update_comment> _update_comment;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<project_plan> project_plan
+        {
+            get
+            {
+                if ((_project_plan == null))
+                {
+                    _project_plan = base.CreateObjectSet<project_plan>("project_plan");
+                }
+                return _project_plan;
+            }
+        }
+        private ObjectSet<project_plan> _project_plan;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<project_cost> project_cost
+        {
+            get
+            {
+                if ((_project_cost == null))
+                {
+                    _project_cost = base.CreateObjectSet<project_cost>("project_cost");
+                }
+                return _project_cost;
+            }
+        }
+        private ObjectSet<project_cost> _project_cost;
 
         #endregion
 
@@ -451,6 +485,22 @@ namespace Localactors.entities
         public void AddToupdate_comment(update_comment update_comment)
         {
             base.AddObject("update_comment", update_comment);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the project_plan EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToproject_plan(project_plan project_plan)
+        {
+            base.AddObject("project_plan", project_plan);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the project_cost EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToproject_cost(project_cost project_cost)
+        {
+            base.AddObject("project_cost", project_cost);
         }
 
         #endregion
@@ -2215,6 +2265,277 @@ namespace Localactors.entities
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("localactorsModel", "FK_plan_project", "project_plan")]
+        public EntityCollection<project_plan> project_plan
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<project_plan>("localactorsModel.FK_plan_project", "project_plan");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<project_plan>("localactorsModel.FK_plan_project", "project_plan", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("localactorsModel", "FK_cost_project", "project_cost")]
+        public EntityCollection<project_cost> project_cost
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<project_cost>("localactorsModel.FK_cost_project", "project_cost");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<project_cost>("localactorsModel.FK_cost_project", "project_cost", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="localactorsModel", Name="project_cost")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class project_cost : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new project_cost object.
+        /// </summary>
+        /// <param name="costID">Initial value of the CostID property.</param>
+        /// <param name="projectID">Initial value of the ProjectID property.</param>
+        /// <param name="order">Initial value of the Order property.</param>
+        /// <param name="title">Initial value of the Title property.</param>
+        /// <param name="goal">Initial value of the Goal property.</param>
+        public static project_cost Createproject_cost(global::System.Int32 costID, global::System.Int32 projectID, global::System.Int32 order, global::System.String title, global::System.String goal)
+        {
+            project_cost project_cost = new project_cost();
+            project_cost.CostID = costID;
+            project_cost.ProjectID = projectID;
+            project_cost.Order = order;
+            project_cost.Title = title;
+            project_cost.Goal = goal;
+            return project_cost;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 CostID
+        {
+            get
+            {
+                return _CostID;
+            }
+            set
+            {
+                if (_CostID != value)
+                {
+                    OnCostIDChanging(value);
+                    ReportPropertyChanging("CostID");
+                    _CostID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("CostID");
+                    OnCostIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _CostID;
+        partial void OnCostIDChanging(global::System.Int32 value);
+        partial void OnCostIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ProjectID
+        {
+            get
+            {
+                return _ProjectID;
+            }
+            set
+            {
+                OnProjectIDChanging(value);
+                ReportPropertyChanging("ProjectID");
+                _ProjectID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ProjectID");
+                OnProjectIDChanged();
+            }
+        }
+        private global::System.Int32 _ProjectID;
+        partial void OnProjectIDChanging(global::System.Int32 value);
+        partial void OnProjectIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Order
+        {
+            get
+            {
+                return _Order;
+            }
+            set
+            {
+                OnOrderChanging(value);
+                ReportPropertyChanging("Order");
+                _Order = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Order");
+                OnOrderChanged();
+            }
+        }
+        private global::System.Int32 _Order;
+        partial void OnOrderChanging(global::System.Int32 value);
+        partial void OnOrderChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> Date
+        {
+            get
+            {
+                return _Date;
+            }
+            set
+            {
+                OnDateChanging(value);
+                ReportPropertyChanging("Date");
+                _Date = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Date");
+                OnDateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _Date;
+        partial void OnDateChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Title
+        {
+            get
+            {
+                return _Title;
+            }
+            set
+            {
+                OnTitleChanging(value);
+                ReportPropertyChanging("Title");
+                _Title = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Title");
+                OnTitleChanged();
+            }
+        }
+        private global::System.String _Title;
+        partial void OnTitleChanging(global::System.String value);
+        partial void OnTitleChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Goal
+        {
+            get
+            {
+                return _Goal;
+            }
+            set
+            {
+                OnGoalChanging(value);
+                ReportPropertyChanging("Goal");
+                _Goal = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Goal");
+                OnGoalChanged();
+            }
+        }
+        private global::System.String _Goal;
+        partial void OnGoalChanging(global::System.String value);
+        partial void OnGoalChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("localactorsModel", "FK_cost_project", "project")]
+        public project project
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<project>("localactorsModel.FK_cost_project", "project").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<project>("localactorsModel.FK_cost_project", "project").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<project> projectReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<project>("localactorsModel.FK_cost_project", "project");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<project>("localactorsModel.FK_cost_project", "project", value);
+                }
+            }
+        }
 
         #endregion
 
@@ -2652,6 +2973,205 @@ namespace Localactors.entities
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<project>("localactorsModel.FK_project_photo_project", "project", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="localactorsModel", Name="project_plan")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class project_plan : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new project_plan object.
+        /// </summary>
+        /// <param name="planID">Initial value of the PlanID property.</param>
+        /// <param name="projectID">Initial value of the ProjectID property.</param>
+        /// <param name="order">Initial value of the Order property.</param>
+        public static project_plan Createproject_plan(global::System.Int32 planID, global::System.Int32 projectID, global::System.Int32 order)
+        {
+            project_plan project_plan = new project_plan();
+            project_plan.PlanID = planID;
+            project_plan.ProjectID = projectID;
+            project_plan.Order = order;
+            return project_plan;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 PlanID
+        {
+            get
+            {
+                return _PlanID;
+            }
+            set
+            {
+                if (_PlanID != value)
+                {
+                    OnPlanIDChanging(value);
+                    ReportPropertyChanging("PlanID");
+                    _PlanID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("PlanID");
+                    OnPlanIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _PlanID;
+        partial void OnPlanIDChanging(global::System.Int32 value);
+        partial void OnPlanIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ProjectID
+        {
+            get
+            {
+                return _ProjectID;
+            }
+            set
+            {
+                OnProjectIDChanging(value);
+                ReportPropertyChanging("ProjectID");
+                _ProjectID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ProjectID");
+                OnProjectIDChanged();
+            }
+        }
+        private global::System.Int32 _ProjectID;
+        partial void OnProjectIDChanging(global::System.Int32 value);
+        partial void OnProjectIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Order
+        {
+            get
+            {
+                return _Order;
+            }
+            set
+            {
+                OnOrderChanging(value);
+                ReportPropertyChanging("Order");
+                _Order = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Order");
+                OnOrderChanged();
+            }
+        }
+        private global::System.Int32 _Order;
+        partial void OnOrderChanging(global::System.Int32 value);
+        partial void OnOrderChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Time
+        {
+            get
+            {
+                return _Time;
+            }
+            set
+            {
+                OnTimeChanging(value);
+                ReportPropertyChanging("Time");
+                _Time = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Time");
+                OnTimeChanged();
+            }
+        }
+        private global::System.String _Time;
+        partial void OnTimeChanging(global::System.String value);
+        partial void OnTimeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Title
+        {
+            get
+            {
+                return _Title;
+            }
+            set
+            {
+                OnTitleChanging(value);
+                ReportPropertyChanging("Title");
+                _Title = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Title");
+                OnTitleChanged();
+            }
+        }
+        private global::System.String _Title;
+        partial void OnTitleChanging(global::System.String value);
+        partial void OnTitleChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("localactorsModel", "FK_plan_project", "project")]
+        public project project
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<project>("localactorsModel.FK_plan_project", "project").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<project>("localactorsModel.FK_plan_project", "project").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<project> projectReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<project>("localactorsModel.FK_plan_project", "project");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<project>("localactorsModel.FK_plan_project", "project", value);
                 }
             }
         }

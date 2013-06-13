@@ -7,77 +7,85 @@
 }
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
-
 @{Html.RenderPartial("_Project_Header", Model);}
-
 <div id='project-update-tab'>
     <ul class='tab'>
-        <li><a href='@Url.Action("Updates", "Projects", new { id = Model.ProjectID })'>Update</a>
+        <li><a href='@Url.Action("Updates", "Projects", new { id = Model.ProjectID })'>Update <span class="number">(@Model.updates.Count)</span></a>
         </li>
         <li><a href='@Url.Action("Details", "Projects", new { id = Model.ProjectID })'>Project
-                Details</a> </li>
+            Details</a> </li>
         <li class='active'><a href='@Url.Action("Guestbook", "Projects", new { id = Model.ProjectID })'>
-                               Guestbook</a> </li>
+            Guestbook  <span class="number">(@Model.project_guestbook.Count)</span></a></li>
         <li><a href='@Url.Action("Ask", "Projects", new { id = Model.ProjectID })'>Ask a Question</a>
         </li>
     </ul>
     <hr class='tab-line'>
 </div>
-
 <div id='update-body'>
-    @{Html.RenderPartial("_Project_Sidebar", Model);}
-    <h4>
-        Guestbook</h4>
-    @foreach (var guestpost in Model.project_guestbook)
-    {
-        <div class="guestbook-single-entry">
-        <div>
-            from: @guestpost.user.UserName</div>
-        <div>
-            date: @guestpost.Date</div>
-        <div>
-            <img src="@guestpost.Picture"/></div>
-            <div>@guestpost.Text</div>
-            @if (isadmin || ViewBag.UserID == guestpost.UserID)
+    <div id='guestbook'>
+        <div id='comments'>
+            <h3 class='number-comments'>
+                @Model.project_guestbook.Count comments:
+            </h3>
+            <ul>
+                @foreach (var item in Model.project_guestbook)
                 {
-                    <div class="admin">
-                        @using (Html.BeginForm("GuestbookDelete", "Projects"))
-                        {
-                            <input type="hidden" name="GuestpostID" value="@guestpost.GuestpostID"/>
-                            <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
-                            <input type="submit" value="delete" class="btn"/>
-                        }
-                    </div>
+                    <li>
+                        <div class='container-photo-profile'>
+                            <img alt='' class='photo-profile' src='@item.user.Image'>
+                        </div>
+                        <h3 class='name'>
+                            @item.user.Name @item.user.Lastname</h3>
+                        <p class='date'>
+                            @item.Date.ToLongDateString() <span class="slash">/</span> @item.Date.ToShortTimeString()
+                        </p>
+                        <div class='content'>
+                            <p>
+                                @item.Text
+                            </p>
+                            @if (isadmin || ViewBag.UserID == item.UserID)
+                            {
+                                <div class="admin">
+                                    @using (Html.BeginForm("GuestbookDelete", "Projects"))
+                                    {
+                                        <input type="hidden" name="GuestpostID" value="@item.GuestpostID"/>
+                                        <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+                                        <input type="submit" value="delete" class="btn" />
+                                    }
+                                </div>
+                            }
+                        </div>
+                    </li>
+                    <hr class='spacer-comments' />
                 }
+            </ul>
         </div>
-    }
-    @if (isauthenticated)
-    {
-        using (Html.BeginForm("GuestbookCreate", "Projects", FormMethod.Post, new { enctype = "multipart/form-data", id = "mainform" }))
+        @if (isauthenticated)
         {
-            <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
-            <input type="hidden" name="UserID" value="@User.Identity"/>
-            <input type="hidden" name="Date" value="@DateTime.Now.ToShortDateString()"/>
-            <div class="editor-label">
-                Text
+            <div id="form">
+                @using (Html.BeginForm("GuestbookCreate", "Projects", FormMethod.Post, new { enctype = "multipart/form-data", id = "mainform" })) {
+                <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+                <input type="hidden" name="UserID" value="@User.Identity"/>
+                <input type="hidden" name="Date" value="@DateTime.Now.ToShortDateString()"/>
+                <div class="editor-label">
+                    Text
+                </div>
+                <div class="editor-field">
+                    @Html.TextArea("Text")
+                    @Html.ValidationMessage("Text")
+                </div>
+                <div class="editor-label">
+                    Picture
+                </div>
+                <div class="editor-field">
+                    <input type="file" id="Picture" name="Picture" class="imageupload" />
+                    @Html.ValidationMessage("Picture")
+                </div>
+                <p>
+                    <input type="submit" class="btn" value="Create" />
+                </p>
+                }
             </div>
-            <div class="editor-field">
-                @Html.TextArea("Text")
-                @Html.ValidationMessage("Text")
-            </div>
-
-            <div class="editor-label">
-                Picture
-            </div>
-            <div class="editor-field">
-                <input type="file" id="Picture" name="Picture" class="imageupload" />
-                @Html.ValidationMessage("Picture")
-            </div>
-
-            <p>
-                <input type="submit" class="btn" value="Create" />
-            </p>
-
         }
-    }
+    </div>
 </div>

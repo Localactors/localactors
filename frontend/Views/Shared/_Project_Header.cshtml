@@ -44,20 +44,23 @@
             </div>
         </div>
     </div>
+
     <div id='publisher-container'>
-        <img alt='' class='photo-publisher' src='@Model.user.Image'>
-        <a class='name' href='@Url.Action("Details", "Profile", new { id = Model.UserID })'>
-            @Model.user.Name
-            @Model.user.Lastname
-        </a>
+        <a class='container-pic' href='@Url.Action("Details", "Profile", new { id = Model.UserID })'>
+            <img alt="" class=".photo-publisher" src="@Model.user.Image" />
+            <span class='name'>@Model.user.Name
+                @Model.user.Lastname</span> </a>
     </div>
+
     <div id='project-headline'>
+        
         <div class='container-headline'>
-            <h1 class='title'>@Model.Title</h1>
+            <h1 class='title'>@Html.Raw(Model.Title)</h1>
             <div class='icon-where'>
             </div>
-            <h2 class='subtitle'>@Model.Location></h2>
+            <h2 class='subtitle'>@Html.Raw(Model.Location)</h2>
         </div>
+
         <div class='tags-container'>
             <h4>
                 Tags:

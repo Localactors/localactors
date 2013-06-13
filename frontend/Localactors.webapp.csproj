@@ -129,10 +129,12 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\AchievementsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CostsController.cs" />
     <Compile Include="Areas\Admin\Controllers\CountryController.cs" />
     <Compile Include="Areas\Admin\Controllers\DonationsController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\MailinglistController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PlansController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProjectPhotosController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProjectsController.cs" />
     <Compile Include="Areas\Admin\Controllers\TagController.cs" />
@@ -772,6 +774,7 @@
     <Content Include="Scripts\vendor\jquery-ui\ui\jquery.ui.tooltip.js" />
     <Content Include="Scripts\vendor\jquery-ui\ui\jquery.ui.widget.js" />
     <Content Include="Scripts\vendor\jquery-ui.js" />
+    <Content Include="Scripts\vendor\jquery-ujs.js" />
     <Content Include="Scripts\vendor\jquery.js" />
     <Content Include="Scripts\vendor\jquery.scrollTo.js" />
     <Content Include="Scripts\vendor\Modernizr.js" />
@@ -875,6 +878,13 @@
     <Content Include="Areas\Admin\Views\ProjectPhotos\Create.cshtml" />
     <Content Include="Areas\Admin\Views\ProjectPhotos\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\ProjectPhotos\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Costs\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Costs\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Costs\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Plans\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Plans\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Plans\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Projects\ThankYou.cshtml" />
     <None Include="Content\fonts\droid-sans\droidsans-bold-webfont.eot" />
     <None Include="Content\fonts\droid-sans\droidsans-bold-webfont.ttf" />
     <None Include="Content\fonts\droid-sans\droidsans-bold-webfont.woff" />
@@ -943,6 +953,7 @@
     <Content Include="Views\Shared\_Project_Update_Header.cshtml" />
     <Content Include="Views\Shared\_Project_Updates.cshtml" />
     <Content Include="Views\Shared\_Project_Update_Content.cshtml" />
+    <Content Include="Views\Projects\ThankYou.cshtml" />
     <None Include="_bin_deployableAssemblies\it\Microsoft.Web.Infrastructure.resources.dll" />
     <None Include="_bin_deployableAssemblies\Microsoft.Web.Infrastructure.dll" />
     <None Include="_bin_deployableAssemblies\it\System.Web.WebPages.Razor.resources.dll" />

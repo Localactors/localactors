@@ -1,8 +1,40 @@
-﻿@model Localactors.entities.user
+﻿@using System.Configuration
+@model Localactors.entities.user
 
 @{
     ViewBag.Title = "Account Settings";
 }
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".imageupload").disableValidation = true;
+        $(".imageupload").change(function () {
+            $("input").addClass("ignore").disableValidation = true;
+            $("form").disableValidation = true;
+            $("#mainform").submit();
+        });
+
+        $("input[type=file]").each(function () {
+            var input = $(this);
+            var name = input.attr("id");
+            var btn = $("<input type='button' value='upload'></input>");
+
+            input.after(btn);
+            input.css("display", "none");
+
+            btn.click(function () {
+                input.click();
+            });
+
+        });
+
+    });
+
+
+</script>
+
 <div id='update-body'>
 
 @using (Html.BeginForm("Settings", "Profile", FormMethod.Post, new { enctype = "multipart/form-data", id = "mainform" })) {

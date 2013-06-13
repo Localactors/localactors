@@ -4,40 +4,45 @@
     ViewBag.Title = Model.Name + " " + Model.Lastname + "";
 }
 
-
-<div id='update-body'>
-
-
-    <div class="display-label">Name</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Name)
+<div id='publisher-profile'>
+    <div class='container-pic'>
+        <img alt='@Model.Name @Model.Lastname' class='photo-publisher' src='@Model.Image'>
     </div>
+    <h1 class='publisher-name'>@Model.Name @Model.Lastname</h1>
+    <p class='info-publisher'>
+        @Model.Bio
+    </p>
+</div>
 
-    <div class="display-label">Lastname</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Lastname)
+<div id='projects-container'>
+    
+    @foreach(project item in Model.projects){
+
+        <hr class='spacer-projects' />
+    <div class='cover-projects'>
+        <p class='info-project-track'>
+            <span class="number">@((DateTime.Now - item.DateEnd).Days)</span> 
+            days / <span class="number">&#128; @item.donations.Sum(x => x.Amount)</span> 
+            raised of <span class="number">&#128; @item.Target</span> 
+            pledged / <span class="number">@Model.donations.Select(x => x.UserID).Distinct().Count()</span> supporters
+        </p>
+        <div class='info-project'>
+            <h1 class='title'>
+                <a href='@Url.Action("Updates","Projects",new{id=item.ProjectID})'>
+                    @item.Title
+                </a>
+            </h1>
+            <div class='icon-where'></div>
+            <h2 class='subtitle'>
+                @item.Location
+            </h2>
+            <p class='intro'>
+                @item.Description
+            </p>
+        </div>
+        <div class='container-photo'>
+            <img alt='' class='photo-cover' src='@item.Image'>
+        </div>
     </div>
-
-    <div class="display-label">Bio</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Bio)
-    </div>
-
-    <div class="display-label">Email</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Email)
-    </div>
-
-    <div class="display-label">country</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.country.Name)
-    </div>
-
-
-    <div class="display-label">Image</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Image)
-    </div>
-
-
-    </div>
+    }
+</div>

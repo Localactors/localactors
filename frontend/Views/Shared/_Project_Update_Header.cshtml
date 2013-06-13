@@ -1,55 +1,49 @@
 ﻿@using System.Configuration
 @model update
-
-    <div class='single-update-header'>
-        <div class='date'>
-            <h3 class='day'>
-                @Model.Date.Day /
-            </h3>
-            <h3 class='month'>
-                @Model.Date.Month /
-            </h3>
-            <h3 class='year'>
-                @Model.Date.Year</h3>
-        </div>
-        <div class='comments-container'>
-            <div class='comments'>
-                <div class='arrow'>
-                </div>
-                <a href='#comments-@Model.ProjectID'>@Model.update_comment.Count Comments</a>
+<div class='single-update-header'>
+    <div class='date'>
+        <h3 class='day'>
+            @Model.Date.Day /
+        </h3>
+        <h3 class='month'>
+            @Model.Date.Month /
+        </h3>
+        <h3 class='year'>
+            @Model.Date.Year</h3>
+    </div>
+    <div class='comments-container'>
+        <div class='comments'>
+            <div class='arrow'>
             </div>
-            <div class='share'>
-                <div class='arrow'>
-                </div>
-                <a href='#'>Share</a>
-            </div>
+            <a href='#comments-@Model.ProjectID'>@Model.update_comment.Count Comments</a>
         </div>
-        
-        <div class='update-headline-container'>
-            <div class='main-container'>
-                <p class='info-project-track'>
-                    <span class="number">@((Model.Date - Model.project.DateEnd).Days)</span> days /
-                    <span class="number">&#128; @Model.project.donations.Where(x => x.Date <= Model.Date).Sum(x => x.Amount)</span>
-                    raised of <span class="number">&#128; @Model.project.Target</span> pledged / <span
-                                                                                                     class="number">@Model.project.donations.Where(x => x.Date <= Model.Date).Select(x => x.UserID).Distinct().Count()</span>
-                    supporters
-                </p>
-                <div class='clear'>
-                </div>
-                
-                <h1 class='title-update'>
-                    <a href="@Url.Action("Details","Projects",new{id=Model.ProjectID})">
-                        @Model.Title
-                    </a>
-                </h1>
-              
+        <div class='share'>
+            <div class='arrow'>
             </div>
-        </div>
-       
-        <div class='intro-update-container'>
-            <p class='intro'>
-                @Model.Intro
-            </p>
+            <a href='#'>Share</a>
         </div>
     </div>
-    
+    <div class='update-headline-container'>
+        <div class='main-container'>
+            <p class='info-project-track'>
+                <span class="number">@((Model.Date - Model.project.DateEnd).Days)</span> days /
+                <span class="number">&#128; @Model.project.donations.Where(x => x.Date <= Model.Date).Sum(x => x.Amount)</span>
+                raised of <span class="number">&#128; @Model.project.Target</span> pledged / <span
+                    class="number">@Model.project.donations.Where(x => x.Date <= Model.Date).Select(x => x.UserID).Distinct().Count()</span>
+                supporters
+            </p>
+            <div class='clear'>
+            </div>
+            <h1 class='title-update'>
+                <a href="@Url.Action("Details", "Projects", new { id = Model.ProjectID })">
+                    @Html.Raw(Model.Title)
+                </a>
+            </h1>
+        </div>
+    </div>
+    <div class='intro-update-container'>
+        <p class='intro'>
+            @Html.Raw(Model.Intro)
+        </p>
+    </div>
+</div>

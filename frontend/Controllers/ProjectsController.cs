@@ -47,7 +47,10 @@ namespace Localactors.webapp.Controllers
             return View(project);
         }
 
-        
+        public ViewResult ThankYou(int id) {
+            var model = db.projects.FirstOrDefault(x => x.ProjectID == id);
+            return View(model);
+        }
 
         [OutputCache(VaryByParam = "*",Duration = 60)]
         public ViewResult Updates(int id)
@@ -260,62 +263,62 @@ namespace Localactors.webapp.Controllers
             ModelState.SetModelValue("Date", new ValueProviderResult(DateTime.Now, DateTime.Now.ToString(), null));
 
 
-            //if (Request.Files != null && Request.Files.Count > 0)
-            //{
-            //    foreach (string keyname in Request.Files)
-            //    {
-            //        HttpPostedFileBase file = Request.Files[keyname];
-            //        if (file != null && file.ContentLength > 0 && !string.IsNullOrEmpty(file.FileName))
-            //        {
-            //            //file upload
-            //            string ext = Path.GetExtension(file.FileName).ToLower();
-            //            if (ext != ".png" && ext != ".jpg" && ext != ".jpeg" && ext != ".swf" && ext != ".fla")
-            //            {
-            //                ModelState.AddModelError(keyname, "Invalid file type");
-            //            }
-            //            else
-            //            {
+            if (Request.Files != null && Request.Files.Count > 0)
+            {
+                foreach (string keyname in Request.Files)
+                {
+                    HttpPostedFileBase file = Request.Files[keyname];
+                    if (file != null && file.ContentLength > 0 && !string.IsNullOrEmpty(file.FileName))
+                    {
+                        //file upload
+                        string ext = Path.GetExtension(file.FileName).ToLower();
+                        if (ext != ".png" && ext != ".jpg" && ext != ".jpeg" && ext != ".swf" && ext != ".fla")
+                        {
+                            ModelState.AddModelError(keyname, "Invalid file type");
+                        }
+                        else
+                        {
 
-            //                try
-            //                {
-            //                    using (Image tmp = Image.FromStream(file.InputStream))
-            //                    {
-            //                        //resize+crop
-            //                        int width = int.Parse(ConfigurationManager.AppSettings["Image_Guestbook_Width"]);
-            //                        int height = int.Parse(ConfigurationManager.AppSettings["Image_Guestbook_Height"]);
-            //                        string name = file.FileName + ".jpg";
-            //                        string filepath = string.Format("projects/{0}/guestbook/{1}", model.ProjectID, file.FileName);
-            //                        string address = ConfigurationManager.AppSettings["AWSS3BucketUrl"] + filepath;
+                            try
+                            {
+                                using (Image tmp = Image.FromStream(file.InputStream))
+                                {
+                                    //resize+crop
+                                    int width = int.Parse(ConfigurationManager.AppSettings["Image_Comment_Width"]);
+                                    int height = int.Parse(ConfigurationManager.AppSettings["Image_Comment_Height"]);
+                                    string name = file.FileName + ".jpg";
+                                    string filepath = string.Format("projects/{0}/update/{1}/comments/{2}", update.ProjectID, update.UpdateID, file.FileName);
+                                    string address = ConfigurationManager.AppSettings["AWSS3BucketUrl"] + filepath;
 
-            //                        //send
-            //                        using (Image resized = tmp.GetResizedImage(width, height, true))
-            //                        {
-            //                            var request = new PutObjectRequest().WithBucketName(ConfigurationManager.AppSettings["AWSS3Bucket"]).WithKey(filepath);
-            //                            using (MemoryStream buffer = new MemoryStream())
-            //                            {
-            //                                resized.Save(buffer, ImageHelper.GetJpgEncoder(), ImageHelper.GetJpgEncoderParameters(80));
-            //                                request.InputStream = buffer;
-            //                                AmazonS3Client s3Client = new AmazonS3Client();
-            //                                s3Client.PutObject(request);
-            //                            }
-            //                        }
+                                    //send
+                                    using (Image resized = tmp.GetResizedImage(width, height, true))
+                                    {
+                                        var request = new PutObjectRequest().WithBucketName(ConfigurationManager.AppSettings["AWSS3Bucket"]).WithKey(filepath);
+                                        using (MemoryStream buffer = new MemoryStream())
+                                        {
+                                            resized.Save(buffer, ImageHelper.GetJpgEncoder(), ImageHelper.GetJpgEncoderParameters(80));
+                                            request.InputStream = buffer;
+                                            AmazonS3Client s3Client = new AmazonS3Client();
+                                            s3Client.PutObject(request);
+                                        }
+                                    }
 
-            //                        ModelState.Remove(keyname);
-            //                        ModelState.Add(keyname, new ModelState());
-            //                        ModelState.SetModelValue(keyname, new ValueProviderResult(address, address, null));
-            //                        model.Picture = address;
-            //                    }
-            //                }
-            //                catch (Exception ex)
-            //                {
-            //                    ModelState.AddModelError(keyname, "Upload error: " + ex.Message);
+                                    ModelState.Remove(keyname);
+                                    ModelState.Add(keyname, new ModelState());
+                                    ModelState.SetModelValue(keyname, new ValueProviderResult(address, address, null));
+                                    model.Picture = address;
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                ModelState.AddModelError(keyname, "Upload error: " + ex.Message);
 
-            //                }
-            //            }
+                            }
+                        }
 
-            //        }
-            //    }
-            //}
+                    }
+                }
+            }
 
             if (ModelState.IsValid)
             {

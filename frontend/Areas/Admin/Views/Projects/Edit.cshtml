@@ -18,12 +18,12 @@
             $("#mainform").submit();
         });
 
-        $(".imagepreview").load(function () {
-            //console.log($(this));
-        });
-        $(".imagepreview").click(function () {
-            PreviewImage($(this).attr("src"));
-        });
+        //        $(".imagepreview").load(function () {
+        //            //console.log($(this));
+        //        });
+        //        $(".imagepreview").click(function () {
+        //            //PreviewImage($(this).attr("src"));
+        //        });
 
 
         $("input[type=file]").each(function () {
@@ -38,32 +38,8 @@
                 //console.log(input.attr("name"));
                 input.click();
             });
-
         });
-
     });
-
-
-    PreviewImage = function (uri) {
-
-        var imageDialog = $("#dialog");
-        var imageTag = $('#image', imageDialog);
-        var uriParts = uri.split("/");
-
-        imageTag.attr('src', uri);
-
-        imageTag.load(function () {
-
-            $('#dialog').dialog({
-                zIndex: 9999,
-                modal: true,
-                resizable: true,
-                draggable: true,
-                width: 'auto',
-                title: uriParts[uriParts.length - 1]
-            });
-        });
-    };
 </script>
 <ul class="breadcrumb">
     <li><a href='@Url.Action("Index", "Home")'>Home</a> <span class="divider">/</span></li>
@@ -73,531 +49,692 @@
 </ul>
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
-<div style="overflow: auto;">
-    @using (Html.BeginForm("Edit", "Projects", FormMethod.Post, new { enctype = "multipart/form-data", id = "mainform" }))
-    {
-        @Html.ValidationSummary(false)
-    
-        <fieldset>
-            @Html.HiddenFor(model => model.ProjectID)
-            <div class="editor-label">
-                @Html.LabelFor(model => model.UserID, "user")
-            </div>
-            <div class="editor-field">
-                @Html.DropDownList("UserID", String.Empty)
-                @Html.ValidationMessageFor(model => model.UserID)
-            </div>
-            <hr />
-            <div class="editor-label">
-                @Html.LabelFor(model => model.AgancyName)
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.AgancyName)
-                @Html.ValidationMessageFor(model => model.AgancyName)
-            </div>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.AgencyWebsite)
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.AgencyWebsite)
-                @Html.ValidationMessageFor(model => model.AgencyWebsite)
-            </div>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.AgencyLogo)
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.AgencyLogo)
-                <input type="file" id="AgencyLogo" name="AgencyLogo" class="imageupload" />
-                @Html.ValidationMessageFor(model => model.AgencyLogo)
-                <img src="@string.Format("{0}?v={1}", Model.AgencyLogo, DateTime.Now.Ticks)" class="imagepreview" alt=""  />
-            </div>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.AgencyObjective)
-            </div>
-            <div class="editor-field">
-                @Html.TextAreaFor(model => model.AgencyObjective)
-                @Html.ValidationMessageFor(model => model.AgencyObjective)
-            </div>
-            <hr />
-            <div class="editor-label">
-                @Html.LabelFor(model => model.Title)
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.Title)
-                @Html.ValidationMessageFor(model => model.Title)
-            </div>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.Description)
-            </div>
-            <div class="editor-field">
-                @Html.TextAreaFor(model => model.Description)
-                @Html.ValidationMessageFor(model => model.Description)
-            </div>
-             <div class="editor-label">
-            @Html.LabelFor(model => model.ProjectPlan)
-        </div>
-        <div class="editor-field">
-            @Html.TextAreaFor(model => model.ProjectPlan)
-            @Html.ValidationMessageFor(model => model.ProjectPlan)
-        </div>
-
-            <div class="editor-label">
-                @Html.LabelFor(model => model.Cover, "Cover Project")
-            </div>
-            <div class="editor-field">
-                @Html.CheckBoxFor(x => x.Cover)
-                @Html.ValidationMessageFor(model => model.Cover)
-            </div>
-            <div class="editor-label">
-                Image
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.Image)
-                <input type="file" id="Image" name="Image" class="imageupload" />
-                @Html.ValidationMessageFor(model => model.Image)
-                @Html.ValidationMessage("Image")
-                @if (!string.IsNullOrEmpty(Model.Image))
+<div class="tabbable">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#project" data-toggle="tab">Project</a></li>
+        <li><a href="#plan" data-toggle="tab">Plan</a></li>
+        <li><a href="#costs" data-toggle="tab">Costs</a></li>
+        <li><a href="#photos" data-toggle="tab">Photos</a></li>
+        <li><a href="#tags" data-toggle="tab">Tags</a></li>
+        <li><a href="#updates" data-toggle="tab">Updates</a></li>
+        <li><a href="#donations" data-toggle="tab">Donations</a></li>
+        <li><a href="#achievements" data-toggle="tab">Achievements</a></li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active" id="project">
+            <div style="overflow: auto;">
+                @using (Html.BeginForm("Edit", "Projects", FormMethod.Post, new { enctype = "multipart/form-data", id = "mainform" }))
                 {
-                    <img src="@string.Format("{0}?v={1}", Model.Image, DateTime.Now.Ticks)" class="imagepreview" alt=""  width="128px" />
+                    @Html.ValidationSummary(false)
+                    <fieldset>
+                        @Html.HiddenFor(model => model.ProjectID)
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.UserID, "user")
+                        </div>
+                        <div class="editor-field">
+                            @Html.DropDownList("UserID", String.Empty)
+                            @Html.ValidationMessageFor(model => model.UserID)
+                        </div>
+                        <hr />
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.AgancyName, "Agency Name")
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.AgancyName)
+                            @Html.ValidationMessageFor(model => model.AgancyName)
+                        </div>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.AgencyWebsite, "Agency Website")
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.AgencyWebsite)
+                            @Html.ValidationMessageFor(model => model.AgencyWebsite)
+                        </div>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.AgencyLogo, "Agency Logo")
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.AgencyLogo)
+                            <input type="file" id="AgencyLogo" name="AgencyLogo" class="imageupload" />
+                            @Html.ValidationMessageFor(model => model.AgencyLogo)
+                            <img src="@string.Format("{0}?v={1}", Model.AgencyLogo, DateTime.Now.Ticks)" class="imagepreview" alt=""  />
+                        </div>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.AgencyObjective, "Agency Objective")
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextAreaFor(model => model.AgencyObjective)
+                            @Html.ValidationMessageFor(model => model.AgencyObjective)
+                        </div>
+                        <hr />
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Title)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Title)
+                            @Html.ValidationMessageFor(model => model.Title)
+                        </div>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Description)
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextAreaFor(model => model.Description)
+                            @Html.ValidationMessageFor(model => model.Description)
+                        </div>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.ProjectPlan)
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextAreaFor(model => model.ProjectPlan)
+                            @Html.ValidationMessageFor(model => model.ProjectPlan)
+                        </div>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Cover, "Cover Project")
+                        </div>
+                        <div class="editor-field">
+                            @Html.CheckBoxFor(x => x.Cover)
+                            @Html.ValidationMessageFor(model => model.Cover)
+                        </div>
+                        <div class="editor-label">
+                            Image
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Image)
+                            <input type="file" id="Image" name="Image" class="imageupload" />
+                            @Html.ValidationMessageFor(model => model.Image)
+                            @Html.ValidationMessage("Image")
+                            @if (!string.IsNullOrEmpty(Model.Image))
+                            {
+                                <img src="@string.Format("{0}?v={1}", Model.Image, DateTime.Now.Ticks)" class="imagepreview" alt=""  width="128px" />
+                            }
+                        </div>
+                        <hr />
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Twitter)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Twitter)
+                            @Html.ValidationMessageFor(model => model.Twitter)
+                        </div>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Facebook)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Facebook)
+                            @Html.ValidationMessageFor(model => model.Facebook)
+                        </div>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Blog)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Blog)
+                            @Html.ValidationMessageFor(model => model.Blog)
+                        </div>
+                        <hr />
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Date)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Date)
+                            @Html.ValidationMessageFor(model => model.Date)
+                        </div>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.DateStart)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.DateStart)
+                            @Html.ValidationMessageFor(model => model.DateStart)
+                        </div>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.DateEnd)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.DateEnd)
+                            @Html.ValidationMessageFor(model => model.DateEnd)
+                        </div>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Target, "Economic Target")
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Target)
+                            @Html.ValidationMessageFor(model => model.Target)
+                        </div>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.CountryID, "country")
+                        </div>
+                        <div class="editor-field">
+                            @Html.DropDownList("CountryID", String.Empty)
+                            @Html.ValidationMessageFor(model => model.CountryID)
+                        </div>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Location)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Location)
+                            @Html.ValidationMessageFor(model => model.Location)
+                        </div>
+                        <p>
+                            <input type="submit" class="btn" value="Save" />
+                        </p>
+                    </fieldset>
                 }
             </div>
-            
-        <hr/>
-        
-          <div class="editor-label">
-            @Html.LabelFor(model => model.Twitter)
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Twitter)
-            @Html.ValidationMessageFor(model => model.Twitter)
+        <div class="tab-pane" id="plan">
+            <h3>
+                Project Plan</h3>
+            <div style="overflow: auto;">
+                <table class="table table-condensed table-striped table-bordered">
+                    <tr>
+                        <th>
+                            Title
+                        </th>
+                        <th>
+                            Date/Time/Point
+                        </th>
+                        <th>
+                        </th>
+                        <th>
+                        </th>
+                    </tr>
+                    @foreach (var item in Model.project_plan.OrderBy(x => x.Order))
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Title)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Time)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", "Costs", new { id = item.PlanID, projectid = Model.ProjectID }, new { })
+                                |
+                                @Html.ActionLink("Delete", "Delete", "Costs", new { id = item.PlanID, projectid = Model.ProjectID }, new { })
+                            </td>
+                            <td>@Html.ActionLink("UP", "PlanUp", "Projects", new { id = item.PlanID }, new { })
+                                |
+                                @Html.ActionLink("DOWN", "PlanDown", "Projects", new { id = item.PlanID }, new { })
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+            <a href="#modelplane" role="button" class="btn" data-toggle="modal">Add Project Plan
+                Step</a>
+            <div id="modelplane" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="Add Plan"
+                aria-hidden="true">
+                <form action="@Url.Action("Create", "Plans")" method="POST"  enctype="multipart/form-data">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        ×</button>
+                    <h3 id="">
+                        Update</h3>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="projectid" value="@Model.ProjectID"/>
+                    <input type="hidden" name="returntoproject" value="@Model.ProjectID"/>
+                    <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+                    <div class="editor-label">
+                        <label for="Title">
+                            Title</label>
+                    </div>
+                    <div class="editor-field">
+                        <input class="text-box single-line" id="Title" name="Title" type="text" value="" />
+                        <span class="field-validation-valid" data-valmsg-for="Title" data-valmsg-replace="true">
+                        </span>
+                    </div>
+                    <div class="editor-label">
+                        <label for="Goal">
+                            Cost/Amount</label>
+                    </div>
+                    <div class="editor-field">
+                        <input class="text-box single-line" id="" name="Goal" type="text" value="" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn" class="btn btn-primary" value="Create" />
+                </div>
+                </form>
+            </div>
         </div>
-          <div class="editor-label">
-            @Html.LabelFor(model => model.Facebook)
+        <div class="tab-pane " id="costs">
+            <h3>
+                Project Costs</h3>
+            <div style="overflow: auto;">
+                <table class="table table-condensed table-striped table-bordered">
+                    <tr>
+                        <th>
+                            Title
+                        </th>
+                        <th>
+                            Amount
+                        </th>
+                        <th>
+                        </th>
+                        <th>
+                        </th>
+                    </tr>
+                    @foreach (var item in Model.project_cost.OrderBy(x => x.Order))
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Title)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Goal)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", "Costs", new { id = item.CostID, projectid = Model.ProjectID }, new { })
+                                |
+                                @Html.ActionLink("Delete", "Delete", "Costs", new { id = item.CostID, projectid = Model.ProjectID }, new { })
+                            </td>
+                            <td>@Html.ActionLink("UP", "CostUp", "Projects", new { id = item.CostID }, new { })
+                                |
+                                @Html.ActionLink("DOWN", "CostDown", "Projects", new { id = item.CostID }, new { })
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+            <a href="#modalcost" role="button" class="btn" data-toggle="modal">Add Cost</a>
+            <div id="modalcost" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="Add Cost"
+                aria-hidden="true">
+                <form action="@Url.Action("Create", "Costs")" method="POST"  enctype="multipart/form-data">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        ×</button>
+                    <h3 id="">
+                        Update</h3>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="projectid" value="@Model.ProjectID"/>
+                    <input type="hidden" name="returntoproject" value="@Model.ProjectID"/>
+                    <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+                    <div class="editor-label">
+                        <label for="Title">
+                            Title</label>
+                    </div>
+                    <div class="editor-field">
+                        <input class="text-box single-line" id="Title" name="Title" type="text" value="" />
+                        <span class="field-validation-valid" data-valmsg-for="Title" data-valmsg-replace="true">
+                        </span>
+                    </div>
+                    <div class="editor-label">
+                        <label for="Goal">
+                            Cost/Amount</label>
+                    </div>
+                    <div class="editor-field">
+                        <input class="text-box single-line" id="" name="Goal" type="text" value="" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn" class="btn btn-primary" value="Create" />
+                </div>
+                </form>
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Facebook)
-            @Html.ValidationMessageFor(model => model.Facebook)
+        <div class="tab-pane " id="photos">
+            <h3>
+                Photos</h3>
+            <div style="overflow: auto;">
+                @foreach (var item in Model.project_photo)
+                {
+                    <span class="projectimage"><a href="@Url.Action("Edit", "ProjectPhotos", new { id = item.PhotoID, returntoproject = item.ProjectID })">
+                        <img src="@item.Url" alt="@item.Caption" width="128px" />
+                    </a></span>
+                }
+            </div>
+            <a href="#modalphoto" role="button" class="btn" data-toggle="modal">Add Photo</a>
+            <a href="@Url.Action("Index", "ProjectPhotos", new { projectid = Model.ProjectID })"  class="btn">
+                Project Photos</a>
+            <div id="modalphoto" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="Add Photo"
+                aria-hidden="true">
+                <form action="@Url.Action("Create", "ProjectPhotos")" method="POST"  enctype="multipart/form-data">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        ×</button>
+                    <h3 id="">
+                        Update</h3>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="projectid" value="@Model.ProjectID"/>
+                    <input type="hidden" name="returntoproject" value="@Model.ProjectID"/>
+                    <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+                    <div class="editor-label">
+                        <label for="Caption">
+                            Caption</label>
+                    </div>
+                    <div class="editor-field">
+                        <input class="text-box single-line" id="Caption" name="Caption" type="text" value="" />
+                        <span class="field-validation-valid" data-valmsg-for="Caption" data-valmsg-replace="true">
+                        </span>
+                    </div>
+                    <div class="editor-label">
+                        <label for="Url">
+                            Photo</label>
+                    </div>
+                    <div class="editor-field">
+                        <input class="text-box single-line" id="" name="Url" type="file" value="" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn" class="btn btn-primary" value="Create" />
+                </div>
+                </form>
+            </div>
         </div>
-          <div class="editor-label">
-            @Html.LabelFor(model => model.Blog)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Blog)
-            @Html.ValidationMessageFor(model => model.Blog)
-        </div>  
-       
-        <hr/>
-
+        <div class="tab-pane " id="tags">
+            <h3>
+                Tags</h3>
+            <div>
+                @foreach (var item in Model.tags)
+                {
+                    <span>@Html.ActionLink(item.Name + " (x)", "TagRemove", new { id = item.TagID, projectid = Model.ProjectID }, new { @class = "btn" })
+                    </span>
+                }
+            </div>
+            <br />
+            <form action="@Url.Action("TagAdd")" method="POST"  enctype="multipart/form-data">
+            <input type="hidden" name="projectid" value="@Model.ProjectID"/>
+            <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
             <div class="editor-label">
-                @Html.LabelFor(model => model.Date)
+                <label for="tagname">
+                    Add Tag</label>
             </div>
             <div class="editor-field">
-                @Html.EditorFor(model => model.Date)
-                @Html.ValidationMessageFor(model => model.Date)
+                <input id="tagname" name="tagname" type="text" value="" />
             </div>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.DateStart)
+            <input type="submit" class="btn" class="btn btn-primary" value="Add Tag" />
+            </form>
+            <div style="overflow: auto;">
+                @foreach (var item in ViewBag.Tags)
+                {
+                    <form action="@Url.Action("TagAdd")" method="POST"  enctype="multipart/form-data" class="compact">
+                    <input type="hidden" name="projectid" value="@Model.ProjectID"/>
+                    <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+                    <input type="submit" class="btn"  class="btn" id="tagname" name="tagname" value="@item.Name" />
+                    </form> 
+                }
             </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.DateStart)
-                @Html.ValidationMessageFor(model => model.DateStart)
+        </div>
+        <div class="tab-pane" id="updates">
+            <h3>
+                Updates</h3>
+            <table class="table table-condensed table-striped table-bordered">
+                <tr>
+                    <th>
+                        Title
+                    </th>
+                    <th>
+                        Date
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+                @foreach (var item in Model.updates.OrderByDescending(x => x.UpdateID))
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Date)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", "Update", new { id = item.UpdateID }, new { })
+                            |
+                            @Html.ActionLink("Delete", "Delete", "Update", new { id = item.UpdateID, projectid = Model.ProjectID }, new { })
+                        </td>
+                    </tr>
+                }
+            </table>
+            <a href="#modalupdate" role="button" class="btn" data-toggle="modal">Add Update</a>
+            <a href="@Url.Action("index", "Update", new { projectid = Model.ProjectID })" role="button" class="btn" data-toggle="">
+                Project Updates</a>
+            <div id="modalupdate" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="Add Update"
+                aria-hidden="true">
+                <form action="@Url.Action("Create", "Update")" method="POST"  enctype="multipart/form-data">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        ×</button>
+                    <h3 id="">
+                        Update</h3>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="projectid" value="@Model.ProjectID"/>
+                    <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+                    <div class="editor-label">
+                        <label for="Title">
+                            Title</label>
+                    </div>
+                    <div class="editor-field">
+                        <input class="text-box single-line" id="Title" name="Title" type="text" value="" />
+                        <span class="field-validation-valid" data-valmsg-for="Title" data-valmsg-replace="true">
+                        </span>
+                    </div>
+                    <div class="editor-label">
+                        <label for="Title">
+                            Intro</label>
+                    </div>
+                    <div class="editor-field">
+                        <textarea id="" name="Intro" class="wysiwyg" rows="5" style="width: 100%;"></textarea>
+                    </div>
+                    <div class="editor-label">
+                        <label for="Date">
+                            Date</label>
+                    </div>
+                    <div class="editor-field">
+                        <input class="datepicker" data-date-format="dd/mm/yyyy" data-val="true" data-val-required="Il campo Date &amp;#232; obbligatorio."
+                            id="Date" name="Date" type="text" value="22/05/2013" />
+                        <span class="field-validation-valid" data-valmsg-for="Date" data-valmsg-replace="true">
+                        </span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn" class="btn btn-primary" value="Create" />
+                </div>
+                </form>
             </div>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.DateEnd)
+        </div>
+        <div class="tab-pane" id="donations">
+            <h3>
+                Donations</h3>
+            <table class="table table-condensed table-striped table-bordered">
+                <tr>
+                    <th>
+                        user
+                    </th>
+                    <th>
+                        Date
+                    </th>
+                    <th>
+                        Amount
+                    </th>
+                    <th>
+                        Currency
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+                @foreach (var item in Model.donations.OrderByDescending(x => x.InvestmentID))
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.user.UserName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Amount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Currency)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", "Donations", new { id = item.InvestmentID }, new { })
+                            |
+                            @Html.ActionLink("Delete", "Delete", "Donations", new { id = item.InvestmentID, projectid = Model.ProjectID }, new { })
+                        </td>
+                    </tr>
+                }
+            </table>
+            <a href="#modaldonation" role="button" class="btn" data-toggle="modal">Add Donation</a>
+            <div id="modaldonation" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="Add Donation"
+                aria-hidden="true">
+                <form action="@Url.Action("Create", "Donations")" method="POST"  enctype="multipart/form-data">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        ×</button>
+                    <h3 id="">
+                        Donation</h3>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="projectid" value="@Model.ProjectID"/>
+                    <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+                    <div class="editor-label">
+                        <label for="UserID">
+                            user</label>
+                    </div>
+                    <div class="editor-field">
+                        @Html.DropDownList("UserID", ViewBag.Supporters as IEnumerable<SelectListItem>, string.Empty)
+                        <span class="field-validation-valid" data-valmsg-for="UserID" data-valmsg-replace="true">
+                        </span>
+                    </div>
+                    <div class="editor-label">
+                        <label for="Date">
+                            Date</label>
+                    </div>
+                    <div class="editor-field">
+                        <input class="datepicker" data-date-format="dd/mm/yyyy" data-val="true" data-val-required="Il campo Date &amp;#232; obbligatorio."
+                            id="Date" name="Date" type="text" value="" />
+                        <span class="field-validation-valid" data-valmsg-for="Date" data-valmsg-replace="true">
+                        </span>
+                    </div>
+                    <div class="editor-label">
+                        <label for="Amount">
+                            Amount</label>
+                    </div>
+                    <div class="editor-field">
+                        <input class="text-box single-line" data-val="true" data-val-number="Il campo Amount deve essere un numero."
+                            data-val-required="Il campo Amount &amp;#232; obbligatorio." id="Amount" name="Amount"
+                            type="text" value="" />
+                        <span class="field-validation-valid" data-valmsg-for="Amount" data-valmsg-replace="true">
+                        </span>
+                    </div>
+                    <div class="editor-label">
+                        <label for="Currency">
+                            Currency</label>
+                    </div>
+                    <div class="editor-field">
+                        <input class="text-box single-line" data-val="true" data-val-required="Il campo Currency &amp;#232; obbligatorio."
+                            id="Currency" name="Currency" type="text" value="EUR" />
+                        <span class="field-validation-valid" data-valmsg-for="Currency" data-valmsg-replace="true">
+                        </span>
+                    </div>
+                    <div class="editor-label">
+                        <label for="Description">
+                            Description</label>
+                    </div>
+                    <div class="editor-field">
+                        <textarea name="Description" class="text-box single-line" id="Description"></textarea>
+                        <span class="field-validation-valid" data-valmsg-for="Description" data-valmsg-replace="true">
+                        </span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn" class="btn btn-primary" value="Create" />
+                </div>
+                </form>
             </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.DateEnd)
-                @Html.ValidationMessageFor(model => model.DateEnd)
+        </div>
+        <div class="tab-pane" id="achievements">
+            <h3>
+                Achievements</h3>
+            <table class="table table-condensed table-striped table-bordered">
+                <tr>
+                    <th>
+                        Date
+                    </th>
+                    <th>
+                        Title
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+                @foreach (var item in Model.achievements.OrderByDescending(x => x.Date))
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", "Achievements", new { id = item.AchievementID }, new { })
+                            |
+                            @Html.ActionLink("Delete", "Delete", "Achievements", new { id = item.AchievementID, projectid = Model.ProjectID }, new { })
+                        </td>
+                    </tr>
+                }
+            </table>
+            <a href="#modalachievement" role="button" class="btn" data-toggle="modal">Add Achievement</a>
+            <div id="modalachievement" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="Add Achievement"
+                aria-hidden="true">
+                <form action="@Url.Action("Create", "Achievements")" method="POST"  enctype="multipart/form-data">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        ×</button>
+                    <h3 id="">
+                        Achievement</h3>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="projectid" value="@Model.ProjectID"/>
+                    <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+                    <div class="editor-label">
+                        <label for="Date">
+                            Date</label>
+                    </div>
+                    <div class="editor-field">
+                        <input class="datepicker" data-date-format="dd/mm/yyyy" data-val="true" data-val-required="Il campo Date &amp;#232; obbligatorio."
+                            id="Date" name="Date" type="text" value="" />
+                        <span class="field-validation-valid" data-valmsg-for="Date" data-valmsg-replace="true">
+                        </span>
+                    </div>
+                    <div class="editor-label">
+                        <label for="Title">
+                            Title</label>
+                    </div>
+                    <div class="editor-field">
+                        <input class="text-box single-line" id="Title" name="Title" type="text" value="" />
+                        <span class="field-validation-valid" data-valmsg-for="Title" data-valmsg-replace="true">
+                        </span>
+                    </div>
+                    <div class="editor-label">
+                        <label for="Motivation">
+                            Motivation</label>
+                    </div>
+                    <div class="editor-field">
+                        <textarea name="Motivation" class="text-box single-line" id="Motivation"></textarea>
+                        <span class="field-validation-valid" data-valmsg-for="Motivation" data-valmsg-replace="true">
+                        </span>
+                    </div>
+                    <div class="editor-label">
+                        <label for="Goal">
+                            Goal</label>
+                    </div>
+                    <div class="editor-field">
+                        <textarea name="Goal" class="text-box single-line" id="Goal"></textarea>
+                        <span class="field-validation-valid" data-valmsg-for="Goal" data-valmsg-replace="true">
+                        </span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn" class="btn btn-primary" value="Create" />
+                </div>
+                </form>
             </div>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.Target, "Economic Target")
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.Target)
-                @Html.ValidationMessageFor(model => model.Target)
-            </div>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.CountryID, "country")
-            </div>
-            <div class="editor-field">
-                @Html.DropDownList("CountryID", String.Empty)
-                @Html.ValidationMessageFor(model => model.CountryID)
-            </div>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.Location)
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.Location)
-                @Html.ValidationMessageFor(model => model.Location)
-            </div>
-            <p>
-                <input type="submit" class="btn" value="Save" />
-            </p>
-        </fieldset>
-    
-    }
-</div>
-<hr />
-<h3>
-    Photos</h3>
-<div style="overflow: auto;">
-    @foreach (var item in Model.project_photo)
-    {
-        <span class="projectimage"><a href="@Url.Action("Edit", "ProjectPhotos", new { id = item.PhotoID, returntoproject = item.ProjectID })">
-            <img src="@item.Url" alt="@item.Caption" width="128px" />
-        </a></span>
-    }
-</div>
-<br />
-<a href="#modalphoto" role="button" class="btn" data-toggle="modal">Add Photo</a>
-<a href="@Url.Action("Index", "ProjectPhotos", new { projectid = Model.ProjectID })"  class="btn">
-    Project Photos</a>
-<div id="modalphoto" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="Add Photo"
-    aria-hidden="true">
-    <form action="@Url.Action("Create", "ProjectPhotos")" method="POST"  enctype="multipart/form-data">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-            ×</button>
-        <h3 id="">
-            Update</h3>
-    </div>
-    <div class="modal-body">
-        <input type="hidden" name="projectid" value="@Model.ProjectID"/>
-        <input type="hidden" name="returntoproject" value="@Model.ProjectID"/>
-        <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
-        <div class="editor-label">
-            <label for="Caption">
-                Caption</label>
-        </div>
-        <div class="editor-field">
-            <input class="text-box single-line" id="Caption" name="Caption" type="text" value="" />
-            <span class="field-validation-valid" data-valmsg-for="Caption" data-valmsg-replace="true">
-            </span>
-        </div>
-        <div class="editor-label">
-            <label for="Url">
-                Photo</label>
-        </div>
-        <div class="editor-field">
-            <input class="text-box single-line" id="" name="Url" type="file" value="" />
         </div>
     </div>
-    <div class="modal-footer">
-        <input type="submit" class="btn" class="btn btn-primary" value="Create" />
-    </div>
-    </form>
-</div>
-<hr />
-<h3>
-    Tags</h3>
-<div>
-    @foreach (var item in Model.tags)
-    {
-        <span>@Html.ActionLink(item.Name + " (x)", "TagRemove", new { id = item.TagID, projectid = Model.ProjectID }, new { @class = "btn" })
-        </span>
-    }
-</div>
-<br />
-<form action="@Url.Action("TagAdd")" method="POST"  enctype="multipart/form-data">
-<input type="hidden" name="projectid" value="@Model.ProjectID"/>
-<input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
-<div class="editor-label">
-    <label for="tagname">
-        Add Tag</label>
-</div>
-<div class="editor-field">
-    <input id="tagname" name="tagname" type="text" value="" />
-</div>
-<input type="submit" class="btn" class="btn btn-primary" value="Add Tag" />
-</form>
-<div style="overflow: auto;">
-    @foreach (var item in ViewBag.Tags)
-    {
-        <form action="@Url.Action("TagAdd")" method="POST"  enctype="multipart/form-data" class="compact">
-        <input type="hidden" name="projectid" value="@Model.ProjectID"/>
-        <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
-        <input type="submit" class="btn"  class="btn" id="tagname" name="tagname" value="@item.Name" />
-        </form> 
-    }
-</div>
-<hr />
-<h3>
-    Updates</h3>
-<table class="table table-condensed table-striped table-bordered">
-    <tr>
-        <th>
-            Title
-        </th>
-        <th>
-            Date
-        </th>
-        <th>
-        </th>
-    </tr>
-    @foreach (var item in Model.updates.OrderByDescending(x => x.UpdateID))
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", "Update", new { id = item.UpdateID }, new { })
-                |
-                @Html.ActionLink("Delete", "Delete", "Update", new { id = item.UpdateID, projectid = Model.ProjectID }, new { })
-            </td>
-        </tr>
-    }
-</table>
-<hr />
-<a href="#modalupdate" role="button" class="btn" data-toggle="modal">Add Update</a>
-<a href="@Url.Action("index", "Update", new { projectid = Model.ProjectID })" role="button" class="btn" data-toggle="">
-    Project Updates</a>
-<div id="modalupdate" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="Add Update"
-    aria-hidden="true">
-    <form action="@Url.Action("Create", "Update")" method="POST"  enctype="multipart/form-data">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-            ×</button>
-        <h3 id="">
-            Update</h3>
-    </div>
-    <div class="modal-body">
-        <input type="hidden" name="projectid" value="@Model.ProjectID"/>
-        <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
-        <div class="editor-label">
-            <label for="Title">
-                Title</label>
-        </div>
-        <div class="editor-field">
-            <input class="text-box single-line" id="Title" name="Title" type="text" value="" />
-            <span class="field-validation-valid" data-valmsg-for="Title" data-valmsg-replace="true">
-            </span>
-        </div>
-        <div class="editor-label">
-            <label for="Title">
-                Intro</label>
-        </div>
-        <div class="editor-field">
-            <textarea id="" name="Intro" class="wysiwyg" rows="5" style="width: 100%;"></textarea>
-        </div>
-        <div class="editor-label">
-            <label for="Date">
-                Date</label>
-        </div>
-        <div class="editor-field">
-            <input class="datepicker" data-date-format="dd/mm/yyyy" data-val="true" data-val-required="Il campo Date &amp;#232; obbligatorio."
-                id="Date" name="Date" type="text" value="22/05/2013" />
-            <span class="field-validation-valid" data-valmsg-for="Date" data-valmsg-replace="true">
-            </span>
-        </div>
-    </div>
-    <div class="modal-footer">
-        <input type="submit" class="btn" class="btn btn-primary" value="Create" />
-    </div>
-    </form>
-</div>
-<hr />
-<h3>
-    Donations</h3>
-<table class="table table-condensed table-striped table-bordered">
-    <tr>
-        <th>
-            user
-        </th>
-        <th>
-            Date
-        </th>
-        <th>
-            Amount
-        </th>
-        <th>
-            Currency
-        </th>
-        <th>
-        </th>
-    </tr>
-    @foreach (var item in Model.donations.OrderByDescending(x => x.InvestmentID))
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.user.UserName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Amount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Currency)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", "Donations", new { id = item.InvestmentID }, new { })
-                |
-                @Html.ActionLink("Delete", "Delete", "Donations", new { id = item.InvestmentID, projectid = Model.ProjectID }, new { })
-            </td>
-        </tr>
-    }
-</table>
-<a href="#modaldonation" role="button" class="btn" data-toggle="modal">Add Donation</a>
-<div id="modaldonation" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="Add Donation"
-    aria-hidden="true">
-    <form action="@Url.Action("Create", "Donations")" method="POST"  enctype="multipart/form-data">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-            ×</button>
-        <h3 id="">
-            Donation</h3>
-    </div>
-    <div class="modal-body">
-        <input type="hidden" name="projectid" value="@Model.ProjectID"/>
-        <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
-        <div class="editor-label">
-            <label for="UserID">
-                user</label>
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("UserID", ViewBag.Supporters as IEnumerable<SelectListItem>, string.Empty)
-            <span class="field-validation-valid" data-valmsg-for="UserID" data-valmsg-replace="true">
-            </span>
-        </div>
-        <div class="editor-label">
-            <label for="Date">
-                Date</label>
-        </div>
-        <div class="editor-field">
-            <input class="datepicker" data-date-format="dd/mm/yyyy" data-val="true" data-val-required="Il campo Date &amp;#232; obbligatorio."
-                id="Date" name="Date" type="text" value="" />
-            <span class="field-validation-valid" data-valmsg-for="Date" data-valmsg-replace="true">
-            </span>
-        </div>
-        <div class="editor-label">
-            <label for="Amount">
-                Amount</label>
-        </div>
-        <div class="editor-field">
-            <input class="text-box single-line" data-val="true" data-val-number="Il campo Amount deve essere un numero."
-                data-val-required="Il campo Amount &amp;#232; obbligatorio." id="Amount" name="Amount"
-                type="text" value="" />
-            <span class="field-validation-valid" data-valmsg-for="Amount" data-valmsg-replace="true">
-            </span>
-        </div>
-        <div class="editor-label">
-            <label for="Currency">
-                Currency</label>
-        </div>
-        <div class="editor-field">
-            <input class="text-box single-line" data-val="true" data-val-required="Il campo Currency &amp;#232; obbligatorio."
-                id="Currency" name="Currency" type="text" value="EUR" />
-            <span class="field-validation-valid" data-valmsg-for="Currency" data-valmsg-replace="true">
-            </span>
-        </div>
-        <div class="editor-label">
-            <label for="Description">
-                Description</label>
-        </div>
-        <div class="editor-field">
-            <textarea name="Description" class="text-box single-line" id="Description"></textarea>
-            <span class="field-validation-valid" data-valmsg-for="Description" data-valmsg-replace="true">
-            </span>
-        </div>
-    </div>
-    <div class="modal-footer">
-        <input type="submit" class="btn" class="btn btn-primary" value="Create" />
-    </div>
-    </form>
-</div>
-<hr />
-<h3>
-    Achievements</h3>
-<table class="table table-condensed table-striped table-bordered">
-    <tr>
-        <th>
-            Date
-        </th>
-        <th>
-            Title
-        </th>
-        <th>
-        </th>
-    </tr>
-    @foreach (var item in Model.achievements.OrderByDescending(x => x.Date))
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", "Achievements", new { id = item.AchievementID }, new { })
-                |
-                @Html.ActionLink("Delete", "Delete", "Achievements", new { id = item.AchievementID, projectid = Model.ProjectID }, new { })
-            </td>
-        </tr>
-    }
-</table>
-<a href="#modalachievement" role="button" class="btn" data-toggle="modal">Add Achievement</a>
-<div id="modalachievement" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="Add Achievement"
-    aria-hidden="true">
-    <form action="@Url.Action("Create", "Achievements")" method="POST"  enctype="multipart/form-data">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-            ×</button>
-        <h3 id="">
-            Achievement</h3>
-    </div>
-    <div class="modal-body">
-        <input type="hidden" name="projectid" value="@Model.ProjectID"/>
-        <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
-        <div class="editor-label">
-            <label for="Date">
-                Date</label>
-        </div>
-        <div class="editor-field">
-            <input class="datepicker" data-date-format="dd/mm/yyyy" data-val="true" data-val-required="Il campo Date &amp;#232; obbligatorio."
-                id="Date" name="Date" type="text" value="" />
-            <span class="field-validation-valid" data-valmsg-for="Date" data-valmsg-replace="true">
-            </span>
-        </div>
-        <div class="editor-label">
-            <label for="Title">
-                Title</label>
-        </div>
-        <div class="editor-field">
-            <input class="text-box single-line" id="Title" name="Title" type="text" value="" />
-            <span class="field-validation-valid" data-valmsg-for="Title" data-valmsg-replace="true">
-            </span>
-        </div>
-        <div class="editor-label">
-            <label for="Motivation">
-                Motivation</label>
-        </div>
-        <div class="editor-field">
-            <textarea name="Motivation" class="text-box single-line" id="Motivation"></textarea>
-            <span class="field-validation-valid" data-valmsg-for="Motivation" data-valmsg-replace="true">
-            </span>
-        </div>
-        <div class="editor-label">
-            <label for="Goal">
-                Goal</label>
-        </div>
-        <div class="editor-field">
-            <textarea name="Goal" class="text-box single-line" id="Goal"></textarea>
-            <span class="field-validation-valid" data-valmsg-for="Goal" data-valmsg-replace="true">
-            </span>
-        </div>
-    </div>
-    <div class="modal-footer">
-        <input type="submit" class="btn" class="btn btn-primary" value="Create" />
-    </div>
-    </form>
-</div>
-<hr />
-<div>
-    @Html.ActionLink("Back to Projects", "Index", new { }, new { @class = "btn" })
 </div>

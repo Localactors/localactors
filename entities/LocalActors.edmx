@@ -11,8 +11,10 @@
           <EntitySet Name="donation" EntityType="localactorsModel.Store.donation" store:Type="Tables" Schema="localactors" />
           <EntitySet Name="mailinglist" EntityType="localactorsModel.Store.mailinglist" store:Type="Tables" Schema="localactors" />
           <EntitySet Name="project" EntityType="localactorsModel.Store.project" store:Type="Tables" Schema="localactors" />
+          <EntitySet Name="project_cost" EntityType="localactorsModel.Store.project_cost" store:Type="Tables" Schema="localactors" />
           <EntitySet Name="project_guestbook" EntityType="localactorsModel.Store.project_guestbook" store:Type="Tables" Schema="localactors" />
           <EntitySet Name="project_photo" EntityType="localactorsModel.Store.project_photo" store:Type="Tables" Schema="localactors" />
+          <EntitySet Name="project_plan" EntityType="localactorsModel.Store.project_plan" store:Type="Tables" Schema="localactors" />
           <EntitySet Name="project_tag" EntityType="localactorsModel.Store.project_tag" store:Type="Tables" Schema="localactors" />
           <EntitySet Name="tag" EntityType="localactorsModel.Store.tag" store:Type="Tables" Schema="localactors" />
           <EntitySet Name="transaction" EntityType="localactorsModel.Store.transaction" store:Type="Tables" Schema="localactors" />
@@ -36,6 +38,10 @@
             <End Role="project" EntitySet="project" />
             <End Role="achievement" EntitySet="achievement" />
           </AssociationSet>
+          <AssociationSet Name="FK_cost_project" Association="localactorsModel.Store.FK_cost_project">
+            <End Role="project" EntitySet="project" />
+            <End Role="project_cost" EntitySet="project_cost" />
+          </AssociationSet>
           <AssociationSet Name="FK_donation_project" Association="localactorsModel.Store.FK_donation_project">
             <End Role="project" EntitySet="project" />
             <End Role="donation" EntitySet="donation" />
@@ -43,6 +49,10 @@
           <AssociationSet Name="FK_donation_user" Association="localactorsModel.Store.FK_donation_user">
             <End Role="user" EntitySet="user" />
             <End Role="donation" EntitySet="donation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_plan_project" Association="localactorsModel.Store.FK_plan_project">
+            <End Role="project" EntitySet="project" />
+            <End Role="project_plan" EntitySet="project_plan" />
           </AssociationSet>
           <AssociationSet Name="FK_project_country" Association="localactorsModel.Store.FK_project_country">
             <End Role="country" EntitySet="country" />
@@ -185,6 +195,17 @@
           <Property Name="Facebook" Type="varchar" MaxLength="255" />
           <Property Name="Blog" Type="varchar" MaxLength="255" />
         </EntityType>
+        <EntityType Name="project_cost">
+          <Key>
+            <PropertyRef Name="CostID" />
+          </Key>
+          <Property Name="CostID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectID" Type="int" Nullable="false" />
+          <Property Name="Order" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="Title" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="Goal" Type="varchar" Nullable="false" MaxLength="20" />
+        </EntityType>
         <EntityType Name="project_guestbook">
           <Key>
             <PropertyRef Name="GuestpostID" />
@@ -204,6 +225,16 @@
           <Property Name="ProjectID" Type="int" Nullable="false" />
           <Property Name="Url" Type="varchar" Nullable="false" MaxLength="255" />
           <Property Name="Caption" Type="varchar" Nullable="false" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="project_plan">
+          <Key>
+            <PropertyRef Name="PlanID" />
+          </Key>
+          <Property Name="PlanID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectID" Type="int" Nullable="false" />
+          <Property Name="Order" Type="int" Nullable="false" />
+          <Property Name="Time" Type="varchar" MaxLength="255" />
+          <Property Name="Title" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="project_tag">
           <Key>
@@ -368,6 +399,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_cost_project">
+          <End Role="project" Type="localactorsModel.Store.project" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="project_cost" Type="localactorsModel.Store.project_cost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="project">
+              <PropertyRef Name="ProjectID" />
+            </Principal>
+            <Dependent Role="project_cost">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_donation_project">
           <End Role="project" Type="localactorsModel.Store.project" Multiplicity="0..1" />
           <End Role="donation" Type="localactorsModel.Store.donation" Multiplicity="*" />
@@ -389,6 +434,20 @@
             </Principal>
             <Dependent Role="donation">
               <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_plan_project">
+          <End Role="project" Type="localactorsModel.Store.project" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="project_plan" Type="localactorsModel.Store.project_plan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="project">
+              <PropertyRef Name="ProjectID" />
+            </Principal>
+            <Dependent Role="project_plan">
+              <PropertyRef Name="ProjectID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -707,6 +766,16 @@
           <AssociationSet Name="FK_update_comment_user" Association="localactorsModel.FK_update_comment_user">
             <End Role="user" EntitySet="users" />
             <End Role="update_comment" EntitySet="update_comment" />
+          </AssociationSet>
+          <EntitySet Name="project_plan" EntityType="localactorsModel.project_plan" />
+          <AssociationSet Name="FK_plan_project" Association="localactorsModel.FK_plan_project">
+            <End Role="project" EntitySet="projects" />
+            <End Role="project_plan" EntitySet="project_plan" />
+          </AssociationSet>
+          <EntitySet Name="project_cost" EntityType="localactorsModel.project_cost" />
+          <AssociationSet Name="FK_cost_project" Association="localactorsModel.FK_cost_project">
+            <End Role="project" EntitySet="projects" />
+            <End Role="project_cost" EntitySet="project_cost" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="achievement">
@@ -1031,6 +1100,8 @@
           <Property Type="String" Name="Twitter" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="Facebook" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="Blog" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="project_plan" Relationship="localactorsModel.FK_plan_project" FromRole="project" ToRole="project_plan" />
+          <NavigationProperty Name="project_cost" Relationship="localactorsModel.FK_cost_project" FromRole="project" ToRole="project_cost" />
         </EntityType>
         <Association Name="FK_achievement_project">
           <End Type="localactorsModel.project" Role="project" Multiplicity="1" />
@@ -1168,6 +1239,53 @@
             </Principal>
             <Dependent Role="update_comment">
               <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="project_plan">
+          <Key>
+            <PropertyRef Name="PlanID" />
+          </Key>
+          <Property Type="Int32" Name="PlanID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ProjectID" Nullable="false" />
+          <Property Type="Int32" Name="Order" Nullable="false" />
+          <Property Type="String" Name="Time" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Title" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="project" Relationship="localactorsModel.FK_plan_project" FromRole="project_plan" ToRole="project" />
+        </EntityType>
+        <Association Name="FK_plan_project">
+          <End Type="localactorsModel.project" Role="project" Multiplicity="1" />
+          <End Type="localactorsModel.project_plan" Role="project_plan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="project">
+              <PropertyRef Name="ProjectID" />
+            </Principal>
+            <Dependent Role="project_plan">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="project_cost">
+          <Key>
+            <PropertyRef Name="CostID" />
+          </Key>
+          <Property Type="Int32" Name="CostID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ProjectID" Nullable="false" />
+          <Property Type="Int32" Name="Order" Nullable="false" />
+          <Property Type="DateTime" Name="Date" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Goal" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="project" Relationship="localactorsModel.FK_cost_project" FromRole="project_cost" ToRole="project" />
+        </EntityType>
+        <Association Name="FK_cost_project">
+          <End Type="localactorsModel.project" Role="project" Multiplicity="1" />
+          <End Type="localactorsModel.project_cost" Role="project_cost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="project">
+              <PropertyRef Name="ProjectID" />
+            </Principal>
+            <Dependent Role="project_cost">
+              <PropertyRef Name="ProjectID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1420,6 +1538,29 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="project_plan">
+            <EntityTypeMapping TypeName="localactorsModel.project_plan">
+              <MappingFragment StoreEntitySet="project_plan">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+                <ScalarProperty Name="PlanID" ColumnName="PlanID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="project_cost">
+            <EntityTypeMapping TypeName="localactorsModel.project_cost">
+              <MappingFragment StoreEntitySet="project_cost">
+                <ScalarProperty Name="Goal" ColumnName="Goal" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+                <ScalarProperty Name="CostID" ColumnName="CostID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1441,120 +1582,184 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="LocalActors" ShowGrid="true">
-        <EntityTypeShape EntityType="localactorsModel.achievement" Width="1.5" PointX="7.5" PointY="1.375" Height="2.3648893229166674" />
-        <EntityTypeShape EntityType="localactorsModel.country" Width="1.5" PointX="0.75" PointY="13.25" Height="2.1725878906249996" />
-        <EntityTypeShape EntityType="localactorsModel.project_guestbook" Width="1.5" PointX="8.25" PointY="13" Height="2.5571907552083353" />
-        <EntityTypeShape EntityType="localactorsModel.tag" Width="1.5" PointX="7.5" PointY="16.375" Height="1.5956835937500031" />
-        <EntityTypeShape EntityType="localactorsModel.update" Width="1.5" PointX="5.25" PointY="12.75" Height="3.1340950520833317" />
-        <EntityTypeShape EntityType="localactorsModel.update_content" Width="1.5" PointX="10.5" PointY="14.125" Height="4.2879036458333388" />
-        <EntityTypeShape EntityType="localactorsModel.update_content_type" Width="1.5" PointX="8.25" PointY="22.375" Height="1.7879850260416674" />
-        <EntityTypeShape EntityType="localactorsModel.user" Width="1.5" PointX="3" PointY="10.375" Height="7.9416308593750014" />
+        <EntityTypeShape EntityType="localactorsModel.achievement" Width="1.5" PointX="7.5" PointY="10.875" Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="localactorsModel.country" Width="1.5" PointX="0.75" PointY="16.375" Height="2.1725878906250031" />
+        <EntityTypeShape EntityType="localactorsModel.project_guestbook" Width="1.5" PointX="10.5" PointY="16.25" Height="2.5571907552083317" />
+        <EntityTypeShape EntityType="localactorsModel.tag" Width="1.5" PointX="7.5" PointY="20.75" Height="1.5956835937500031" />
+        <EntityTypeShape EntityType="localactorsModel.update" Width="1.5" PointX="10.5" PointY="12" Height="3.1340950520833317" />
+        <EntityTypeShape EntityType="localactorsModel.update_content" Width="1.5" PointX="12.75" PointY="14.625" Height="4.2879036458333388" />
+        <EntityTypeShape EntityType="localactorsModel.update_content_type" Width="1.5" PointX="10.5" PointY="8.875" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="localactorsModel.user" Width="1.5" PointX="3" PointY="13.5" Height="7.9416308593750031" />
         <AssociationConnector Association="localactorsModel.FK_user_country" >
-          <ConnectorPoint PointX="2.25" PointY="14.3362939453125" />
-          <ConnectorPoint PointX="3" PointY="14.3362939453125" />
+          <ConnectorPoint PointX="2.25" PointY="17.4612939453125" />
+          <ConnectorPoint PointX="3" PointY="17.4612939453125" />
         </AssociationConnector>
         <AssociationConnector Association="localactorsModel.FK_project_guestbook_user" >
-          <ConnectorPoint PointX="4.5" PointY="16.129547526041666" />
-          <ConnectorPoint PointX="5.916666666666667" PointY="16.129547526041666" />
-          <ConnectorPoint PointX="6.083333333333333" PointY="16.129547526041666" />
-          <ConnectorPoint PointX="7.041666666666667" PointY="16.129547526041666" />
-          <ConnectorPoint PointX="7.208333333333333" PointY="16.129547526041666" />
-          <ConnectorPoint PointX="9.40625" PointY="16.129547526041666" />
-          <ConnectorPoint PointX="9.40625" PointY="15.557190755208335" />
+          <ConnectorPoint PointX="3.75" PointY="13.5" />
+          <ConnectorPoint PointX="3.75" PointY="13.25" />
+          <ConnectorPoint PointX="5.4674458541666668" PointY="13.25" />
+          <ConnectorPoint PointX="5.6341125208333329" PointY="13.25" />
+          <ConnectorPoint PointX="5.8307300416666665" PointY="13.25" />
+          <ConnectorPoint PointX="5.9973967083333326" PointY="13.25" />
+          <ConnectorPoint PointX="6.2799508541666667" PointY="13.25" />
+          <ConnectorPoint PointX="6.4466175208333327" PointY="13.25" />
+          <ConnectorPoint PointX="7.25" PointY="13.25" />
+          <ConnectorPoint PointX="7.25" PointY="15.375" />
+          <ConnectorPoint PointX="8.1666666666666661" PointY="15.375" />
+          <ConnectorPoint PointX="8.3333333333333339" PointY="15.375" />
+          <ConnectorPoint PointX="10.125" PointY="15.375" />
+          <ConnectorPoint PointX="10.125" PointY="17.528595377604166" />
+          <ConnectorPoint PointX="10.5" PointY="17.528595377604166" />
         </AssociationConnector>
         <AssociationConnector Association="localactorsModel.FK_update_content_update" >
-          <ConnectorPoint PointX="6.75" PointY="15.751892903645834" />
-          <ConnectorPoint PointX="7.041666666666667" PointY="15.751892903645834" />
-          <ConnectorPoint PointX="7.208333333333333" PointY="15.751892903645834" />
-          <ConnectorPoint PointX="9.3229166666666661" PointY="15.751892903645834" />
-          <ConnectorPoint PointX="9.4895833333333339" PointY="15.751892903645834" />
-          <ConnectorPoint PointX="10.5" PointY="15.751892903645834" />
+          <ConnectorPoint PointX="12" PointY="14.879547526041666" />
+          <ConnectorPoint PointX="12.75" PointY="14.879547526041666" />
         </AssociationConnector>
         <AssociationConnector Association="localactorsModel.FK_update_content_update_content_type" >
-          <ConnectorPoint PointX="9.75" PointY="23.268992513020834" />
-          <ConnectorPoint PointX="11.25" PointY="23.268992513020834" />
-          <ConnectorPoint PointX="11.25" PointY="18.412903645833339" />
+          <ConnectorPoint PointX="12" PointY="9.7689925130208337" />
+          <ConnectorPoint PointX="13.5" PointY="9.7689925130208337" />
+          <ConnectorPoint PointX="13.5" PointY="14.625" />
         </AssociationConnector>
         <AssociationConnector Association="localactorsModel.FK_update_user" >
-          <ConnectorPoint PointX="4.5" PointY="14.317047526041666" />
-          <ConnectorPoint PointX="5.25" PointY="14.317047526041666" />
+          <ConnectorPoint PointX="4.5" PointY="13.71875" />
+          <ConnectorPoint PointX="5.4674458541666668" PointY="13.71875" />
+          <ConnectorPoint PointX="5.6341125208333329" PointY="13.71875" />
+          <ConnectorPoint PointX="5.8307300416666665" PointY="13.71875" />
+          <ConnectorPoint PointX="5.9973967083333326" PointY="13.71875" />
+          <ConnectorPoint PointX="6.2799508541666667" PointY="13.71875" />
+          <ConnectorPoint PointX="6.4466175208333327" PointY="13.71875" />
+          <ConnectorPoint PointX="7.166666666666667" PointY="13.718749999999998" />
+          <ConnectorPoint PointX="7.458333333333333" PointY="13.71875" />
+          <ConnectorPoint PointX="10.5" PointY="13.71875" />
         </AssociationConnector>
         <AssociationConnector Association="localactorsModel.FK_update_content_user" >
-          <ConnectorPoint PointX="4.5" PointY="18.174907226562503" />
-          <ConnectorPoint PointX="5.916666666666667" PointY="18.174907226562503" />
-          <ConnectorPoint PointX="6.083333333333333" PointY="18.174907226562503" />
-          <ConnectorPoint PointX="10.5" PointY="18.174907226562503" />
+          <ConnectorPoint PointX="4.156252" PointY="13.5" />
+          <ConnectorPoint PointX="4.156252" PointY="13.234375" />
+          <ConnectorPoint PointX="5.4674458541666668" PointY="13.234375" />
+          <ConnectorPoint PointX="5.6341125208333329" PointY="13.234375" />
+          <ConnectorPoint PointX="5.8307300416666665" PointY="13.234375" />
+          <ConnectorPoint PointX="5.9973967083333326" PointY="13.234375" />
+          <ConnectorPoint PointX="6.2799508541666667" PointY="13.234375" />
+          <ConnectorPoint PointX="6.4466175208333327" PointY="13.234375" />
+          <ConnectorPoint PointX="7.375" PointY="13.234375" />
+          <ConnectorPoint PointX="7.375" PointY="15.359375" />
+          <ConnectorPoint PointX="8.1666666666666661" PointY="15.359375" />
+          <ConnectorPoint PointX="8.3333333333333339" PointY="15.359375" />
+          <ConnectorPoint PointX="12.375" PointY="15.359375" />
+          <ConnectorPoint PointX="12.375" PointY="16.768951822916669" />
+          <ConnectorPoint PointX="12.75" PointY="16.768951822916669" />
         </AssociationConnector>
         <EntityTypeShape EntityType="localactorsModel.user_roles" Width="1.5" PointX="0.75" PointY="0.75" Height="1.4033821614583388" />
         <EntityTypeShape EntityType="localactorsModel.mailinglist" Width="1.5" PointX="2.75" PointY="0.75" Height="1.9802864583333388" />
-        <EntityTypeShape EntityType="localactorsModel.transaction" Width="1.5" PointX="10.5" PointY="8" Height="4.6725065104166674" />
-        <EntityTypeShape EntityType="localactorsModel.donation" Width="1.5" PointX="8.25" PointY="8.375" Height="3.9033007812499996" />
+        <EntityTypeShape EntityType="localactorsModel.transaction" Width="1.5" PointX="9.75" PointY="20.125" Height="4.6725065104166674" />
+        <EntityTypeShape EntityType="localactorsModel.donation" Width="1.5" PointX="7.5" PointY="15.625" Height="3.9033007812500014" />
         <AssociationConnector Association="localactorsModel.FK_donation_user" >
-          <ConnectorPoint PointX="4.5" PointY="11.968160807291667" />
-          <ConnectorPoint PointX="5.916666666666667" PointY="11.968160807291667" />
-          <ConnectorPoint PointX="6.083333333333333" PointY="11.968160807291667" />
-          <ConnectorPoint PointX="8.25" PointY="11.968160807291667" />
+          <ConnectorPoint PointX="4.5" PointY="13.859377499999994" />
+          <ConnectorPoint PointX="5.4674458541666668" PointY="13.859377499999994" />
+          <ConnectorPoint PointX="5.6341125208333329" PointY="13.859377499999994" />
+          <ConnectorPoint PointX="5.8307300416666665" PointY="13.859377499999994" />
+          <ConnectorPoint PointX="5.9973967083333326" PointY="13.859377499999994" />
+          <ConnectorPoint PointX="6.2799508541666667" PointY="13.859377499999994" />
+          <ConnectorPoint PointX="6.4466175208333327" PointY="13.859377499999994" />
+          <ConnectorPoint PointX="7.166666666666667" PointY="13.859377499999992" />
+          <ConnectorPoint PointX="7.458333333333333" PointY="13.859377499999994" />
+          <ConnectorPoint PointX="8.25" PointY="13.859377499999994" />
+          <ConnectorPoint PointX="8.25" PointY="15.625" />
         </AssociationConnector>
         <AssociationConnector Association="localactorsModel.FK_transaction_donation" >
-          <ConnectorPoint PointX="9.75" PointY="10.326650390625" />
-          <ConnectorPoint PointX="10.5" PointY="10.326650390625" />
+          <ConnectorPoint PointX="9" PointY="19.198995768229167" />
+          <ConnectorPoint PointX="9.9375" PointY="19.198995768229167" />
+          <ConnectorPoint PointX="9.9375" PointY="20.125" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="localactorsModel.project" Width="1.5" PointX="5.25" PointY="5" Height="6.5955208333333353" />
+        <EntityTypeShape EntityType="localactorsModel.project" Width="1.5" PointX="5.25" PointY="14" Height="6.9801236979166621" />
         <AssociationConnector Association="localactorsModel.FK_achievement_project" >
-          <ConnectorPoint PointX="6" PointY="5" />
-          <ConnectorPoint PointX="6" PointY="2.5574446614583337" />
-          <ConnectorPoint PointX="7.5" PointY="2.5574446614583337" />
+          <ConnectorPoint PointX="5.914063375" PointY="14" />
+          <ConnectorPoint PointX="5.914063375" PointY="12.046875" />
+          <ConnectorPoint PointX="6.2799508541666667" PointY="12.046875" />
+          <ConnectorPoint PointX="6.4466175208333327" PointY="12.046875" />
+          <ConnectorPoint PointX="7.5" PointY="12.046875" />
         </AssociationConnector>
         <AssociationConnector Association="localactorsModel.FK_project_country" >
-          <ConnectorPoint PointX="1.5" PointY="13.25" />
-          <ConnectorPoint PointX="1.5" PointY="7.65625" />
-          <ConnectorPoint PointX="5.25" PointY="7.65625" />
+          <ConnectorPoint PointX="2.25" PointY="17.4612939453125" />
+          <ConnectorPoint PointX="2.75" PointY="17.4612939453125" />
+          <ConnectorPoint PointX="2.75" PointY="21.691630859375003" />
+          <ConnectorPoint PointX="5.5742189374999995" PointY="21.691630859375003" />
+          <ConnectorPoint PointX="5.5742189374999995" PointY="20.980123697916667" />
         </AssociationConnector>
         <AssociationConnector Association="localactorsModel.FK_donation_project" >
-          <ConnectorPoint PointX="6.75" PointY="9.9852604166666676" />
-          <ConnectorPoint PointX="8.25" PointY="9.9852604166666676" />
+          <ConnectorPoint PointX="6.75" PointY="17.576650390625" />
+          <ConnectorPoint PointX="7.5" PointY="17.576650390625" />
         </AssociationConnector>
         <AssociationConnector Association="localactorsModel.FK__project" >
-          <ConnectorPoint PointX="6" PointY="11.595520833333335" />
-          <ConnectorPoint PointX="6" PointY="12.75" />
+          <ConnectorPoint PointX="6.75" PointY="14.567047526041666" />
+          <ConnectorPoint PointX="7.166666666666667" PointY="14.567047526041664" />
+          <ConnectorPoint PointX="7.458333333333333" PointY="14.567047526041666" />
+          <ConnectorPoint PointX="8.1666666666666661" PointY="14.567047526041666" />
+          <ConnectorPoint PointX="8.3333333333333339" PointY="14.567047526041666" />
+          <ConnectorPoint PointX="10.5" PointY="14.567047526041666" />
         </AssociationConnector>
         <AssociationConnector Association="localactorsModel.FK_project_guestbook_project" >
-          <ConnectorPoint PointX="6.75" PointY="11.538981371794874" />
-          <ConnectorPoint PointX="7.21875" PointY="12.007731371794874" />
-          <ConnectorPoint PointX="7.21875" PointY="14.278595377604168" />
-          <ConnectorPoint PointX="8.25" PointY="14.278595377604168" />
+          <ConnectorPoint PointX="6.75" PointY="19.857900390625" />
+          <ConnectorPoint PointX="7.166666666666667" PointY="19.857900390625" />
+          <ConnectorPoint PointX="7.333333333333333" PointY="19.857900390625" />
+          <ConnectorPoint PointX="9.8541666666666661" PointY="19.857900390625" />
+          <ConnectorPoint PointX="10.020833333333334" PointY="19.857900390625" />
+          <ConnectorPoint PointX="11.65625" PointY="19.857900390625" />
+          <ConnectorPoint PointX="11.65625" PointY="18.807190755208332" />
         </AssociationConnector>
         <AssociationConnector Association="localactorsModel.FK_project_user" >
-          <ConnectorPoint PointX="4.5" PointY="10.985260416666668" />
-          <ConnectorPoint PointX="5.25" PointY="10.985260416666668" />
+          <ConnectorPoint PointX="4.5" PointY="17.993622012369791" />
+          <ConnectorPoint PointX="5.25" PointY="17.993622012369791" />
         </AssociationConnector>
         <AssociationConnector Association="localactorsModel.project_tag" >
-          <ConnectorPoint PointX="6.72576923076923" PointY="11.595520833333335" />
-          <ConnectorPoint PointX="7.125" PointY="11.994751602564104" />
-          <ConnectorPoint PointX="7.125" PointY="17.172841796875" />
-          <ConnectorPoint PointX="7.5" PointY="17.172841796875" />
+          <ConnectorPoint PointX="5.9960974375" PointY="20.980123697916667" />
+          <ConnectorPoint PointX="5.9960974375" PointY="22.018657226562503" />
+          <ConnectorPoint PointX="6.3209678854166667" PointY="22.018657226562503" />
+          <ConnectorPoint PointX="6.4876345520833327" PointY="22.018657226562503" />
+          <ConnectorPoint PointX="7.5" PointY="22.018657226562503" />
         </AssociationConnector>
         <AssociationConnector Association="localactorsModel.user_follow_project" >
-          <ConnectorPoint PointX="5.25" PointY="10.617630208333335" />
-          <ConnectorPoint PointX="4.5" PointY="10.617630208333335" />
+          <ConnectorPoint PointX="5.25" PointY="15.934311006184895" />
+          <ConnectorPoint PointX="4.5" PointY="15.934311006184895" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="localactorsModel.project_photo" Width="1.5" PointX="7.5" PointY="4.625" Height="1.9802864583333388" />
+        <EntityTypeShape EntityType="localactorsModel.project_photo" Width="1.5" PointX="7.5" PointY="8" Height="1.9802864583333388" />
         <AssociationConnector Association="localactorsModel.FK_project_photo_project" >
-          <ConnectorPoint PointX="6.75" PointY="5.8026432291666694" />
-          <ConnectorPoint PointX="7.5" PointY="5.8026432291666694" />
+          <ConnectorPoint PointX="6.3632841875" PointY="14" />
+          <ConnectorPoint PointX="6.3632841875" PointY="8.99014322916667" />
+          <ConnectorPoint PointX="7.5" PointY="8.99014322916667" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="localactorsModel.update_comment" Width="1.5" PointX="7.5" PointY="19" Height="2.5571907552083388" />
+        <EntityTypeShape EntityType="localactorsModel.update_comment" Width="1.5" PointX="15.75" PointY="15.5" Height="2.5571907552083388" />
         <AssociationConnector Association="localactorsModel.FK_update_comment_update" >
-          <ConnectorPoint PointX="6" PointY="15.884095052083332" />
-          <ConnectorPoint PointX="6" PointY="20.278595377604169" />
-          <ConnectorPoint PointX="7.5" PointY="20.278595377604169" />
+          <ConnectorPoint PointX="12" PointY="13.28125" />
+          <ConnectorPoint PointX="13.416666666666666" PointY="13.28125" />
+          <ConnectorPoint PointX="13.583333333333334" PointY="13.28125" />
+          <ConnectorPoint PointX="16.5" PointY="13.28125" />
+          <ConnectorPoint PointX="16.5" PointY="15.5" />
         </AssociationConnector>
         <AssociationConnector Association="localactorsModel.FK_update_comment_user" >
-          <ConnectorPoint PointX="3.75" PointY="18.316630859375003" />
-          <ConnectorPoint PointX="3.75" PointY="19.608045188802091" />
-          <ConnectorPoint PointX="5.916666666666667" PointY="19.608045188802091" />
-          <ConnectorPoint PointX="6.083333333333333" PointY="19.608045188802091" />
-          <ConnectorPoint PointX="7.5" PointY="19.608045188802091" />
+          <ConnectorPoint PointX="4.5" PointY="19.900905727213537" />
+          <ConnectorPoint PointX="5" PointY="19.900905727213537" />
+          <ConnectorPoint PointX="5" PointY="21.037822265625003" />
+          <ConnectorPoint PointX="7.25" PointY="21.037822265625003" />
+          <ConnectorPoint PointX="7.25" PointY="19.653300781250003" />
+          <ConnectorPoint PointX="9.8541666666666661" PointY="19.653300781250003" />
+          <ConnectorPoint PointX="10.020833333333334" PointY="19.653300781250003" />
+          <ConnectorPoint PointX="11.572916666666666" PointY="19.653300781250003" />
+          <ConnectorPoint PointX="11.739583333333334" PointY="19.653300781250003" />
+          <ConnectorPoint PointX="16.5" PointY="19.653300781250003" />
+          <ConnectorPoint PointX="16.5" PointY="18.057190755208339" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="localactorsModel.project_plan" Width="1.5" PointX="7.5" PointY="26" Height="2.1725878906250031" />
+        <AssociationConnector Association="localactorsModel.FK_plan_project" >
+          <ConnectorPoint PointX="6.40430121875" PointY="20.980123697916667" />
+          <ConnectorPoint PointX="6.40430121875" PointY="27.0862939453125" />
+          <ConnectorPoint PointX="7.5" PointY="27.0862939453125" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="localactorsModel.project_cost" Width="1.5" PointX="7.5" PointY="4.25" Height="2.3648893229166674" />
+        <AssociationConnector Association="localactorsModel.FK_cost_project" >
+          <ConnectorPoint PointX="5.5507791875" PointY="14" />
+          <ConnectorPoint PointX="5.5507791875" PointY="5.4324446614583337" />
+          <ConnectorPoint PointX="7.5" PointY="5.4324446614583337" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

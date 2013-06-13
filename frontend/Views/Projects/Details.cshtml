@@ -3,25 +3,89 @@
 @{
     ViewBag.Title = Model.Title + "";
 }
-
-@{Html.RenderPartial("_Project_Header", Model);}
-
 <div id='project-update-tab'>
     <ul class='tab'>
-        <li><a href='@Url.Action("Updates","Projects",new{id=Model.ProjectID})'>Update</a> </li>
-        <li class='active'><a href='@Url.Action("Details","Projects",new{id=Model.ProjectID})'>Project Details</a> </li>
-        <li><a href='@Url.Action("Guestbook","Projects",new{id=Model.ProjectID})'>Guestbook</a> </li>
-        <li><a href='@Url.Action("Ask","Projects",new{id=Model.ProjectID})'>Ask a Question</a> </li>
+        <li><a href='@Url.Action("Updates", "Projects", new { id = Model.ProjectID })'>Update <span class="number">(@Model.updates.Count)</span></a>
+        </li>
+        <li class='active'><a href='@Url.Action("Details", "Projects", new { id = Model.ProjectID })'>
+            Project Details</a> </li>
+        <li><a href='@Url.Action("Guestbook", "Projects", new { id = Model.ProjectID })'>Guestbook <span class="number">(@Model.project_guestbook.Count)</span></a>
+        </li>
+        <li><a href='@Url.Action("Ask", "Projects", new { id = Model.ProjectID })'>Ask a Question</a>
+        </li>
     </ul>
     <hr class='tab-line'>
 </div>
+<div id='project-details'>
+    <img alt='Rosella04' class='cover-details' src='content/images/rosella04.jpg'>
+    <div id='description-details'>
+        <p>
+            @Html.Raw(Model.Description)
+        </p>
+        <ul>
+            <li>
+                <h1 class='title'>
+                    Project Plan:</h1>
+            </li>
+            @foreach (var item in Model.project_plan.OrderBy(x => x.Order))
+            {
+                <li>
+                    <div class='icon-time'>
+                    </div>
+                    <h2 class='subtitle'>
+                        @item.Time
+                        <span>/ @item.Title</span>
+                    </h2>
+                </li>
+            }
+            <li>
+                @Html.Raw(Model.ProjectPlan)
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <h1 class='title'>
+                    Costs:</h1>
+            </li>
+            @foreach (var item in Model.project_cost.OrderBy(x => x.Order))
+            {
+                <li class='cost'>
+                    <div class='icon-cost'>
+                    </div>
+                    <h2 class='subtitle'>
+                        @item.Goal &#128; <span>/ @item.Title</span>
+                    </h2>
+                </li>
+            }
+            <li class='cost'>
+                <div class='icon-cost'>
+                </div>
+                <h2 class='subtitle total'>
+                    Total: @Model.Target &#128;
+                </h2>
+            </li>
+        </ul>
+        @*          <p>
+            The foundation is putting in-kind resources of the members time and work and also resources covering their travelling from Netherlands to Lombok, including basic accommodation costs (3600 EUR for 3 Foundation representatives); in kind resources of local experts incl. university experts is also another contribution.
+          </p>*@
+    </div>
+    <div class='clear'>
+    </div>
+    <hr class='spacer-details'>
+    <div id='ngo-details'>
+        <img alt='' class='logo' src='@Model.AgencyLogo'>
+        <h1 class='title'>
+            @Model.AgancyName</h1>
+        <p>
+           @Model.AgencyObjective
+        </p>
 
-<div id='update-body'>
-    @{Html.RenderPartial("_Project_Sidebar", Model);}
-    <div class="photos">
-        @foreach (var item in Model.project_photo)
-        {
-            <img alt='@item.Caption' src='@item.Url' />
-        }
+        <ul class='links'>
+            <li>
+                <h2 class='subtitle'>
+                    Contacts</h2>
+            </li>
+            <li><a class='link' href='@Model.AgencyWebsite'>@Model.AgencyWebsite</a> </li>
+        </ul>
     </div>
 </div>

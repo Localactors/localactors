@@ -32,6 +32,8 @@ namespace Localactors.webapp.Areas.Admin.Controllers
             return View(project);
         }
 
+     
+
         public ActionResult Create()
         {
             ViewBag.CountryID = new SelectList(db.countries, "CountryID", "Name");
@@ -212,18 +214,11 @@ namespace Localactors.webapp.Areas.Admin.Controllers
             return View(project);
         }
 
-        //
-        // GET: /Admin/Projects/Delete/5
- 
         public ActionResult Delete(int id)
         {
             project project = db.projects.Single(p => p.ProjectID == id);
             return View(project);
         }
-
-        //
-        // POST: /Admin/Projects/Delete/5
-
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
@@ -265,9 +260,6 @@ namespace Localactors.webapp.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-        //////////////
-        //TAGS////////
-        //////////////
         public ActionResult TagRemove(int id, int projectid)
         {
             project project = db.projects.Single(p => p.ProjectID == projectid);
@@ -277,7 +269,6 @@ namespace Localactors.webapp.Areas.Admin.Controllers
 
             return RedirectToAction("Edit","Projects",new {id = projectid});
         }
-
         [HttpPost]
         public ActionResult TagAdd(string tagname, int projectid) {
             var name = tagname.ToLower().Trim();
@@ -303,6 +294,111 @@ namespace Localactors.webapp.Areas.Admin.Controllers
 
 
             return RedirectToAction("Edit","Projects",new {id = projectid});
+        }
+
+        public ActionResult PlanUp(int id) {
+            //get the data
+            var item = db.project_plan.FirstOrDefault(x => x.PlanID == id);
+            var items = db.project_plan.Where(x => x.ProjectID == item.ProjectID).OrderBy("Order");
+
+            project_plan otheritem = null;
+            foreach (var updateContent in items)
+            {
+                if (updateContent.PlanID == id)
+                {
+                    break;
+                }
+                otheritem = updateContent;
+            }
+
+            if (otheritem != null)
+            {
+                int oldorder = item.Order;
+                item.Order = otheritem.Order;
+                otheritem.Order = oldorder;
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Edit", "Projects", new { id = item.ProjectID });
+        }
+        public ActionResult PlanDown(int id)
+        {
+            //get the data
+            var item = db.project_plan.FirstOrDefault(x => x.PlanID == id);
+            var items = db.project_plan.Where(x => x.ProjectID == item.ProjectID).OrderByDescending("Order");
+
+            project_plan otheritem = null;
+            foreach (var updateContent in items)
+            {
+                if (updateContent.PlanID == id)
+                {
+                    break;
+                }
+                otheritem = updateContent;
+            }
+
+            if (otheritem != null && otheritem.PlanID != otheritem.PlanID)
+            {
+                int oldorder = item.Order;
+                item.Order = otheritem.Order;
+                otheritem.Order = oldorder;
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Edit", "Projects", new { id = item.ProjectID });
+        }
+
+        public ActionResult CostUp(int id)
+        {
+            //get the data
+            var item = db.project_cost.FirstOrDefault(x => x.CostID == id);
+            var items = db.project_cost.Where(x => x.ProjectID == item.ProjectID).OrderBy("Order");
+
+            project_cost otheritem = null;
+            foreach (var updateContent in items)
+            {
+                if (updateContent.CostID == id)
+                {
+                    break;
+                }
+                otheritem = updateContent;
+            }
+
+            if (otheritem != null)
+            {
+                int oldorder = item.Order;
+                item.Order = otheritem.Order;
+                otheritem.Order = oldorder;
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Edit", "Projects", new { id = item.ProjectID });
+        }
+        public ActionResult CostDown(int id)
+        {
+            //get the data
+            var item = db.project_cost.FirstOrDefault(x => x.CostID == id);
+            var items = db.project_cost.Where(x => x.ProjectID == item.ProjectID).OrderByDescending("Order");
+
+            project_cost otheritem = null;
+            foreach (var updateContent in items)
+            {
+                if (updateContent.CostID == id)
+                {
+                    break;
+                }
+                otheritem = updateContent;
+            }
+
+            if (otheritem != null )
+            {
+                int oldorder = item.Order;
+                item.Order = otheritem.Order;
+                otheritem.Order = oldorder;
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Edit", "Projects", new { id = item.ProjectID });
         }
 
         protected override void Dispose(bool disposing)

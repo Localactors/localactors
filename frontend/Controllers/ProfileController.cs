@@ -22,6 +22,12 @@ namespace Localactors.webapp.Controllers
         public List<update> updates { get; set; }
     }
 
+    public class LocalactorsModel
+    {
+        public List<user> publishers { get; set; }
+        public List<user> supporters { get; set; }
+    }
+
     public class ProfileController : ControllerBase
     {
         [ChildActionOnly]
@@ -35,8 +41,10 @@ namespace Localactors.webapp.Controllers
         [OutputCache(VaryByParam = "*", Duration = 60)]
         public ViewResult Index()
         {
-            var users = db.users.Include("country");
-            return View(users.ToList());
+            LocalactorsModel model = new LocalactorsModel();
+            model.publishers = db.users.Include("projects").Where(x => x.Role == "publisher").ToList();
+            model.supporters = db.users.Where(x => x.Role == "supporter").ToList();
+            return View(model);
         }
 
         [OutputCache(VaryByParam = "*", Duration = 60)]

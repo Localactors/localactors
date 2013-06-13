@@ -99,9 +99,6 @@ namespace Localactors.webapp.Areas.Admin.Controllers
             return View(update);
         }
 
-        //
-        // POST: /Admin/Update/Delete/5
-
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id, int projectid = 0)
         {

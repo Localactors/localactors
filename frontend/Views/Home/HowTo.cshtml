@@ -4,17 +4,15 @@
 <div id='sections_accordion'>
     <div id='mailing-list'>
         <hr class='spacer-accordion'>
-        <header>
+        <header class='accordion'>
             <a href='/'><span class='icon'></span></a>
             <div class='container-title'>
                 <div class='arrow'>
                 </div>
                 <h2>
-                    Subscribe to mailing list
-                </h2>
+                    Subscribe to mailing list</h2>
                 <h3>
-                    and become a local actor
-                </h3>
+                    and become a local actor</h3>
             </div>
         </header>
         <section class='mailing_list'>
@@ -27,11 +25,23 @@
                     next steps. More to come soon we promise!
                 </p>
             </div>
+            <!-- - form_tag 'http://thedoersproject.com/mailinglist/subscribe', :id => "mail_form", :class => 'submit-form', :method => 'POST' do -->
+            <!-- / = flash_tag(:success) -->
+            <!-- - field_set_tag do -->
+            <!-- %p -->
+            <!-- = label_tag :email, :class => 'first' -->
+            <!-- = text_field_tag :email, :name => "email", :value => params[:email], :id => 'email', :placeholder=>"Your email address here" -->
+            <!-- - field_set_tag(:class => 'buttons') do -->
+            <!-- = hidden_field_tag  :list, :value => 4, :name => "list", :id => 'mail_list' -->
+            <!-- .button_container -->
+            <!-- .corner_left -->
+            <!-- = submit_tag "Submit", :name => "submit", :id => 'mail_submit',:class=> "buttons yellow_button" -->
+            <!-- .corner_right -->
         </section>
     </div>
     <div id='faq'>
         <hr class='spacer-accordion'>
-        <header>
+        <header class='accordion'>
             <a href='/'><span class='icon'></span></a>
             <div class='container-title'>
                 <div class='arrow'>
@@ -48,7 +58,7 @@
             <ul class='questions' id='faq_accordion'>
                 <li>
                     <h3>
-                        <i></i><span class='hl'>Who can publish a project?</span>
+                        <i></i>Who can publish a project?
                     </h3>
                     <p>
                         Anybody can publish a project. You can be a registered NGO (non-governmental organisation),
@@ -60,7 +70,7 @@
                 </li>
                 <li>
                     <h3>
-                        <i></i><span class='hl'>How does it work with money?</span>
+                        <i></i>How does it work with money?
                     </h3>
                     <p>
                         Every project publisher sets their project's funding goal (support needed to get
@@ -75,7 +85,7 @@
                 </li>
                 <li>
                     <h3>
-                        <i></i><span class='hl'>What is my guarantee?</span>
+                        <i></i>What is my guarantee?
                     </h3>
                     <p>
                         There is a high degree of transparency in publishing the project and feedback on
@@ -89,7 +99,7 @@
                 </li>
                 <li>
                     <h3>
-                        <i></i><span class='hl'>What kind of projects can I submit?</span>
+                        <i></i>What kind of projects can I submit?
                     </h3>
                     <p>
                         We support local action and we are willing to publish good cause - non-for-profit
@@ -101,7 +111,7 @@
                 </li>
                 <li>
                     <h3>
-                        <i></i><span class='hl'>Why should I choose Local Actors for my project?</span>
+                        <i></i>Why should I choose Local Actors for my project?
                     </h3>
                     <p>
                         If you have a project, through LocalActors.org you can address small donors directly
@@ -113,7 +123,7 @@
                 </li>
                 <li>
                     <h3>
-                        <i></i><span class='hl'>When will the service be available?</span>
+                        <i></i>When will the service be available?
                     </h3>
                     <p>
                         Currently LocalActors.org founding team and supporters are gathering first projects
@@ -126,7 +136,7 @@
                 </li>
                 <li>
                     <h3>
-                        <i></i><span class='hl'>How can I support?</span>
+                        <i></i>How can I support?
                     </h3>
                     <p>
                         If you want to support a particular local project, you can choose to do so either
@@ -135,7 +145,7 @@
                 </li>
                 <li>
                     <h3>
-                        <i></i><span class='hl'>What do I get from being a supporter?</span>
+                        <i></i>What do I get from being a supporter?
                     </h3>
                     <p>
                         We start as a small group of those not happy with the options opened for small donors
@@ -161,7 +171,7 @@
     </div>
     <div id='think'>
         <hr class='spacer-accordion'>
-        <header>
+        <header class='accordion'>
             <a href='/'><span class='icon'></span></a>
             <div class='container-title'>
                 <div class='arrow'>
@@ -195,7 +205,7 @@
                     <div class='corner_left'>
                     </div>
                     <h4 class='buttons yellow_button'>
-                        <a href='@Url.Action("CallForProjects")'>Look guidelines</a>
+                        <a href='/call_for_projects.html'>Look guidelines</a>
                     </h4>
                     <div class='corner_right'>
                     </div>
@@ -205,7 +215,7 @@
     </div>
     <div id='submit-project'>
         <hr class='spacer-accordion'>
-        <header>
+        <header class='accordion'>
             <a href='/'><span class='icon'></span></a>
             <div class='container-title'>
                 <div class='arrow'>
@@ -239,7 +249,7 @@
     </div>
     <div id='publish'>
         <hr class='spacer-accordion'>
-        <header>
+        <header class='accordion'>
             <a href='/'><span class='icon'></span></a>
             <div class='container-title'>
                 <div class='arrow'>
@@ -253,8 +263,6 @@
             </div>
         </header>
         <section class='mailing_list'>
-            <div id='icon'>
-            </div>
             <div id='spiegazione'>
                 <p>
                     We read, get back to you and will help you to create an attractive page on the localactors.org

@@ -48,7 +48,13 @@
                 @Html.TextArea("Text")
                 @Html.ValidationMessage("Text")
             </div>
-
+             <div class="editor-label">
+                    Picture
+                </div>
+                <div class="editor-field">
+                    <input type="file" id="Picture" name="Picture" class="imageupload" />
+                    @Html.ValidationMessage("Picture")
+                </div>
             <p>
                 <input type="submit" class="btn" value="Create" />
             </p>
