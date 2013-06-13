@@ -14,7 +14,7 @@
         @Html.HiddenFor(model => model.UserName)
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Name)
+            First Name
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.Name)
@@ -22,7 +22,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Lastname)
+            Last Name
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.Lastname)
@@ -30,16 +30,24 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Bio)
+            Your Details
+        </div>
+    <div class="editor-field">
+        @Html.TextAreaFor(model => model.Bio)
+        @Html.ValidationMessageFor(model => model.Bio)
+    </div>
+    
+     <div class="editor-label">
+            Country
         </div>
         <div class="editor-field">
-            @Html.TextAreaFor(model => model.Bio)
-            @Html.ValidationMessageFor(model => model.Bio)
+            @Html.DropDownList("CountryID", String.Empty)
+            @Html.ValidationMessageFor(model => model.CountryID)
         </div>
 
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Image)
+            Avatar
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.Image)
@@ -117,7 +125,7 @@
 
 
         <p>
-            <input type="submit" value="Save" />
+            <input type="submit" value="Update" />
         </p>
    
 }

@@ -1,5 +1,9 @@
 ﻿@using System.Configuration
 @model update
+@{
+    bool isadmin = User.IsInRole("admin") || ViewBag.UserID == Model.UserID ;
+    bool isauthenticated = User.Identity.IsAuthenticated;
+}
 <div class='single-update-body'>
     @foreach (update_content content in Model.update_content)
     {
@@ -9,16 +13,28 @@
         <a name="comments-@Model.ProjectID" id="comments" />
         <h4>
             Comments</h4>
-        @foreach (var item in Model.update_comment)
+        @foreach (var item in Model.update_comment.OrderByDescending(x => x.CommentID))
         {
-            <div>
-                from: @item.user.UserName</div>
-            <div>
-                date: @item.Date</div>
-            <div>@item.Text</div>
-            <br />
+            <div class="comment-single-entry">
+                <div>
+                    from: @item.user.UserName</div>
+                <div>
+                    date: @item.Date</div>
+                <div>@item.Text</div>
+                @if (isadmin || ViewBag.UserID == item.UserID)
+                {
+                    <div class="admin">
+                        @using (Html.BeginForm("CommentDelete", "Projects"))
+                        {
+                            <input type="hidden" name="CommentID" value="@item.CommentID"/>
+                            <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+                            <input type="submit" value="delete" class="btn"/>
+                        }
+                    </div>
+                }
+            </div>
         }
-        @if (User.Identity.IsAuthenticated)
+        @if (isauthenticated)
         {
             using (Html.BeginForm("CommentCreate", "Projects", FormMethod.Post, new { enctype = "multipart/form-data", id = "", @class = "commentform" }))
             {

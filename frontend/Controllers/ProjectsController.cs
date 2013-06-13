@@ -42,22 +42,12 @@ namespace Localactors.webapp.Controllers
                 .Include("updates")
                 .Include("achievements")
                 .Single(p => p.ProjectID == id);
+
+            ViewBag.UserID = CurrentUser.UserID;
             return View(project);
         }
 
-        public ViewResult Guestbook(int id)
-        {
-            project project = db.projects
-                .Include("country")
-                .Include("user")
-                .Include("project_guestbook")
-                .Include("project_photo")
-                .Include("tags")
-                .Include("updates")
-                .Include("achievements")
-                .Single(p => p.ProjectID == id);
-            return View(project);
-        }
+        
 
         [OutputCache(VaryByParam = "*",Duration = 60)]
         public ViewResult Updates(int id)
@@ -72,6 +62,7 @@ namespace Localactors.webapp.Controllers
                 //.Include("achievements")
                 .FirstOrDefault(p => p.ProjectID == id);
 
+            ViewBag.UserID = CurrentUser.UserID;
             return View(project);
         }
 
@@ -91,6 +82,7 @@ namespace Localactors.webapp.Controllers
                 .Include("updates")
                 .Include("achievements")
                 .Single(p => p.ProjectID == id);
+            ViewBag.UserID = CurrentUser.UserID;
             return View(new AskModel() { Project = project, Question = new AskQuestion(){ProjectID = id,ProjectName = project.Title,UserName = User.Identity.Name} });
         }
         [HttpPost]
@@ -131,6 +123,20 @@ namespace Localactors.webapp.Controllers
 
         }
 
+
+        [OutputCache(VaryByParam = "*", Duration = 60)]
+        public ViewResult Guestbook(int id)
+        {
+            project project = db.projects
+                .Include("country")
+                .Include("user")
+                .Include("project_guestbook")
+                .Include("tags")
+                .Single(p => p.ProjectID == id);
+
+            ViewBag.UserID = CurrentUser.UserID;
+            return View(project);
+        }
         [HttpPost]
         [Authorize(Roles="supporter,publisher,admin")]
         public ActionResult GuestbookCreate(project_guestbook model)
@@ -210,9 +216,30 @@ namespace Localactors.webapp.Controllers
                 db.SaveChanges();
             }
 
-            return Request.UrlReferrer != null ? Redirect(Request.UrlReferrer.AbsolutePath) : Redirect("/");
-            return RedirectToAction("Details", new {id = model.ProjectID});
-            return View("Details", project);
+            //redirect & reload
+            if (Request.UrlReferrer != null)
+            {
+                HttpResponse.RemoveOutputCacheItem(Request.UrlReferrer.AbsolutePath);
+                return Redirect(Request.UrlReferrer.AbsolutePath + "" );
+            }
+            return Redirect("/");
+        }
+        [HttpPost]
+        [Authorize()]
+        public ActionResult GuestbookDelete(int GestpostID, int ProjectID)
+        {
+            var post = db.project_guestbook.FirstOrDefault(x => x.GuestpostID == GestpostID);
+            if (post!=null && (User.IsInRole("admin") || post.UserID == CurrentUser.UserID || post.project.UserID == CurrentUser.UserID)) {
+                db.project_guestbook.DeleteObject(post);
+                db.SaveChanges();
+            }
+
+            if (Request.UrlReferrer != null)
+            {
+                HttpResponse.RemoveOutputCacheItem(Request.UrlReferrer.AbsolutePath);
+                return Redirect(Request.UrlReferrer.AbsolutePath);
+            }
+            return Redirect("/");
         }
 
         [HttpPost]
@@ -296,7 +323,36 @@ namespace Localactors.webapp.Controllers
                 db.SaveChanges();
             }
 
-            return Request.UrlReferrer != null ? Redirect(Request.UrlReferrer.AbsolutePath) : Redirect("/");
+            if (Request.UrlReferrer != null) {
+                HttpResponse.RemoveOutputCacheItem(Request.UrlReferrer.AbsolutePath);
+                return Redirect(Request.UrlReferrer.AbsolutePath + "#comments-" + model.update.ProjectID);
+            }
+            return Redirect("/");
+        }
+
+        [HttpPost]
+        [Authorize()]
+        public ActionResult CommentDelete(int CommentID, int ProjectID) {
+            var comment = db.update_comment.FirstOrDefault(x => x.CommentID == CommentID);
+
+            if (comment != null && (User.IsInRole("admin") || 
+                comment.UserID == CurrentUser.UserID || 
+                comment.update.UserID == CurrentUser.UserID || 
+                comment.update.project.UserID == CurrentUser.UserID))
+            {
+                db.update_comment.DeleteObject(comment);
+                db.SaveChanges();
+            }
+
+
+          
+
+            if (Request.UrlReferrer != null)
+            {
+                HttpResponse.RemoveOutputCacheItem(Request.UrlReferrer.AbsolutePath);
+                return Redirect(Request.UrlReferrer.AbsolutePath + "#comments-" + ProjectID);
+            }
+            return Redirect("/");
         }
 
         protected override void Dispose(bool disposing)

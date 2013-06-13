@@ -183,14 +183,15 @@ namespace Localactors.webapp.Controllers
                                   {
                                       UserPassword = computeHash(model.Password.ToUpper()),
                                       UserName = model.Email.ToLower(),
-                                      Name = model.Email,
+                                      Name = "",
+                                      Lastname = "",
                                       Email = model.Email,
                                       DateJoined = DateTime.Now,
                                       DateLastLogin = DateTime.Now,
                                       Enabled = true,
                                       Confirmed = false,
                                       Reset = false,
-                                      Role = "user",
+                                      Role = "supporter",
                                       Email_Hash = key,
                                       Newsletter = model.Newsletter
                                   };
@@ -205,7 +206,7 @@ namespace Localactors.webapp.Controllers
 
             string url = Url.Action("SubscribeConfirm", "Account", new { key }, "http");
             string title = "Conferma Email";
-            string body = string.Format("Ciao \r\n\r\nPer poter attivare il tuo account è necessario aprire il link :\r\n\r\n{0}\r\n\r\nOppure inserire il codice riportato nella casella di conferma; \r\ncodice:{1}", url, key);
+            string body = string.Format("Ciao \r\n\r\nPer poter attivare il tuo account è necessario cliccare il link :\r\n\r\n{0}\r\n\r\nOppure inserire il codice riportato nella casella di conferma; \r\ncodice:{1}", url, key);
             bool sent = SendMailAws(model.Email, title, body);
 
             db.users.AddObject(newuser);
@@ -234,14 +235,14 @@ namespace Localactors.webapp.Controllers
                     return View();
                 }
 
-                geo.Role = "shop";
+                geo.Role = "supporter";
                 geo.Enabled = true;
                 geo.Confirmed = true;
                 geo.Reset = false;
                 geo.Email_Hash = null;
                 db.SaveChanges();
 
-                //SendMailAws("diego@nonmonkey.com", "User Confirmed", geo.Email);
+                SendMailAws("diego@nonmonkey.com", "User Confirmed", geo.Email);
 
                 return RedirectToAction("Login");
             }

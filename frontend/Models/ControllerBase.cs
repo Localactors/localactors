@@ -10,13 +10,13 @@ using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web;
+using System.Web.Caching;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using Localactors.entities;
 using Amazon.S3;
 using Amazon.S3.Model;
 using NLog;
-using WSC_webapp.Helper;
 using System.Linq;
 
 namespace Localactors.webapp
@@ -28,7 +28,18 @@ namespace Localactors.webapp
         internal readonly localactors db = new localactors();
         internal  user CurrentUser {
             get {
-                var user = db.users.FirstOrDefault(x => x.UserName.ToLower() == User.Identity.Name.ToLower());
+                string username = User.Identity.Name;
+                if (username == null)
+                    return null;
+
+                user user = System.Web.HttpContext.Current.Cache.Get(username) as user;
+                if(user==null) {
+                    user = db.users.FirstOrDefault(x => x.UserName.ToLower() == User.Identity.Name.ToLower());
+                    if (user != null) {
+                        System.Web.HttpContext.Current.Cache.Insert(username, user, null, DateTime.Now.AddMinutes(10), Cache.NoSlidingExpiration, CacheItemPriority.Normal, null);
+                    }
+                }
+
                 return user;
             }
         }
@@ -39,7 +50,6 @@ namespace Localactors.webapp
         {
             base.OnActionExecuting(filterContext);
         }
-
         protected override void OnException(ExceptionContext filterContext)
         {
             base.OnException(filterContext);

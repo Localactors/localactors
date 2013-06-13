@@ -79,7 +79,9 @@ namespace Localactors.webapp.Controllers
         [Authorize]
         public ActionResult Settings()
         {
-            return View(CurrentUser);
+            user user = db.users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            ViewBag.CountryID = new SelectList(db.countries, "CountryID", "Name", user.CountryID);
+            return View(user);
         }
         [Authorize]
         [HttpPost]
@@ -141,6 +143,7 @@ namespace Localactors.webapp.Controllers
                             }
                         }
 
+                        ViewBag.CountryID = new SelectList(db.countries, "CountryID", "Name", user.CountryID);
                         return View(user);
                     }
                 }
@@ -150,10 +153,23 @@ namespace Localactors.webapp.Controllers
                 user.Name = model.Name;
                 user.Lastname = model.Lastname;
                 user.Bio = model.Bio;
+                user.Image = model.Image;
+                user.CountryID = model.CountryID;
+
+                user.Contact_Blog = model.Contact_Blog;
+                user.Contact_Email = model.Contact_Email;
+                user.Contact_Facebook = model.Contact_Facebook;
+                user.Contact_Linkedin = model.Contact_Linkedin;
+                user.Contact_Skype = model.Contact_Skype;
+                user.Contact_Tel = model.Contact_Tel;
+                user.Contact_Twitter = model.Contact_Twitter;
+                user.Contact_Web = model.Contact_Web;
+
                 db.ObjectStateManager.ChangeObjectState(user, EntityState.Modified);
                 db.SaveChanges();
             }
 
+            ViewBag.CountryID = new SelectList(db.countries, "CountryID", "Name", user.CountryID);
             return View(user);
         }
 

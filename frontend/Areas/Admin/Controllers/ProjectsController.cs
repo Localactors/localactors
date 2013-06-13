@@ -34,7 +34,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.CountryID = new SelectList(db.countries, "CountryID", "Code");
+            ViewBag.CountryID = new SelectList(db.countries, "CountryID", "Name");
             ViewBag.UserID = new SelectList(db.users.Where(x => x.Role == "admin" || x.Role == "publisher"), "UserID", "UserName");
             var model = new project();
             model.Date = DateTime.Now;
@@ -99,7 +99,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
                             }
                         }
 
-                        ViewBag.CountryID = new SelectList(db.countries, "CountryID", "Code", project.CountryID);
+                        ViewBag.CountryID = new SelectList(db.countries, "CountryID", "Name");
                         ViewBag.UserID = new SelectList(db.users.Where(x => x.Role == "admin" || x.Role == "publisher"), "UserID", "UserName", project.UserID);
                         return View(project);
                     }
@@ -114,7 +114,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
                 return RedirectToAction("Create","Update",new{projectid = project.ProjectID});  
             }
 
-            ViewBag.CountryID = new SelectList(db.countries, "CountryID", "Code", project.CountryID);
+            ViewBag.CountryID = new SelectList(db.countries, "CountryID", "Name");
             ViewBag.UserID = new SelectList(db.users.Where(x => x.Role == "admin" || x.Role == "publisher"), "UserID", "UserName", project.UserID);
             return View(project);
         }
@@ -130,7 +130,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
                 .Single(p => p.ProjectID == id);
 
             ViewBag.Supporters = new SelectList(db.users.Where(x => x.Role == "admin" || x.Role == "supporter"), "UserID", "UserName");
-            ViewBag.CountryID = new SelectList(db.countries, "CountryID", "Code", project.CountryID);
+            ViewBag.CountryID = new SelectList(db.countries, "CountryID", "Name", project.CountryID);
             ViewBag.UserID = new SelectList(db.users.Where(x => x.Role == "admin" || x.Role == "publisher"), "UserID", "UserName", project.UserID);
             ViewBag.Tags = db.tags;
             return View(project);
@@ -190,7 +190,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
                         }
 
                         ViewBag.Supporters = new SelectList(db.users.Where(x => x.Role == "admin" || x.Role == "supporter"), "UserID", "UserName");
-                        ViewBag.CountryID = new SelectList(db.countries, "CountryID", "Code", project.CountryID);
+                        ViewBag.CountryID = new SelectList(db.countries, "CountryID", "Name", project.CountryID);
                         ViewBag.UserID = new SelectList(db.users.Where(x => x.Role == "admin" || x.Role == "publisher"), "UserID", "UserName", project.UserID);
                         ViewBag.Tags = db.tags;
                         return View(project);
@@ -206,7 +206,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
             }
 
             ViewBag.Supporters = new SelectList(db.users.Where(x => x.Role == "admin" || x.Role == "supporter"), "UserID", "UserName");
-            ViewBag.CountryID = new SelectList(db.countries, "CountryID", "Code", project.CountryID);
+            ViewBag.CountryID = new SelectList(db.countries, "CountryID", "Name", project.CountryID);
             ViewBag.UserID = new SelectList(db.users.Where(x => x.Role == "admin" || x.Role == "publisher"), "UserID", "UserName", project.UserID);
             ViewBag.Tags = db.tags;
             return View(project);

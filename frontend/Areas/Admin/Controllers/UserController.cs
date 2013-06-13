@@ -37,7 +37,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.CountryID = new SelectList(db.countries, "CountryID", "Code");
+            ViewBag.CountryID = new SelectList(db.countries, "CountryID", "Name");
             ViewBag.Role = new SelectList(db.user_roles, "RoleName", "RoleName");
             return View(new user(){DateJoined = DateTime.Now,DateLastLogin = DateTime.Now,Confirmed = true,Enabled = true,Privacy = true});
         } 
@@ -104,7 +104,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
                             }
                         }
 
-                        ViewBag.CountryID = new SelectList(db.countries, "CountryID", "Code", user.CountryID);
+                        ViewBag.CountryID = new SelectList(db.countries, "CountryID", "Name");
                         ViewBag.Role = new SelectList(db.user_roles, "RoleName", "RoleName");
                         return View(user);
                     }
@@ -112,15 +112,15 @@ namespace Localactors.webapp.Areas.Admin.Controllers
             }
 
 
-            var usr = db.users.FirstOrDefault(x => x.Email.ToLower() == user.Email.ToLower());
-            if (usr != null)
-            {
-                ModelState.AddModelError("Email", "Indirizzo Email gia registrato");
-                return View(user);
-            }
-
-
+            
             if (ModelState.IsValid) {
+
+                var usr = db.users.FirstOrDefault(x => x.Email.ToLower() == user.Email.ToLower());
+                if (usr != null)
+                {
+                    ModelState.AddModelError("Email", "Indirizzo Email gia registrato");
+                    return View(user);
+                }
 
                 string key = computeHash(DateTime.Now.ToString("dd/MM/yyHHmmss") + user.Email);
                 user newuser = new user
@@ -158,7 +158,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
                 return RedirectToAction("Index");  
             }
 
-            ViewBag.CountryID = new SelectList(db.countries, "CountryID", "Code", user.CountryID);
+            ViewBag.CountryID = new SelectList(db.countries, "CountryID", "Name");
             ViewBag.Role = new SelectList(db.user_roles, "RoleName", "RoleName");
             return View(user);
         }
@@ -169,7 +169,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
         public ActionResult Edit(int id)
         {
             user user = db.users.Single(u => u.UserID == id);
-            ViewBag.CountryID = new SelectList(db.countries, "CountryID", "Code", user.CountryID);
+            ViewBag.CountryID = new SelectList(db.countries, "CountryID", "Name", user.CountryID);
             ViewBag.Role = new SelectList(db.user_roles, "RoleName", "RoleName",user.Role);
             return View(user);
         }
@@ -234,7 +234,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
                             }
                         }
 
-                        ViewBag.CountryID = new SelectList(db.countries, "CountryID", "Code", user.CountryID);
+                        ViewBag.CountryID = new SelectList(db.countries, "CountryID", "Name", user.CountryID);
                         ViewBag.Role = new SelectList(db.user_roles, "RoleName", "RoleName", user.Role);
                         return View(user);
                     }
@@ -242,7 +242,8 @@ namespace Localactors.webapp.Areas.Admin.Controllers
             }
 
             if (ModelState.IsValid) {
-                user.UserPassword = computeHash(user.UserPassword.ToUpper());
+                //do not change the password!
+                //user.UserPassword = computeHash(user.UserPassword.ToUpper());
                 user.UserName = user.Email;
 
                 db.users.Attach(user);
@@ -250,7 +251,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CountryID = new SelectList(db.countries, "CountryID", "Code", user.CountryID);
+            ViewBag.CountryID = new SelectList(db.countries, "CountryID", "Name", user.CountryID);
             ViewBag.Role = new SelectList(db.user_roles, "RoleName", "RoleName", user.Role);
             return View(user);
         }
