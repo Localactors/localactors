@@ -25,8 +25,8 @@
 
                         <script src="@PP_URL"
                                 data-button="donate" 
-                                data-name="Project" 
-                                data-number="1" 
+                                data-name="P@(Model.ProjectID) @Model.Title" 
+                                data-number="@Model.ProjectID" 
                                 data-custom="@User.Identity.Name"
                                 data-currency="@ConfigurationManager.AppSettings["PP_Currency"]"
                                 data-callback="@ConfigurationManager.AppSettings["PP_Callback"]" 

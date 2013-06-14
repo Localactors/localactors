@@ -1,0 +1,34 @@
+﻿@model Localactors.entities.project
+           
+@using (Html.BeginForm("GuestbookCreate", "Projects", FormMethod.Post, new { enctype = "multipart/form-data", id = "mainform" })) {
+    <div class='container-comment'>
+        <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+        <input type="hidden" name="UserID" value="@User.Identity"/>
+        <input type="hidden" name="Date" value="@DateTime.Now.ToShortDateString()"/>
+        
+        <div class='editor-label'>
+            Text
+          </div>
+          <div class='editor-field'>
+            <textarea cols='20' id='Text' name='Text' rows='2'></textarea>
+            <span class='field-validation-valid' data-valmsg-for='Text' data-valmsg-replace='true'></span>
+          </div>
+          <div class='editor-label'>
+            Picture
+          </div>
+          <div class='editor-field upload-pic'>
+            <input class='imageupload' id='Picture' name='Picture' type='file'>
+            <span class='field-validation-valid' data-valmsg-for='Picture' data-valmsg-replace='true'></span>
+          </div>
+          <div class='create-comment'>
+            <div class='clear-box'></div>
+            <div class='button_container'>
+              <div class='corner_left'></div>
+              <h4 class='buttons yellow_button'>
+                <input class='btn' type='submit' value='Create'>
+              </h4>
+              <div class='corner_right'></div>
+            </div>
+          </div>
+    </div>
+}

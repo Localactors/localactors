@@ -9,7 +9,7 @@ load: [ basicURl+'jquery.js',
 					basicURl+'response.js'],
 	complete: function(){
 	    Response.create({ mode: 'src', prefix: 'src', breakpoints: [0, 980] });
-	    
+	    yepnope([{load: ['/scripts/site2.js']}]);
 		yepnope([
 			{
 			    load: [ '/scripts/site2.js'],

@@ -21,6 +21,7 @@
                 <div>
                     date: @item.Date</div>
                 <div>@item.Text</div>
+                <div><img src="@item.Picture" /></div>
                 @if (isadmin || ViewBag.UserID == item.UserID)
                 {
                     <div class="admin">
@@ -36,29 +37,7 @@
         }
         @if (isauthenticated)
         {
-            using (Html.BeginForm("CommentCreate", "Projects", FormMethod.Post, new { enctype = "multipart/form-data", id = "", @class = "commentform" }))
-            {
-            <input type="hidden" name="UpdateID" value="@Model.UpdateID"/>
-            <input type="hidden" name="UserID" value="@User.Identity"/>
-            <input type="hidden" name="Date" value="@DateTime.Now.ToShortDateString()"/>
-            <div class="editor-label">
-                Text
-            </div>
-            <div class="editor-field">
-                @Html.TextArea("Text")
-                @Html.ValidationMessage("Text")
-            </div>
-             <div class="editor-label">
-                    Picture
-                </div>
-                <div class="editor-field">
-                    <input type="file" id="Picture" name="Picture" class="imageupload" />
-                    @Html.ValidationMessage("Picture")
-                </div>
-            <p>
-                <input type="submit" class="btn" value="Create" />
-            </p>
-            }
+            Html.RenderPartial("_Form_Comment",Model);
         }else {
             <div>To post comments on the Project you need to register or login.</div>
         }

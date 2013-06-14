@@ -1,67 +1,76 @@
 ﻿@model SubscribeModel
-
 @{
     ViewBag.Title = "Registrazione Utente";
 }
-
-
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
-
 @using (Html.BeginForm())
 {
+    
     @Html.ValidationSummary(true)
-    <div class="">
-
-        <div class="">
+    <div class='container-form'>
+        <div class="mail">
             @Html.LabelFor(model => model.Email, "Email")
             @Html.TextBoxFor(model => model.Email)
             @Html.ValidationMessageFor(model => model.Email)
         </div>
-
-        <div class="clarfix">
+        <div class="password">
             @Html.LabelFor(model => model.Password, "Password")
             @Html.PasswordFor(model => model.Password)
             @Html.ValidationMessageFor(model => model.Password)
         </div>
-
-        <div class="">
+        <div class="confirm-password">
             @Html.LabelFor(model => model.Password, "Conferma Password")
             @Html.PasswordFor(model => model.Confirm)
             @Html.ValidationMessageFor(model => model.Confirm)
         </div>
-
-
-        <div class="">
+        <div class="newsletter">
             @Html.LabelFor(model => model.Newsletter, "Icriviti alla Newsletter")
             @Html.CheckBoxFor(model => model.Newsletter)
             @Html.ValidationMessageFor(model => model.Newsletter)
         </div>
-
-        </div>
-        <hr />
-        <div class="">
+    </div>
         
-            <p>
-            Dopo aver letto l'informativa  <a href="@Url.Action("privacy","Home")" target="_blank">Privacy</a>, acconsento al trattamento dei miei dati per finalit&agrave; di invio di mails a carattere promozionale
-            </p>
-            <div class="">
 
-                <div class="">
-                <label for="Privacy0" class="" style="text-align:right;">Acconsento</label>
-                <input type="radio" class="" id="Privacy0" name="Privacy" value="Acconsento" data-val-required="Il campo Privacy &#232; obbligatorio." data-val="true" />
-                </div>
-                <div class="">
-                <label for="Privacy1" class=""  style="text-align:right;">Non Acconsento</label>
-                <input type="radio" class="" id="Privacy1" name="Privacy" value="Non Acconsento" data-val-required="Il campo Privacy &#232; obbligatorio." data-val="true" />
-                </div>
-                @Html.ValidationMessageFor(model => model.Privacy)
+    <hr class='spacer privacy' />
+    <div class="privacy">
+        <p>
+            Dopo aver letto l'informativa <a href="@Url.Action("privacy", "Home")" target="_blank">
+                Privacy</a>, acconsento al trattamento dei miei dati per finalit&agrave; di
+            invio di mails a carattere promozionale
+        </p>
+        <div class='container-radio'>
+            <div class="radio">
+                <label for="Privacy0" class="" style="text-align: right;">
+                    Acconsento</label>
+                <input type="radio" class="" id="Privacy0" name="Privacy" value="Acconsento" data-val-required="Il campo Privacy &#232; obbligatorio."
+                    data-val="true" />
             </div>
-
+            <div class="radio">
+                <label for="Privacy1" class="" style="text-align: right;">
+                    Non Acconsento</label>
+                <input type="radio" class="" id="Privacy1" name="Privacy" value="Non Acconsento"
+                    data-val-required="Il campo Privacy &#232; obbligatorio." data-val="true" />
+            </div>
+            @Html.ValidationMessageFor(model => model.Privacy)
         </div>
-        <br />
+    </div>
 
-            <input type="submit" class="btn"  value="  Iscriviti  " class="" />
+    <br />
+    <hr class='spacer button' />
 
+    <input type="submit" class="btn" value="  Iscriviti  " class="" />
+    <div class='iscriviti'>
+        <div class='clear-box'>
+        </div>
+        <div class='button_container'>
+            <div class='corner_left'>
+            </div>
+            <h4 class='buttons yellow_button'>
+                <input type='submit' value='  Iscriviti  '>
+            </h4>
+            <div class='corner_right'>
+            </div>
+        </div>
+    </div>
 }
-

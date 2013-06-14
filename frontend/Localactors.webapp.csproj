@@ -908,7 +908,7 @@
     <None Include="Content\fonts\nasalization\nasalization_rg-webfont.woff" />
     <Content Include="Views\Shared\_Metatags.cshtml" />
     <Content Include="Views\Home\TOS.cshtml" />
-    <Content Include="Views\Home\fourofour.cshtml" />
+    <Content Include="Views\Shared\fourofour.cshtml" />
     <Content Include="Views\Projects\Index.cshtml" />
     <Content Include="Views\Projects\Details.cshtml" />
     <Content Include="Views\Comments\Index.cshtml" />
@@ -954,6 +954,11 @@
     <Content Include="Views\Shared\_Project_Updates.cshtml" />
     <Content Include="Views\Shared\_Project_Update_Content.cshtml" />
     <Content Include="Views\Projects\ThankYou.cshtml" />
+    <Content Include="Views\Shared\_Form_Question.cshtml" />
+    <Content Include="Views\Shared\_Form_Comment.cshtml" />
+    <Content Include="Views\Shared\_Form_Guestbook.cshtml" />
+    <Content Include="Views\Shared\_ProfileBar_Update.cshtml" />
+    <Content Include="Views\Shared\_ProfileBar_Donation.cshtml" />
     <None Include="_bin_deployableAssemblies\it\Microsoft.Web.Infrastructure.resources.dll" />
     <None Include="_bin_deployableAssemblies\Microsoft.Web.Infrastructure.dll" />
     <None Include="_bin_deployableAssemblies\it\System.Web.WebPages.Razor.resources.dll" />

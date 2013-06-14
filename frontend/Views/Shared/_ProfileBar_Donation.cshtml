@@ -1,0 +1,23 @@
+﻿@using System.Configuration
+@model Localactors.entities.project
+<li>
+    <img alt='' class='photo-project' src='@Model.Image'>
+    <div class='container-title'>
+        <a href='@Url.Action("Details", "Projects", new { id = Model.ProjectID })'>@Model.Title</a>
+        <div class='location'>
+            <div class='icon-where'>
+            </div>
+            <h2>@Model.Location</h2>
+        </div>
+    </div>
+    <div class='donation-money'>
+        @foreach (donation donation in Model.donations.Where(x => x.ProjectID == Model.ProjectID))
+        {
+            <h2>
+                <span class="number">&#128; @donation.Amount</span> donated
+            </h2>
+            <h3 class='date'>
+                on @donation.Date.ToLongDateString()</h3>
+        }
+    </div>
+</li>

@@ -1,23 +1,26 @@
 ﻿@using System.Configuration
 @model Localactors.entities.project
 @{
-@{
     ViewBag.Title = Model.Title + ": Thank You!";
 }
 @{Html.RenderPartial("_Project_Header", Model);}
 <div id='project-update-tab'>
     <ul class='tab'>
-        <li><a href='@Url.Action("Updates", "Projects", new { id = Model.ProjectID })'>
-            Update  <span class="number">(@Model.updates.Count)</span></a> </li>
-        <li><a href='@Url.Action("Details", "Projects", new { id = Model.ProjectID })'>
-            Project Details</a> </li>
-        <li><a href='@Url.Action("Guestbook", "Projects", new { id = Model.ProjectID })'>
-            Guestbook <span class="number">(@Model.project_guestbook.Count)</span></a> </li>
+        <li><a href='@Url.Action("Updates", "Projects", new { id = Model.ProjectID })'>Update
+            <span class="number">(@Model.updates.Count)</span></a> </li>
+        <li><a href='@Url.Action("Details", "Projects", new { id = Model.ProjectID })'>Project
+            Details</a> </li>
+        <li><a href='@Url.Action("Guestbook", "Projects", new { id = Model.ProjectID })'>Guestbook
+            <span class="number">(@Model.project_guestbook.Count)</span></a> </li>
         <li class='active'><a href='@Url.Action("Ask", "Projects", new { id = Model.ProjectID })'>
             Ask a Question</a> </li>
     </ul>
     <hr class='tab-line'>
 </div>
-
-   
-   <div id='thankyou'></div>
+<div id='thankyou'>
+    <h2>
+        Thank you!
+    </h2>
+    <p class='intro'>
+    </p>
+</div>

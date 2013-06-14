@@ -4,17 +4,29 @@ $(document).ready(function () {
         return false;
     });
 
+    //donations
     $("#supported_list a.close")[0].click(function () {
+        $("#supported_list").slideToggle();
+        return false;
+    });
+    $("#profile-bar #donation a").click(function () {
+        $("#supported_list").slideToggle();
+        $("#stream_update").slideUp();
+        return false;
+    });
+
+    //updates
+    $("#stream_update a.close")[0].click(function () {
+        $("#stream_update").slideToggle();
+        return false;
+    });
+    $("#profile-bar #updates a").click(function () {
+        $("#stream_update").slideToggle();
         $("#supported_list").slideUp();
         return false;
     });
 
-    $("#profile-bar #donation a").click(function () {
-        $("#supported_list").slideToggle();
-        return false;
-    });
-
-    //    $('.datepicker').datepicker(); //Initialise any date pickers
+        $('.datepicker').datepicker(); //Initialise any date pickers
     //    $('.wysiwyg').wysihtml5(); //Initializes the wysiwyg editor
 
     //datepicker on modal

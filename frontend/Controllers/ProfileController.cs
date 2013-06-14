@@ -28,6 +28,14 @@ namespace Localactors.webapp.Controllers
         public List<user> supporters { get; set; }
     }
 
+    public class ProfileBarModel
+    {
+        public user user { get; set; }
+        public List<update> updates { get; set; }
+        public List<donation> donations { get; set; }
+        public List<project> projects { get; set; }
+    }
+
     public class ProfileController : ControllerBase
     {
         [ChildActionOnly]
@@ -35,7 +43,15 @@ namespace Localactors.webapp.Controllers
         public PartialViewResult ProfileBar(string username) {
             var user = db.users.FirstOrDefault(x => x.UserName == username);
 
-            return PartialView("_ProfileBar", user);
+            ProfileBarModel model = new ProfileBarModel();
+            model.user = user;
+            if(user!=null) {
+                model.donations = user.donations.ToList();
+                model.projects = user.donations.Select(x=>x.project).Distinct().ToList();
+                model.updates = user.followedProjects.SelectMany(x => x.updates).OrderByDescending(x => x.UpdateID).Skip(0).Take(5).ToList();
+            }
+
+            return PartialView("_ProfileBar", model);
         }
 
         [OutputCache(VaryByParam = "*", Duration = 60)]

@@ -1,13 +1,13 @@
-﻿@model Localactors.entities.user
-@if (Model != null)
+﻿@model Localactors.webapp.Controllers.ProfileBarModel
+@if (Model.user != null)
 {
     <div id='profile-bar'>
         <div id='header-profile'>
             <div id='donor'>
-                <img alt='' class='photo-donor' src='@Model.Image'>
+                <img alt='' class='photo-donor' src='@Model.user.Image'>
                 <div class='container'>
                     <h3 class='name'>
-                        @Model.Name @Model.Lastname</h3>
+                        @Model.user.Name @Model.user.Lastname</h3>
                     <a href='@Url.Action("Settings", "Profile")'>Settings</a>
                 </div>
             </div>
@@ -16,12 +16,11 @@
                 <div class='container'>
                     <div id='supported'>
                         <h3>
-                            <span class="number">@Model.donations.Select(x => x.ProjectID).Distinct().Count()</span>
-                            supported projects
+                            <span class="number">@Model.projects.Count()</span> supported projects
                         </h3>
                     </div>
                     <div id='donation'>
-                        <a href='@Url.Action("Index", "Donation")' id=""><span class="number">&#128; @Model.donations.Sum(x => x.Amount)</span>
+                        <a href='#' id=""><span class="number">&#128; @Model.donations.Sum(x => x.Amount)</span>
                             donated </a>
                     </div>
                 </div>
@@ -40,31 +39,21 @@
         </div>
         <ul id='supported_list' style="display: none; overflow: auto;">
             <hr class='spacer-projects-top' />
-            <a class='close' href='#' id="">close</a>
-            @foreach (project project in Model.donations.Select(x => x.project))
+            <a class='close' href='#'>close</a>
+            @foreach (var item in Model.projects)
             {
-                <li>
-                    <img alt='' class='photo-project' src='@project.Image'>
-                    <div class='container-title'>
-                        <a href='@Url.Action("Details", "Projects", new { id = project.ProjectID })'>@project.Title</a>
-                        <div class='location'>
-                            <div class='icon-where'>
-                            </div>
-                            <h2>@project.Location</h2>
-                        </div>
-                    </div>
-                    <div class='donation-money'>
-                        @foreach (donation donation in Model.donations.Where(x => x.ProjectID == project.ProjectID))
-                        {
-                            <h2>
-                                <span class="number">&#128; donation.Amount</span> donated
-                            </h2>
-                            <h3 class='date'>
-                                on donation.Date.ToShortLongString()</h3>
-                        }
-                    </div>
-                </li>
+                Html.RenderPartial("_ProfileBar_Donation", item);
             }
         </ul>
+        <div id='stream_update' style="display: none; overflow: auto;">
+            <hr class='spacer-projects-top'>
+            <a class='close' href='#'>close</a>
+            <div id='update-body'>
+                @foreach (var item in Model.updates)
+                {
+                    Html.RenderPartial("_ProfileBar_Update", item);
+                }
+            </div>
+        </div>
     </div>
 }
