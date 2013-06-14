@@ -2030,6 +2030,30 @@ namespace Localactors.entities
         private global::System.String _Blog;
         partial void OnBlogChanging(global::System.String value);
         partial void OnBlogChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ProjectGoal
+        {
+            get
+            {
+                return _ProjectGoal;
+            }
+            set
+            {
+                OnProjectGoalChanging(value);
+                ReportPropertyChanging("ProjectGoal");
+                _ProjectGoal = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("ProjectGoal");
+                OnProjectGoalChanged();
+            }
+        }
+        private global::System.String _ProjectGoal;
+        partial void OnProjectGoalChanging(global::System.String value);
+        partial void OnProjectGoalChanged();
 
         #endregion
 

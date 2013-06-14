@@ -61,10 +61,11 @@
         <li><a href="#achievements" data-toggle="tab">Achievements</a></li>
     </ul>
     <div class="tab-content">
-        <div class="tab-pane active" id="project">
-            <div style="overflow: auto;">
-                @using (Html.BeginForm("Edit", "Projects", FormMethod.Post, new { enctype = "multipart/form-data", id = "mainform" }))
-                {
+        
+        @using (Html.BeginForm("Edit", "Projects", FormMethod.Post, new { enctype = "multipart/form-data", id = "mainform" })) {
+            <div class="tab-pane active" id="project">
+                <div style="overflow: auto;">
+                
                     @Html.ValidationSummary(false)
                     <fieldset>
                         @Html.HiddenFor(model => model.ProjectID)
@@ -118,18 +119,25 @@
                             @Html.LabelFor(model => model.Description)
                         </div>
                         <div class="editor-field">
-                            @Html.TextAreaFor(model => model.Description)
+                            @Html.TextAreaFor(model => model.Description, "Project Description")
                             @Html.ValidationMessageFor(model => model.Description)
                         </div>
                         <div class="editor-label">
-                            @Html.LabelFor(model => model.ProjectPlan)
+                            @Html.LabelFor(model => model.ProjectGoal, "Project Goal")
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextAreaFor(model => model.ProjectGoal)
+                            @Html.ValidationMessageFor(model => model.ProjectGoal)
+                        </div>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.ProjectPlan, "Project Plan (description)")
                         </div>
                         <div class="editor-field">
                             @Html.TextAreaFor(model => model.ProjectPlan)
                             @Html.ValidationMessageFor(model => model.ProjectPlan)
                         </div>
                         <div class="editor-label">
-                            @Html.LabelFor(model => model.Cover, "Cover Project")
+                            @Html.LabelFor(model => model.Cover, "Use as Cover Project")
                         </div>
                         <div class="editor-field">
                             @Html.CheckBoxFor(x => x.Cover)
@@ -143,8 +151,7 @@
                             <input type="file" id="Image" name="Image" class="imageupload" />
                             @Html.ValidationMessageFor(model => model.Image)
                             @Html.ValidationMessage("Image")
-                            @if (!string.IsNullOrEmpty(Model.Image))
-                            {
+                            @if (!string.IsNullOrEmpty(Model.Image)) {
                                 <img src="@string.Format("{0}?v={1}", Model.Image, DateTime.Now.Ticks)" class="imagepreview" alt=""  width="128px" />
                             }
                         </div>
@@ -217,9 +224,11 @@
                             <input type="submit" class="btn" value="Save" />
                         </p>
                     </fieldset>
-                }
+                
+                </div>
             </div>
-        </div>
+        }
+
         <div class="tab-pane" id="plan">
             <h3>
                 Project Plan</h3>
@@ -262,38 +271,38 @@
             <a href="#modelplane" role="button" class="btn" data-toggle="modal">Add Project Plan
                 Step</a>
             <div id="modelplane" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="Add Plan"
-                aria-hidden="true">
+                 aria-hidden="true">
                 <form action="@Url.Action("Create", "Plans")" method="POST"  enctype="multipart/form-data">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        ×</button>
-                    <h3 id="">
-                        Update</h3>
-                </div>
-                <div class="modal-body">
-                    <input type="hidden" name="projectid" value="@Model.ProjectID"/>
-                    <input type="hidden" name="returntoproject" value="@Model.ProjectID"/>
-                    <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
-                    <div class="editor-label">
-                        <label for="Title">
-                            Title</label>
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            ×</button>
+                        <h3 id="">
+                            Update</h3>
                     </div>
-                    <div class="editor-field">
-                        <input class="text-box single-line" id="Title" name="Title" type="text" value="" />
-                        <span class="field-validation-valid" data-valmsg-for="Title" data-valmsg-replace="true">
-                        </span>
+                    <div class="modal-body">
+                        <input type="hidden" name="projectid" value="@Model.ProjectID"/>
+                        <input type="hidden" name="returntoproject" value="@Model.ProjectID"/>
+                        <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+                        <div class="editor-label">
+                            <label for="Title">
+                                Title</label>
+                        </div>
+                        <div class="editor-field">
+                            <input class="text-box single-line" id="Title" name="Title" type="text" value="" />
+                            <span class="field-validation-valid" data-valmsg-for="Title" data-valmsg-replace="true">
+                            </span>
+                        </div>
+                        <div class="editor-label">
+                            <label for="Goal">
+                                Cost/Amount</label>
+                        </div>
+                        <div class="editor-field">
+                            <input class="text-box single-line" id="" name="Goal" type="text" value="" />
+                        </div>
                     </div>
-                    <div class="editor-label">
-                        <label for="Goal">
-                            Cost/Amount</label>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn" class="btn btn-primary" value="Create" />
                     </div>
-                    <div class="editor-field">
-                        <input class="text-box single-line" id="" name="Goal" type="text" value="" />
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <input type="submit" class="btn" class="btn btn-primary" value="Create" />
-                </div>
                 </form>
             </div>
         </div>
@@ -338,38 +347,38 @@
             </div>
             <a href="#modalcost" role="button" class="btn" data-toggle="modal">Add Cost</a>
             <div id="modalcost" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="Add Cost"
-                aria-hidden="true">
+                 aria-hidden="true">
                 <form action="@Url.Action("Create", "Costs")" method="POST"  enctype="multipart/form-data">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        ×</button>
-                    <h3 id="">
-                        Update</h3>
-                </div>
-                <div class="modal-body">
-                    <input type="hidden" name="projectid" value="@Model.ProjectID"/>
-                    <input type="hidden" name="returntoproject" value="@Model.ProjectID"/>
-                    <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
-                    <div class="editor-label">
-                        <label for="Title">
-                            Title</label>
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            ×</button>
+                        <h3 id="">
+                            Update</h3>
                     </div>
-                    <div class="editor-field">
-                        <input class="text-box single-line" id="Title" name="Title" type="text" value="" />
-                        <span class="field-validation-valid" data-valmsg-for="Title" data-valmsg-replace="true">
-                        </span>
+                    <div class="modal-body">
+                        <input type="hidden" name="projectid" value="@Model.ProjectID"/>
+                        <input type="hidden" name="returntoproject" value="@Model.ProjectID"/>
+                        <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+                        <div class="editor-label">
+                            <label for="Title">
+                                Title</label>
+                        </div>
+                        <div class="editor-field">
+                            <input class="text-box single-line" id="Title" name="Title" type="text" value="" />
+                            <span class="field-validation-valid" data-valmsg-for="Title" data-valmsg-replace="true">
+                            </span>
+                        </div>
+                        <div class="editor-label">
+                            <label for="Goal">
+                                Cost/Amount</label>
+                        </div>
+                        <div class="editor-field">
+                            <input class="text-box single-line" id="" name="Goal" type="text" value="" />
+                        </div>
                     </div>
-                    <div class="editor-label">
-                        <label for="Goal">
-                            Cost/Amount</label>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn" class="btn btn-primary" value="Create" />
                     </div>
-                    <div class="editor-field">
-                        <input class="text-box single-line" id="" name="Goal" type="text" value="" />
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <input type="submit" class="btn" class="btn btn-primary" value="Create" />
-                </div>
                 </form>
             </div>
         </div>
@@ -380,46 +389,46 @@
                 @foreach (var item in Model.project_photo)
                 {
                     <span class="projectimage"><a href="@Url.Action("Edit", "ProjectPhotos", new { id = item.PhotoID, returntoproject = item.ProjectID })">
-                        <img src="@item.Url" alt="@item.Caption" width="128px" />
-                    </a></span>
+                                                   <img src="@item.Url" alt="@item.Caption" width="128px" />
+                                               </a></span>
                 }
             </div>
             <a href="#modalphoto" role="button" class="btn" data-toggle="modal">Add Photo</a>
             <a href="@Url.Action("Index", "ProjectPhotos", new { projectid = Model.ProjectID })"  class="btn">
                 Project Photos</a>
             <div id="modalphoto" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="Add Photo"
-                aria-hidden="true">
+                 aria-hidden="true">
                 <form action="@Url.Action("Create", "ProjectPhotos")" method="POST"  enctype="multipart/form-data">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        ×</button>
-                    <h3 id="">
-                        Update</h3>
-                </div>
-                <div class="modal-body">
-                    <input type="hidden" name="projectid" value="@Model.ProjectID"/>
-                    <input type="hidden" name="returntoproject" value="@Model.ProjectID"/>
-                    <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
-                    <div class="editor-label">
-                        <label for="Caption">
-                            Caption</label>
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            ×</button>
+                        <h3 id="">
+                            Update</h3>
                     </div>
-                    <div class="editor-field">
-                        <input class="text-box single-line" id="Caption" name="Caption" type="text" value="" />
-                        <span class="field-validation-valid" data-valmsg-for="Caption" data-valmsg-replace="true">
-                        </span>
+                    <div class="modal-body">
+                        <input type="hidden" name="projectid" value="@Model.ProjectID"/>
+                        <input type="hidden" name="returntoproject" value="@Model.ProjectID"/>
+                        <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+                        <div class="editor-label">
+                            <label for="Caption">
+                                Caption</label>
+                        </div>
+                        <div class="editor-field">
+                            <input class="text-box single-line" id="Caption" name="Caption" type="text" value="" />
+                            <span class="field-validation-valid" data-valmsg-for="Caption" data-valmsg-replace="true">
+                            </span>
+                        </div>
+                        <div class="editor-label">
+                            <label for="Url">
+                                Photo</label>
+                        </div>
+                        <div class="editor-field">
+                            <input class="text-box single-line" id="" name="Url" type="file" value="" />
+                        </div>
                     </div>
-                    <div class="editor-label">
-                        <label for="Url">
-                            Photo</label>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn" class="btn btn-primary" value="Create" />
                     </div>
-                    <div class="editor-field">
-                        <input class="text-box single-line" id="" name="Url" type="file" value="" />
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <input type="submit" class="btn" class="btn btn-primary" value="Create" />
-                </div>
                 </form>
             </div>
         </div>
@@ -435,24 +444,24 @@
             </div>
             <br />
             <form action="@Url.Action("TagAdd")" method="POST"  enctype="multipart/form-data">
-            <input type="hidden" name="projectid" value="@Model.ProjectID"/>
-            <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
-            <div class="editor-label">
-                <label for="tagname">
-                    Add Tag</label>
-            </div>
-            <div class="editor-field">
-                <input id="tagname" name="tagname" type="text" value="" />
-            </div>
-            <input type="submit" class="btn" class="btn btn-primary" value="Add Tag" />
+                <input type="hidden" name="projectid" value="@Model.ProjectID"/>
+                <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+                <div class="editor-label">
+                    <label for="tagname">
+                        Add Tag</label>
+                </div>
+                <div class="editor-field">
+                    <input id="tagname" name="tagname" type="text" value="" />
+                </div>
+                <input type="submit" class="btn" class="btn btn-primary" value="Add Tag" />
             </form>
             <div style="overflow: auto;">
                 @foreach (var item in ViewBag.Tags)
                 {
                     <form action="@Url.Action("TagAdd")" method="POST"  enctype="multipart/form-data" class="compact">
-                    <input type="hidden" name="projectid" value="@Model.ProjectID"/>
-                    <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
-                    <input type="submit" class="btn"  class="btn" id="tagname" name="tagname" value="@item.Name" />
+                        <input type="hidden" name="projectid" value="@Model.ProjectID"/>
+                        <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+                        <input type="submit" class="btn"  class="btn" id="tagname" name="tagname" value="@item.Name" />
                     </form> 
                 }
             </div>
@@ -492,47 +501,47 @@
             <a href="@Url.Action("index", "Update", new { projectid = Model.ProjectID })" role="button" class="btn" data-toggle="">
                 Project Updates</a>
             <div id="modalupdate" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="Add Update"
-                aria-hidden="true">
+                 aria-hidden="true">
                 <form action="@Url.Action("Create", "Update")" method="POST"  enctype="multipart/form-data">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        ×</button>
-                    <h3 id="">
-                        Update</h3>
-                </div>
-                <div class="modal-body">
-                    <input type="hidden" name="projectid" value="@Model.ProjectID"/>
-                    <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
-                    <div class="editor-label">
-                        <label for="Title">
-                            Title</label>
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            ×</button>
+                        <h3 id="">
+                            Update</h3>
                     </div>
-                    <div class="editor-field">
-                        <input class="text-box single-line" id="Title" name="Title" type="text" value="" />
-                        <span class="field-validation-valid" data-valmsg-for="Title" data-valmsg-replace="true">
-                        </span>
+                    <div class="modal-body">
+                        <input type="hidden" name="projectid" value="@Model.ProjectID"/>
+                        <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+                        <div class="editor-label">
+                            <label for="Title">
+                                Title</label>
+                        </div>
+                        <div class="editor-field">
+                            <input class="text-box single-line" id="Title" name="Title" type="text" value="" />
+                            <span class="field-validation-valid" data-valmsg-for="Title" data-valmsg-replace="true">
+                            </span>
+                        </div>
+                        <div class="editor-label">
+                            <label for="Title">
+                                Intro</label>
+                        </div>
+                        <div class="editor-field">
+                            <textarea id="" name="Intro" class="wysiwyg" rows="5" style="width: 100%;"></textarea>
+                        </div>
+                        <div class="editor-label">
+                            <label for="Date">
+                                Date</label>
+                        </div>
+                        <div class="editor-field">
+                            <input class="datepicker" data-date-format="dd/mm/yyyy" data-val="true" data-val-required="Il campo Date &amp;#232; obbligatorio."
+                                   id="Date" name="Date" type="text" value="22/05/2013" />
+                            <span class="field-validation-valid" data-valmsg-for="Date" data-valmsg-replace="true">
+                            </span>
+                        </div>
                     </div>
-                    <div class="editor-label">
-                        <label for="Title">
-                            Intro</label>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn" class="btn btn-primary" value="Create" />
                     </div>
-                    <div class="editor-field">
-                        <textarea id="" name="Intro" class="wysiwyg" rows="5" style="width: 100%;"></textarea>
-                    </div>
-                    <div class="editor-label">
-                        <label for="Date">
-                            Date</label>
-                    </div>
-                    <div class="editor-field">
-                        <input class="datepicker" data-date-format="dd/mm/yyyy" data-val="true" data-val-required="Il campo Date &amp;#232; obbligatorio."
-                            id="Date" name="Date" type="text" value="22/05/2013" />
-                        <span class="field-validation-valid" data-valmsg-for="Date" data-valmsg-replace="true">
-                        </span>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <input type="submit" class="btn" class="btn btn-primary" value="Create" />
-                </div>
                 </form>
             </div>
         </div>
@@ -581,70 +590,70 @@
             </table>
             <a href="#modaldonation" role="button" class="btn" data-toggle="modal">Add Donation</a>
             <div id="modaldonation" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="Add Donation"
-                aria-hidden="true">
+                 aria-hidden="true">
                 <form action="@Url.Action("Create", "Donations")" method="POST"  enctype="multipart/form-data">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        ×</button>
-                    <h3 id="">
-                        Donation</h3>
-                </div>
-                <div class="modal-body">
-                    <input type="hidden" name="projectid" value="@Model.ProjectID"/>
-                    <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
-                    <div class="editor-label">
-                        <label for="UserID">
-                            user</label>
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            ×</button>
+                        <h3 id="">
+                            Donation</h3>
                     </div>
-                    <div class="editor-field">
-                        @Html.DropDownList("UserID", ViewBag.Supporters as IEnumerable<SelectListItem>, string.Empty)
-                        <span class="field-validation-valid" data-valmsg-for="UserID" data-valmsg-replace="true">
-                        </span>
+                    <div class="modal-body">
+                        <input type="hidden" name="projectid" value="@Model.ProjectID"/>
+                        <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+                        <div class="editor-label">
+                            <label for="UserID">
+                                user</label>
+                        </div>
+                        <div class="editor-field">
+                            @Html.DropDownList("UserID", ViewBag.Supporters as IEnumerable<SelectListItem>, string.Empty)
+                            <span class="field-validation-valid" data-valmsg-for="UserID" data-valmsg-replace="true">
+                            </span>
+                        </div>
+                        <div class="editor-label">
+                            <label for="Date">
+                                Date</label>
+                        </div>
+                        <div class="editor-field">
+                            <input class="datepicker" data-date-format="dd/mm/yyyy" data-val="true" data-val-required="Il campo Date &amp;#232; obbligatorio."
+                                   id="Date" name="Date" type="text" value="" />
+                            <span class="field-validation-valid" data-valmsg-for="Date" data-valmsg-replace="true">
+                            </span>
+                        </div>
+                        <div class="editor-label">
+                            <label for="Amount">
+                                Amount</label>
+                        </div>
+                        <div class="editor-field">
+                            <input class="text-box single-line" data-val="true" data-val-number="Il campo Amount deve essere un numero."
+                                   data-val-required="Il campo Amount &amp;#232; obbligatorio." id="Amount" name="Amount"
+                                   type="text" value="" />
+                            <span class="field-validation-valid" data-valmsg-for="Amount" data-valmsg-replace="true">
+                            </span>
+                        </div>
+                        <div class="editor-label">
+                            <label for="Currency">
+                                Currency</label>
+                        </div>
+                        <div class="editor-field">
+                            <input class="text-box single-line" data-val="true" data-val-required="Il campo Currency &amp;#232; obbligatorio."
+                                   id="Currency" name="Currency" type="text" value="EUR" />
+                            <span class="field-validation-valid" data-valmsg-for="Currency" data-valmsg-replace="true">
+                            </span>
+                        </div>
+                        <div class="editor-label">
+                            <label for="Description">
+                                Description</label>
+                        </div>
+                        <div class="editor-field">
+                            <textarea name="Description" class="text-box single-line" id="Description"></textarea>
+                            <span class="field-validation-valid" data-valmsg-for="Description" data-valmsg-replace="true">
+                            </span>
+                        </div>
                     </div>
-                    <div class="editor-label">
-                        <label for="Date">
-                            Date</label>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn" class="btn btn-primary" value="Create" />
                     </div>
-                    <div class="editor-field">
-                        <input class="datepicker" data-date-format="dd/mm/yyyy" data-val="true" data-val-required="Il campo Date &amp;#232; obbligatorio."
-                            id="Date" name="Date" type="text" value="" />
-                        <span class="field-validation-valid" data-valmsg-for="Date" data-valmsg-replace="true">
-                        </span>
-                    </div>
-                    <div class="editor-label">
-                        <label for="Amount">
-                            Amount</label>
-                    </div>
-                    <div class="editor-field">
-                        <input class="text-box single-line" data-val="true" data-val-number="Il campo Amount deve essere un numero."
-                            data-val-required="Il campo Amount &amp;#232; obbligatorio." id="Amount" name="Amount"
-                            type="text" value="" />
-                        <span class="field-validation-valid" data-valmsg-for="Amount" data-valmsg-replace="true">
-                        </span>
-                    </div>
-                    <div class="editor-label">
-                        <label for="Currency">
-                            Currency</label>
-                    </div>
-                    <div class="editor-field">
-                        <input class="text-box single-line" data-val="true" data-val-required="Il campo Currency &amp;#232; obbligatorio."
-                            id="Currency" name="Currency" type="text" value="EUR" />
-                        <span class="field-validation-valid" data-valmsg-for="Currency" data-valmsg-replace="true">
-                        </span>
-                    </div>
-                    <div class="editor-label">
-                        <label for="Description">
-                            Description</label>
-                    </div>
-                    <div class="editor-field">
-                        <textarea name="Description" class="text-box single-line" id="Description"></textarea>
-                        <span class="field-validation-valid" data-valmsg-for="Description" data-valmsg-replace="true">
-                        </span>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <input type="submit" class="btn" class="btn btn-primary" value="Create" />
-                </div>
                 </form>
             </div>
         </div>
@@ -681,58 +690,58 @@
             </table>
             <a href="#modalachievement" role="button" class="btn" data-toggle="modal">Add Achievement</a>
             <div id="modalachievement" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="Add Achievement"
-                aria-hidden="true">
+                 aria-hidden="true">
                 <form action="@Url.Action("Create", "Achievements")" method="POST"  enctype="multipart/form-data">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        ×</button>
-                    <h3 id="">
-                        Achievement</h3>
-                </div>
-                <div class="modal-body">
-                    <input type="hidden" name="projectid" value="@Model.ProjectID"/>
-                    <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
-                    <div class="editor-label">
-                        <label for="Date">
-                            Date</label>
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            ×</button>
+                        <h3 id="">
+                            Achievement</h3>
                     </div>
-                    <div class="editor-field">
-                        <input class="datepicker" data-date-format="dd/mm/yyyy" data-val="true" data-val-required="Il campo Date &amp;#232; obbligatorio."
-                            id="Date" name="Date" type="text" value="" />
-                        <span class="field-validation-valid" data-valmsg-for="Date" data-valmsg-replace="true">
-                        </span>
+                    <div class="modal-body">
+                        <input type="hidden" name="projectid" value="@Model.ProjectID"/>
+                        <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+                        <div class="editor-label">
+                            <label for="Date">
+                                Date</label>
+                        </div>
+                        <div class="editor-field">
+                            <input class="datepicker" data-date-format="dd/mm/yyyy" data-val="true" data-val-required="Il campo Date &amp;#232; obbligatorio."
+                                   id="Date" name="Date" type="text" value="" />
+                            <span class="field-validation-valid" data-valmsg-for="Date" data-valmsg-replace="true">
+                            </span>
+                        </div>
+                        <div class="editor-label">
+                            <label for="Title">
+                                Title</label>
+                        </div>
+                        <div class="editor-field">
+                            <input class="text-box single-line" id="Title" name="Title" type="text" value="" />
+                            <span class="field-validation-valid" data-valmsg-for="Title" data-valmsg-replace="true">
+                            </span>
+                        </div>
+                        <div class="editor-label">
+                            <label for="Motivation">
+                                Motivation</label>
+                        </div>
+                        <div class="editor-field">
+                            <textarea name="Motivation" class="text-box single-line" id="Motivation"></textarea>
+                            <span class="field-validation-valid" data-valmsg-for="Motivation" data-valmsg-replace="true">
+                            </span>
+                        </div>
+                        <div class="editor-label">
+                            <label for="Goal">
+                                Goal</label>
+                        </div>
+                        <div class="editor-field">
+                            <textarea name="Goal" class="text-box single-line" id="Goal"></textarea>
+                            <span class="field-validation-valid" data-valmsg-for="Goal" data-valmsg-replace="true">
+                            </span>
+                        </div>
                     </div>
-                    <div class="editor-label">
-                        <label for="Title">
-                            Title</label>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn" class="btn btn-primary" value="Create" />
                     </div>
-                    <div class="editor-field">
-                        <input class="text-box single-line" id="Title" name="Title" type="text" value="" />
-                        <span class="field-validation-valid" data-valmsg-for="Title" data-valmsg-replace="true">
-                        </span>
-                    </div>
-                    <div class="editor-label">
-                        <label for="Motivation">
-                            Motivation</label>
-                    </div>
-                    <div class="editor-field">
-                        <textarea name="Motivation" class="text-box single-line" id="Motivation"></textarea>
-                        <span class="field-validation-valid" data-valmsg-for="Motivation" data-valmsg-replace="true">
-                        </span>
-                    </div>
-                    <div class="editor-label">
-                        <label for="Goal">
-                            Goal</label>
-                    </div>
-                    <div class="editor-field">
-                        <textarea name="Goal" class="text-box single-line" id="Goal"></textarea>
-                        <span class="field-validation-valid" data-valmsg-for="Goal" data-valmsg-replace="true">
-                        </span>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <input type="submit" class="btn" class="btn btn-primary" value="Create" />
-                </div>
                 </form>
             </div>
         </div>

@@ -187,6 +187,7 @@
           <Property Name="Image" Type="varchar" MaxLength="255" />
           <Property Name="Cover" Type="bool" Nullable="false" />
           <Property Name="ProjectPlan" Type="text" />
+          <Property Name="ProjectGoal" Type="text" />
           <Property Name="AgancyName" Type="varchar" MaxLength="255" />
           <Property Name="AgencyLogo" Type="varchar" MaxLength="255" />
           <Property Name="AgencyWebsite" Type="varchar" MaxLength="255" />
@@ -1102,6 +1103,7 @@
           <Property Type="String" Name="Blog" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="project_plan" Relationship="localactorsModel.FK_plan_project" FromRole="project" ToRole="project_plan" />
           <NavigationProperty Name="project_cost" Relationship="localactorsModel.FK_cost_project" FromRole="project" ToRole="project_cost" />
+          <Property Type="String" Name="ProjectGoal" MaxLength="65535" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_achievement_project">
           <End Type="localactorsModel.project" Role="project" Multiplicity="1" />
@@ -1477,6 +1479,7 @@
           <EntitySetMapping Name="projects">
             <EntityTypeMapping TypeName="localactorsModel.project">
               <MappingFragment StoreEntitySet="project">
+                <ScalarProperty Name="ProjectGoal" ColumnName="ProjectGoal" />
                 <ScalarProperty Name="Blog" ColumnName="Blog" />
                 <ScalarProperty Name="Facebook" ColumnName="Facebook" />
                 <ScalarProperty Name="Twitter" ColumnName="Twitter" />

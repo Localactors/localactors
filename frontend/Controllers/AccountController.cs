@@ -271,26 +271,18 @@ namespace Localactors.webapp.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
-            user geo = null;
-            if (!string.IsNullOrEmpty(model.Email))
-            {
-                geo = db.users.FirstOrDefault(x => x.Email == model.Email);
-            }
-            else if (!string.IsNullOrEmpty(model.Username))
-            {
-                geo = db.users.FirstOrDefault(x => x.UserName == model.Username);
-            }
+            user user = db.users.FirstOrDefault(x => x.UserName == model.Username || x.Email == model.Username );
 
-            if (geo == null)
+            if (user == null)
             {
                 ModelState.AddModelError(string.Empty, "Utente non trovato.");
                 return View(model);
             }
 
             string key = computeHash(DateTime.Now.ToString("dd/MM/yyHHmmss") + model.Username);
-            geo.Reset = true;
-            geo.ResetEndDate = DateTime.Now.AddDays(2);
-            geo.Email_Hash = key;
+            user.Reset = true;
+            user.ResetEndDate = DateTime.Now.AddDays(3);
+            user.Email_Hash = key;
 
             TempData["success"] = "Richiesta di reset password ricevuta. Controlla le email.";
 
@@ -298,7 +290,7 @@ namespace Localactors.webapp.Controllers
             string title = "Conferma Reset Password";
             string body = string.Format("Ciao \r\n\r\nPer poter resettare la password è necessario aprire il link seguente:\r\n\r\n{0}\r\n\r\nOppure inserire il codice riportato nella casella di conferma;\r\n\r\nAttenzione: per garantire la sicurezza il codice di rest scadrà entro poche ore.  \r\ncodice:{1}", url, key);
 
-            bool sent = SendMailAws(geo.Email, title, body);
+            bool sent = SendMailAws(user.Email, title, body);
             if (sent)
             {
                 db.SaveChanges();
@@ -306,11 +298,11 @@ namespace Localactors.webapp.Controllers
             }
             else
             {
-                //ModelState.AddModelError("Email", "Problema Tecnico: impossibile inviare l'email.");
-                //return View(model);
+                ModelState.AddModelError("username", "Problema Tecnico: impossibile inviare l'email.");
+                return View(model);
 
-                db.SaveChanges();
-                return RedirectToAction("ResetPassword", new { });
+                //db.SaveChanges();
+                //return RedirectToAction("ResetPassword", new { });
             }
 
             FormsAuthentication.SignOut();
@@ -351,7 +343,7 @@ namespace Localactors.webapp.Controllers
             geo.Reset = false;
             geo.ShouldChangePassword = false;
             geo.ResetEndDate = null;
-            geo.UserPassword = computeHash(model.Password);
+            geo.UserPassword = computeHash(model.Password.ToUpper());
             geo.Email_Hash = null;
 
             db.SaveChanges();

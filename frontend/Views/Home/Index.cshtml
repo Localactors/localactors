@@ -136,7 +136,7 @@
         </ul>
     @foreach (project project in Model.projects)
     {
-        <hr class='spacer-projects'>
+        <hr class='spacer-projects' />
         <div class='cover-projects'>
           <p class='info-project-track'>
               <span class="number">@((DateTime.Now - project.DateEnd).Days)</span> days / <span class="number">&#128; @project.donations.Sum(x => x.Amount)</span> raised of 

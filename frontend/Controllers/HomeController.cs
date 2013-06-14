@@ -23,6 +23,10 @@ namespace Localactors.webapp.Controllers
             return View(model);
         }
 
+        public ActionResult HealthCheck() {
+            return Content("OK");
+        }
+
         public ActionResult Login()
         {
             return RedirectToAction("Login","Account");
