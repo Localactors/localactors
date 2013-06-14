@@ -43,7 +43,7 @@ namespace Localactors.webapp.Controllers
                 .Include("achievements")
                 .Single(p => p.ProjectID == id);
 
-            ViewBag.UserID = CurrentUser.UserID;
+            ViewBag.UserID = CurrentUser != null ? CurrentUser.UserID : 0;
             return View(project);
         }
 
@@ -65,7 +65,7 @@ namespace Localactors.webapp.Controllers
                 //.Include("achievements")
                 .FirstOrDefault(p => p.ProjectID == id);
 
-            ViewBag.UserID = CurrentUser.UserID;
+            ViewBag.UserID = CurrentUser!=null ? CurrentUser.UserID : 0;
             return View(project);
         }
 
@@ -85,7 +85,7 @@ namespace Localactors.webapp.Controllers
                 .Include("updates")
                 .Include("achievements")
                 .Single(p => p.ProjectID == id);
-            ViewBag.UserID = CurrentUser.UserID;
+            ViewBag.UserID = CurrentUser != null ? CurrentUser.UserID : 0;
             return View(new AskModel() { Project = project, Question = new AskQuestion(){ProjectID = id,ProjectName = project.Title,UserName = User.Identity.Name} });
         }
         [HttpPost]
@@ -137,7 +137,7 @@ namespace Localactors.webapp.Controllers
                 .Include("tags")
                 .Single(p => p.ProjectID == id);
 
-            ViewBag.UserID = CurrentUser.UserID;
+            ViewBag.UserID = CurrentUser != null ? CurrentUser.UserID : 0;
             return View(project);
         }
         [HttpPost]
@@ -328,7 +328,7 @@ namespace Localactors.webapp.Controllers
 
             if (Request.UrlReferrer != null) {
                 HttpResponse.RemoveOutputCacheItem(Request.UrlReferrer.AbsolutePath);
-                return Redirect(Request.UrlReferrer.AbsolutePath + "#comments-" + model.update.ProjectID);
+                return Redirect(ReferrerUrlTimestamped() + "#comments-" + model.update.ProjectID);
             }
             return Redirect("/");
         }
@@ -340,8 +340,7 @@ namespace Localactors.webapp.Controllers
 
             if (comment != null && (User.IsInRole("admin") || 
                 comment.UserID == CurrentUser.UserID || 
-                comment.update.UserID == CurrentUser.UserID || 
-                comment.update.project.UserID == CurrentUser.UserID))
+                comment.update.UserID == CurrentUser.UserID ))
             {
                 db.update_comment.DeleteObject(comment);
                 db.SaveChanges();
@@ -353,7 +352,7 @@ namespace Localactors.webapp.Controllers
             if (Request.UrlReferrer != null)
             {
                 HttpResponse.RemoveOutputCacheItem(Request.UrlReferrer.AbsolutePath);
-                return Redirect(Request.UrlReferrer.AbsolutePath + "#comments-" + ProjectID);
+                return Redirect(ReferrerUrlTimestamped() + "#comments-" + ProjectID);
             }
             return Redirect("/");
         }

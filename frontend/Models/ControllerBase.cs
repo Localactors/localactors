@@ -29,8 +29,9 @@ namespace Localactors.webapp
         internal  user CurrentUser {
             get {
                 string username = User.Identity.Name;
-                if (username == null)
-                    return null;
+                if (username == null) {
+                    return new user(){UserID = 0,UserName = null,Email = null};
+                }
 
                 user user = System.Web.HttpContext.Current.Cache.Get(username) as user;
                 if(user==null) {
@@ -57,6 +58,23 @@ namespace Localactors.webapp
 
         }
 
+        //URLS
+        protected string AddVariableToUrl(string url, string name, string value)
+        {
+            url = url + (url.IndexOf("?") > 0 ? "&" : "?") + name + "=" + value;
+            return url;
+        }
+        protected string ReferrerUrlTimestamped() {
+            string referrer = Request.UrlReferrer != null ? Request.UrlReferrer.AbsolutePath : "/";
+            string url = AddVariableToUrl(referrer, "tsp", DateTime.Now.Ticks.ToString());
+            return url;
+        }
+        protected string CurrentUrlTimestamped()
+        {
+            string current = Request.Url != null ? Request.Url.AbsolutePath : "/";
+            string url = AddVariableToUrl(current, "tsp", DateTime.Now.Ticks.ToString());
+            return url;
+        }
 
         //JSON
         protected static T DeserializeFromJson<T>(string input)
