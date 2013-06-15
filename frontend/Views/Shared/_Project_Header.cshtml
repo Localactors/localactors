@@ -1,8 +1,4 @@
-﻿@using System.Configuration
-@model Localactors.entities.project
-@{
-    var PP_URL = Url.Content("~/Scripts/paypal-button.min.js") + "?merchant=" + ConfigurationManager.AppSettings["PP_MerchantAccountId"];
-}
+﻿@model Localactors.entities.project
 <div id='project-update-header'>
     <div id='support'>
         <div class='share'>
@@ -20,24 +16,7 @@
                 <div class='corner_left'>
                 </div>
                 <h4 class='buttons yellow_button'>
-                    @if (User.Identity.IsAuthenticated)
-                    {
-
-                        <script src="@PP_URL"
-                                data-button="donate" 
-                                data-name="P@(Model.ProjectID) @Model.Title" 
-                                data-number="@Model.ProjectID" 
-                                data-custom="@User.Identity.Name"
-                                data-currency="@ConfigurationManager.AppSettings["PP_Currency"]"
-                                data-callback="@ConfigurationManager.AppSettings["PP_Callback"]" 
-                                data-return="@Url.AbsoluteAction("return", "donation", new { projectid = Model.ProjectID })"
-                            @if (@ConfigurationManager.AppSettings["PP_environment"] == "sandbox")
-                            {
-                                <text>data-env = "sandbox"</text>
-                            }
-                            ></script>
-    
-                    }
+                    <a href='@Url.Action("Donate","Projects",new{id=Model.ProjectID})'>Donate</a>
                 </h4>
                 <div class='corner_right'>
                 </div>

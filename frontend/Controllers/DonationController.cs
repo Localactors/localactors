@@ -127,7 +127,7 @@ namespace Localactors.webapp.Controllers
                 return View(donation);
             }
 
-            return RedirectToAction("Index","Projects");
+            return RedirectToAction("ThankYou","Projects",new{id=projectid});
         }
 
         [HttpPost]
@@ -142,7 +142,7 @@ namespace Localactors.webapp.Controllers
             }
 
             if(projectid>0) {
-                return RedirectToAction("Details", "Projects", new{id=projectid});
+                return RedirectToAction("ThankYou", "Projects", new { id = projectid });
             }
 
             return RedirectToAction("Index", "Projects");

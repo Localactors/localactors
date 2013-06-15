@@ -1,42 +1,42 @@
 @font-face {
   font-family: "source sans pro";
   src: url("/fonts/sourcesanspro/sourcesanspro-bold-webfont.eot");
-  src: url("/fonts/sourcesanspro/sourcesanspro-bold-webfont.eot?#iefix") format('eot'), url("/fonts/sourcesanspro/sourcesanspro-bold-webfont.woff") format('woff'), url("/fonts/sourcesanspro/sourcesanspro-bold-webfont.ttf") format('truetype');
+  src: url("/fonts/sourcesanspro/sourcesanspro-bold-webfont.eot?#iefix") format('eot'), url("http://localactors-webapp.s3.amazonaws.com/content/fonts/sourcesanspro/sourcesanspro-bold-webfont.woff") format('woff'), url("http://localactors-webapp.s3.amazonaws.com/content/fonts/sourcesanspro/sourcesanspro-bold-webfont.ttf") format('truetype');
   font-weight: 600;
   font-style: normal; }
 
 @font-face {
   font-family: "source sans pro";
   src: url("/fonts/sourcesanspro/sourcesanspro-italic-webfont.eot");
-  src: url("/fonts/sourcesanspro/sourcesanspro-italic-webfont.eot?#iefix") format('eot'), url("/fonts/sourcesanspro/sourcesanspro-italic-webfont.woff") format('woff'), url("/fonts/sourcesanspro/sourcesanspro-italic-webfont.ttf") format('truetype');
+  src: url("/fonts/sourcesanspro/sourcesanspro-italic-webfont.eot?#iefix") format('eot'), url("http://localactors-webapp.s3.amazonaws.com/content/fonts/sourcesanspro/sourcesanspro-italic-webfont.woff") format('woff'), url("http://localactors-webapp.s3.amazonaws.com/content/fonts/sourcesanspro/sourcesanspro-italic-webfont.ttf") format('truetype');
   font-weight: 400;
   font-style: italic; }
 
 @font-face {
   font-family: "source sans pro";
   src: url("/fonts/sourcesanspro/sourcesanspro-regular-webfont.eot");
-  src: url("/fonts/sourcesanspro/sourcesanspro-regular-webfont.eot?#iefix") format('eot'), url("/fonts/sourcesanspro/sourcesanspro-regular-webfont.woff") format('woff'), url("/fonts/sourcesanspro/sourcesanspro-regular-webfont.ttf") format('truetype');
+  src: url("/fonts/sourcesanspro/sourcesanspro-regular-webfont.eot?#iefix") format('eot'), url("http://localactors-webapp.s3.amazonaws.com/content/fonts/sourcesanspro/sourcesanspro-regular-webfont.woff") format('woff'), url("http://localactors-webapp.s3.amazonaws.com/content/fonts/sourcesanspro/sourcesanspro-regular-webfont.ttf") format('truetype');
   font-weight: 400;
   font-style: normal; }
 
 @font-face {
   font-family: "miso";
-  src: url("/fonts/miso/miso-bold-webfont.eot");
-  src: url("/fonts/miso/miso-bold-webfont.eot?#iefix") format('eot'), url("/fonts/miso/miso-bold-webfont.woff") format('woff'), url("/fonts/miso/miso-bold-webfont.ttf") format('truetype');
+  src: url("http://localactors-webapp.s3.amazonaws.com/content/fonts/miso/miso-bold-webfont.eot");
+  src: url("http://localactors-webapp.s3.amazonaws.com/content/fonts/miso/miso-bold-webfont.eot?#iefix") format('eot'), url("http://localactors-webapp.s3.amazonaws.com/content/fonts/miso/miso-bold-webfont.woff") format('woff'), url("http://localactors-webapp.s3.amazonaws.com/content/fonts/miso/miso-bold-webfont.ttf") format('truetype');
   font-weight: 600;
   font-style: normal; }
 
 @font-face {
   font-family: "miso";
-  src: url("/fonts/miso/miso-light-webfont.eot");
-  src: url("/fonts/miso/miso-light-webfont.eot?#iefix") format('eot'), url("/fonts/miso/miso-light-webfont.woff") format('woff'), url("/fonts/miso/miso-light-webfont.ttf") format('truetype');
+  src: url("http://localactors-webapp.s3.amazonaws.com/content/fonts/miso/miso-light-webfont.eot");
+  src: url("http://localactors-webapp.s3.amazonaws.com/content/fonts/miso/miso-light-webfont.eot?#iefix") format('eot'), url("http://localactors-webapp.s3.amazonaws.com/content/fonts/miso/miso-light-webfont.woff") format('woff'), url("http://localactors-webapp.s3.amazonaws.com/content/fonts/miso/miso-light-webfont.ttf") format('truetype');
   font-weight: 200;
   font-style: normal; }
 
 @font-face {
   font-family: "miso";
-  src: url("/fonts/miso/miso-webfont.eot");
-  src: url("/fonts/miso/miso-webfont.eot?#iefix") format('eot'), url("/fonts/miso/miso-webfont.woff") format('woff'), url("/fonts/miso/miso-webfont.ttf") format('truetype');
+  src: url("http://localactors-webapp.s3.amazonaws.com/content/fonts/miso/miso-webfont.eot");
+  src: url("http://localactors-webapp.s3.amazonaws.com/content/fonts/miso/miso-webfont.eot?#iefix") format('eot'), url("http://localactors-webapp.s3.amazonaws.com/content/fonts/miso/miso-webfont.woff") format('woff'), url("http://localactors-webapp.s3.amazonaws.com/content/fonts/miso/miso-webfont.ttf") format('truetype');
   font-weight: 400;
   font-style: normal; }
 
@@ -330,7 +330,7 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
-/* line 33, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+/* line 33, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.css.sass */
 body {
   width: 100% !important;
   -webkit-text-size-adjust: 100%;
@@ -339,18 +339,18 @@ body {
   padding: 0;
   -webkit-font-smoothing: antialiased; }
 
-/* line 41, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+/* line 41, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.css.sass */
 p {
   font-family: "source sans pro", "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
-/* line 44, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+/* line 44, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.css.sass */
 div.logo {
   background: white url("/content/images/logo_mail.png") no-repeat left top;
   width: 122px;
   height: 71px;
   margin-bottom: 0; }
 
-/* line 50, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+/* line 50, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.css.sass */
 h1, h2, h3, h4, h5, h6 {
   margin: 0.625em 0 0 0;
   color: #ff4874;
@@ -358,50 +358,50 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
   line-height: 1em; }
 
-/* line 56, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+/* line 56, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.css.sass */
 h1 {
   font-size: 2.25em; }
 
-/* line 58, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+/* line 58, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.css.sass */
 h2 {
   font-size: 2em; }
 
-/* line 60, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+/* line 60, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.css.sass */
 h3 {
   font-size: 1.75em; }
 
-/* line 62, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+/* line 62, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.css.sass */
 h4 {
   font-size: 1.5em; }
 
-/* line 64, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+/* line 64, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.css.sass */
 h5 {
   font-size: 1.25em; }
 
-/* line 66, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+/* line 66, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.css.sass */
 h6 {
   font-size: 1em; }
 
-/* line 69, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+/* line 69, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.css.sass */
 hr.border {
   margin-bottom: 0;
   border: 0;
   height: 5px;
   background: url("/content/images/textures/spined.png") repeat-x; }
 
-/* line 75, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+/* line 75, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.css.sass */
 img {
   width: 100%;
   max-width: 100%; }
 
-/* line 79, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+/* line 79, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.css.sass */
 p.subtitle {
   font-size: 1.125em;
   margin: 0.1875em 0 0.3125em 0;
   color: #ff4874;
   text-transform: uppercase;
   font-size: 0.875em; }
-/* line 85, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+/* line 85, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.css.sass */
 p.month {
   font-size: 0.75em;
   margin-top: 0.3125em;
@@ -410,34 +410,34 @@ p.month {
   color: #ff4874;
   font-weight: bold;
   text-transform: uppercase; }
-  /* line 93, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+  /* line 93, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.css.sass */
   p.month span {
     color: #6045ff; }
-/* line 95, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+/* line 95, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.css.sass */
 p.description {
   font-size: 1em;
   display: inline;
   color: #6045ff; }
-/* line 100, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+/* line 100, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.css.sass */
 p a {
   background-color: yellow;
   color: black; }
-  /* line 103, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+  /* line 103, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.css.sass */
   p a:hover {
     color: #6045ff;
     background-color: #81ffd0; }
 
-/* line 107, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+/* line 107, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.css.sass */
 table[id="external"] {
   margin: 0 !important;
   padding: 0 !important;
   background-color: white; }
-  /* line 112, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+  /* line 112, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.css.sass */
   table[id="external"] td[id="externaltd"] {
     max-width: 37.5em;
     padding: 1.25em !important; }
     @media (min-width: 25em) {
-      /* line 112, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+      /* line 112, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.css.sass */
       table[id="external"] td[id="externaltd"] {
         max-width: 25em;
         padding-left: 0.625em;
@@ -450,78 +450,78 @@ table[id="external"] {
           display: table;
           clear: both; } }
     @media (min-width: 32.5em) {
-      /* line 112, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+      /* line 112, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.css.sass */
       table[id="external"] td[id="externaltd"] {
         max-width: 32.5em; } }
-    /* line 117, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+    /* line 117, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.css.sass */
     table[id="external"] td[id="externaltd"] table[id="main"] td[class="story"] {
       margin-top: 1.25em; }
 
 @media screen and (max-device-width: 480px), screen and (max-width: 480px) {
-  /* line 123, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+  /* line 123, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.css.sass */
   div.logo {
     background: white url("/content/images/logo_mail_mobile.png") no-repeat left top;
     width: 78px;
     height: 47px;
     margin-bottom: 1.875em; }
 
-  /* line 129, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+  /* line 129, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.css.sass */
   h1, h2, h3, h4, h5, h6 {
     margin: 0.3125em 0 0 0; }
 
-  /* line 133, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+  /* line 133, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.css.sass */
   h1 {
     font-size: 1.875em; }
 
-  /* line 135, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+  /* line 135, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.css.sass */
   h2 {
     font-size: 1.625em; }
 
-  /* line 137, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+  /* line 137, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.css.sass */
   h3 {
     font-size: 1.5em; }
 
-  /* line 139, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+  /* line 139, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.css.sass */
   h4 {
     font-size: 1.25em; }
 
-  /* line 141, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+  /* line 141, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.css.sass */
   h5 {
     font-size: 1em; }
 
-  /* line 143, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+  /* line 143, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.css.sass */
   h6 {
     font-size: 0.75em; }
 
-  /* line 146, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+  /* line 146, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.css.sass */
   hr.border {
     margin-top: 1.25em;
     margin-bottom: 0.625em; }
 
-  /* line 151, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+  /* line 151, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.css.sass */
   p.subtitle {
     margin: 0.5em 0 0.625em 0; }
-  /* line 153, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+  /* line 153, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.css.sass */
   p.month {
     position: absolute;
     right: 0;
     top: 0;
     padding-right: 0.83333em;
     font-size: 0.75em; }
-  /* line 160, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+  /* line 160, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.css.sass */
   p.description {
     font-size: 0.8125em; }
 
-  /* line 163, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+  /* line 163, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.css.sass */
   table[id="external"] {
     margin: 0 !important;
     padding: 0 !important; }
-    /* line 166, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+    /* line 166, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.css.sass */
     table[id="external"] td[id="externaltd"] {
       max-width: 32.5em;
       _width: 32.5em;
       position: relative;
       padding: 0.3125em !important; }
-      /* line 170, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.sass */
+      /* line 170, /Users/piermariacosina/Documents/middleman/localactors-static/source/content/css/mailing-list.css.sass */
       table[id="external"] td[id="externaltd"] table[id="main"] {
         width: 100%; } }

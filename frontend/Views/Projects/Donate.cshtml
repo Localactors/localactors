@@ -1,0 +1,42 @@
+﻿@using System.Configuration
+@model Localactors.entities.project
+@{
+    ViewBag.Title = Model.Title + ": Thank You!";
+    var PP_URL = Url.Content("~/Scripts/paypal-button.min.js") + "?merchant=" + ConfigurationManager.AppSettings["PP_MerchantAccountId"];
+}
+@{Html.RenderPartial("_Project_Header", Model);}
+<div id='project-update-tab'>
+    <ul class='tab'>
+        <li><a href='@Url.Action("Updates", "Projects", new { id = Model.ProjectID })'>Update
+            <span class="number">(@Model.updates.Count)</span></a> </li>
+        <li><a href='@Url.Action("Details", "Projects", new { id = Model.ProjectID })'>Project
+            Details</a> </li>
+        <li><a href='@Url.Action("Guestbook", "Projects", new { id = Model.ProjectID })'>Guestbook
+            <span class="number">(@Model.project_guestbook.Count)</span></a> </li>
+        <li class='active'><a href='@Url.Action("Ask", "Projects", new { id = Model.ProjectID })'>
+            Ask a Question</a> </li>
+    </ul>
+    <hr class='tab-line'>
+</div>
+<div id='donate'>
+    @if (User.Identity.IsAuthenticated)
+    {
+
+        <script src="@PP_URL"
+                                data-button="donate" 
+                                data-name="P@(Model.ProjectID) @Model.Title" 
+                                data-number="@Model.ProjectID" 
+                                data-custom="@User.Identity.Name"
+                                data-currency="@ConfigurationManager.AppSettings["PP_Currency"]"
+                                data-callback="@ConfigurationManager.AppSettings["PP_Callback"]" 
+                                data-return="@Url.AbsoluteAction("return", "donation", new { projectid = Model.ProjectID })"
+                            @if (@ConfigurationManager.AppSettings["PP_environment"] == "sandbox")
+                            {
+                                <text>data-env = "sandbox"</text>
+                            }
+                            ></script>
+    
+    }else {
+        <div>To danate using Paypal you need to register or login first :)</div>
+    }
+</div>

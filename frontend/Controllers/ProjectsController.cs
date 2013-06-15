@@ -47,6 +47,18 @@ namespace Localactors.webapp.Controllers
             return View(project);
         }
 
+        [OutputCache(VaryByParam = "*", Duration = 60)]
+        public ViewResult Donate(int id)
+        {
+            project project = db.projects
+                .Include("country")
+                .Include("user")
+                .Single(p => p.ProjectID == id);
+
+            ViewBag.UserID = CurrentUser != null ? CurrentUser.UserID : 0;
+            return View(project);
+        }
+
         public ViewResult ThankYou(int id) {
             var model = db.projects.FirstOrDefault(x => x.ProjectID == id);
             return View(model);

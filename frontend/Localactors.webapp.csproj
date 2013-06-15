@@ -208,8 +208,12 @@
     <Content Include="Content\css\datepicker.css" />
     <Content Include="Content\css\mailing-list.css" />
     <Content Include="Content\css\site.css" />
+    <Content Include="Content\images\404_mobile.gif" />
+    <Content Include="Content\images\404_web.gif" />
     <Content Include="Content\images\assets-s0e18abe629.png" />
     <Content Include="Content\images\assets-s2c285df26b.png" />
+    <Content Include="Content\images\assets-s541c47fe87.png" />
+    <Content Include="Content\images\assets-s770762d69d.png" />
     <Content Include="Content\images\assets\allert_blue.png" />
     <Content Include="Content\images\assets\allert_green.png" />
     <Content Include="Content\images\assets\allert_grey.png" />
@@ -240,6 +244,8 @@
     <Content Include="Content\images\assets\check-mobile.png" />
     <Content Include="Content\images\assets\check.png" />
     <Content Include="Content\images\assets\check2.png" />
+    <Content Include="Content\images\assets\checkbox-false.png" />
+    <Content Include="Content\images\assets\checkbox-true.png" />
     <Content Include="Content\images\assets\CIA_logo.png" />
     <Content Include="Content\images\assets\circle_blue.png" />
     <Content Include="Content\images\assets\circle_red.png" />
@@ -254,6 +260,8 @@
     <Content Include="Content\images\assets\doc2.png" />
     <Content Include="Content\images\assets\doc3-mobile.png" />
     <Content Include="Content\images\assets\doc3.png" />
+    <Content Include="Content\images\assets\error404.png" />
+    <Content Include="Content\images\assets\error404_mobile.png" />
     <Content Include="Content\images\assets\error_page.png" />
     <Content Include="Content\images\assets\esagono.png" />
     <Content Include="Content\images\assets\esagono_footer.png" />
@@ -340,6 +348,8 @@
     <Content Include="Content\images\assets\pupazzo_registrati_home.png" />
     <Content Include="Content\images\assets\questionmark.png" />
     <Content Include="Content\images\assets\questionmark_color.png" />
+    <Content Include="Content\images\assets\radio-false.png" />
+    <Content Include="Content\images\assets\radio-true.png" />
     <Content Include="Content\images\assets\robot-1.png" />
     <Content Include="Content\images\assets\robot-2.png" />
     <Content Include="Content\images\assets\robot-3.png" />
@@ -539,6 +549,8 @@
     <Content Include="Content\images\stemmi\stemma_oro_messaggerivoyagers.png" />
     <Content Include="Content\images\stemmi\stemma_oro_primalinea.png" />
     <Content Include="Content\images\stemmi\stemma_oro_sentinelle.png" />
+    <Content Include="Content\images\textures\404_texture.png" />
+    <Content Include="Content\images\textures\404_texture_mobile.png" />
     <Content Include="Content\images\textures\bg_footer.png" />
     <Content Include="Content\images\textures\button_middle_bg.png" />
     <Content Include="Content\images\textures\dash_blue.png" />
@@ -959,6 +971,7 @@
     <Content Include="Views\Shared\_Form_Guestbook.cshtml" />
     <Content Include="Views\Shared\_ProfileBar_Update.cshtml" />
     <Content Include="Views\Shared\_ProfileBar_Donation.cshtml" />
+    <Content Include="Views\Projects\Donate.cshtml" />
     <None Include="_bin_deployableAssemblies\it\Microsoft.Web.Infrastructure.resources.dll" />
     <None Include="_bin_deployableAssemblies\Microsoft.Web.Infrastructure.dll" />
     <None Include="_bin_deployableAssemblies\it\System.Web.WebPages.Razor.resources.dll" />

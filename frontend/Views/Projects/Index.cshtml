@@ -2,7 +2,6 @@
 @model IEnumerable<Localactors.entities.project>
 @{
     ViewBag.Title = "Projects";
-    var PP_URL = Url.Content("~/Scripts/paypal-button.min.js") + "?merchant=" + ConfigurationManager.AppSettings["PP_MerchantAccountId"];
 }
 <div id='projects-container'>
     @foreach (project project in Model)
