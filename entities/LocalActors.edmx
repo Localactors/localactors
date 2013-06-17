@@ -195,6 +195,9 @@
           <Property Name="Twitter" Type="varchar" MaxLength="50" />
           <Property Name="Facebook" Type="varchar" MaxLength="255" />
           <Property Name="Blog" Type="varchar" MaxLength="255" />
+          <Property Name="Web" Type="varchar" MaxLength="255" />
+          <Property Name="Video" Type="varchar" MaxLength="255" />
+          <Property Name="Website" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="project_cost">
           <Key>
@@ -1104,6 +1107,9 @@
           <NavigationProperty Name="project_plan" Relationship="localactorsModel.FK_plan_project" FromRole="project" ToRole="project_plan" />
           <NavigationProperty Name="project_cost" Relationship="localactorsModel.FK_cost_project" FromRole="project" ToRole="project_cost" />
           <Property Type="String" Name="ProjectGoal" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Web" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Video" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Website" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_achievement_project">
           <End Type="localactorsModel.project" Role="project" Multiplicity="1" />
@@ -1479,6 +1485,9 @@
           <EntitySetMapping Name="projects">
             <EntityTypeMapping TypeName="localactorsModel.project">
               <MappingFragment StoreEntitySet="project">
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="Video" ColumnName="Video" />
+                <ScalarProperty Name="Web" ColumnName="Web" />
                 <ScalarProperty Name="ProjectGoal" ColumnName="ProjectGoal" />
                 <ScalarProperty Name="Blog" ColumnName="Blog" />
                 <ScalarProperty Name="Facebook" ColumnName="Facebook" />

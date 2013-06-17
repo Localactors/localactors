@@ -923,16 +923,6 @@
     <Content Include="Views\Shared\fourofour.cshtml" />
     <Content Include="Views\Projects\Index.cshtml" />
     <Content Include="Views\Projects\Details.cshtml" />
-    <Content Include="Views\Comments\Index.cshtml" />
-    <Content Include="Views\Comments\Details.cshtml" />
-    <Content Include="Views\Comments\Create.cshtml" />
-    <Content Include="Views\Comments\Edit.cshtml" />
-    <Content Include="Views\Comments\Delete.cshtml" />
-    <Content Include="Views\Guestbook\Index.cshtml" />
-    <Content Include="Views\Guestbook\Details.cshtml" />
-    <Content Include="Views\Guestbook\Create.cshtml" />
-    <Content Include="Views\Guestbook\Edit.cshtml" />
-    <Content Include="Views\Guestbook\Delete.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
     <Content Include="Content\fonts\sourcesanspro\sourcesanspro-bold-webfont.eot" />

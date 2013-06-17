@@ -4,27 +4,7 @@
     ViewBag.Title = "Account Settings";
 }
 <script type="text/javascript">
-    $(document).ready(function () {
-        $(".imageupload").disableValidation = true;
-        $(".imageupload").change(function () {
-            $("input").addClass("ignore").disableValidation = true;
-            $("form").disableValidation = true;
-            $("#mainform").submit();
-        });
-
-        $("input[type=file]").each(function () {
-            var input = $(this);
-            var name = input.attr("id");
-            var btn = $("<input type='button' value='upload'></input>");
-
-            input.after(btn);
-            input.css("display", "none");
-
-            btn.click(function () {
-                input.click();
-            });
-        });
-    });
+   
 </script>
 <div id='update-body'>
     @using (Html.BeginForm("Settings", "Profile", FormMethod.Post, new { enctype = "multipart/form-data", id = "mainform" }))
@@ -66,7 +46,7 @@
                     Avatar
                 </div>
                 <div class="editor-field">
-                    @Html.EditorFor(model => model.Image)
+                    @Html.HiddenFor(model => model.Image)
                     <input type="file" id="Image" name="Image" class="imageupload" />
                     @Html.ValidationMessageFor(model => model.Image)
                     @Html.ValidationMessage("Image")
@@ -135,7 +115,6 @@
                     @Html.ValidationMessageFor(model => model.Contact_Web)
                 </div>
             </div>
-            <hr />
             <hr class='spacer-update' />
             <div class='update'>
                 <div class='clear-box'>

@@ -104,6 +104,10 @@ namespace Localactors.webapp.Controllers
         public ActionResult Settings()
         {
             user user = db.users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+
+            if (user == null)
+                return RedirectToAction("Index", "Home");
+
             ViewBag.CountryID = new SelectList(db.countries, "CountryID", "Name", user.CountryID);
             return View(user);
         }

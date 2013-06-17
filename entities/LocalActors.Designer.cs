@@ -2054,6 +2054,78 @@ namespace Localactors.entities
         private global::System.String _ProjectGoal;
         partial void OnProjectGoalChanging(global::System.String value);
         partial void OnProjectGoalChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Web
+        {
+            get
+            {
+                return _Web;
+            }
+            set
+            {
+                OnWebChanging(value);
+                ReportPropertyChanging("Web");
+                _Web = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Web");
+                OnWebChanged();
+            }
+        }
+        private global::System.String _Web;
+        partial void OnWebChanging(global::System.String value);
+        partial void OnWebChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Video
+        {
+            get
+            {
+                return _Video;
+            }
+            set
+            {
+                OnVideoChanging(value);
+                ReportPropertyChanging("Video");
+                _Video = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Video");
+                OnVideoChanged();
+            }
+        }
+        private global::System.String _Video;
+        partial void OnVideoChanging(global::System.String value);
+        partial void OnVideoChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Website
+        {
+            get
+            {
+                return _Website;
+            }
+            set
+            {
+                OnWebsiteChanging(value);
+                ReportPropertyChanging("Website");
+                _Website = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Website");
+                OnWebsiteChanged();
+            }
+        }
+        private global::System.String _Website;
+        partial void OnWebsiteChanging(global::System.String value);
+        partial void OnWebsiteChanged();
 
         #endregion
 

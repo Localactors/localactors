@@ -12,7 +12,6 @@ load: [ basicURl+'jquery.js',
 	    yepnope([{load: ['/scripts/site2.js']}]);
 		yepnope([
 			{
-			    load: [ '/scripts/site2.js'],
 				test: Modernizr.mq('all and (max-width: 980px)'),
 				yep:  [basicURl+'toe/dist/toe.min.js','/scripts/320.js'],
 				nope: ['/scripts/960.js']

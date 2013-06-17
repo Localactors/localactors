@@ -17,7 +17,7 @@
     <hr class='tab-line'>
 </div>
 <div id='project-details'>
-    <img alt='Rosella04' class='cover-details' src='content/images/rosella04.jpg'>
+    <img alt='@Model.Title' class='cover-details' src='@Model.Image'>
     <div id='description-details'>
         <p>
             @Html.Raw(Model.Description)
@@ -38,9 +38,11 @@
                     </h2>
                 </li>
             }
-            <li>
-                @Html.Raw(Model.ProjectPlan)
-            </li>
+            @if (@Model.ProjectPlan != null) {
+                <li>
+                    @Html.Raw(Model.ProjectPlan)
+                </li>
+            }
         </ul>
         <ul>
             <li>
