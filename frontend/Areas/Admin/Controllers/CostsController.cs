@@ -38,7 +38,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
 
                 if (db.project_cost.Any(x => x.ProjectID == project_cost.ProjectID))
                 {
-                    int order = db.project_plan.Where(x => x.ProjectID == project_cost.ProjectID).Max(x => x.Order);
+                    int order = db.project_cost.Where(x => x.ProjectID == project_cost.ProjectID).Max(x => x.Order);
                     order = order + 1;
                     project_cost.Order = order;
                 }

@@ -156,7 +156,7 @@
                         }
                     </div>
                     <hr />
-                      <div class="editor-label">
+                    <div class="editor-label">
                         @Html.LabelFor(model => model.Website, "Official Website")
                     </div>
                     <div class="editor-field">
@@ -235,7 +235,7 @@
                         @Html.ValidationMessageFor(model => model.CountryID)
                     </div>
                     <div class="editor-label">
-                        @Html.LabelFor(model => model.Location,"Location (campo libero)")
+                        @Html.LabelFor(model => model.Location, "Location (campo libero)")
                     </div>
                     <div class="editor-field">
                         @Html.EditorFor(model => model.Location)
@@ -256,10 +256,10 @@
                 <table class="table table-condensed table-striped table-bordered">
                     <tr>
                         <th>
-                            Title
+                            Title/Description
                         </th>
                         <th>
-                            Date/Time/Point
+                            Date/Time/Month
                         </th>
                         <th>
                         </th>
@@ -294,18 +294,17 @@
                 aria-hidden="true">
                 <form action="@Url.Action("Create", "Plans")" method="POST"  enctype="multipart/form-data">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        ×</button>
                     <h3 id="">
-                        Update</h3>
+                        Project Plan Step</h3>
                 </div>
                 <div class="modal-body">
                     <input type="hidden" name="projectid" value="@Model.ProjectID"/>
                     <input type="hidden" name="returntoproject" value="@Model.ProjectID"/>
                     <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+                    <input type="hidden" name="Order" value="10" />
                     <div class="editor-label">
                         <label for="Title">
-                            Title</label>
+                            Title/Description</label>
                     </div>
                     <div class="editor-field">
                         <input class="text-box single-line" id="Title" name="Title" type="text" value="" />
@@ -314,7 +313,7 @@
                     </div>
                     <div class="editor-label">
                         <label for="Goal">
-                            Cost/Amount</label>
+                            Date/Time/Month</label>
                     </div>
                     <div class="editor-field">
                         <input class="text-box single-line" id="" name="Goal" type="text" value="" />
@@ -333,7 +332,7 @@
                 <table class="table table-condensed table-striped table-bordered">
                     <tr>
                         <th>
-                            Title
+                            Title/Description
                         </th>
                         <th>
                             Amount
@@ -370,18 +369,17 @@
                 aria-hidden="true">
                 <form action="@Url.Action("Create", "Costs")" method="POST"  enctype="multipart/form-data">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        ×</button>
                     <h3 id="">
-                        Update</h3>
+                        Project Cost</h3>
                 </div>
                 <div class="modal-body">
                     <input type="hidden" name="projectid" value="@Model.ProjectID"/>
                     <input type="hidden" name="returntoproject" value="@Model.ProjectID"/>
                     <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+                    <input type="hidden" name="Order" value="10" />
                     <div class="editor-label">
                         <label for="Title">
-                            Title</label>
+                            Title/Description</label>
                     </div>
                     <div class="editor-field">
                         <input class="text-box single-line" id="Title" name="Title" type="text" value="" />
@@ -394,6 +392,8 @@
                     </div>
                     <div class="editor-field">
                         <input class="text-box single-line" id="" name="Goal" type="text" value="" />
+                        <span class="field-validation-valid" data-valmsg-for="Goal" data-valmsg-replace="true">
+                        </span>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -422,10 +422,8 @@
                 aria-hidden="true">
                 <form action="@Url.Action("Create", "ProjectPhotos")" method="POST"  enctype="multipart/form-data">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        ×</button>
                     <h3 id="">
-                        Update</h3>
+                        Photo</h3>
                 </div>
                 <div class="modal-body">
                     <input type="hidden" name="projectid" value="@Model.ProjectID"/>
@@ -526,8 +524,6 @@
                 aria-hidden="true">
                 <form action="@Url.Action("Create", "Update")" method="POST"  enctype="multipart/form-data">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        ×</button>
                     <h3 id="">
                         Update</h3>
                 </div>
@@ -615,8 +611,6 @@
                 aria-hidden="true">
                 <form action="@Url.Action("Create", "Donations")" method="POST"  enctype="multipart/form-data">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        ×</button>
                     <h3 id="">
                         Donation</h3>
                 </div>
@@ -715,8 +709,6 @@
                 aria-hidden="true">
                 <form action="@Url.Action("Create", "Achievements")" method="POST"  enctype="multipart/form-data">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        ×</button>
                     <h3 id="">
                         Achievement</h3>
                 </div>
