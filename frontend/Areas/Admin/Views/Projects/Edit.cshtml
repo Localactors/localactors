@@ -83,13 +83,7 @@
                         @Html.EditorFor(model => model.AgancyName)
                         @Html.ValidationMessageFor(model => model.AgancyName)
                     </div>
-                    <div class="editor-label">
-                        @Html.LabelFor(model => model.AgencyWebsite, "Agency Website")
-                    </div>
-                    <div class="editor-field">
-                        @Html.EditorFor(model => model.AgencyWebsite)
-                        @Html.ValidationMessageFor(model => model.AgencyWebsite)
-                    </div>
+                  
                     <div class="editor-label">
                         @Html.LabelFor(model => model.AgencyLogo, "Agency Logo")
                     </div>
@@ -105,6 +99,27 @@
                     <div class="editor-field">
                         @Html.TextAreaFor(model => model.AgencyObjective)
                         @Html.ValidationMessageFor(model => model.AgencyObjective)
+                    </div>
+                     <div class="editor-label">
+                        @Html.LabelFor(model => model.AgencyWebsite, "Agency Website")
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.AgencyWebsite)
+                        @Html.ValidationMessageFor(model => model.AgencyWebsite)
+                    </div>
+                      <div class="editor-label">
+                        @Html.LabelFor(model => model.AgencyLink1, "Agency Link #1")
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.AgencyLink1)
+                        @Html.ValidationMessageFor(model => model.AgencyLink1)
+                    </div>
+                      <div class="editor-label">
+                        @Html.LabelFor(model => model.AgencyLink2, "Agency Link #2")
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.AgencyLink2)
+                        @Html.ValidationMessageFor(model => model.AgencyLink2)
                     </div>
                     <hr />
                     <div class="editor-label">

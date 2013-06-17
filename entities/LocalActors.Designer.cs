@@ -2126,6 +2126,54 @@ namespace Localactors.entities
         private global::System.String _Website;
         partial void OnWebsiteChanging(global::System.String value);
         partial void OnWebsiteChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String AgencyLink1
+        {
+            get
+            {
+                return _AgencyLink1;
+            }
+            set
+            {
+                OnAgencyLink1Changing(value);
+                ReportPropertyChanging("AgencyLink1");
+                _AgencyLink1 = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("AgencyLink1");
+                OnAgencyLink1Changed();
+            }
+        }
+        private global::System.String _AgencyLink1;
+        partial void OnAgencyLink1Changing(global::System.String value);
+        partial void OnAgencyLink1Changed();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String AgencyLink2
+        {
+            get
+            {
+                return _AgencyLink2;
+            }
+            set
+            {
+                OnAgencyLink2Changing(value);
+                ReportPropertyChanging("AgencyLink2");
+                _AgencyLink2 = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("AgencyLink2");
+                OnAgencyLink2Changed();
+            }
+        }
+        private global::System.String _AgencyLink2;
+        partial void OnAgencyLink2Changing(global::System.String value);
+        partial void OnAgencyLink2Changed();
 
         #endregion
 
