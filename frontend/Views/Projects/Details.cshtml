@@ -33,8 +33,8 @@
                     <div class='icon-time'>
                     </div>
                     <h2 class='subtitle'>
-                        @item.Time
-                        <span>/ @item.Title</span>
+                        @Html.Raw(item.Time)
+                        <span>/ @Html.Raw(item.Title)</span>
                     </h2>
                 </li>
             }
@@ -55,7 +55,7 @@
                     <div class='icon-cost'>
                     </div>
                     <h2 class='subtitle'>
-                        @item.Goal &#128; <span>/ @item.Title</span>
+                        @Html.Raw(item.Goal) &#128; <span>/ @Html.Raw(item.Title)</span>
                     </h2>
                 </li>
             }
@@ -77,9 +77,9 @@
     <div id='ngo-details'>
         <img alt='' class='logo' src='@Model.AgencyLogo'>
         <h1 class='title'>
-            @Model.AgancyName</h1>
+            @Html.Raw(Model.AgancyName)</h1>
         <p>
-           @Model.AgencyObjective
+           @Html.Raw(Model.AgencyObjective)
         </p>
 
         <ul class='links'>
@@ -88,6 +88,13 @@
                     Contacts</h2>
             </li>
             <li><a class='link' href='@Model.AgencyWebsite'>@Model.AgencyWebsite</a> </li>
+            @if (Model.AgencyLink1 != null) {
+                <li><a class='link' href='@Model.AgencyLink1'>@Model.AgencyLink1</a> </li>
+            }
+            @if (Model.AgencyLink2 != null) {
+                <li><a class='link' href='@Model.AgencyLink2'>@Model.AgencyLink2</a> </li>
+            }
+           
         </ul>
     </div>
 </div>
