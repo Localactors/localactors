@@ -13,6 +13,7 @@
 </p>
 <table class="table table-condensed table-striped table-bordered">
     <tr>
+        <th></th>
         <th>
             user
         </th>
@@ -43,6 +44,9 @@
 
 @foreach (var item in Model) {
     <tr>
+        <td style="background:url(@item.Image); background-size:cover;background-repeat:no-repeat;width:64px;">
+            
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.user.UserName)
         </td>
