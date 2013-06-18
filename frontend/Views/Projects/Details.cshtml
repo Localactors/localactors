@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = Model.Title + "";
 }
+@{Html.RenderPartial("_Project_Header", Model);}
 <div id='project-update-tab'>
     <ul class='tab'>
         <li><a href='@Url.Action("Updates", "Projects", new { id = Model.ProjectID })'>Update <span class="number">(@Model.updates.Count)</span></a>
