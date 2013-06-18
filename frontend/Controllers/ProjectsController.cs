@@ -241,9 +241,9 @@ namespace Localactors.webapp.Controllers
         }
         [HttpPost]
         [Authorize()]
-        public ActionResult GuestbookDelete(int GestpostID, int ProjectID)
+        public ActionResult GuestbookDelete(int GuestpostID, int ProjectID)
         {
-            var post = db.project_guestbook.FirstOrDefault(x => x.GuestpostID == GestpostID);
+            var post = db.project_guestbook.FirstOrDefault(x => x.GuestpostID == GuestpostID);
             if (post!=null && (User.IsInRole("admin") || post.UserID == CurrentUser.UserID || post.project.UserID == CurrentUser.UserID)) {
                 db.project_guestbook.DeleteObject(post);
                 db.SaveChanges();
