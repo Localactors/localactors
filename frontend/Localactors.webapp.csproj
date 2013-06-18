@@ -432,6 +432,7 @@
     <Content Include="Content\images\cemara_logo.jpg" />
     <Content Include="Content\images\cover_project.png" />
     <Content Include="Content\images\cover_project2.png" />
+    <Content Include="Content\images\default_user_256.png" />
     <Content Include="Content\images\favicon.gif" />
     <Content Include="Content\images\frames-s2618f72e5f.png" />
     <Content Include="Content\images\frames\codice_gioco.png" />

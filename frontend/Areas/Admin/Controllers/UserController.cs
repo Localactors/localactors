@@ -72,7 +72,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
                                     //resize+crop
                                     int width = int.Parse(ConfigurationManager.AppSettings["Image_User_Width"]);
                                     int height = int.Parse(ConfigurationManager.AppSettings["Image_User_Height"]);
-                                    string name = file.FileName + ".jpg";
+                                    string name = getGuid() + ".jpg";
                                     string filepath = string.Format("users/{0}", name);
                                     string address = ConfigurationManager.AppSettings["AWSS3BucketUrl"] + filepath;
 
@@ -109,6 +109,8 @@ namespace Localactors.webapp.Areas.Admin.Controllers
                         return View(user);
                     }
                 }
+            }else {
+                user.Image = "https://s3-eu-west-1.amazonaws.com/localactors-webapp/users/default_user_256.png";
             }
 
 
@@ -204,7 +206,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
                                     //resize+crop
                                     int width = int.Parse(ConfigurationManager.AppSettings["Image_User_Width"]);
                                     int height = int.Parse(ConfigurationManager.AppSettings["Image_User_Height"]);
-                                    string name = file.FileName + ".jpg";
+                                    string name = getGuid() + ".jpg";
                                     string filepath = string.Format("users/{0}", name);
                                     string address = ConfigurationManager.AppSettings["AWSS3BucketUrl"] + filepath;
 
@@ -245,6 +247,8 @@ namespace Localactors.webapp.Areas.Admin.Controllers
                 //do not change the password!
                 //user.UserPassword = computeHash(user.UserPassword.ToUpper());
                 user.UserName = user.Email;
+                if(string.IsNullOrEmpty( user.Image) || user.Image.Length <=3 )
+                    user.Image = "https://s3-eu-west-1.amazonaws.com/localactors-webapp/users/default_user_256.png";
 
                 db.users.Attach(user);
                 db.ObjectStateManager.ChangeObjectState(user, EntityState.Modified);

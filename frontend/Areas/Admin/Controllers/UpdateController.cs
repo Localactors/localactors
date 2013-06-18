@@ -161,7 +161,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
                                     //resize+crop
                                     int width = int.Parse(ConfigurationManager.AppSettings["Image_Update_Width"]);
                                     int height = int.Parse(ConfigurationManager.AppSettings["Image_Update_Height"]);
-                                    string name = file.FileName + ".jpg";
+                                    string name = getTimestamp() + ".jpg";
                                     string filepath = string.Format("projects/{0}/update_{1}/{2}", ProjectID, update_content.UpdateID, name);
                                     string address = ConfigurationManager.AppSettings["AWSS3BucketUrl"] + filepath;
 
@@ -256,7 +256,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
                                     //resize+crop
                                     int width = int.Parse(ConfigurationManager.AppSettings["Image_Update_Width"]);
                                     int height = int.Parse(ConfigurationManager.AppSettings["Image_Update_Height"]);
-                                    string name = file.FileName + ".jpg";
+                                    string name = getTimestamp() + ".jpg";
                                     string filepath = string.Format("projects/{0}/update_{1}/{2}", ProjectID, update_content.UpdateID, name);
                                     string address = ConfigurationManager.AppSettings["AWSS3BucketUrl"] + filepath;
 

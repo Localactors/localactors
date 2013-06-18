@@ -49,6 +49,10 @@ namespace Localactors.webapp.Controllers
                 model.donations = user.donations.ToList();
                 model.projects = user.donations.Select(x=>x.project).Distinct().ToList();
                 model.updates = user.followedProjects.SelectMany(x => x.updates).OrderByDescending(x => x.UpdateID).Skip(0).Take(5).ToList();
+            
+                if(model.updates.Count<=0) {
+                    model.updates = db.updates.AsQueryable().OrderByDescending("UpdateID").Take(5).ToList();
+                }
             }
 
             return PartialView("_ProfileBar", model);
@@ -142,7 +146,7 @@ namespace Localactors.webapp.Controllers
                                     //resize+crop
                                     int width = int.Parse(ConfigurationManager.AppSettings["Image_User_Width"]);
                                     int height = int.Parse(ConfigurationManager.AppSettings["Image_User_Height"]);
-                                    string name = file.FileName + ".jpg";
+                                    string name = getGuid() + ".jpg";
                                     string filepath = string.Format("users/{0}", name);
                                     string address = ConfigurationManager.AppSettings["AWSS3BucketUrl"] + filepath;
 

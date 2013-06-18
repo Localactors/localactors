@@ -70,7 +70,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
                                     //resize+crop
                                     int width = int.Parse(ConfigurationManager.AppSettings["Image_Project_Width"]);
                                     int height = int.Parse(ConfigurationManager.AppSettings["Image_Project_Height"]);
-                                    string name = file.FileName + ".jpg";
+                                    string name = getGuid() + ".jpg";
                                     string filepath = string.Format("projects/{0}", name);
                                     string address = ConfigurationManager.AppSettings["AWSS3BucketUrl"] + filepath;
 
@@ -162,7 +162,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
                                     //resize+crop
                                     int width = int.Parse(ConfigurationManager.AppSettings["Image_Project_Width"]);
                                     int height = int.Parse(ConfigurationManager.AppSettings["Image_Project_Height"]);
-                                    string name = file.FileName + ".jpg";
+                                    string name = getGuid() + ".jpg";
                                     string filepath = string.Format("projects/{0}", name);
                                     string address = ConfigurationManager.AppSettings["AWSS3BucketUrl"] + filepath;
 

@@ -193,7 +193,7 @@ namespace Localactors.webapp.Controllers
                                     //resize+crop
                                     int width = int.Parse(ConfigurationManager.AppSettings["Image_Guestbook_Width"]);
                                     int height = int.Parse(ConfigurationManager.AppSettings["Image_Guestbook_Height"]);
-                                    string name = file.FileName + ".jpg";
+                                    string name = getTimestamp() + ".jpg";
                                     string filepath = string.Format("projects/{0}/guestbook/{1}", model.ProjectID, file.FileName);
                                     string address = ConfigurationManager.AppSettings["AWSS3BucketUrl"] + filepath;
 
@@ -298,7 +298,7 @@ namespace Localactors.webapp.Controllers
                                     //resize+crop
                                     int width = int.Parse(ConfigurationManager.AppSettings["Image_Comment_Width"]);
                                     int height = int.Parse(ConfigurationManager.AppSettings["Image_Comment_Height"]);
-                                    string name = file.FileName + ".jpg";
+                                    string name = getTimestamp() + ".jpg";
                                     string filepath = string.Format("projects/{0}/update/{1}/comments/{2}", update.ProjectID, update.UpdateID, file.FileName);
                                     string address = ConfigurationManager.AppSettings["AWSS3BucketUrl"] + filepath;
 

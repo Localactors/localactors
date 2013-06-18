@@ -291,9 +291,9 @@
                                 @Html.DisplayFor(modelItem => item.Time)
                             </td>
                             <td>
-                                @Html.ActionLink("Edit", "Edit", "Costs", new { id = item.PlanID, projectid = Model.ProjectID }, new { })
+                                @Html.ActionLink("Edit", "Edit", "Plans", new { id = item.PlanID, projectid = Model.ProjectID }, new { })
                                 |
-                                @Html.ActionLink("Delete", "Delete", "Costs", new { id = item.PlanID, projectid = Model.ProjectID }, new { })
+                                @Html.ActionLink("Delete", "Delete", "Plans", new { id = item.PlanID, projectid = Model.ProjectID }, new { })
                             </td>
                             <td>@Html.ActionLink("UP", "PlanUp", "Projects", new { id = item.PlanID }, new { })
                                 |

@@ -147,6 +147,12 @@ namespace Localactors.webapp
             string H = BitConverter.ToString(hashedBytes).Replace("-", "");
             return H;
         }
+        internal string getGuid() {
+            return Guid.NewGuid().ToString("N");
+        }
+        internal string getTimestamp() {
+            return DateTime.Now.Ticks.ToString();
+        }
 
         //IMAGES
         protected Image DownloadImage(string _URL)

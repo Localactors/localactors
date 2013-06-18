@@ -193,7 +193,8 @@ namespace Localactors.webapp.Controllers
                                       Reset = false,
                                       Role = "supporter",
                                       Email_Hash = key,
-                                      Newsletter = model.Newsletter
+                                      Newsletter = model.Newsletter,
+                                      Image = "https://s3-eu-west-1.amazonaws.com/localactors-webapp/users/default_user_256.png"
                                   };
 
             if (model.Privacy.Equals("Acconsento", StringComparison.InvariantCultureIgnoreCase))
