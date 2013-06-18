@@ -1,10 +1,26 @@
-﻿@if (Request.IsAuthenticated)
-{                      
-    <a href="@Url.Action("Feed", "Profile")">@User.Identity.Name</a>
-    <a href="@Url.Action("Logout", "Account")">Esci</a> 
-}
-else
+﻿@if (!User.Identity.IsAuthenticated)
 {
-    <a href="@Url.Action("Login", "Account")">Accedi</a>
-    <a href="@Url.Action("Subscribe", "Account")">Iscriviti</a>
+    <div class='join'>
+        <div class='clear-box'>
+        </div>
+        <div class='button_container'>
+            <div class='corner_left'>
+            </div>
+            <h4 class='buttons yellow_button'>
+                <a href='@Url.Action("Subscribe", "Account")'>Join!</a>
+            </h4>
+            <div class='corner_right'>
+            </div>
+        </div>
+        &nbsp;
+        <div class='button_container'>
+            <div class='corner_left'>
+            </div>
+            <h4 class='buttons yellow_button'>
+                <a href='@Url.Action("Login", "Account")'>Login</a>
+            </h4>
+            <div class='corner_right'>
+            </div>
+        </div>
+    </div>
 }
