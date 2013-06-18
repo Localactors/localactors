@@ -112,7 +112,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
                 db.SaveChanges();
 
                 if(returntoproject>0) {
-                    return RedirectToAction("Edit", "Projects", new { id = project_photo.ProjectID});
+                    return RedirectToAction("Edit", "Projects", new { id = project_photo.ProjectID},"photos");
                 }
 
                 return RedirectToAction("Index");  
@@ -242,7 +242,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
 
             if (returntoproject > 0)
             {
-                return RedirectToAction("Edit", "Projects", new { id = project_photo.ProjectID });
+                return RedirectToAction("Edit", "Projects", new { id = project_photo.ProjectID },"photos");
             }
 
             return RedirectToAction("Index");

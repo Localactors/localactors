@@ -267,7 +267,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
             project.tags.Remove(tag);
             db.SaveChanges();
 
-            return RedirectToAction("Edit","Projects",new {id = projectid});
+            return RedirectToAction("Edit","Projects",new {id = projectid},"tags");
         }
         [HttpPost]
         public ActionResult TagAdd(string tagname, int projectid) {
@@ -275,7 +275,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
             name = Regex.Replace(name, @"[^a-zA-Z]", string.Empty);
 
             if(string.IsNullOrEmpty(name)) {
-                return RedirectToAction("Edit", "Projects", new { id = projectid });
+                return RedirectToAction("Edit", "Projects", new { id = projectid },"tags");
             }
 
             tag tag = db.tags.FirstOrDefault(x => x.Name.ToLower() == name);
@@ -293,7 +293,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
             }
 
 
-            return RedirectToAction("Edit","Projects",new {id = projectid});
+            return RedirectToAction("Edit","Projects",new {id = projectid},"tags");
         }
 
         public ActionResult PlanUp(int id) {
@@ -319,7 +319,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
                 db.SaveChanges();
             }
 
-            return RedirectToAction("Edit", "Projects", new { id = item.ProjectID });
+            return RedirectToAction("Edit", "Projects", new { id = item.ProjectID },"plan");
         }
         public ActionResult PlanDown(int id)
         {
@@ -345,7 +345,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
                 db.SaveChanges();
             }
 
-            return RedirectToAction("Edit", "Projects", new { id = item.ProjectID });
+            return RedirectToAction("Edit", "Projects", new { id = item.ProjectID },"plan");
         }
 
         public ActionResult CostUp(int id)
@@ -372,7 +372,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
                 db.SaveChanges();
             }
 
-            return RedirectToAction("Edit", "Projects", new { id = item.ProjectID });
+            return RedirectToAction("Edit", "Projects", new { id = item.ProjectID },"costs");
         }
         public ActionResult CostDown(int id)
         {
@@ -398,7 +398,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
                 db.SaveChanges();
             }
 
-            return RedirectToAction("Edit", "Projects", new { id = item.ProjectID });
+            return RedirectToAction("Edit", "Projects", new { id = item.ProjectID },"costs");
         }
 
         protected override void Dispose(bool disposing)

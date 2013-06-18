@@ -75,6 +75,9 @@ namespace Localactors.webapp
             string url = AddVariableToUrl(current, "tsp", DateTime.Now.Ticks.ToString());
             return url;
         }
+        protected ActionResult RedirectToAction(string action, string controller, object routeValues, string anchor) {
+            return new RedirectResult(Url.Action(action,controller,routeValues) + "#" + anchor);
+        }
 
         //JSON
         protected static T DeserializeFromJson<T>(string input)
