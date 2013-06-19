@@ -45,6 +45,9 @@
     <Reference Include="DataAnnotationsExtensions.ClientValidation, Version=1.1.0.0, Culture=neutral, PublicKeyToken=358a5681c50fd84c, processorArchitecture=MSIL">
       <HintPath>..\packages\DataAnnotationsExtensions.MVC3.1.1.0.0\lib\NETFramework40\DataAnnotationsExtensions.ClientValidation.dll</HintPath>
     </Reference>
+    <Reference Include="DevTrends.MvcDonutCaching">
+      <HintPath>..\packages\MvcDonutCaching.1.2.1\lib\net40\DevTrends.MvcDonutCaching.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=4.4.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
     </Reference>
@@ -73,6 +76,7 @@
       <HintPath>..\packages\NLog.2.0.0.2000\lib\net40\NLog.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -584,6 +588,7 @@
     <Content Include="Content\images\world3.png" />
     <Content Include="Content\img\glyphicons-halflings-white.png" />
     <Content Include="Content\img\glyphicons-halflings.png" />
+    <Content Include="DevTrends.MvcDonutCaching.README.txt" />
     <Content Include="favicon.png" />
     <Content Include="favicon_base.gif" />
     <Content Include="Global.asax" />

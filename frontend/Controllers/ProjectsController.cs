@@ -235,7 +235,7 @@ namespace Localactors.webapp.Controllers
             if (Request.UrlReferrer != null)
             {
                 HttpResponse.RemoveOutputCacheItem(Request.UrlReferrer.AbsolutePath);
-                return Redirect(Request.UrlReferrer.AbsolutePath + "" );
+                return Redirect(ReferrerUrlTimestamped());
             }
             return Redirect("/");
         }
@@ -252,7 +252,7 @@ namespace Localactors.webapp.Controllers
             if (Request.UrlReferrer != null)
             {
                 HttpResponse.RemoveOutputCacheItem(Request.UrlReferrer.AbsolutePath);
-                return Redirect(Request.UrlReferrer.AbsolutePath);
+                return Redirect(ReferrerUrlTimestamped());
             }
             return Redirect("/");
         }

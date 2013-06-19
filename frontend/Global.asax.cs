@@ -47,6 +47,8 @@ namespace Localactors.webapp
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
 
+            HttpRuntime.Cache.Insert("User", DateTime.Now);
+
 	        DefaultModelBinder.ResourceClassKey = "MyResources";
         }
 

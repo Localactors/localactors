@@ -25,16 +25,14 @@
         </th>
 
         <th>
-            Date
+            Target 
         </th>
         <th>
-            DateStart
+            Ends
         </th>
+        <th>Days</th>
         <th>
-            DateEnd
-        </th>
-        <th>
-            country
+            Country
         </th>
         <th>
             Location
@@ -51,32 +49,31 @@
             @Html.DisplayFor(modelItem => item.user.UserName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.AgancyName)
+           @Html.Raw(item.AgancyName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Title)
+            @Html.Raw(item.Title)
         </td>
 
+      
         <td>
-            @Html.DisplayFor(modelItem => item.Date)
+            @Html.DisplayFor(modelItem => item.Target)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DateStart)
+        <td >
+            @item.DateEnd.ToShortDateString()
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DateEnd)
-        </td>
+        <td> @((item.DateEnd-DateTime.Now).Days)</td>
         <td>
             @Html.DisplayFor(modelItem => item.country.Code)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Location)
         </td>
-        <td>
+        <td style="white-space: nowrap;">
             @Html.ActionLink("Edit", "Edit", new { id=item.ProjectID }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.ProjectID }) | 
             @Html.ActionLink("Updates", "Index", "Update", new { projectid = item.ProjectID },new{})  |
-            @Html.ActionLink("New Update", "Create", "Update", new { projectid = item.ProjectID },new{}) 
+            @Html.ActionLink("Add Update", "Create", "Update", new { projectid = item.ProjectID },new{}) 
         </td>
     </tr>
 }

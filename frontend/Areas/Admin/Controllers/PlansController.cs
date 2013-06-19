@@ -32,7 +32,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
                 }
                 db.project_plan.AddObject(project_plan);
                 db.SaveChanges();
-                return RedirectToAction("Edit", "Projects", new { id = project_plan.ProjectID });  
+                return RedirectToAction("Edit", "Projects", new { id = project_plan.ProjectID },"plan");  
             }
 
             ViewBag.ProjectID = new SelectList(db.projects, "ProjectID", "Title", project_plan.ProjectID);
@@ -61,7 +61,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
                 db.project_plan.Attach(project_plan);
                 db.ObjectStateManager.ChangeObjectState(project_plan, EntityState.Modified);
                 db.SaveChanges();
-                return RedirectToAction("Edit", "Projects", new { id = project_plan.ProjectID }); 
+                return RedirectToAction("Edit", "Projects", new { id = project_plan.ProjectID },"plan"); 
             }
             ViewBag.ProjectID = new SelectList(db.projects, "ProjectID", "Title", project_plan.ProjectID);
             ViewBag.Project = db.projects.FirstOrDefault(x => x.ProjectID == project_plan.ProjectID);
@@ -87,7 +87,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
             project_plan project_plan = db.project_plan.Single(p => p.PlanID == id);
             db.project_plan.DeleteObject(project_plan);
             db.SaveChanges();
-            return RedirectToAction("Edit", "Projects", new { id = project_plan.ProjectID }); 
+            return RedirectToAction("Edit", "Projects", new { id = project_plan.ProjectID },"plan"); 
         }
 
         protected override void Dispose(bool disposing)

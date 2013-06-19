@@ -6,11 +6,14 @@ using System.Data.Entity;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.Caching;
 using System.Web;
+using System.Web.Caching;
 using System.Web.Mvc;
 using Amazon.S3;
 using Amazon.S3.Model;
 using Localactors.entities;
+
 
 namespace Localactors.webapp.Controllers
 { 
@@ -36,11 +39,17 @@ namespace Localactors.webapp.Controllers
         public List<project> projects { get; set; }
     }
 
+
+
+
+
     public class ProfileController : ControllerBase
     {
         [ChildActionOnly]
         [OutputCache(Duration = 60, VaryByParam = "*")]
         public PartialViewResult ProfileBar(string username) {
+ 
+         
             var user = db.users.FirstOrDefault(x => x.UserName == username);
 
             ProfileBarModel model = new ProfileBarModel();
@@ -199,6 +208,9 @@ namespace Localactors.webapp.Controllers
 
                 db.ObjectStateManager.ChangeObjectState(user, EntityState.Modified);
                 db.SaveChanges();
+
+                //clear
+                OutputCacheAttribute.ChildActionCache = new MemoryCache("newcache");
             }
 
             ViewBag.CountryID = new SelectList(db.countries, "CountryID", "Name", user.CountryID);

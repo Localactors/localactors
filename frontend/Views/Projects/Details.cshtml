@@ -6,12 +6,12 @@
 @{Html.RenderPartial("_Project_Header", Model);}
 <div id='project-update-tab'>
     <ul class='tab'>
-        <li><a href='@Url.Action("Updates", "Projects", new { id = Model.ProjectID })'>Update <span class="number">(@Model.updates.Count)</span></a>
-        </li>
+        <li><a href='@Url.Action("Updates", "Projects", new { id = Model.ProjectID })'>Update
+            <span class="number">(@Model.updates.Count)</span></a> </li>
         <li class='active'><a href='@Url.Action("Details", "Projects", new { id = Model.ProjectID })'>
             Project Details</a> </li>
-        <li><a href='@Url.Action("Guestbook", "Projects", new { id = Model.ProjectID })'>Guestbook <span class="number">(@Model.project_guestbook.Count)</span></a>
-        </li>
+        <li><a href='@Url.Action("Guestbook", "Projects", new { id = Model.ProjectID })'>Guestbook
+            <span class="number">(@Model.project_guestbook.Count)</span></a> </li>
         <li><a href='@Url.Action("Ask", "Projects", new { id = Model.ProjectID })'>Ask a Question</a>
         </li>
     </ul>
@@ -39,12 +39,13 @@
                     </h2>
                 </li>
             }
-            @if (@Model.ProjectPlan != null) {
-                <li>
-                    @Html.Raw(Model.ProjectPlan)
-                </li>
-            }
         </ul>
+        @if (@Model.ProjectPlan != null)
+        {
+            <p>
+                @Html.Raw(Model.ProjectPlan)
+            </p>
+        }
         <ul>
             <li>
                 <h1 class='title'>
@@ -80,22 +81,22 @@
         <h1 class='title'>
             @Html.Raw(Model.AgancyName)</h1>
         <p>
-           @Html.Raw(Model.AgencyObjective)
+            @Html.Raw(Model.AgencyObjective)
         </p>
-
         <ul class='links'>
             <li>
                 <h2 class='subtitle'>
                     Contacts</h2>
             </li>
             <li><a class='link' href='@Model.AgencyWebsite'>@Model.AgencyWebsite</a> </li>
-            @if (Model.AgencyLink1 != null) {
+            @if (Model.AgencyLink1 != null)
+            {
                 <li><a class='link' href='@Model.AgencyLink1'>@Model.AgencyLink1</a> </li>
             }
-            @if (Model.AgencyLink2 != null) {
+            @if (Model.AgencyLink2 != null)
+            {
                 <li><a class='link' href='@Model.AgencyLink2'>@Model.AgencyLink2</a> </li>
             }
-           
         </ul>
     </div>
 </div>

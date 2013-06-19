@@ -122,7 +122,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
             //comes from project
             if (projectid > 0)
             {
-                return RedirectToAction("Edit", "Projects", new { id = projectid });
+                return RedirectToAction("Edit", "Projects", new { id = projectid },"updates");
             }
 
             return RedirectToAction("Index");

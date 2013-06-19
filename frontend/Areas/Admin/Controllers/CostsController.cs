@@ -50,7 +50,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
                 project_cost.Date = DateTime.Now;
                 db.project_cost.AddObject(project_cost);
                 db.SaveChanges();
-                return RedirectToAction("Edit", "Projects", new { id = project_cost.ProjectID });  
+                return RedirectToAction("Edit", "Projects", new { id = project_cost.ProjectID },"costs");  
             }
 
             ViewBag.ProjectID = new SelectList(db.projects, "ProjectID", "Title", project_cost.ProjectID);
@@ -77,7 +77,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
                 db.project_cost.Attach(project_cost);
                 db.ObjectStateManager.ChangeObjectState(project_cost, EntityState.Modified);
                 db.SaveChanges();
-                return RedirectToAction("Edit", "Projects", new { id = project_cost.ProjectID });
+                return RedirectToAction("Edit", "Projects", new { id = project_cost.ProjectID },"costs");
             }
             ViewBag.ProjectID = new SelectList(db.projects, "ProjectID", "Title", project_cost.ProjectID);
             ViewBag.Project = db.projects.FirstOrDefault(x => x.ProjectID == project_cost.ProjectID);
@@ -103,10 +103,10 @@ namespace Localactors.webapp.Areas.Admin.Controllers
             //comes from project
             if (projectid > 0)
             {
-                return RedirectToAction("Edit", "Projects", new { id = projectid });
+                return RedirectToAction("Edit", "Projects", new { id = projectid },"costs");
             }
 
-            return RedirectToAction("Edit", "Projects", new { id = project_cost.ProjectID });
+            return RedirectToAction("Edit", "Projects", new { id = project_cost.ProjectID },"costs");
         }
 
         protected override void Dispose(bool disposing)
