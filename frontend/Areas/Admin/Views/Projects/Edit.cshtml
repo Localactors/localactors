@@ -68,6 +68,8 @@
                 @Html.ValidationSummary(false)
                 <fieldset>
                     @Html.HiddenFor(model => model.ProjectID)
+                     @Html.HiddenFor(model => model.DateUpdate)
+
                     <div class="editor-label">
                         @Html.LabelFor(model => model.UserID, "user")
                     </div>
