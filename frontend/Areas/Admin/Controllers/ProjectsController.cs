@@ -22,7 +22,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
       
         public ViewResult Index()
         {
-            var projects = db.projects.Include("country").Include("user");
+            var projects = db.projects.Include("country").Include("user").Where(x=>x.Enabled);
             return View(projects.ToList());
         }
 
@@ -42,6 +42,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
             model.Date = DateTime.Now;
             model.DateStart = DateTime.Now;
             model.DateEnd = DateTime.Now.AddDays(60);
+            model.DateUpdate = DateTime.Now;
             model.Target = 1000;
             return View(model);
         } 
@@ -110,6 +111,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
+                project.DateUpdate = DateTime.Now;
                 db.projects.AddObject(project);
                 db.SaveChanges();
                 //return RedirectToAction("Index");  
@@ -200,8 +202,8 @@ namespace Localactors.webapp.Areas.Admin.Controllers
                 }
             }
 
-            if (ModelState.IsValid)
-            {
+            if (ModelState.IsValid) {
+                project.DateUpdate = DateTime.Now;
                 db.projects.Attach(project);
                 db.ObjectStateManager.ChangeObjectState(project, EntityState.Modified);
                 db.SaveChanges();
@@ -255,7 +257,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
             //foreach (var item in project.project_guestbook)
             //    project.project_guestbook.Remove(item);
 
-            db.projects.DeleteObject(project);
+            project.Enabled = false;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

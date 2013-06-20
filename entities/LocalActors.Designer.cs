@@ -1529,7 +1529,8 @@ namespace Localactors.entities
         /// <param name="countryID">Initial value of the CountryID property.</param>
         /// <param name="cover">Initial value of the Cover property.</param>
         /// <param name="target">Initial value of the Target property.</param>
-        public static project Createproject(global::System.Int32 projectID, global::System.Int32 userID, global::System.String title, global::System.DateTime date, global::System.DateTime dateStart, global::System.DateTime dateEnd, global::System.Int32 countryID, global::System.Boolean cover, global::System.Int32 target)
+        /// <param name="enabled">Initial value of the Enabled property.</param>
+        public static project Createproject(global::System.Int32 projectID, global::System.Int32 userID, global::System.String title, global::System.DateTime date, global::System.DateTime dateStart, global::System.DateTime dateEnd, global::System.Int32 countryID, global::System.Boolean cover, global::System.Int32 target, global::System.Boolean enabled)
         {
             project project = new project();
             project.ProjectID = projectID;
@@ -1541,6 +1542,7 @@ namespace Localactors.entities
             project.CountryID = countryID;
             project.Cover = cover;
             project.Target = target;
+            project.Enabled = enabled;
             return project;
         }
 
@@ -2174,6 +2176,54 @@ namespace Localactors.entities
         private global::System.String _AgencyLink2;
         partial void OnAgencyLink2Changing(global::System.String value);
         partial void OnAgencyLink2Changed();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> DateUpdate
+        {
+            get
+            {
+                return _DateUpdate;
+            }
+            set
+            {
+                OnDateUpdateChanging(value);
+                ReportPropertyChanging("DateUpdate");
+                _DateUpdate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DateUpdate");
+                OnDateUpdateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _DateUpdate;
+        partial void OnDateUpdateChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateUpdateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean Enabled
+        {
+            get
+            {
+                return _Enabled;
+            }
+            set
+            {
+                OnEnabledChanging(value);
+                ReportPropertyChanging("Enabled");
+                _Enabled = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Enabled");
+                OnEnabledChanged();
+            }
+        }
+        private global::System.Boolean _Enabled;
+        partial void OnEnabledChanging(global::System.Boolean value);
+        partial void OnEnabledChanged();
 
         #endregion
 

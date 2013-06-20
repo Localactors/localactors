@@ -20,11 +20,13 @@ namespace Localactors.webapp.Controllers
             var projects = db.projects
                 .Include("country")
                 .Include("user")
-                .Include("tags").AsQueryable();
+                .Include("tags").Where(x => x.Enabled);
 
             if(tag!=null) {
                 projects = projects.Where(x => x.tags.Any(y => y.Name == tag));
             }
+
+            projects = projects.OrderBy("DateUpdate");
 
             return View(projects.ToList());
         }
@@ -75,7 +77,7 @@ namespace Localactors.webapp.Controllers
                 .Include("tags")
                 .Include("updates")
                 //.Include("achievements")
-                .FirstOrDefault(p => p.ProjectID == id);
+                .FirstOrDefault(p => p.ProjectID == id && p.Enabled);
 
             ViewBag.UserID = CurrentUser!=null ? CurrentUser.UserID : 0;
             return View(project);

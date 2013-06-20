@@ -50,8 +50,12 @@ namespace Localactors.webapp.Areas.Admin.Controllers
         {
             update.UserID = CurrentUser.UserID;
             update.DateCreated = DateTime.Now;
-            if (ModelState.IsValid)
-            {
+            if (ModelState.IsValid) {
+
+                var proj = db.projects.FirstOrDefault(x => x.ProjectID == update.ProjectID);
+                if(proj!=null)
+                    proj.DateUpdate = DateTime.Now;
+
                 db.updates.AddObject(update);
                 db.SaveChanges();
 
@@ -80,6 +84,10 @@ namespace Localactors.webapp.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                var proj = db.projects.FirstOrDefault(x => x.ProjectID == update.ProjectID);
+                if (proj != null)
+                    proj.DateUpdate = DateTime.Now;
+
                 db.updates.Attach(update);
                 db.ObjectStateManager.ChangeObjectState(update, EntityState.Modified);
                 db.SaveChanges();
@@ -215,7 +223,8 @@ namespace Localactors.webapp.Areas.Admin.Controllers
                 order = order + 1;
             }
 
-            if (update_content.Date == null) update_content.Date = DateTime.Now;
+            if (update_content.Date == null) 
+                update_content.Date = DateTime.Now;
             update_content.DateCreated = DateTime.Now;
             update_content.UserID = CurrentUser.UserID;
             update_content.Order = order;
