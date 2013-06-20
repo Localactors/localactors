@@ -22,13 +22,28 @@ namespace Localactors.webapp.Areas.Admin.Controllers
         //
         // GET: /Admin/User/
 
-        public ViewResult Index(string role = null)
-        {
-            var users = db.users.Include("country").AsQueryable();
+        public ViewResult Index(string role = null, int page =1) {
+
+            if (page < 1) page = 1;
+
+            int pagesize = 20;
+            int skip = pagesize*(page -1);
+            int take = pagesize;
+
+
+            var users = db.users.Include("country").Where(x=>x.Enabled);
             if (role != null)
                 users = users.Where(x => x.Role == role);
 
-            return View(users.ToList());
+            users = users.OrderBy("UserName").Skip(skip).Take(take);
+            var list = users.ToList();
+
+            ViewBag.role = role;
+            ViewBag.page = page ;
+            ViewBag.next = list.Count()>=pagesize;
+            ViewBag.prev = page > 1;
+
+            return View(list);
         }
 
 
@@ -276,7 +291,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
         public ActionResult DeleteConfirmed(int id)
         {            
             user user = db.users.Single(u => u.UserID == id);
-            db.users.DeleteObject(user);
+            user.Enabled = false;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

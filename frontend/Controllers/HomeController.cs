@@ -18,8 +18,8 @@ namespace Localactors.webapp.Controllers
         public ActionResult Index() {
 
             HomeModel model = new HomeModel();
-            model.publishers = db.users.Where(x => x.Role == "publisher").ToList();
-            model.projects = db.projects.OrderByDescending("ProjectID").Take(5).ToList();
+            model.publishers = db.users.Where(x => x.Role == "publisher" && x.Enabled).ToList();
+            model.projects = db.projects.OrderByDescending("ProjectID" ).Take(5).ToList();
 
 
             return View(model);

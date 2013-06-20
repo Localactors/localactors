@@ -17,7 +17,7 @@
     <ul class='publisher-list'>
         @foreach (var item in Model.publishers)
         {
-            var project = item.projects.FirstOrDefault();
+            var project = item.projects.FirstOrDefault(x=>x.Enabled);
             <li class='publisher'><a href='@(project != null ? Url.Action("Updates", "Projects", new { id = project.ProjectID }) : "#")'>
                 <img src="@item.Image" />
                 <span>@item.Name @item.Lastname</span> </a></li>
@@ -39,7 +39,7 @@
     <ul class='publisher-list'>
         @foreach (var item in Model.supporters)
         {
-            <li class='publisher'><a href=''>
+            <li class='publisher'><a href='#'>
                 <img src="@item.Image" />
                 <span>@item.Name @item.Lastname</span> </a></li>
         }

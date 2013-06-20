@@ -56,8 +56,8 @@ namespace Localactors.webapp.Controllers
             model.user = user;
             if(user!=null) {
                 model.donations = user.donations.ToList();
-                model.projects = user.donations.Select(x=>x.project).Distinct().ToList();
-                model.updates = user.followedProjects.SelectMany(x => x.updates).OrderByDescending(x => x.UpdateID).Skip(0).Take(5).ToList();
+                model.projects = user.donations.Select(x=>x.project).Where(p=>p.Enabled).Distinct().ToList();
+                model.updates = user.followedProjects.Where(x=>x.Enabled).SelectMany(x => x.updates).OrderByDescending(x => x.UpdateID).Skip(0).Take(5).ToList();
             
                 if(model.updates.Count<=0) {
                     model.updates = db.updates.AsQueryable().OrderByDescending("UpdateID").Take(5).ToList();
@@ -71,8 +71,8 @@ namespace Localactors.webapp.Controllers
         public ViewResult Index()
         {
             LocalactorsModel model = new LocalactorsModel();
-            model.publishers = db.users.Include("projects").Where(x => x.Role == "publisher").ToList();
-            model.supporters = db.users.Where(x => x.Role == "supporter").ToList();
+            model.publishers = db.users.Include("projects").Where(x => x.Role == "publisher" && x.Enabled).ToList();
+            model.supporters = db.users.Where(x => x.Role == "supporter" && x.Enabled).ToList();
             return View(model);
         }
 

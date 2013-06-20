@@ -61,7 +61,7 @@ namespace Localactors.webapp.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
-            user geo = db.users.FirstOrDefault(x => x.UserName.ToLower() == model.Username.ToLower() || x.Email.ToLower() == model.Username.ToLower());
+            user geo = db.users.FirstOrDefault( x=> ( x.UserName.ToLower() == model.Username.ToLower() || x.Email.ToLower() == model.Username.ToLower()));
 
             if (geo == null)
             {
