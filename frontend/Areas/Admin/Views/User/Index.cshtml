@@ -1,42 +1,37 @@
 ﻿@model IEnumerable<Localactors.entities.user>
-
 @{
     ViewBag.Title = "Index";
 }
-
 <ul class="breadcrumb">
-    <li><a href='@Url.Action("Index","Home")'>Home</a> <span class="divider">/</span></li>
-    <li class="active"><a href='@Url.Action("Index","User")'>Users</a> <span class="divider">/</span></li>
+    <li><a href='@Url.Action("Index", "Home")'>Home</a> <span class="divider">/</span></li>
+    <li class="active"><a href='@Url.Action("Index", "User")'>Users</a> <span class="divider">
+        /</span></li>
 </ul>
-
 <ul class="nav nav-pills">
     <li><a href='@Url.Action("Index", "User")'>All Users</a></li>
-    <li><a href='@Url.Action("Index", "User",new{role="admin"})'>Admins</a></li>
+    <li><a href='@Url.Action("Index", "User", new { role = "admin" })'>Admins</a></li>
     <li><a href='@Url.Action("Index", "User", new { role = "publisher" })'>Publishers</a></li>
     <li><a href='@Url.Action("Index", "User", new { role = "supporter" })'>Supporters</a></li>
 </ul>
-
 <p>
     @Html.ActionLink("Create New", "Create", new { }, new { @class = "btn" })
 </p>
-
 <table class="table table-condensed table-striped table-bordered">
     <tr>
-        <th></th>
+        <th>
+        </th>
         <th>
             Role
         </th>
         <th>
             UserName
         </th>
-       
         <th>
             Name
         </th>
         <th>
             Lastname
         </th>
-
         <th>
             Email
         </th>
@@ -46,45 +41,60 @@
         <th>
             Enabled
         </th>
-
-
-        <th></th>
+        <th>
+        </th>
     </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            <img src="@item.Image" alt="" class="userthumbnail"/>
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Role)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserName)
-        </td>
-   
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Lastname)
-        </td>
-   
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.country.Code)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Enabled)
-        </td>
-       
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.UserID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.UserID })
-        </td>
-    </tr>
-}
-
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <img src="@item.Image" alt="" class="userthumbnail"/>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Role)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lastname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.country.Code)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Enabled)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.UserID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.UserID })
+            </td>
+        </tr>
+        foreach (project project in item.projects)
+        {
+        <tr>
+            <td colspan="8">
+            </td>
+            <td>@Html.ActionLink(project.Title, "Edit", "Projects", new { id = project.ProjectID }, new { })
+            </td>
+        </tr>
+        }
+        <tr>
+            <td colspan="9">
+            </td>
+        </tr>
+    }
 </table>
+<div class="pagination">
+    <ul>
+        <li><a href="@(ViewBag.prev ? Url.Action("index",new{page=ViewBag.page - 1, role=ViewBag.role}):"#")" >Prev</a></li>
+        <li><a href="@Url.Action("index",new{page=ViewBag.page, role=ViewBag.role})" class="active">@ViewBag.page</a></li>
+        <li><a href="@(ViewBag.next ? Url.Action("index",new{page=ViewBag.page + 1, role=ViewBag.role}): "#")" >Next</a></li>
+    </ul>
+</div>
