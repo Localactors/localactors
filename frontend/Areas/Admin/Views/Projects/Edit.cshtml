@@ -68,8 +68,14 @@
                 @Html.ValidationSummary(false)
                 <fieldset>
                     @Html.HiddenFor(model => model.ProjectID)
-                     @Html.HiddenFor(model => model.DateUpdate)
-
+                    @Html.HiddenFor(model => model.DateUpdate)
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Enabled )
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Enabled)
+                        @Html.ValidationMessageFor(model => model.Enabled)
+                    </div>
                     <div class="editor-label">
                         @Html.LabelFor(model => model.UserID, "user")
                     </div>
@@ -85,7 +91,6 @@
                         @Html.EditorFor(model => model.AgancyName)
                         @Html.ValidationMessageFor(model => model.AgancyName)
                     </div>
-                  
                     <div class="editor-label">
                         @Html.LabelFor(model => model.AgencyLogo, "Agency Logo")
                     </div>
@@ -102,21 +107,21 @@
                         @Html.TextAreaFor(model => model.AgencyObjective)
                         @Html.ValidationMessageFor(model => model.AgencyObjective)
                     </div>
-                     <div class="editor-label">
+                    <div class="editor-label">
                         @Html.LabelFor(model => model.AgencyWebsite, "Agency Website")
                     </div>
                     <div class="editor-field">
                         @Html.EditorFor(model => model.AgencyWebsite)
                         @Html.ValidationMessageFor(model => model.AgencyWebsite)
                     </div>
-                      <div class="editor-label">
+                    <div class="editor-label">
                         @Html.LabelFor(model => model.AgencyLink1, "Agency Link #1")
                     </div>
                     <div class="editor-field">
                         @Html.EditorFor(model => model.AgencyLink1)
                         @Html.ValidationMessageFor(model => model.AgencyLink1)
                     </div>
-                      <div class="editor-label">
+                    <div class="editor-label">
                         @Html.LabelFor(model => model.AgencyLink2, "Agency Link #2")
                     </div>
                     <div class="editor-field">

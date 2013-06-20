@@ -588,7 +588,6 @@
     <Content Include="Content\images\world3.png" />
     <Content Include="Content\img\glyphicons-halflings-white.png" />
     <Content Include="Content\img\glyphicons-halflings.png" />
-    <Content Include="DevTrends.MvcDonutCaching.README.txt" />
     <Content Include="favicon.png" />
     <Content Include="favicon_base.gif" />
     <Content Include="Global.asax" />
@@ -902,7 +901,6 @@
     <Content Include="Areas\Admin\Views\Plans\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Plans\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Plans\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Projects\ThankYou.cshtml" />
     <None Include="Content\fonts\droid-sans\droidsans-bold-webfont.eot" />
     <None Include="Content\fonts\droid-sans\droidsans-bold-webfont.ttf" />
     <None Include="Content\fonts\droid-sans\droidsans-bold-webfont.woff" />

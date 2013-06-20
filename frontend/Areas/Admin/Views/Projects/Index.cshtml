@@ -11,7 +11,7 @@
 <p>
     @Html.ActionLink("Create New", "Create", new { }, new { @class = "btn" })
 </p>
-<table class="table table-condensed table-striped table-bordered">
+<table class="table table-condensed table-bordered">
     <tr>
         <th></th>
         <th>
@@ -38,10 +38,11 @@
             Location
         </th>
         <th></th>
+ 
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
+    <tr class="@(item.Enabled == false ? "disabled":"")">
         <td style="background:url(@item.Image); background-size:cover;background-repeat:no-repeat;width:64px;">
             
         </td>
@@ -69,11 +70,14 @@
         <td>
             @Html.DisplayFor(modelItem => item.Location)
         </td>
+     
         <td style="white-space: nowrap;">
+            
             @Html.ActionLink("Edit", "Edit", new { id=item.ProjectID }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.ProjectID }) | 
             @Html.ActionLink("Updates", "Index", "Update", new { projectid = item.ProjectID },new{})  |
-            @Html.ActionLink("Add Update", "Create", "Update", new { projectid = item.ProjectID },new{}) 
+            @Html.ActionLink("Add Update", "Create", "Update", new { projectid = item.ProjectID },new{}) | 
+            @(item.Enabled ? Html.ActionLink("Disable", "Disable", new {id = item.ProjectID}) : Html.ActionLink("Enable", "Enable", new {id = item.ProjectID}))
         </td>
     </tr>
 }

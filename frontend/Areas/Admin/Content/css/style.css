@@ -39,3 +39,5 @@ form.compact{ display: inline-block;float: left;margin: 2px;overflow: auto;}
 
 .userthumbnail { height: 32px;border-radius: 24px;}
 .projectthumbnail { height: 32px;width: 32px; border-radius: 24px;}
+
+.disabled{ background-color: #ccc;color: #666;}
