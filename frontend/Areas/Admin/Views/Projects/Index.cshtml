@@ -47,7 +47,7 @@
             
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.user.UserName)
+            @Html.ActionLink(item.user.UserName, "Edit","User", new { id=item.UserID },new{})
         </td>
         <td>
            @Html.Raw(item.AgancyName)
