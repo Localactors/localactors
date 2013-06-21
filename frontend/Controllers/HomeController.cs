@@ -19,7 +19,7 @@ namespace Localactors.webapp.Controllers
 
             HomeModel model = new HomeModel();
             model.publishers = db.users.Where(x => x.Role == "publisher" && x.Enabled).ToList();
-            model.projects = db.projects.OrderByDescending("ProjectID" ).Take(5).ToList();
+            model.projects = db.projects.OrderByDescending("ProjectID" ).Where(x=>x.Enabled).Take(5).ToList();
 
 
             return View(model);
