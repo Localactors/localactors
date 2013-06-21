@@ -137,6 +137,7 @@
     <Compile Include="Areas\Admin\Controllers\CountryController.cs" />
     <Compile Include="Areas\Admin\Controllers\DonationsController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\LogsController.cs" />
     <Compile Include="Areas\Admin\Controllers\MailinglistController.cs" />
     <Compile Include="Areas\Admin\Controllers\PlansController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProjectPhotosController.cs" />
@@ -901,6 +902,8 @@
     <Content Include="Areas\Admin\Views\Plans\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Plans\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Plans\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Logs\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Logs\Details.cshtml" />
     <None Include="Content\fonts\droid-sans\droidsans-bold-webfont.eot" />
     <None Include="Content\fonts\droid-sans\droidsans-bold-webfont.ttf" />
     <None Include="Content\fonts\droid-sans\droidsans-bold-webfont.woff" />

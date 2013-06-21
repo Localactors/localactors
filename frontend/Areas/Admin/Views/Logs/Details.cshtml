@@ -1,0 +1,34 @@
+﻿@model Localactors.entities.transaction_dump
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<ul class="breadcrumb">
+    <li><a href='@Url.Action("Index","Home")'>Home</a> <span class="divider">/</span></li>
+    <li><a href='@Url.Action("Index","logs")'>Logs</a> <span class="divider">/</span></li>
+    <li class="active"><a href="@Url.Action("Details", "logs",new{id=Model.DumpID})">@Model.Type (@Model.Date.ToUniversalTime())</a> </li>
+</ul>
+
+<fieldset>
+    <legend>Log Detail</legend>
+
+    <div class="display-label">Date</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Date)
+    </div>
+
+    <div class="display-label">Type</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Type)
+    </div>
+    <hr/>
+    <div class="display-label">Dump</div>
+    <div class="">
+        <textarea style="width:100%;" rows="12">@Html.Raw(Model.Dump)</textarea>
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.DumpID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

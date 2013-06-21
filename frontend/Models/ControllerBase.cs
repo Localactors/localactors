@@ -79,6 +79,21 @@ namespace Localactors.webapp
             return new RedirectResult(Url.Action(action,controller,routeValues) + "#" + anchor);
         }
 
+        //Transaction Logs
+        protected void LogStuff(string type, DateTime date, string body) {
+            try {
+                transaction_dump dump = new transaction_dump();
+                dump.Date = date;
+                dump.Type = type;
+                dump.Dump = body;
+
+                db.transaction_dump.AddObject(dump);
+                db.SaveChanges();
+            }catch(Exception ex) {
+                //do nothing
+            }
+        }
+
         //JSON
         protected static T DeserializeFromJson<T>(string input)
         {

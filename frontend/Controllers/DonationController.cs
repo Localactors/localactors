@@ -71,6 +71,9 @@ namespace Localactors.webapp.Controllers
         [Authorize(Roles = "supporter,admin,publisher")]
         public ActionResult Return(int projectid=0)
         {
+
+            LogStuff("PAYPAL RETURN", DateTime.Now, Request.ToString());
+
             /*
              * mc_gross=1.00
              * &protection_eligibility=Eligible
@@ -155,9 +158,12 @@ namespace Localactors.webapp.Controllers
             //logging stuff
             string body = "";
             string nl = "\r\n";
-            body = body + "Form:" + nl + Request.Form.ToString().Replace("&", nl) + nl + nl;
+
 
             try {
+
+                body = Request.Form.ToString().Replace("&", nl) + nl + nl;
+                LogStuff("PAYPAL CALLBACK", DateTime.Now, Request.Form.ToString());
 
                 string custom = Request.Form["custom"];
                 string item_name = Request.Form["item_name"];
@@ -255,7 +261,8 @@ namespace Localactors.webapp.Controllers
                 SendMailAws(ConfigurationManager.AppSettings["PP_webappEmailNotificationAddress"], "Paypal IPN Confirm:", body);
                 return Content("");
             }catch(Exception ex) {
-                SendMailAws(ConfigurationManager.AppSettings["PP_webappEmailNotificationAddress"], "Paypal IPN Error:", "Error: " + ex.Message + "\r\n\r\n" + body);
+                LogStuff("PAYPAL ERROR",DateTime.Now,ex.Message);
+                LogStuff("PAYPAL ERROR", DateTime.Now, body);
                 return Content("");
             }
         }

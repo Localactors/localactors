@@ -39,7 +39,7 @@
         <!--return and ipn callback-->
         <input type="hidden" name="return" value="@Url.AbsoluteAction("return", "donation", new { projectid = Model.ProjectID })">
         <input type="hidden" name="notify_url" value="@ConfigurationManager.AppSettings["PP_Callback"]">
-        <input type="hidden" name="callback_url" value="@ConfigurationManager.AppSettings["PP_Callback"]">
+        <!--input type="hidden" name="callback_url" value="@ConfigurationManager.AppSettings["PP_Callback"]"-->
         <!--paypal signup page locale-->
         <input type="hidden" name="lc" value="US">
         <!--item details-->

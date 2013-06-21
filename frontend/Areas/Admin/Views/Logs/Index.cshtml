@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Localactors.entities.transaction_dump>
+
+@{
+    ViewBag.Title = "Log Dumps";
+}
+<ul class="breadcrumb">
+    <li><a href='@Url.Action("Index","Home")'>Home</a> <span class="divider">/</span></li>
+    <li class="active"><a href='@Url.Action("Index","logs")'>Logs</a> </li>
+</ul>
+
+<table class="table table-condensed table-bordered">
+    <tr>
+        <th>
+            Date
+        </th>
+        <th>
+            Type
+        </th>
+        <th>
+            Dump
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @item.Date.ToUniversalTime()
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Type)
+        </td>
+        <td>
+            @Html.Raw(item.Dump.Truncate(100))
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id=item.DumpID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.DumpID })
+        </td>
+    </tr>
+}
+
+</table>

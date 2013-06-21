@@ -362,6 +362,22 @@ namespace Localactors.entities
             }
         }
         private ObjectSet<project_cost> _project_cost;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<transaction_dump> transaction_dump
+        {
+            get
+            {
+                if ((_transaction_dump == null))
+                {
+                    _transaction_dump = base.CreateObjectSet<transaction_dump>("transaction_dump");
+                }
+                return _transaction_dump;
+            }
+        }
+        private ObjectSet<transaction_dump> _transaction_dump;
 
         #endregion
 
@@ -501,6 +517,14 @@ namespace Localactors.entities
         public void AddToproject_cost(project_cost project_cost)
         {
             base.AddObject("project_cost", project_cost);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the transaction_dump EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTotransaction_dump(transaction_dump transaction_dump)
+        {
+            base.AddObject("transaction_dump", transaction_dump);
         }
 
         #endregion
@@ -3990,6 +4014,137 @@ namespace Localactors.entities
 
         #endregion
 
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="localactorsModel", Name="transaction_dump")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class transaction_dump : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new transaction_dump object.
+        /// </summary>
+        /// <param name="dumpID">Initial value of the DumpID property.</param>
+        /// <param name="date">Initial value of the Date property.</param>
+        public static transaction_dump Createtransaction_dump(global::System.Int32 dumpID, global::System.DateTime date)
+        {
+            transaction_dump transaction_dump = new transaction_dump();
+            transaction_dump.DumpID = dumpID;
+            transaction_dump.Date = date;
+            return transaction_dump;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 DumpID
+        {
+            get
+            {
+                return _DumpID;
+            }
+            set
+            {
+                if (_DumpID != value)
+                {
+                    OnDumpIDChanging(value);
+                    ReportPropertyChanging("DumpID");
+                    _DumpID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("DumpID");
+                    OnDumpIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _DumpID;
+        partial void OnDumpIDChanging(global::System.Int32 value);
+        partial void OnDumpIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime Date
+        {
+            get
+            {
+                return _Date;
+            }
+            set
+            {
+                OnDateChanging(value);
+                ReportPropertyChanging("Date");
+                _Date = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Date");
+                OnDateChanged();
+            }
+        }
+        private global::System.DateTime _Date;
+        partial void OnDateChanging(global::System.DateTime value);
+        partial void OnDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Type
+        {
+            get
+            {
+                return _Type;
+            }
+            set
+            {
+                OnTypeChanging(value);
+                ReportPropertyChanging("Type");
+                _Type = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Type");
+                OnTypeChanged();
+            }
+        }
+        private global::System.String _Type;
+        partial void OnTypeChanging(global::System.String value);
+        partial void OnTypeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Dump
+        {
+            get
+            {
+                return _Dump;
+            }
+            set
+            {
+                OnDumpChanging(value);
+                ReportPropertyChanging("Dump");
+                _Dump = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Dump");
+                OnDumpChanged();
+            }
+        }
+        private global::System.String _Dump;
+        partial void OnDumpChanging(global::System.String value);
+        partial void OnDumpChanged();
+
+        #endregion
+
+    
     }
     
     /// <summary>

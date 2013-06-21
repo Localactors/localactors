@@ -18,6 +18,7 @@
           <EntitySet Name="project_tag" EntityType="localactorsModel.Store.project_tag" store:Type="Tables" Schema="localactors" />
           <EntitySet Name="tag" EntityType="localactorsModel.Store.tag" store:Type="Tables" Schema="localactors" />
           <EntitySet Name="transaction" EntityType="localactorsModel.Store.transaction" store:Type="Tables" Schema="localactors" />
+          <EntitySet Name="transaction_dump" EntityType="localactorsModel.Store.transaction_dump" store:Type="Tables" Schema="localactors" />
           <EntitySet Name="update" EntityType="localactorsModel.Store.update" store:Type="Tables" Schema="localactors" />
           <EntitySet Name="update_comment" EntityType="localactorsModel.Store.update_comment" store:Type="Tables" Schema="localactors" />
           <EntitySet Name="update_content" EntityType="localactorsModel.Store.update_content" store:Type="Tables" Schema="localactors" />
@@ -281,6 +282,15 @@
           <Property Name="ReceiverEmail" Type="varchar" MaxLength="255" />
           <Property Name="ItemName" Type="varchar" MaxLength="255" />
           <Property Name="ItemNumber" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="transaction_dump">
+          <Key>
+            <PropertyRef Name="DumpID" />
+          </Key>
+          <Property Name="DumpID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="255" />
+          <Property Name="Dump" Type="text" />
         </EntityType>
         <EntityType Name="update">
           <Key>
@@ -785,6 +795,7 @@
             <End Role="project" EntitySet="projects" />
             <End Role="project_cost" EntitySet="project_cost" />
           </AssociationSet>
+          <EntitySet Name="transaction_dump" EntityType="localactorsModel.transaction_dump" />
         </EntityContainer>
         <EntityType Name="achievement">
           <Key>
@@ -1305,6 +1316,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="transaction_dump">
+          <Key>
+            <PropertyRef Name="DumpID" />
+          </Key>
+          <Property Type="Int32" Name="DumpID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="DateTime" Name="Date" Nullable="false" />
+          <Property Type="String" Name="Type" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Dump" MaxLength="65535" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1585,6 +1605,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="transaction_dump">
+            <EntityTypeMapping TypeName="localactorsModel.transaction_dump">
+              <MappingFragment StoreEntitySet="transaction_dump">
+                <ScalarProperty Name="Dump" ColumnName="Dump" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="DumpID" ColumnName="DumpID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1786,6 +1816,7 @@
           <ConnectorPoint PointX="5.5830054218750007" PointY="5.4324446614583337" />
           <ConnectorPoint PointX="7.5" PointY="5.4324446614583337" />
         </AssociationConnector>
+        <EntityTypeShape EntityType="localactorsModel.transaction_dump" Width="1.5" PointX="4.875" PointY="0.75" Height="1.7879850260416674" />
       </Diagram>
     </Diagrams>
   </Designer>
