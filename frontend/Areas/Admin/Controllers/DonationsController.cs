@@ -21,6 +21,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
         {
             var donations = db.donations.Include("project").Include("user");
       
+
             ViewBag.Project = db.projects.FirstOrDefault(x => x.ProjectID == projectid);
             return View(donations.ToList());
         }
@@ -31,9 +32,9 @@ namespace Localactors.webapp.Areas.Admin.Controllers
 
         public ActionResult Create(int projectid = 0)
         {
-            ViewBag.Project = db.projects.FirstOrDefault(x => x.ProjectID == projectid);
-            ViewBag.ProjectID = new SelectList(db.projects, "ProjectID", "Title");
-            ViewBag.UserID = new SelectList(db.users, "UserID", "Role");
+            ViewBag.Project = db.projects.FirstOrDefault(x => x.ProjectID == projectid );
+            ViewBag.ProjectID = new SelectList(db.projects.Where(x=>x.Enabled), "ProjectID", "Title");
+            ViewBag.UserID = new SelectList(db.users.Where(x=>x.Role=="supporter"), "UserID", "UserName");
             return View(new donation { ProjectID = projectid });
         }
 
@@ -58,9 +59,9 @@ namespace Localactors.webapp.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Project = db.projects.FirstOrDefault(x => x.ProjectID == donation.ProjectID);
-            ViewBag.ProjectID = new SelectList(db.projects, "ProjectID", "Title");
-            ViewBag.UserID = new SelectList(db.users, "UserID", "Role", donation.UserID);
+            ViewBag.Project = db.projects.FirstOrDefault(x => x.ProjectID == projectid );
+            ViewBag.ProjectID = new SelectList(db.projects.Where(x => x.Enabled), "ProjectID", "Title");
+            ViewBag.UserID = new SelectList(db.users.Where(x => x.Role == "supporter"), "UserID", "UserName");
             return View(donation);
         }
 
@@ -71,8 +72,8 @@ namespace Localactors.webapp.Areas.Admin.Controllers
         {
             donation donation = db.donations.Single(d => d.InvestmentID == id);
             ViewBag.Project = db.projects.FirstOrDefault(x => x.ProjectID == donation.ProjectID);
-            ViewBag.ProjectID = new SelectList(db.projects, "ProjectID", "Title", donation.ProjectID);
-            ViewBag.UserID = new SelectList(db.users, "UserID", "Role", donation.UserID);
+            ViewBag.ProjectID = new SelectList(db.projects.Where(x=>x.Enabled), "ProjectID", "Title", donation.ProjectID);
+            ViewBag.UserID = new SelectList(db.users.Where(x => x.Role == "supporter"), "UserID", "Role", donation.UserID);
             return View(donation);
         }
 
@@ -90,8 +91,8 @@ namespace Localactors.webapp.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.Project = db.projects.FirstOrDefault(x => x.ProjectID == donation.ProjectID);
-            ViewBag.ProjectID = new SelectList(db.projects, "ProjectID", "Title", donation.ProjectID);
-            ViewBag.UserID = new SelectList(db.users, "UserID", "Role", donation.UserID);
+            ViewBag.ProjectID = new SelectList(db.projects.Where(x => x.Enabled), "ProjectID", "Title", donation.ProjectID);
+            ViewBag.UserID = new SelectList(db.users.Where(x => x.Role == "supporter"), "UserID", "Role", donation.UserID);
             return View(donation);
         }
 
