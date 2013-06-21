@@ -152,7 +152,13 @@ namespace Localactors.webapp.Controllers
 
         public ActionResult Callback() {
 
+            //logging stuff
+            string body = "";
+            string nl = "\r\n";
+            body = body + "Form:" + nl + Request.Form.ToString().Replace("&", nl) + nl + nl;
+
             try {
+
                 string custom = Request.Form["custom"];
                 string item_name = Request.Form["item_name"];
                 string item_number = Request.Form["item_number"];
@@ -183,7 +189,7 @@ namespace Localactors.webapp.Controllers
                 //1: check duplicate transaction
                 var duplicate = db.transactions.FirstOrDefault(x => x.TransactionCode == txn_id);
                 if (duplicate != null) {
-                    SendMailAws("diego@nonmonkey.com", "Paypal IPN", "Duplicate Transaction");
+                    SendMailAws(ConfigurationManager.AppSettings["PP_webappEmailNotificationAddress"], "Paypal IPN", "Duplicate Transaction: " + body);
                     return Content("Duplicate");
                 }
 
@@ -245,13 +251,11 @@ namespace Localactors.webapp.Controllers
 
                 db.SaveChanges();
 
-                string body = "";
-                string nl = "\r\n";
-                body = body + "Form:" + nl + Request.Form.ToString().Replace("&", nl) + nl + nl;
-                SendMailAws("diego@nonmonkey.com", "Paypal IPN Confirm:", body);
+
+                SendMailAws(ConfigurationManager.AppSettings["PP_webappEmailNotificationAddress"], "Paypal IPN Confirm:", body);
                 return Content("");
             }catch(Exception ex) {
-                SendMailAws("diego@nonmonkey.com", "Paypal IPN Error:", ex.Message);
+                SendMailAws(ConfigurationManager.AppSettings["PP_webappEmailNotificationAddress"], "Paypal IPN Error:", "Error: " + ex.Message + "\r\n\r\n" + body);
                 return Content("");
             }
         }
