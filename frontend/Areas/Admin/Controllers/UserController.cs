@@ -310,6 +310,11 @@ namespace Localactors.webapp.Areas.Admin.Controllers
         {
             var item = db.users.Single(p => p.UserID == id);
             item.Enabled = false;
+
+            foreach (project project in item.projects) {
+                project.Enabled = false;
+            }
+
             db.SaveChanges();
             return RedirectToAction("Index");
         }
