@@ -2,7 +2,7 @@
 @model Localactors.entities.project
 @{
     ViewBag.Title = Model.Title + ": Thank You!";
-    var PP_URL = Url.Content("~/Scripts/paypal-button.min.js") + "?merchant=" + ConfigurationManager.AppSettings["PP_MerchantAccountId"];
+    //var PP_URL = Url.Content("~/Scripts/paypal-button.min.js") + "?merchant=" + ConfigurationManager.AppSettings["PP_MerchantAccountId"];
 }
 @{Html.RenderPartial("_Project_Header", Model);}
 <div id='project-update-tab'>
@@ -22,21 +22,47 @@
     @if (User.Identity.IsAuthenticated)
     {
 
-        <script src="@PP_URL"
-                                data-button="donate" 
-                                data-name="P@(Model.ProjectID) @Model.Title" 
-                                data-number="@Model.ProjectID" 
-                                data-custom="@User.Identity.Name"
-                                data-currency="@ConfigurationManager.AppSettings["PP_Currency"]"
-                                data-callback="@ConfigurationManager.AppSettings["PP_Callback"]" 
-                                data-return="@Url.AbsoluteAction("return", "donation", new { projectid = Model.ProjectID })"
-                            @if (@ConfigurationManager.AppSettings["PP_environment"] == "sandbox")
-                            {
-                                <text>data-env = "sandbox"</text>
-                            }
-                            ></script>
+        <form action="@ConfigurationManager.AppSettings["PP_IPNEndpoint"]" method="post" target="_top">
+        <input type="hidden" name="business" value="@ConfigurationManager.AppSettings["PP_MerchantAccountId"]">
+        <!--labels + values to show on paypal-->
+        <input type="hidden" name="on0" value="">
+        <input type="hidden" name="os0" value="">
+        <input type="hidden" name="on1" value="">
+        <input type="hidden" name="os2" value="">
+        <!--custom value, holds the username-->
+        <input type="hidden" name="custom" value="@User.Identity.Name">
+        <!--type of paypal action-->
+        <input type="hidden" name="cmd" value="_xclick">
+        <input type="hidden" name="button_subtype" value="services">
+        <input type="hidden" name="no_note" value="0">
+        <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHostedGuest">
+        <!--return and ipn callback-->
+        <input type="hidden" name="return" value="@Url.AbsoluteAction("return", "donation", new { projectid = Model.ProjectID })">
+        <input type="hidden" name="notify_url" value="@ConfigurationManager.AppSettings["PP_Callback"]">
+        <input type="hidden" name="callback_url" value="@ConfigurationManager.AppSettings["PP_Callback"]">
+        <!--paypal signup page locale-->
+        <input type="hidden" name="lc" value="US">
+        <!--item details-->
+        <input type="hidden" name="item_name" value="P@(Model.ProjectID) @Model.Title">
+        <input type="hidden" name="item_number" value="@Model.ProjectID">
+        <!--input type="hidden" name="amount" value="1.00"-->
+        <input type="hidden" name="currency_code" value="@ConfigurationManager.AppSettings["PP_Currency"]">
+        <!--custom image-->
+        <input type="image" src="https://s3-eu-west-1.amazonaws.com/localactors-webapp/content/buttons/btn_buynowCC_LG.gif"
+            border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+        <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif"
+            width="1" height="1">
+        @if (@ConfigurationManager.AppSettings["PP_environment"] == "sandbox")
+        {
+            <input type="hidden" name="env" value="sandbox" />
+        }
+        </form>
+
     
-    }else {
-        <div>To donate using Paypal you need to register or login first :)</div>
+    }
+    else
+    {
+        <div>
+            To donate using Paypal you need to register or login first :)</div>
     }
 </div>
