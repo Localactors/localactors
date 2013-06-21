@@ -46,7 +46,7 @@
     </tr>
     @foreach (var item in Model)
     {
-        <tr>
+        <tr class="@(item.Enabled == false ? "disabled":"")">
             <td>
                 <img src="@item.Image" alt="" class="userthumbnail" width="32px" height="32px"/>
             </td>
@@ -71,17 +71,19 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Enabled)
             </td>
-            <td>
+            <td style="white-space: nowrap;">
                 @Html.ActionLink("Edit", "Edit", new { id = item.UserID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.UserID })
+                @Html.ActionLink("Delete", "Delete", new { id = item.UserID }) |  
+                @(item.Enabled ? Html.ActionLink("Disable", "Disable","User", new {id = item.UserID},new{}) : Html.ActionLink("Enable", "Enable","User", new {id = item.UserID},new{}))
             </td>
         </tr>
         foreach (project project in item.projects)
         {
         <tr>
             <td colspan="8">
+                @Html.ActionLink(project.Title, "Edit", "Projects", new { id = project.ProjectID }, new { })
             </td>
-            <td>@Html.ActionLink(project.Title, "Edit", "Projects", new { id = project.ProjectID }, new { })
+            <td>
             </td>
         </tr>
         }

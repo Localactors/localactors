@@ -31,7 +31,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
             int take = pagesize;
 
 
-            var users = db.users.Include("country").Where(x=>x.Enabled);
+            var users = db.users.Include("country").AsQueryable();
             if (role != null)
                 users = users.Where(x => x.Role == role);
 
@@ -127,7 +127,6 @@ namespace Localactors.webapp.Areas.Admin.Controllers
             }else {
                 user.Image = "https://s3-eu-west-1.amazonaws.com/localactors-webapp/users/default_user_256.png";
             }
-
 
             
             if (ModelState.IsValid) {
@@ -292,6 +291,25 @@ namespace Localactors.webapp.Areas.Admin.Controllers
         {            
             user user = db.users.Single(u => u.UserID == id);
             user.Enabled = false;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        //6620 
+
+
+        public ActionResult Enable(int id)
+        {
+            var item = db.users.Single(p => p.UserID == id);
+            item.Enabled = true;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Disable(int id)
+        {
+            var item = db.users.Single(p => p.UserID == id);
+            item.Enabled = false;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

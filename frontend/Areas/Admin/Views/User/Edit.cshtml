@@ -82,6 +82,7 @@
         <legend>user</legend>
 
         @Html.HiddenFor(model => model.UserID)
+        
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Role)
@@ -97,7 +98,7 @@
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.UserName)
-            @Html.ValidationMessageFor(model => model.UserName)
+          @Html.ValidationMessageFor(model => model.UserName)
         </div>
 
         @Html.HiddenFor(model => model.UserPassword)

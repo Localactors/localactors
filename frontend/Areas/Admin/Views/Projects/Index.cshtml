@@ -77,7 +77,7 @@
             @Html.ActionLink("Delete", "Delete", new { id=item.ProjectID }) | 
             @Html.ActionLink("Updates", "Index", "Update", new { projectid = item.ProjectID },new{})  |
             @Html.ActionLink("Add Update", "Create", "Update", new { projectid = item.ProjectID },new{}) | 
-            @(item.Enabled ? Html.ActionLink("Disable", "Disable", new {id = item.ProjectID}) : Html.ActionLink("Enable", "Enable", new {id = item.ProjectID}))
+            @(item.Enabled ? Html.ActionLink("Disable", "Disable","Projects", new {id = item.ProjectID}) : Html.ActionLink("Enable", "Enable","Projects", new {id = item.ProjectID}))
         </td>
     </tr>
 }
