@@ -1,4 +1,4 @@
-var basicURl = 'scripts/vendor/'
+var basicURl = '/scripts/vendor/';
 yepnope([{
 load: [ basicURl+'jquery.js',
 					basicURl+'jquery-ujs.js',
@@ -13,8 +13,13 @@ load: [ basicURl+'jquery.js',
 			{
 				test: Modernizr.mq('all and (max-width: 980px)'),
 				yep: [basicURl+'toe/dist/toe.min.js','scripts/320.js'],
-				nope: ['scripts/960.js']
-			}	
+				nope: ['/scripts/960.js']
+			}
+			]);
+yepnope([
+			{
+			    load: ['/scripts/site2.js']
+			}
 			]);
 		}
 },{
@@ -23,10 +28,10 @@ load: [ basicURl+'jquery.js',
 		enquire.register("all and (min-width:58.75em)", {
 			deferSetup: true,
 			match : function() {
-				yepnope(['scripts/960.js']);
+				yepnope(['/scripts/960.js']);
 			},
 			unmatch : function() {
-				yepnope([basicURl+'toe/dist/toe.min.js','scripts/320.js']);
+				yepnope([basicURl+'toe/dist/toe.min.js','/scripts/320.js']);
 			}
 		}).listen(); // note the `true`!
 	}
