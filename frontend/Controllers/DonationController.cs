@@ -255,6 +255,7 @@ namespace Localactors.webapp.Controllers
                 SendMailAws(ConfigurationManager.AppSettings["Email_Info"], "Donation: " + project.Title, mailbody);
                 SendMailAws(project.user.Email, "Donation: " + project.Title, mailbody);
                 SendMailAwsAdmin("Donation: " + project.Title, mailbody);
+                SendMailAwsTemplate(user, project, user.Email, "donation_thankyou.htm", "Thank You!", "");
                 
 
                 //5: add follower

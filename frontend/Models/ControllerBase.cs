@@ -330,6 +330,53 @@ namespace Localactors.webapp
                 return false;
             }
         }
+        internal bool SendMailAwsTemplate(user theuser, project theproject,string to ,string template, string title, string body)
+        {
+            try
+            {
+
+                var client = new SmtpClient
+                {
+                    Host = ConfigurationManager.AppSettings["AWS_smtp_host"],
+                    Port = int.Parse(ConfigurationManager.AppSettings["AWS_smtp_port"]),
+                    UseDefaultCredentials = true
+                };
+
+                client.Credentials = new NetworkCredential(
+                    ConfigurationManager.AppSettings["AWS_smtp_user"],
+                    ConfigurationManager.AppSettings["AWS_smtp_pass"]);
+                client.EnableSsl = true;
+
+                string path = "~/Templates/" + template;
+                string fullpath = Server.MapPath(path);
+
+                string templatebody = System.IO.File.ReadAllText(fullpath);
+                if (theuser != null) {
+                    templatebody = templatebody.Replace("[username]", theuser.UserName);
+                    templatebody = templatebody.Replace("[usermail]", theuser.Email);
+                    templatebody = templatebody.Replace("[userbio]", theuser.Bio);
+                    templatebody = templatebody.Replace("[userphoto]", theuser.Image);
+                }
+                if (theproject != null)
+                {
+                    templatebody = templatebody.Replace("[projectname]", theproject.Title);
+                    templatebody = templatebody.Replace("[projectcontact]", theproject.user.Email);
+                    templatebody = templatebody.Replace("[projectphoto]", theproject.Image);
+                }
+                templatebody = templatebody.Replace("[body]", body);
+                templatebody = templatebody.Replace("[title]", title);
+
+                client.Send(ConfigurationManager.AppSettings["AWS_mailfrom"], to, title, templatebody);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                string msg = ex.Message;
+                LogAppend("sendmail", 'E', msg);
+                return false;
+            }
+        }
 
         //dates
         internal DateTime DateFromString(string date)
