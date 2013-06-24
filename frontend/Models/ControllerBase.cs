@@ -366,7 +366,9 @@ namespace Localactors.webapp
                 templatebody = templatebody.Replace("[body]", body);
                 templatebody = templatebody.Replace("[title]", title);
 
-                client.Send(ConfigurationManager.AppSettings["AWS_mailfrom"], to, title, templatebody);
+                MailMessage message = new MailMessage(ConfigurationManager.AppSettings["AWS_mailfrom"], to, title, templatebody);
+                message.IsBodyHtml = true;
+                client.Send(message);
 
                 return true;
             }
