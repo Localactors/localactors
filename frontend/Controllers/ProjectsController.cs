@@ -77,7 +77,7 @@ namespace Localactors.webapp.Controllers
                 .Include("tags")
                 .Include("updates")
                 //.Include("achievements")
-                .FirstOrDefault(p => p.ProjectID == id && p.Enabled);
+                .FirstOrDefault(p => p.ProjectID == id );
 
             ViewBag.UserID = CurrentUser!=null ? CurrentUser.UserID : 0;
             return View(project);
@@ -172,6 +172,8 @@ namespace Localactors.webapp.Controllers
             ModelState.Add("Date", new ModelState());
             ModelState.SetModelValue("Date", new ValueProviderResult(DateTime.Now, DateTime.Now.ToString(), null));
 
+            ViewBag.guestbook_text = model.Text;
+            ViewBag.guestbook_image = model.Picture;
 
             if (Request.Files != null && Request.Files.Count > 0)
             {
@@ -214,6 +216,8 @@ namespace Localactors.webapp.Controllers
                                     ModelState.Add(keyname, new ModelState());
                                     ModelState.SetModelValue(keyname, new ValueProviderResult(address, address, null));
                                     model.Picture = address;
+
+                      
                                 }
                             }
                             catch (Exception ex)
@@ -227,7 +231,7 @@ namespace Localactors.webapp.Controllers
                 }
             }
 
-            if (ModelState.IsValid)
+            if (ModelState.IsValid )
             {
                 project.project_guestbook.Add(model);
                 db.SaveChanges();
