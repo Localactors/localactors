@@ -299,6 +299,37 @@ namespace Localactors.webapp
                 return false;
             }
         }
+        internal bool SendMailAwsAdmin(string title, string body)
+        {
+            try
+            {
+
+                var client = new SmtpClient
+                {
+                    Host = ConfigurationManager.AppSettings["AWS_smtp_host"],
+                    Port = int.Parse(ConfigurationManager.AppSettings["AWS_smtp_port"]),
+                    UseDefaultCredentials = true
+                };
+
+                client.Credentials = new NetworkCredential(
+                    ConfigurationManager.AppSettings["AWS_smtp_user"],
+                    ConfigurationManager.AppSettings["AWS_smtp_pass"]);
+                client.EnableSsl = true;
+
+                var admins = db.users.Where(x => x.Role == "admin").ToList();
+                foreach (user admin in admins) {
+                    client.Send(ConfigurationManager.AppSettings["AWS_mailfrom"], admin.Email, title, body);
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                string msg = ex.Message;
+                LogAppend("sendmail", 'E', msg);
+                return false;
+            }
+        }
 
         //dates
         internal DateTime DateFromString(string date)

@@ -239,6 +239,7 @@ namespace Localactors.webapp.Controllers
                 string body = string.Format("From: {0}\r\nProject: {1}\r\nProjectID: {2}\r\n\r\nGestbook Post: {3}", CurrentUser.Email, project.Title, model.ProjectID, model.Text);
                 SendMailAws(ConfigurationManager.AppSettings["Email_Info"], "New Guestbook Post: " + project.Title, body);
                 SendMailAws(project.user.Email, "New Guestbook Post: " + project.Title, body);
+                SendMailAwsAdmin("New Guestbook Post: " + project.Title, body);
             }
 
             //redirect & reload
@@ -352,6 +353,7 @@ namespace Localactors.webapp.Controllers
                 string body = string.Format("From: {0}\r\nProject: {1}\r\nProjectID: {2}\r\n\r\nComment: {3}", CurrentUser.Email, project.Title, update.ProjectID, model.Text);
                 SendMailAws(ConfigurationManager.AppSettings["Email_Info"], "New Comment : " + project.Title, body);
                 SendMailAws(project.user.Email, "New Comment : " + project.Title, body);
+                SendMailAwsAdmin("New Comment : " + project.Title, body);
             }
 
             if (Request.UrlReferrer != null) {

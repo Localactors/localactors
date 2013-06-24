@@ -251,7 +251,10 @@ namespace Localactors.webapp.Controllers
 
                 db.SaveChanges();
 
-                SendMailAws(ConfigurationManager.AppSettings["PP_webappEmailNotificationAddress"], "Paypal IPN Confirm:", body);
+                string mailbody = string.Format("From: {0}\r\nName: {1}\r\nProject: {2}\r\nProjectID: {3}\r\n\r\nPaypal Donation Data: {4}", user.Email, user.UserName, project.Title, project.ProjectID, body);
+                SendMailAws(ConfigurationManager.AppSettings["Email_Info"], "Donation: " + project.Title, mailbody);
+                SendMailAws(project.user.Email, "Donation: " + project.Title, mailbody);
+                SendMailAwsAdmin("Donation: " + project.Title, mailbody);
                 
 
                 //5: add follower

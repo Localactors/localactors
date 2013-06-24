@@ -214,6 +214,9 @@ namespace Localactors.webapp.Controllers
             db.SaveChanges();
 
 
+            //admins
+            SendMailAwsAdmin("LocalActors New User:" + newuser.UserName,"");
+
             FormsAuthentication.SetAuthCookie(model.Email, true);
             return RedirectToAction("Settings", "Profile");
 
@@ -243,7 +246,7 @@ namespace Localactors.webapp.Controllers
                 geo.Email_Hash = null;
                 db.SaveChanges();
 
-                SendMailAws("diego@nonmonkey.com", "User Confirmed", geo.Email);
+                //SendMailAws("diego@nonmonkey.com", "User Confirmed", geo.Email);
 
                 return RedirectToAction("Login");
             }
