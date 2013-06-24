@@ -7,7 +7,8 @@
                 <img alt='' class='photo-donor' src='@Model.user.Image'>
                 <div class='container'>
                     <h3 class='name'>
-                        @Model.user.Name @Model.user.Lastname</h3>
+                        <a href="@Url.Action("Feed", "Profile")">
+                            @Model.user.Name @Model.user.Lastname</a></h3>
                     <a href='@Url.Action("Settings", "Profile")'>Settings</a>
                 </div>
             </div>
