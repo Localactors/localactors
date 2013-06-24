@@ -808,6 +808,7 @@
     <Content Include="Scripts\wysihtml5-0.3.0_rc1.min.js" />
     <Content Include="Scripts\wysihtml5-0.3.0_rc2.js" />
     <Content Include="Scripts\wysihtml5-0.3.0_rc2.min.js" />
+    <Content Include="Templates\donation_thankyou.htm" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -984,7 +985,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Templates\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

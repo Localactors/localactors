@@ -19,6 +19,9 @@ using DataAnnotationsExtensions;
         public string Privacy { get; set; }
 
         [Required]
+        public string Terms { get; set; }
+
+        [Required]
         public bool Newsletter { get; set; }
 
         public string recaptcha_challenge_field { get; set; }
