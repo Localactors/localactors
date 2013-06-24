@@ -46,7 +46,7 @@
     </tr>
     @foreach (var item in Model)
     {
-        <tr class="@(item.Enabled == false ? "disabled":"")">
+        <tr class="@(item.Enabled == false ? "disabled" : "")">
             <td>
                 <img src="@item.Image" alt="" class="userthumbnail" width="32px" height="32px"/>
             </td>
@@ -73,8 +73,8 @@
             </td>
             <td style="white-space: nowrap;">
                 @Html.ActionLink("Edit", "Edit", new { id = item.UserID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.UserID }) |  
-                @(item.Enabled ? Html.ActionLink("Disable", "Disable","User", new {id = item.UserID},new{}) : Html.ActionLink("Enable", "Enable","User", new {id = item.UserID},new{}))
+                @Html.ActionLink("Delete", "Delete", new { id = item.UserID }) |
+                @(item.Enabled ? Html.ActionLink("Disable", "Disable", "User", new { id = item.UserID }, new { }) : Html.ActionLink("Enable", "Enable", "User", new { id = item.UserID }, new { }))
             </td>
         </tr>
         foreach (project project in item.projects)
@@ -88,6 +88,19 @@
         </tr>
         }
         <tr>
+            <td colspan="8">
+                Followed:
+                @foreach (project project in item.followedProjects)
+                {
+        
+                    <span class="btn-info btn">@project.Title.Truncate(10)</span> 
+            
+                }
+            </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
             <td colspan="9">
             </td>
         </tr>
@@ -95,8 +108,10 @@
 </table>
 <div class="pagination">
     <ul>
-        <li><a href="@(ViewBag.prev ? Url.Action("index",new{page=ViewBag.page - 1, role=ViewBag.role}):"#")" >Prev</a></li>
-        <li><a href="@Url.Action("index",new{page=ViewBag.page, role=ViewBag.role})" class="active">@ViewBag.page</a></li>
-        <li><a href="@(ViewBag.next ? Url.Action("index",new{page=ViewBag.page + 1, role=ViewBag.role}): "#")" >Next</a></li>
+        <li><a href="@(ViewBag.prev ? Url.Action("index", new { page = ViewBag.page - 1, role = ViewBag.role }) : "#")" >
+            Prev</a></li>
+        <li><a href="@Url.Action("index", new { page = ViewBag.page, role = ViewBag.role })" class="active">@ViewBag.page</a></li>
+        <li><a href="@(ViewBag.next ? Url.Action("index", new { page = ViewBag.page + 1, role = ViewBag.role }) : "#")" >
+            Next</a></li>
     </ul>
 </div>
