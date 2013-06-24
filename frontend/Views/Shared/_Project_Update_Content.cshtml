@@ -10,7 +10,7 @@
         { Html.RenderPartial("_Update_Content", content); }
     }
     <div class='comments-container'>
-        <a name="comments-@Model.ProjectID" id="comments" />
+        <a name="comments-@Model.UpdateID" id="comments" ></a>
         <h4>
             Comments</h4>
         @foreach (var item in Model.update_comment.OrderByDescending(x => x.CommentID))

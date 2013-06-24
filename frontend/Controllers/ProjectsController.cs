@@ -358,7 +358,7 @@ namespace Localactors.webapp.Controllers
 
             if (Request.UrlReferrer != null) {
                 HttpResponse.RemoveOutputCacheItem(Request.UrlReferrer.AbsolutePath);
-                return Redirect(ReferrerUrlTimestamped() + "#comments-" + model.update.ProjectID);
+                return Redirect(ReferrerUrlTimestamped() + "#comments-" + model.update.UpdateID);
             }
             return Redirect("/");
         }
