@@ -26,6 +26,21 @@
         <ul>
             <li>
                 <h1 class='title'>
+                    Project Photos:</h1>
+            </li>
+            @foreach (var item in Model.project_photo.OrderBy(x => x.PhotoID))
+            {
+                <li>
+                    <img scr="@item.Url" alt=""/>
+                    <h2 class='subtitle'>
+                        @Html.Raw(item.Caption)
+                    </h2>
+                </li>
+            }
+        </ul>
+        <ul>
+            <li>
+                <h1 class='title'>
                     Project Plan:</h1>
             </li>
             @foreach (var item in Model.project_plan.OrderBy(x => x.Order))
