@@ -208,17 +208,13 @@ namespace Localactors.webapp.Controllers
                 newuser.Privacy = true;
             }
 
-
-            //TempData["success"] = "Richiesta salvata, in attesa di conferma email.";
-
-            string url = Url.Action("SubscribeConfirm", "Account", new { key }, "http");
-            string title = "Conferma Email";
-            string body = string.Format("Ciao \r\n\r\nTo activate your account you should click this link :\r\n\r\n{0}\r\n\r\nOr manually insert the code in the confirmation box \r\ncode:{1}", url, key);
-            bool sent = SendMailAws(model.Email, title, body);
-
             db.users.AddObject(newuser);
             db.SaveChanges();
 
+            //activation
+            string url = Url.Action("SubscribeConfirm", "Account", new { key }, "http");
+            string body = string.Format("Hi, \r\n\r\nTo activate your account you should click this link :\r\n\r\n{0}\r\n\r\nOr manually insert the code in the confirmation box \r\ncode:{1}", url, key);
+            SendMailAws(newuser.Email, "LocalActors: Email Confirmation", body);
 
             //admins
             SendMailAwsAdmin("LocalActors New User:" + newuser.UserName,"");
