@@ -102,13 +102,14 @@ namespace Localactors.webapp.Controllers
             ViewBag.hasnext = model.updates.Count >= pagesize;
 
             //add some updates if there are less than pagesize, but leave the pager disabled :)
-            if (model.updates.Count < pagesize) {
-                int many = pagesize - model.updates.Count;
-                if(many >0) {
-                    var add = db.updates.Except(model.updates).OrderByDescending("UpdateID").Take(many);
-                    model.updates.AddRange(add);
-                }
-            }
+            //removed
+            //if (model.updates.Count < pagesize) {
+            //    int many = pagesize - model.updates.Count;
+            //    if(many >0) {
+            //        var add = db.updates.Except(model.updates).OrderByDescending("UpdateID").Take(many);
+            //        model.updates.AddRange(add);
+            //    }
+            //}
 
             return View(model);
         }
