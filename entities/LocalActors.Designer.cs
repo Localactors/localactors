@@ -2934,6 +2934,30 @@ namespace Localactors.entities
         private global::System.String _Picture;
         partial void OnPictureChanging(global::System.String value);
         partial void OnPictureChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Link
+        {
+            get
+            {
+                return _Link;
+            }
+            set
+            {
+                OnLinkChanging(value);
+                ReportPropertyChanging("Link");
+                _Link = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Link");
+                OnLinkChanged();
+            }
+        }
+        private global::System.String _Link;
+        partial void OnLinkChanging(global::System.String value);
+        partial void OnLinkChanged();
 
         #endregion
 

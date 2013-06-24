@@ -10,12 +10,12 @@
 @{Html.RenderPartial("_Project_Header", Model);}
 <div id='project-update-tab'>
     <ul class='tab'>
-        <li><a href='@Url.Action("Updates", "Projects", new { id = Model.ProjectID })'>Update <span class="number">(@Model.updates.Count)</span></a>
-        </li>
+        <li><a href='@Url.Action("Updates", "Projects", new { id = Model.ProjectID })'>Update
+            <span class="number">(@Model.updates.Count)</span></a> </li>
         <li><a href='@Url.Action("Details", "Projects", new { id = Model.ProjectID })'>Project
             Details</a> </li>
         <li class='active'><a href='@Url.Action("Guestbook", "Projects", new { id = Model.ProjectID })'>
-            Guestbook  <span class="number">(@Model.project_guestbook.Count)</span></a></li>
+            Guestbook <span class="number">(@Model.project_guestbook.Count)</span></a></li>
         <li><a href='@Url.Action("Ask", "Projects", new { id = Model.ProjectID })'>Ask a Question</a>
         </li>
     </ul>
@@ -40,10 +40,22 @@
                             @item.Date.ToLongDateString() <span class="slash">/</span> @item.Date.ToShortTimeString()
                         </p>
                         <div class='content'>
-                            <p>
-                                @item.Text
-                            </p>
-                            <div><img src="@item.Picture" /></div>
+                            @if (!string.IsNullOrEmpty(item.Text))
+                            {
+                                <p>
+                                    @item.Text
+                                </p>
+                            }
+                            @if (!string.IsNullOrEmpty(item.Link))
+                            {
+                                <div>
+                                    <a href="@item.Link">@item.Link</a></div>
+                            }
+                            @if (!string.IsNullOrEmpty(item.Picture))
+                            {
+                                <div>
+                                    <img src="@item.Picture" /></div>
+                            }
                             @if (isadmin || ViewBag.UserID == item.UserID)
                             {
                                 <div class="admin">
@@ -64,8 +76,11 @@
         @if (isauthenticated)
         {
             { Html.RenderPartial("_Form_Guestbook", Model); }
-        }else {
-            <div>To post comments on the Project Guestbook you need to register or login.</div>
+        }
+        else
+        {
+            <div>
+                To post comments on the Project Guestbook you need to register or login.</div>
         }
     </div>
 </div>

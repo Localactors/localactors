@@ -55,6 +55,7 @@ namespace Localactors.webapp
         {
             base.OnException(filterContext);
             LogAppend("controller", 'E', filterContext.Exception.Message);
+            //LogStuff("MVC", DateTime.Now, filterContext.Exception.Message);
 
         }
 
@@ -316,6 +317,7 @@ namespace Localactors.webapp
         //logging
         internal void LogAppend(string source = "", char logType = 'E', string logMessage = "")
         {
+
             log.Error(logMessage);
             return;
 

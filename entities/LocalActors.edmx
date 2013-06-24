@@ -225,6 +225,7 @@
           <Property Name="Date" Type="datetime" Nullable="false" />
           <Property Name="Text" Type="text" />
           <Property Name="Picture" Type="varchar" MaxLength="255" />
+          <Property Name="Link" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="project_photo">
           <Key>
@@ -482,7 +483,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_project_guestbook_project">
-          <End Role="project" Type="localactorsModel.Store.project" Multiplicity="1" />
+          <End Role="project" Type="localactorsModel.Store.project" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="project_guestbook" Type="localactorsModel.Store.project_guestbook" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="project">
@@ -494,7 +497,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_project_guestbook_user">
-          <End Role="user" Type="localactorsModel.Store.user" Multiplicity="1" />
+          <End Role="user" Type="localactorsModel.Store.user" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="project_guestbook" Type="localactorsModel.Store.project_guestbook" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="user">
@@ -832,6 +837,7 @@
           <Property Type="String" Name="Picture" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="user" Relationship="localactorsModel.FK_project_guestbook_user" FromRole="project_guestbook" ToRole="user" />
           <NavigationProperty Name="project" Relationship="localactorsModel.FK_project_guestbook_project" FromRole="project_guestbook" ToRole="project" />
+          <Property Type="String" Name="Link" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="tag">
           <Key>
@@ -1356,6 +1362,7 @@
           <EntitySetMapping Name="project_guestbook">
             <EntityTypeMapping TypeName="localactorsModel.project_guestbook">
               <MappingFragment StoreEntitySet="project_guestbook">
+                <ScalarProperty Name="Link" ColumnName="Link" />
                 <ScalarProperty Name="Picture" ColumnName="Picture" />
                 <ScalarProperty Name="Text" ColumnName="Text" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
