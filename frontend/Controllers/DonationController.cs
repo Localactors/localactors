@@ -72,7 +72,7 @@ namespace Localactors.webapp.Controllers
         public ActionResult Return(int projectid=0)
         {
 
-            LogStuff("PAYPAL RETURN", DateTime.Now, Request.ToString());
+            LogStuff("PAYPAL RETURN", DateTime.Now, Request.QueryString.ToString() + "\r\n" + Request.Form.ToString());
 
             /*
              * mc_gross=1.00
@@ -249,19 +249,30 @@ namespace Localactors.webapp.Controllers
                 t.TransactionStatus = status;
                 t.TransactionType = "PP";
 
-                //5: add follower
-                if(project!=null) {
-                    if(!user.followedProjects.Any(x=>x.ProjectID == projectid))
-                        user.followedProjects.Add(project);
-                }
-
                 db.SaveChanges();
 
-
                 SendMailAws(ConfigurationManager.AppSettings["PP_webappEmailNotificationAddress"], "Paypal IPN Confirm:", body);
+                
+
+                //5: add follower
+                try {
+                    if (project != null && user!=null) {
+                        //TODO: fix here!
+                        if (!user.followedProjects.Any(x => x.ProjectID == projectid)) {
+                            user.followedProjects.Add(project);
+                        }
+                        db.SaveChanges();
+                    }
+                }catch(Exception exi) {
+                    SendMailAws(ConfigurationManager.AppSettings["PP_webappEmailNotificationAddress"], "DB Follow Error:", exi.Message + " // " + (exi.InnerException != null ? exi.InnerException.Message : ""));
+                    LogStuff("DB FOLLOW ERROR", DateTime.Now, exi.Message + " // " + (exi.InnerException != null ? exi.InnerException.Message : ""));
+                }
+
                 return Content("");
+                
             }catch(Exception ex) {
-                LogStuff("PAYPAL ERROR",DateTime.Now,ex.Message);
+                SendMailAws(ConfigurationManager.AppSettings["PP_webappEmailNotificationAddress"], "Paypal Error:", ex.Message + " // " + (ex.InnerException != null ? ex.InnerException.Message : ""));
+                LogStuff("PAYPAL ERROR", DateTime.Now, ex.Message + " // " + (ex.InnerException != null ? ex.InnerException.Message : ""));
                 LogStuff("PAYPAL ERROR", DateTime.Now, body);
                 return Content("");
             }
@@ -269,45 +280,49 @@ namespace Localactors.webapp.Controllers
 
         private string Verify() {
 
-            string endpoint = ConfigurationManager.AppSettings["PP_IPNEndpoint"];
-            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(endpoint);
+            try {
+                string endpoint = ConfigurationManager.AppSettings["PP_IPNEndpoint"];
+                HttpWebRequest req = (HttpWebRequest) WebRequest.Create(endpoint);
 
-            req.Method = "POST";
-            req.ContentType = "application/x-www-form-urlencoded";
-            byte[] param = Request.BinaryRead(Request.ContentLength);
-            string strRequest = Encoding.ASCII.GetString(param);
-            string strResponse_copy = strRequest;  //Save a copy of the initial info sent by PayPal
-            strRequest += "&cmd=_notify-validate";
-            req.ContentLength = strRequest.Length;
+                req.Method = "POST";
+                req.ContentType = "application/x-www-form-urlencoded";
+                byte[] param = Request.BinaryRead(Request.ContentLength);
+                string strRequest = Encoding.ASCII.GetString(param);
+                string strResponse_copy = strRequest; //Save a copy of the initial info sent by PayPal
+                strRequest += "&cmd=_notify-validate";
+                req.ContentLength = strRequest.Length;
 
-            //for proxy
-            //WebProxy proxy = new WebProxy(new Uri("http://url:port#"));
-            //req.Proxy = proxy;
+                //for proxy
+                //WebProxy proxy = new WebProxy(new Uri("http://url:port#"));
+                //req.Proxy = proxy;
 
-            //Send the request to PayPal and get the response
-            StreamWriter streamOut = new StreamWriter(req.GetRequestStream(), Encoding.ASCII);
-            streamOut.Write(strRequest);
-            streamOut.Close();
-            StreamReader streamIn = new StreamReader(req.GetResponse().GetResponseStream());
-            string strResponse = streamIn.ReadToEnd();
-            streamIn.Close();
+                //Send the request to PayPal and get the response
+                StreamWriter streamOut = new StreamWriter(req.GetRequestStream(), Encoding.ASCII);
+                streamOut.Write(strRequest);
+                streamOut.Close();
+                StreamReader streamIn = new StreamReader(req.GetResponse().GetResponseStream());
+                string strResponse = streamIn.ReadToEnd();
+                streamIn.Close();
 
-            if (strResponse == "VERIFIED") {
-                return "VERIFIED";
-                //check the payment_status is Completed
-                //process payment
+                if (strResponse == "VERIFIED") {
+                    return "VERIFIED";
+                    //check the payment_status is Completed
+                    //process payment
 
-                // pull the values passed on the initial message from PayPal
+                    // pull the values passed on the initial message from PayPal
 
-            }
-            else if (strResponse == "INVALID")
-            {
-                return "INVALID";
-                //log for manual investigation
-            }
-            else
-            {
-                //log response/ipn data for manual investigation
+                }
+                else if (strResponse == "INVALID") {
+                    return "INVALID";
+                    //log for manual investigation
+                }
+                else {
+                    //log response/ipn data for manual investigation
+                    return "PENDING";
+                }
+            }catch(Exception ex) {
+                SendMailAws(ConfigurationManager.AppSettings["PP_webappEmailNotificationAddress"], "Paypal Verification Error:", ex.Message);
+                LogStuff("PAYPAL VERIFICATION ERROR", DateTime.Now, ex.Message);
                 return "PENDING";
             }
         }

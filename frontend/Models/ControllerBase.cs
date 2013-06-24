@@ -91,6 +91,7 @@ namespace Localactors.webapp
                 db.SaveChanges();
             }catch(Exception ex) {
                 //do nothing
+                SendMailAws(ConfigurationManager.AppSettings["PP_webappEmailNotificationAddress"], "Logging Error:", (ex.InnerException != null ? ex.InnerException.Message : ""));
             }
         }
 

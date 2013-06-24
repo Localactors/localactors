@@ -25,11 +25,8 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("localactorsModel", "FK_update_content_update_content_type", "update_content_type", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.update_content_type), "update_content", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.update_content), true)]
 [assembly: EdmRelationshipAttribute("localactorsModel", "FK_update_user", "user", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.user), "update", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.update), true)]
 [assembly: EdmRelationshipAttribute("localactorsModel", "FK_update_content_user", "user", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.user), "update_content", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.update_content), true)]
-[assembly: EdmRelationshipAttribute("localactorsModel", "FK_donation_user", "user", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.user), "donation", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.donation), true)]
-[assembly: EdmRelationshipAttribute("localactorsModel", "FK_transaction_donation", "donation", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.donation), "transaction", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.transaction), true)]
 [assembly: EdmRelationshipAttribute("localactorsModel", "FK_achievement_project", "project", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.project), "achievement", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.achievement), true)]
 [assembly: EdmRelationshipAttribute("localactorsModel", "FK_project_country", "country", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.country), "project", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.project), true)]
-[assembly: EdmRelationshipAttribute("localactorsModel", "FK_donation_project", "project", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Localactors.entities.project), "donation", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.donation), true)]
 [assembly: EdmRelationshipAttribute("localactorsModel", "FK__project", "project", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.project), "update", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.update), true)]
 [assembly: EdmRelationshipAttribute("localactorsModel", "FK_project_guestbook_project", "project", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.project), "project_guestbook", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.project_guestbook), true)]
 [assembly: EdmRelationshipAttribute("localactorsModel", "FK_project_user", "user", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.user), "project", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.project), true)]
@@ -40,6 +37,9 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("localactorsModel", "FK_update_comment_user", "user", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.user), "update_comment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.update_comment), true)]
 [assembly: EdmRelationshipAttribute("localactorsModel", "FK_plan_project", "project", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.project), "project_plan", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.project_plan), true)]
 [assembly: EdmRelationshipAttribute("localactorsModel", "FK_cost_project", "project", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.project), "project_cost", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.project_cost), true)]
+[assembly: EdmRelationshipAttribute("localactorsModel", "FK_donation_project", "project", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Localactors.entities.project), "donation", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.donation), true)]
+[assembly: EdmRelationshipAttribute("localactorsModel", "FK_donation_user", "user", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Localactors.entities.user), "donation", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.donation), true)]
+[assembly: EdmRelationshipAttribute("localactorsModel", "FK_transaction_donation", "donation", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.donation), "transaction", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.transaction), true)]
 
 #endregion
 
@@ -270,22 +270,6 @@ namespace Localactors.entities
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<donation> donations
-        {
-            get
-            {
-                if ((_donations == null))
-                {
-                    _donations = base.CreateObjectSet<donation>("donations");
-                }
-                return _donations;
-            }
-        }
-        private ObjectSet<donation> _donations;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<project> projects
         {
             get
@@ -378,6 +362,22 @@ namespace Localactors.entities
             }
         }
         private ObjectSet<transaction_dump> _transaction_dump;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<donation> donations
+        {
+            get
+            {
+                if ((_donations == null))
+                {
+                    _donations = base.CreateObjectSet<donation>("donations");
+                }
+                return _donations;
+            }
+        }
+        private ObjectSet<donation> _donations;
 
         #endregion
 
@@ -472,14 +472,6 @@ namespace Localactors.entities
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the donations EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddTodonations(donation donation)
-        {
-            base.AddObject("donations", donation);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the projects EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToprojects(project project)
@@ -525,6 +517,14 @@ namespace Localactors.entities
         public void AddTotransaction_dump(transaction_dump transaction_dump)
         {
             base.AddObject("transaction_dump", transaction_dump);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the donations EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTodonations(donation donation)
+        {
+            base.AddObject("donations", donation);
         }
 
         #endregion
@@ -955,15 +955,13 @@ namespace Localactors.entities
         /// Create a new donation object.
         /// </summary>
         /// <param name="investmentID">Initial value of the InvestmentID property.</param>
-        /// <param name="userID">Initial value of the UserID property.</param>
         /// <param name="date">Initial value of the Date property.</param>
         /// <param name="amount">Initial value of the Amount property.</param>
         /// <param name="currency">Initial value of the Currency property.</param>
-        public static donation Createdonation(global::System.Int32 investmentID, global::System.Int32 userID, global::System.DateTime date, global::System.Decimal amount, global::System.String currency)
+        public static donation Createdonation(global::System.Int32 investmentID, global::System.DateTime date, global::System.Decimal amount, global::System.String currency)
         {
             donation donation = new donation();
             donation.InvestmentID = investmentID;
-            donation.UserID = userID;
             donation.Date = date;
             donation.Amount = amount;
             donation.Currency = currency;
@@ -1004,9 +1002,9 @@ namespace Localactors.entities
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Int32 UserID
+        public Nullable<global::System.Int32> UserID
         {
             get
             {
@@ -1021,8 +1019,8 @@ namespace Localactors.entities
                 OnUserIDChanged();
             }
         }
-        private global::System.Int32 _UserID;
-        partial void OnUserIDChanging(global::System.Int32 value);
+        private Nullable<global::System.Int32> _UserID;
+        partial void OnUserIDChanging(Nullable<global::System.Int32> value);
         partial void OnUserIDChanged();
     
         /// <summary>
@@ -1276,6 +1274,44 @@ namespace Localactors.entities
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("localactorsModel", "FK_donation_project", "project")]
+        public project project
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<project>("localactorsModel.FK_donation_project", "project").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<project>("localactorsModel.FK_donation_project", "project").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<project> projectReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<project>("localactorsModel.FK_donation_project", "project");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<project>("localactorsModel.FK_donation_project", "project", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("localactorsModel", "FK_donation_user", "user")]
         public user user
         {
@@ -1326,44 +1362,6 @@ namespace Localactors.entities
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<transaction>("localactorsModel.FK_transaction_donation", "transaction", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("localactorsModel", "FK_donation_project", "project")]
-        public project project
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<project>("localactorsModel.FK_donation_project", "project").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<project>("localactorsModel.FK_donation_project", "project").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<project> projectReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<project>("localactorsModel.FK_donation_project", "project");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<project>("localactorsModel.FK_donation_project", "project", value);
                 }
             }
         }
@@ -2320,28 +2318,6 @@ namespace Localactors.entities
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("localactorsModel", "FK_donation_project", "donation")]
-        public EntityCollection<donation> donations
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<donation>("localactorsModel.FK_donation_project", "donation");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<donation>("localactorsModel.FK_donation_project", "donation", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("localactorsModel", "FK__project", "update")]
         public EntityCollection<update> updates
         {
@@ -2524,6 +2500,28 @@ namespace Localactors.entities
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<project_cost>("localactorsModel.FK_cost_project", "project_cost", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("localactorsModel", "FK_donation_project", "donation")]
+        public EntityCollection<donation> donations
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<donation>("localactorsModel.FK_donation_project", "donation");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<donation>("localactorsModel.FK_donation_project", "donation", value);
                 }
             }
         }
@@ -6206,28 +6204,6 @@ namespace Localactors.entities
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("localactorsModel", "FK_donation_user", "donation")]
-        public EntityCollection<donation> donations
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<donation>("localactorsModel.FK_donation_user", "donation");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<donation>("localactorsModel.FK_donation_user", "donation", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("localactorsModel", "FK_project_user", "project")]
         public EntityCollection<project> projects
         {
@@ -6284,6 +6260,28 @@ namespace Localactors.entities
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<update_comment>("localactorsModel.FK_update_comment_user", "update_comment", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("localactorsModel", "FK_donation_user", "donation")]
+        public EntityCollection<donation> donations
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<donation>("localactorsModel.FK_donation_user", "donation");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<donation>("localactorsModel.FK_donation_user", "donation", value);
                 }
             }
         }

@@ -29,10 +29,11 @@ else
 {
     <ul class="breadcrumb">
         <li><a href='@Url.Action("Index", "Home")'>Home</a> <span class="divider">/</span></li>
-        <li><a href='@Url.Action("Index", "Donations")'>Donations</a> <span class="divider">
-            /</span></li>
+        
         @if (ViewBag.Donation != null)
         {
+            <li><a href='@Url.Action("Index", "Donations")'>Donations</a> <span class="divider">
+            /</span></li>
             <li><a href='@Url.Action("Edit", "Donations", new { id = ViewBag.Donation.InvestmentID })'>@ViewBag.Donation.InvestmentID</a>
                 <span class="divider">/</span></li>
             <li class="active"><a href='@Url.Action("Index", "Transactions", new { donationid = ViewBag.Donation.InvestmentID })'>

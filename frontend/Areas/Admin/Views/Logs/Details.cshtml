@@ -4,6 +4,14 @@
     ViewBag.Title = "Details";
 }
 
+<script>
+    $(document).ready(function () {
+        var val = $("#dump").val();
+        val = val.replace("&", "\r\n");
+        $("#dump").val(val);
+    });
+</script>
+
 <ul class="breadcrumb">
     <li><a href='@Url.Action("Index","Home")'>Home</a> <span class="divider">/</span></li>
     <li><a href='@Url.Action("Index","logs")'>Logs</a> <span class="divider">/</span></li>
@@ -25,7 +33,7 @@
     <hr/>
     <div class="display-label">Dump</div>
     <div class="">
-        <textarea style="width:100%;" rows="12">@Html.Raw(Model.Dump)</textarea>
+        <textarea style="width:100%;" rows="12" id="dump">@Html.Raw(Model.Dump)</textarea>
     </div>
 </fieldset>
 <p>
