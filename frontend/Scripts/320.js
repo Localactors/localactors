@@ -112,8 +112,8 @@ function fitMap() {
 }
 
 $(document).ready(function() {
-	// $( "#sections_accordion" ).accordion({ header: "header", collapsible: true, heightStyle: "content", active: false  });
-	// $( "#faq_accordion" ).accordion({ header: "h3", collapsible: true, heightStyle: "content", active: false  });
+	$( "#sections_accordion" ).accordion({ header: "header", collapsible: true, heightStyle: "content", active: false  });
+	$( "#faq_accordion" ).accordion({ header: "h3", collapsible: true, heightStyle: "content", active: false  });
 	
 	var step1 = $( "li.step1" );
 	var step2 = $( "li.step2" );
