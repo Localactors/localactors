@@ -589,7 +589,6 @@
     <Content Include="Content\images\world3.png" />
     <Content Include="Content\img\glyphicons-halflings-white.png" />
     <Content Include="Content\img\glyphicons-halflings.png" />
-    <Content Include="favicon.png" />
     <Content Include="favicon_base.gif" />
     <Content Include="Global.asax" />
     <Content Include="robots.txt" />
@@ -791,7 +790,6 @@
     <Content Include="Scripts\vendor\jquery-ui\ui\jquery.ui.tabs.js" />
     <Content Include="Scripts\vendor\jquery-ui\ui\jquery.ui.tooltip.js" />
     <Content Include="Scripts\vendor\jquery-ui\ui\jquery.ui.widget.js" />
-    <Content Include="Scripts\vendor\jquery-ui.js" />
     <Content Include="Scripts\vendor\jquery-ujs.js" />
     <Content Include="Scripts\vendor\jquery.js" />
     <Content Include="Scripts\vendor\jquery.scrollTo.js" />
@@ -986,6 +984,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Templates\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

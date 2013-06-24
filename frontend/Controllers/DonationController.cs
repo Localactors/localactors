@@ -258,10 +258,11 @@ namespace Localactors.webapp.Controllers
                 try {
                     if (project != null && user!=null) {
                         //TODO: fix here!
-                        if (!user.followedProjects.Any(x => x.ProjectID == projectid)) {
+                        var followed = user.followedProjects.FirstOrDefault(x => x.ProjectID == projectid);
+                        if (followed == null) {
                             user.followedProjects.Add(project);
+                            db.SaveChanges();
                         }
-                        db.SaveChanges();
                     }
                 }catch(Exception exi) {
                     SendMailAws(ConfigurationManager.AppSettings["PP_webappEmailNotificationAddress"], "DB Follow Error:", exi.Message + " // " + (exi.InnerException != null ? exi.InnerException.Message : ""));

@@ -1,12 +1,15 @@
 $(document).ready(function () {
+    Log("site2.js");
+
     $(".close").click(function () {
         $(this).parent().fadeOut();
         return false;
     });
 
 
-    //donations
-    if ($("#supported_list a.close").lenght > 0) {
+    
+    try {
+        //donations
         $("#supported_list a.close")[0].click(function () {
             $("#supported_list").slideToggle();
             return false;
@@ -16,54 +19,65 @@ $(document).ready(function () {
             $("#stream_update").slideUp();
             return false;
         });
-    }
-
-    //updates
-    if ($("#stream_update a.close").lenght > 0) {
-        $("#stream_update a.close")[0].click(function() {
+        //updates
+        $("#stream_update a.close")[0].click(function () {
             $("#stream_update").slideToggle();
             return false;
         });
-        $("#profile-bar #updates a").click(function() {
+        $("#profile-bar #updates a").click(function () {
             $("#stream_update").slideToggle();
             $("#supported_list").slideUp();
             return false;
         });
+    } catch (e) {
+        Log(e);
     }
 
-
-    //    $('.datepicker').datepicker(); //Initialise any date pickers
-    //    $('.wysiwyg').wysihtml5(); //Initializes the wysiwyg editor
-
-    //datepicker on modal
-    $('.modal').on('shown', function () {
-    });
+    try {
+        $('.datepicker').datepicker(); //Initialise any date pickers
+        //    $('.wysiwyg').wysihtml5(); //Initializes the wysiwyg editor
+    } catch (e) {
+        Log(e);
+    }
 
 });
 
 $(document).ready(function () {
-    $(".imageupload").disableValidation = true;
-    $(".imageupload").change(function () {
-        $("input").addClass("ignore").disableValidation = true;
-        $("form").disableValidation = true;
-        $("#mainform").submit();
-    });
-
-    $("input[type=file]").each(function () {
-        var input = $(this);
-        var name = input.attr("id");
-        var btn = $("<input type='button' value='upload'></input>");
-        var img = $(".imagepreview");
-
-        input.after(btn);
-        input.css("display", "none");
-
-        btn.click(function () {
-            input.click();
+    try {
+        $(".imageupload").disableValidation = true;
+        $(".imageupload").change(function () {
+            $("input").addClass("ignore").disableValidation = true;
+            $("form").disableValidation = true;
+            $("#mainform").submit();
         });
 
-        img.click(function () {
-            input.click();
+        $("input[type=file]").each(function () {
+            var input = $(this);
+            var name = input.attr("id");
+            var btn = $("<input type='button' value='upload'></input>");
+            var img = $(".imagepreview");
+
+            input.after(btn);
+            input.css("display", "none");
+
+            btn.click(function () {
+                input.click();
+            });
+
+            img.click(function () {
+                input.click();
+            });
         });
-    });
+    } catch (e) {
+        Log(e);
+    }
 });
+
+//logging function
+function Log(statement) {
+    try {
+        console.log(statement);
+    } catch (e) {
+        //nope
+    }
+}

@@ -1,6 +1,6 @@
 var basicURl = '/scripts/vendor/';
 yepnope([{
-load: [ basicURl+'jquery.js',
+    load: [ basicURl+'jquery.js',
 					basicURl+'jquery-ujs.js',
 					basicURl+'jquery.scrollTo.js',
 					basicURl+'jquery-ui/ui/jquery.ui.core.js',
@@ -9,19 +9,13 @@ load: [ basicURl+'jquery.js',
 					basicURl+'response.js'],
 	complete: function(){
 		Response.create({ mode: 'src',  prefix: 'src', breakpoints: [0,980] });
-		yepnope([
-			{
+		yepnope([{
 				test: Modernizr.mq('all and (max-width: 980px)'),
 				yep: [basicURl+'toe/dist/toe.min.js','scripts/320.js'],
 				nope: ['/scripts/960.js']
-			}
-			]);
-yepnope([
-			{
-			    load: ['/scripts/site2.js']
-			}
-			]);
-		}
+			}]);
+        yepnope([{ load: ['/scripts/site2.js']}]);
+	}
 },{
 	load: basicURl+'enquire/dist/enquire.min.js',
 	complete: function(){
