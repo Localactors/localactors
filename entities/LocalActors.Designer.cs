@@ -31,7 +31,6 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("localactorsModel", "FK_project_guestbook_project", "project", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.project), "project_guestbook", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.project_guestbook), true)]
 [assembly: EdmRelationshipAttribute("localactorsModel", "FK_project_user", "user", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.user), "project", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.project), true)]
 [assembly: EdmRelationshipAttribute("localactorsModel", "project_tag", "project", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.project), "tag", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.tag))]
-[assembly: EdmRelationshipAttribute("localactorsModel", "user_follow_project", "project", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.project), "user", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.user))]
 [assembly: EdmRelationshipAttribute("localactorsModel", "FK_project_photo_project", "project", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.project), "project_photo", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.project_photo), true)]
 [assembly: EdmRelationshipAttribute("localactorsModel", "FK_update_comment_update", "update", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.update), "update_comment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.update_comment), true)]
 [assembly: EdmRelationshipAttribute("localactorsModel", "FK_update_comment_user", "user", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.user), "update_comment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.update_comment), true)]
@@ -40,6 +39,7 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("localactorsModel", "FK_donation_project", "project", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Localactors.entities.project), "donation", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.donation), true)]
 [assembly: EdmRelationshipAttribute("localactorsModel", "FK_donation_user", "user", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Localactors.entities.user), "donation", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.donation), true)]
 [assembly: EdmRelationshipAttribute("localactorsModel", "FK_transaction_donation", "donation", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Localactors.entities.donation), "transaction", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.transaction), true)]
+[assembly: EdmRelationshipAttribute("localactorsModel", "user_follow_project", "project", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.project), "user", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Localactors.entities.user))]
 
 #endregion
 
@@ -2422,28 +2422,6 @@ namespace Localactors.entities
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("localactorsModel", "user_follow_project", "user")]
-        public EntityCollection<user> followers
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<user>("localactorsModel.user_follow_project", "user");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<user>("localactorsModel.user_follow_project", "user", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("localactorsModel", "FK_project_photo_project", "project_photo")]
         public EntityCollection<project_photo> project_photo
         {
@@ -2522,6 +2500,28 @@ namespace Localactors.entities
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<donation>("localactorsModel.FK_donation_project", "donation", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("localactorsModel", "user_follow_project", "user")]
+        public EntityCollection<user> followers
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<user>("localactorsModel.user_follow_project", "user");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<user>("localactorsModel.user_follow_project", "user", value);
                 }
             }
         }
@@ -6250,28 +6250,6 @@ namespace Localactors.entities
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("localactorsModel", "user_follow_project", "project")]
-        public EntityCollection<project> followedProjects
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<project>("localactorsModel.user_follow_project", "project");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<project>("localactorsModel.user_follow_project", "project", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("localactorsModel", "FK_update_comment_user", "update_comment")]
         public EntityCollection<update_comment> update_comment
         {
@@ -6306,6 +6284,28 @@ namespace Localactors.entities
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<donation>("localactorsModel.FK_donation_user", "donation", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("localactorsModel", "user_follow_project", "project")]
+        public EntityCollection<project> followedProjects
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<project>("localactorsModel.user_follow_project", "project");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<project>("localactorsModel.user_follow_project", "project", value);
                 }
             }
         }
