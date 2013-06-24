@@ -2,17 +2,30 @@
 @{
     ViewBag.Title = "Your Projects Feed";
 }
-
-@foreach (update item in Model.updates.OrderByDescending(x=>x.Date))
+@if (Model.updates.Count > 0)
 {
-    {Html.RenderPartial("_Project_Update", item);}
-}
 
-<div class="pager">
-    @if(ViewBag.page>1) {
-        <a href="@Url.Action("Feed",new{page=ViewBag.page-1})" class="previous">Previous</a>  
+    foreach (update item in Model.updates.OrderByDescending(x => x.Date))
+    {
+        {
+            Html.RenderPartial("_Project_Update", item);
+        }
     }
-    @if (ViewBag.hasnext == true) {
-        <a href="@Url.Action("Feed", new {page = ViewBag.page + 1})" class="next">Next</a>
-    }
-</div>
+
+    <div class="pager">
+        @if (ViewBag.page > 1)
+        {
+            <a href="@Url.Action("Feed", new { page = ViewBag.page - 1 })" class="previous">Previous</a>
+        }
+        @if (ViewBag.hasnext == true)
+        {
+            <a href="@Url.Action("Feed", new { page = ViewBag.page + 1 })" class="next">Next</a>
+        }
+    </div>
+}
+else
+{
+    <div>
+        Here you will be able to follow all the updates from the projects you donated for.
+        Start browsing our platform and become a real supporter!</div>
+}
