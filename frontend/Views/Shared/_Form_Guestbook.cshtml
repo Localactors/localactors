@@ -10,7 +10,7 @@
             Text
         </div>
         <div class='editor-field'>
-            <textarea cols='20' id='Text' name='Text' rows='2'>@ViewBag.guestbook_text</textarea>
+            <textarea cols='20' id='Text' name='Text' rows='2' data-val-required="The Text is Mandatory.">@ViewBag.guestbook_text</textarea>
             <span class='field-validation-valid' data-valmsg-for='Text' data-valmsg-replace='true'>
             </span>
         </div>

@@ -21,12 +21,12 @@
             @Html.ValidationMessageFor(model => model.Password)
         </div>
         <div class="confirm-password">
-            @Html.LabelFor(model => model.Password, "Conferma Password")
+            @Html.LabelFor(model => model.Password, "Password Confirm")
             @Html.PasswordFor(model => model.Confirm)
             @Html.ValidationMessageFor(model => model.Confirm)
         </div>
         <div class="newsletter">
-            @Html.LabelFor(model => model.Newsletter, "Icriviti alla Newsletter")
+            @Html.LabelFor(model => model.Newsletter, "Newsletter")
             @Html.CheckBoxFor(model => model.Newsletter)
             @Html.ValidationMessageFor(model => model.Newsletter)
         </div>
@@ -36,22 +36,22 @@
     <hr class='spacer privacy' />
     <div class="privacy">
         <p>
-            Dopo aver letto l'informativa <a href="@Url.Action("privacy", "Home")" target="_blank">
-                Privacy</a>, acconsento al trattamento dei miei dati per finalit&agrave; di
-            invio di mails a carattere promozionale
+            After reading the <a href="@Url.Action("privacy", "Home")" target="_blank">
+                Privacy Policy</a>, i agree to the terms hereby exposed.
         </p>
         <div class='container-radio'>
             <div class="radio">
                 <label for="Privacy0" class="" style="text-align: right;">
-                    Acconsento</label>
-                <input type="radio" class="" id="Privacy0" name="Privacy" value="Acconsento" data-val-required="Il campo Privacy &#232; obbligatorio."
+                    I Agree</label>
+                <input type="radio" class="" id="Privacy0" name="Privacy" value="I Agree" 
+                data-val-required="Privacy Policy Agreement is Mandatory."
                     data-val="true" />
             </div>
             <div class="radio">
                 <label for="Privacy1" class="" style="text-align: right;">
-                    Non Acconsento</label>
-                <input type="radio" class="" id="Privacy1" name="Privacy" value="Non Acconsento"
-                    data-val-required="Il campo Privacy &#232; obbligatorio." data-val="true" />
+                    I Don't Agree</label>
+                <input type="radio" class="" id="Privacy1" name="Privacy" value="I Don't Agree"
+                    data-val-required="Privacy Policy Agreement is Mandatory" data-val="true" />
             </div>
             @Html.ValidationMessageFor(model => model.Privacy)
         </div>
