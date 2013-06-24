@@ -121,6 +121,7 @@ namespace Localactors.webapp.Controllers
                 //send email
                 string body = string.Format("From: {0}\r\nName (if loggedin): {1}\r\nProject: {2}\r\nProjectID: {3}\r\n\r\nQuestion: {4}",question.Email, question.UserName,question.ProjectName,question.ProjectID,question.Question );
                 SendMailAws(ConfigurationManager.AppSettings["Email_Info"], "Question about project: " + question.ProjectName, body);
+                
                 return RedirectToAction("Details", "Projects", new {id = question.ProjectID});
             }
 
@@ -158,8 +159,7 @@ namespace Localactors.webapp.Controllers
         [Authorize(Roles="supporter,publisher,admin")]
         public ActionResult GuestbookCreate(project_guestbook model)
         {
-            project project = db.projects
-                .Single(p => p.ProjectID == model.ProjectID);
+            project project = db.projects.Single(p => p.ProjectID == model.ProjectID);
 
             model.UserID = CurrentUser.UserID;
             model.Date = DateTime.Now;
@@ -235,6 +235,10 @@ namespace Localactors.webapp.Controllers
             {
                 project.project_guestbook.Add(model);
                 db.SaveChanges();
+
+                string body = string.Format("From: {0}\r\nProject: {1}\r\nProjectID: {2}\r\n\r\nGestbook Post: {3}", CurrentUser.Email, project.Title, model.ProjectID, model.Text);
+                SendMailAws(ConfigurationManager.AppSettings["Email_Info"], "New Guestbook Post: " + project.Title, body);
+                SendMailAws(project.user.Email, "New Guestbook Post: " + project.Title, body);
             }
 
             //redirect & reload
@@ -266,7 +270,9 @@ namespace Localactors.webapp.Controllers
         [HttpPost]
         [Authorize(Roles = "supporter,publisher,admin")]
         public ActionResult CommentCreate(update_comment model) {
-            update update = db.updates.FirstOrDefault(x => x.UpdateID == model.UpdateID);
+            update update = db.updates.Include("project").FirstOrDefault(x => x.UpdateID == model.UpdateID);
+            project project = update.project;
+
 
             model.UserID = CurrentUser.UserID;
             model.Date = DateTime.Now;
@@ -342,6 +348,10 @@ namespace Localactors.webapp.Controllers
             {
                 update.update_comment.Add(model);
                 db.SaveChanges();
+
+                string body = string.Format("From: {0}\r\nProject: {1}\r\nProjectID: {2}\r\n\r\nComment: {3}", CurrentUser.Email, project.Title, update.ProjectID, model.Text);
+                SendMailAws(ConfigurationManager.AppSettings["Email_Info"], "New Comment : " + project.Title, body);
+                SendMailAws(project.user.Email, "New Comment : " + project.Title, body);
             }
 
             if (Request.UrlReferrer != null) {
