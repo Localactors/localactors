@@ -65,18 +65,18 @@ namespace Localactors.webapp.Controllers
 
             if (geo == null)
             {
-                ModelState.AddModelError("Username", "Utente o Password errati");
+                ModelState.AddModelError("Username", "wrong user or password");
                 return View(model);
             }
 
-            //if(geo.Confirmed == false ){
-            //    ModelState.AddModelError("Username","Utente non confermato. Controlla le tua casella per la mail di conferma.");
-            //    return View(model);
-            //}
+            if(geo.Confirmed == false ){
+                ModelState.AddModelError("Username","User not yet confirmed. Check your inbox for the confirmation email.");
+                return View(model);
+            }
 
             if (geo.Enabled == false)
             {
-                ModelState.AddModelError("Username", "Utente non abilitato");
+                ModelState.AddModelError("Username", "user not enabled");
                 return View(model);
             }
 
@@ -108,7 +108,7 @@ namespace Localactors.webapp.Controllers
 
             //fallback out!
             TempData["error"] = "Errore di accesso";
-            ModelState.AddModelError("Username", "Utente o Password errati");
+            ModelState.AddModelError("Username", "wrong username or password");
             return View(model);
         }
         [HttpGet]
@@ -138,7 +138,13 @@ namespace Localactors.webapp.Controllers
 
             if (model.Password != model.Confirm)
             {
-                ModelState.AddModelError("Confirm", "Le password non coincidono");
+                ModelState.AddModelError("Confirm", "Passwords do not match");
+                return View(model);
+            }
+
+            if (!model.Terms.Equals("I Agree", StringComparison.InvariantCultureIgnoreCase))
+            {
+                ModelState.AddModelError("Terms", "You need to read and agree to the terms and conditions.");
                 return View(model);
             }
 
@@ -159,7 +165,7 @@ namespace Localactors.webapp.Controllers
             var geo = db.users.FirstOrDefault(x => x.Email.ToLower() == model.Email.ToLower());
             if (geo != null)
             {
-                ModelState.AddModelError("Email", "Indirizzo Email gia registrato");
+                ModelState.AddModelError("Email", "Email address already registered");
                 return View(model);
             }
 
@@ -197,7 +203,7 @@ namespace Localactors.webapp.Controllers
                                       Image = "https://s3-eu-west-1.amazonaws.com/localactors-webapp/users/default_user_256.png"
                                   };
 
-            if (model.Privacy.Equals("Acconsento", StringComparison.InvariantCultureIgnoreCase))
+            if (model.Privacy.Equals("I Agree", StringComparison.InvariantCultureIgnoreCase))
             {
                 newuser.Privacy = true;
             }
@@ -207,7 +213,7 @@ namespace Localactors.webapp.Controllers
 
             string url = Url.Action("SubscribeConfirm", "Account", new { key }, "http");
             string title = "Conferma Email";
-            string body = string.Format("Ciao \r\n\r\nPer poter attivare il tuo account è necessario cliccare il link :\r\n\r\n{0}\r\n\r\nOppure inserire il codice riportato nella casella di conferma; \r\ncodice:{1}", url, key);
+            string body = string.Format("Ciao \r\n\r\nTo activate your account you should click this link :\r\n\r\n{0}\r\n\r\nOr manually insert the code in the confirmation box \r\ncode:{1}", url, key);
             bool sent = SendMailAws(model.Email, title, body);
 
             db.users.AddObject(newuser);
@@ -235,7 +241,7 @@ namespace Localactors.webapp.Controllers
                 user geo = db.users.FirstOrDefault(x => x.Email_Hash == key && x.Confirmed == false);
                 if (geo == null)
                 {
-                    ModelState.AddModelError(string.Empty, "Codice non corretto o account gia attivato");
+                    ModelState.AddModelError(string.Empty, "Wrong code or account already active");
                     return View();
                 }
 
@@ -279,7 +285,7 @@ namespace Localactors.webapp.Controllers
 
             if (user == null)
             {
-                ModelState.AddModelError(string.Empty, "Utente non trovato.");
+                ModelState.AddModelError(string.Empty, "User not found");
                 return View(model);
             }
 
@@ -288,11 +294,11 @@ namespace Localactors.webapp.Controllers
             user.ResetEndDate = DateTime.Now.AddDays(3);
             user.Email_Hash = key;
 
-            TempData["success"] = "Richiesta di reset password ricevuta. Controlla le email.";
+            TempData["success"] = "Check your inbox for the reset link";
 
             string url = Url.Action("ResetPassword", "Account", new { key = key }, "http");
             string title = "Conferma Reset Password";
-            string body = string.Format("Ciao \r\n\r\nPer poter resettare la password è necessario aprire il link seguente:\r\n\r\n{0}\r\n\r\nOppure inserire il codice riportato nella casella di conferma;\r\n\r\nAttenzione: per garantire la sicurezza il codice di rest scadrà entro poche ore.  \r\ncodice:{1}", url, key);
+            string body = string.Format("Ciao \r\n\r\nTo reset your password you should open the following link:\r\n\r\n{0}\r\n\r\nOr manually input the following code;\r\n\r\n \r\ncode:{1}", url, key);
 
             bool sent = SendMailAws(user.Email, title, body);
             if (sent)
@@ -302,7 +308,7 @@ namespace Localactors.webapp.Controllers
             }
             else
             {
-                ModelState.AddModelError("username", "Problema Tecnico: impossibile inviare l'email.");
+                ModelState.AddModelError("username", "There was an error sending the email");
                 return View(model);
 
                 //db.SaveChanges();
@@ -326,20 +332,20 @@ namespace Localactors.webapp.Controllers
 
             if (string.IsNullOrEmpty(model.Key))
             {
-                ModelState.AddModelError("Password", "Codice di reset non presente. E' necessario richiedere nuovamente il reset.");
+                ModelState.AddModelError("Password", "Wrong code, Please try again resetting your password");
                 return View(model);
             }
 
             if (model.Password != model.Confirm)
             {
-                ModelState.AddModelError("Confirm", "Le password non coincidono");
+                ModelState.AddModelError("Confirm", "The passwords do not match");
                 return View(model);
             }
 
             user geo = db.users.FirstOrDefault(x => x.Reset && x.Email_Hash == model.Key && x.ResetEndDate.HasValue && x.ResetEndDate.Value >= DateTime.Now);
             if (geo == null)
             {
-                ModelState.AddModelError("Password", "Reset password non abilitato/scaduto. In caso sia necessario, richiedere nuovamente il reset della password tramite la schermata di login.");
+                ModelState.AddModelError("Password", "Old reset code, please try again requesting a passowrd reset");
                 return View(model);
             }
 
@@ -413,7 +419,7 @@ namespace Localactors.webapp.Controllers
             user.Bio = model.Bio;
             db.SaveChanges();
 
-            TempData["success"] = "Impostazioni Salvate.";
+            TempData["success"] = "Data updated";
 
             return RedirectToAction("Index");
         }
