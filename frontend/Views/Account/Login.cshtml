@@ -12,12 +12,12 @@
 
     <div class='container-form'>
         <div class="mail">
-            @Html.LabelFor(model => model.Username, "Email")
+            <label for="Email">Email</label>
             @Html.TextBoxFor(model => model.Username)
             @Html.ValidationMessageFor(model => model.Username)
         </div>
         <div class="password">
-            @Html.LabelFor(model => model.Password, "Password")
+             <label for="Password">Password</label>
             @Html.PasswordFor(model => model.Password)
             @Html.ValidationMessageFor(model => model.Password)
         </div>

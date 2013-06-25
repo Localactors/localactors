@@ -16,7 +16,7 @@
             box or click the link in the confirmation email.
         </div>
         <div class="mail">
-            @Html.Label("key", "Chiave di Conferma")
+            <label for="key">Confirmation Key</label>
             @Html.TextBox("key", (string)ViewBag.key)
             @Html.ValidationMessage("key")
         </div>
