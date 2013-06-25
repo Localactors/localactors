@@ -12,22 +12,26 @@
     <div class='container-form'>
         <div class="mail">
             @Html.TextBoxFor(model => model.Email)
-            @Html.LabelFor(model => model.Email, "Email")
+            <label for="Email" class="" style="text-align: right;">
+-                    <span></span> Email</label>
             @Html.ValidationMessageFor(model => model.Email)
         </div>
         <div class="password">
             @Html.PasswordFor(model => model.Password)
-            @Html.LabelFor(model => model.Password, "Password")
+            <label for="Password" class="" style="text-align: right;">
+-                    <span></span> Password</label>
             @Html.ValidationMessageFor(model => model.Password)
         </div>
         <div class="confirm-password">
             @Html.PasswordFor(model => model.Confirm)
-            @Html.LabelFor(model => model.Password, "Password Confirm")
+            <label for="Confirm" class="" style="text-align: right;">
+-                    <span></span> Password Confirm</label>
             @Html.ValidationMessageFor(model => model.Confirm)
         </div>
         <div class="newsletter">
             @Html.CheckBoxFor(model => model.Newsletter)
-            @Html.LabelFor(model => model.Newsletter, "Newsletter")
+            <label for="Newsletter" class="" style="text-align: right;">
+-                    <span></span> Newsletter</label>
             @Html.ValidationMessageFor(model => model.Newsletter)
         </div>
     </div>
