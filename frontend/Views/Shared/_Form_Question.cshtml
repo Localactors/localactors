@@ -1,35 +1,39 @@
 ﻿@model Localactors.webapp.Controllers.ProjectsController.AskModel
 @using (Html.BeginForm("Ask", "Projects", FormMethod.Post, new { enctype = "multipart/form-data", id = "mainform", @class = "blue-form" }))
 {
-            
+        
     <div class='container-comment'>
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.Question.ProjectID)
         @Html.HiddenFor(model => model.Question.ProjectName)
         @Html.HiddenFor(model => model.Question.UserName)
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Question.Email, "Email")
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Question.Email)
-            @Html.ValidationMessageFor(model => model.Question.Email)
+        <div class='email cont'>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Question.Email, "Email")
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Question.Email)
+                @Html.ValidationMessageFor(model => model.Question.Email)
+            </div>
         </div>
         <div class="editor-label">
             @Html.LabelFor(model => model.Question.Question, "Question")
         </div>
-        <div class="editor-field">
-            @Html.TextAreaFor(model => model.Question.Question, new { cols = 20, rows = 2 })
-            @Html.ValidationMessageFor(model => model.Question.Question)
-            <div class='create-comment'>
-                <div class='clear-box'>
-                </div>
-                <div class='button_container'>
-                    <div class='corner_left'>
+        <div class='question-cont'>
+            <div class="editor-field">
+                @Html.TextAreaFor(model => model.Question.Question, new { cols = 20, rows = 2 })
+                @Html.ValidationMessageFor(model => model.Question.Question)
+                <div class='create-comment'>
+                    <div class='clear-box'>
                     </div>
-                    <h4 class='buttons yellow_button'>
-                        <input class='btn' type='submit' value='Ask'>
-                    </h4>
-                    <div class='corner_right'>
+                    <div class='button_container'>
+                        <div class='corner_left'>
+                        </div>
+                        <h4 class='buttons yellow_button'>
+                            <input class='btn' type='submit' value='Ask'>
+                        </h4>
+                        <div class='corner_right'>
+                        </div>
                     </div>
                 </div>
             </div>
