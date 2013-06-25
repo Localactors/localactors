@@ -44,6 +44,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
             model.DateEnd = DateTime.Now.AddDays(60);
             model.DateUpdate = DateTime.Now;
             model.Target = 1000;
+            model.Image = "https://s3-eu-west-1.amazonaws.com/localactors-webapp/projects/placeholder_project.png";
             return View(model);
         } 
         [HttpPost]
@@ -110,6 +111,9 @@ namespace Localactors.webapp.Areas.Admin.Controllers
             }
 
             if (ModelState.IsValid) {
+                if (project.Image == null)
+                    project.Image = "https://s3-eu-west-1.amazonaws.com/localactors-webapp/projects/placeholder_project.png";
+
                 project.Enabled = false;
                 project.DateUpdate = DateTime.Now;
                 db.projects.AddObject(project);
@@ -203,6 +207,10 @@ namespace Localactors.webapp.Areas.Admin.Controllers
             }
 
             if (ModelState.IsValid) {
+
+                if (project.Image == null)
+                    project.Image = "https://s3-eu-west-1.amazonaws.com/localactors-webapp/projects/placeholder_project.png";
+
                 project.DateUpdate = DateTime.Now;
                 db.projects.Attach(project);
                 db.ObjectStateManager.ChangeObjectState(project, EntityState.Modified);
