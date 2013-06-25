@@ -26,8 +26,8 @@
             @Html.ValidationMessageFor(model => model.Confirm)
         </div>
         <div class="newsletter">
-            <label for="Newsletter" class="" style="text-align: right;">Newsletter</label>
             @Html.CheckBoxFor(model => model.Newsletter)
+            <label for="Newsletter" class="" style="text-align: right;"><span></span> Newsletter</label>
             @Html.ValidationMessageFor(model => model.Newsletter)
         </div>
     </div>
