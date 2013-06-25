@@ -238,8 +238,8 @@ namespace Localactors.webapp.Controllers
                 Validator validator = new Validator(ConfigurationManager.AppSettings["Akismet_Key"]);
                 bool isspam = validator.IsSpam(new Comment()
                                      {
-                                             comment_author_email = CurrentUser.Email, 
-                                             blog = "http://localactors.org", 
+                                             comment_author_email = CurrentUser.Email,
+                                             blog = ConfigurationManager.AppSettings["Akismet_Url"], 
                                              comment_author = CurrentUser.UserName, 
                                              comment_content = model.Text, 
                                              user_agent = Request.UserAgent, 
@@ -369,12 +369,12 @@ namespace Localactors.webapp.Controllers
             if (ModelState.IsValid)
             {
 
-
+                //akismet
                 Validator validator = new Validator(ConfigurationManager.AppSettings["Akismet_Key"]);
                 bool isspam = validator.IsSpam(new Comment()
                 {
                     comment_author_email = CurrentUser.Email,
-                    blog = "http://localactors.org",
+                    blog = ConfigurationManager.AppSettings["Akismet_Url"], 
                     comment_author = CurrentUser.UserName,
                     comment_content = model.Text,
                     user_agent = Request.UserAgent,

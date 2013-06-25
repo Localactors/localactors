@@ -261,7 +261,7 @@ namespace Localactors.webapp.Controllers
                 //5: add follower
                 try {
                     if (project != null && user!=null) {
-                        //TODO: fix here!
+      
                         var followed = user.followedProjects.FirstOrDefault(x => x.ProjectID == projectid);
                         if (followed == null) {
                             user.followedProjects.Add(project);
