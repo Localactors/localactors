@@ -271,7 +271,7 @@ namespace Localactors.webapp
                 return false;
             }
         }
-        internal bool SendMailAws(string to, string title, string body)
+        internal bool SendMailAws(string to, string title, string body, bool html = false)
         {
             try
             {
@@ -287,8 +287,10 @@ namespace Localactors.webapp
                     ConfigurationManager.AppSettings["AWS_smtp_user"],
                     ConfigurationManager.AppSettings["AWS_smtp_pass"]);
                 client.EnableSsl = true;
-                client.Send(ConfigurationManager.AppSettings["AWS_mailfrom"], to, title, body);
 
+                MailMessage message = new MailMessage(ConfigurationManager.AppSettings["AWS_mailfrom"], to, title, body);
+                message.IsBodyHtml = html;
+                client.Send(message);
 
                 return true;
             }
@@ -382,6 +384,7 @@ namespace Localactors.webapp
                 return false;
             }
         }
+      
 
         //dates
         internal DateTime DateFromString(string date)

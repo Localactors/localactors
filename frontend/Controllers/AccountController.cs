@@ -61,7 +61,7 @@ namespace Localactors.webapp.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
-            user geo = db.users.FirstOrDefault( x=> ( x.UserName.ToLower() == model.Username.ToLower() || x.Email.ToLower() == model.Username.ToLower()));
+            user geo = db.users.FirstOrDefault(x => (x.UserName.ToLower() == model.Username.ToLower() || x.Email.ToLower() == model.Username.ToLower()));
 
             if (geo == null)
             {
@@ -69,8 +69,9 @@ namespace Localactors.webapp.Controllers
                 return View(model);
             }
 
-            if(geo.Confirmed == false ){
-                ModelState.AddModelError("Username","User not yet confirmed. Check your inbox for the confirmation email.");
+            if (geo.Confirmed == false)
+            {
+                ModelState.AddModelError("Username", "User not yet confirmed. Check your inbox for the confirmation email.");
                 return View(model);
             }
 
@@ -94,7 +95,7 @@ namespace Localactors.webapp.Controllers
                 //}
 
                 FormsAuthentication.SetAuthCookie(model.Username.ToLower(), model.RememberMe);
-                
+
                 //data cookies
                 PushCookies(geo);
 
@@ -211,13 +212,20 @@ namespace Localactors.webapp.Controllers
             db.users.AddObject(newuser);
             db.SaveChanges();
 
-            //activation
-            string url = Url.Action("SubscribeConfirm", "Account", new { key }, "http");
-            string body = string.Format("Hi, \r\n\r\nTo activate your account you should click this link :\r\n\r\n{0}\r\n\r\nOr manually insert the code in the confirmation box \r\ncode:{1}", url, key);
-            SendMailAws(newuser.Email, "LocalActors: Email Confirmation", body);
+            //activation email
+            string fullpath = Server.MapPath("~/Templates/registration_confirm.html");
+            string confirmurl = Url.Action("SubscribeConfirm", "Account", new { key }, "http");
+            string body = System.IO.File.ReadAllText(fullpath);
+            body = body.Replace("[username]", newuser.UserName);
+            body = body.Replace("[usermail]", newuser.Email);
+            body = body.Replace("[userbio]", newuser.Bio);
+            body = body.Replace("[userphoto]", newuser.Image);
+            body = body.Replace("[confirmlink]", confirmurl);
+            body = body.Replace("[confirmcode]", key);
+            SendMailAws(newuser.Email, "LocalActors: Email Confirmation", body, true);
 
             //admins
-            SendMailAwsAdmin("LocalActors New User:" + newuser.UserName,"");
+            SendMailAwsAdmin("LocalActors New User:" + newuser.UserName, "");
 
             FormsAuthentication.SetAuthCookie(model.Email, true);
             return RedirectToAction("Settings", "Profile");
@@ -248,6 +256,8 @@ namespace Localactors.webapp.Controllers
                 geo.Email_Hash = null;
                 db.SaveChanges();
 
+                SendMailAwsTemplate(geo, null, geo.Email, "registration_welcome.html", "Welcome to Localactors.org", "");
+
                 //SendMailAws("diego@nonmonkey.com", "User Confirmed", geo.Email);
 
                 return RedirectToAction("Login");
@@ -277,7 +287,7 @@ namespace Localactors.webapp.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
-            user user = db.users.FirstOrDefault(x => x.UserName == model.Username || x.Email == model.Username );
+            user user = db.users.FirstOrDefault(x => x.UserName == model.Username || x.Email == model.Username);
 
             if (user == null)
             {
