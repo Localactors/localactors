@@ -16,26 +16,23 @@
                 @Html.ValidationMessageFor(model => model.Question.Email)
             </div>
         </div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Question.Question, "Question")
-        </div>
         <div class='question-cont'>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Question.Question, "Question")
+            </div>
             <div class="editor-field">
                 @Html.TextAreaFor(model => model.Question.Question, new { cols = 20, rows = 2 })
                 @Html.ValidationMessageFor(model => model.Question.Question)
-                <div class='create-comment'>
-                    <div class='clear-box'>
-                    </div>
-                    <div class='button_container'>
-                        <div class='corner_left'>
-                        </div>
-                        <h4 class='buttons yellow_button'>
-                            <input class='btn' type='submit' value='Ask'>
-                        </h4>
-                        <div class='corner_right'>
-                        </div>
-                    </div>
-                </div>
+            </div>
+        </div>
+        <div class='create-comment'>
+            <div class='clear-box'></div>
+            <div class='button_container'>
+                <div class='corner_left'></div>
+                <h4 class='buttons yellow_button'>
+                    <input class='btn' type='submit' value='Ask'>
+                </h4>
+                <div class='corner_right'></div>
             </div>
         </div>
     </div>
