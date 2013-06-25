@@ -1,23 +1,9 @@
 $(document).ready(function () {
-    
-    //fire console
-    if (!window['console']) {
-        if (window['loadFirebugConsole']) {
-            window.loadFirebugConsole();
-        } else {
-            var firebugLite = function (F, i, r, e, b, u, g, L, I, T, E) { if (F.getElementById(b)) return; E = F[i + 'NS'] && F.documentElement.namespaceURI; E = E ? F[i + 'NS'](E, 'script') : F[i]('script'); E[r]('id', b); E[r]('src', I + g + T); E[r](b, u); (F[e]('head')[0] || F[e]('body')[0]).appendChild(E); E = new Image; E[r]('src', I + L); };
-            firebugLite(document, 'createElement', 'setAttribute', 'getElementsByTagName', 'FirebugLite', '4', 'firebug-lite.js', 'releases/lite/latest/skin/xp/sprite.png', 'https://getfirebug.com/', '#startOpened');
-        }
-    }
-    
-    Log("site2.js");
 
     $(".close").click(function () {
         $(this).parent().fadeOut();
         return false;
     });
-
-
     
     try {
         //donations
@@ -85,10 +71,10 @@ $(document).ready(function () {
 });
 
 //logging function
-function Log(statement) {
-    try {
-        console.log("Error: " + statement);
-    } catch (e) {
-        //nope
+function Log() {
+    log.history = log.history || [];   // store logs to an array for reference
+    log.history.push(arguments);
+    if (this.console) {
+        console.log(Array.prototype.slice.call(arguments));
     }
 }
