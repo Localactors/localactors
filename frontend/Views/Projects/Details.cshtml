@@ -32,13 +32,12 @@
             @foreach (var item in Model.project_photo.OrderBy(x => x.PhotoID))
             {
                 
-                    <img scr="@item.Url" alt=""/>
+                    <img src="@item.Url" alt="" />
                     <p class='subtitle'>
                         @Html.Raw(item.Caption)
                     </p>
                 
             }
-        <
         <ul>
             <li>
                 <h1 class='title'>
