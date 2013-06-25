@@ -195,7 +195,7 @@ namespace Localactors.webapp.Controllers
                 //1: check duplicate transaction
                 var duplicate = db.transactions.FirstOrDefault(x => x.TransactionCode == txn_id);
                 if (duplicate != null) {
-                    SendMailAws(ConfigurationManager.AppSettings["PP_webappEmailNotificationAddress"], "Paypal IPN", "Duplicate Transaction: " + body);
+                    SendMailAwsAdmin("Paypal IPN", "Duplicate Transaction: " + body);
                     return Content("Duplicate");
                 }
 
@@ -252,7 +252,6 @@ namespace Localactors.webapp.Controllers
                 db.SaveChanges();
 
                 string mailbody = string.Format("From: {0}\r\nName: {1}\r\nProject: {2}\r\nProjectID: {3}\r\n\r\nPaypal Donation Data: {4}", user.Email, user.UserName, project.Title, project.ProjectID, body);
-                SendMailAws(ConfigurationManager.AppSettings["Email_Info"], "Donation: " + project.Title, mailbody);
                 SendMailAws(project.user.Email, "Donation: " + project.Title, mailbody);
                 SendMailAwsAdmin("Donation: " + project.Title, mailbody);
                 SendMailAwsTemplate(user, project, user.Email, "donation_thankyou.htm", "Thank You!", "");
@@ -269,14 +268,14 @@ namespace Localactors.webapp.Controllers
                         }
                     }
                 }catch(Exception exi) {
-                    SendMailAws(ConfigurationManager.AppSettings["PP_webappEmailNotificationAddress"], "DB Follow Error:", exi.Message + " // " + (exi.InnerException != null ? exi.InnerException.Message : ""));
+                    SendMailAwsAdmin("DB Follow Error:", exi.Message + " // " + (exi.InnerException != null ? exi.InnerException.Message : ""));
                     LogStuff("DB FOLLOW ERROR", DateTime.Now, exi.Message + " // " + (exi.InnerException != null ? exi.InnerException.Message : ""));
                 }
 
                 return Content("");
                 
             }catch(Exception ex) {
-                SendMailAws(ConfigurationManager.AppSettings["PP_webappEmailNotificationAddress"], "Paypal Error:", ex.Message + " // " + (ex.InnerException != null ? ex.InnerException.Message : ""));
+                SendMailAwsAdmin("Paypal Error:", ex.Message + " // " + (ex.InnerException != null ? ex.InnerException.Message : ""));
                 LogStuff("PAYPAL ERROR", DateTime.Now, ex.Message + " // " + (ex.InnerException != null ? ex.InnerException.Message : ""));
                 LogStuff("PAYPAL ERROR", DateTime.Now, body);
                 return Content("");
@@ -326,7 +325,7 @@ namespace Localactors.webapp.Controllers
                     return "PENDING";
                 }
             }catch(Exception ex) {
-                SendMailAws(ConfigurationManager.AppSettings["PP_webappEmailNotificationAddress"], "Paypal Verification Error:", ex.Message);
+                SendMailAwsAdmin( "Paypal Verification Error:", ex.Message);
                 LogStuff("PAYPAL VERIFICATION ERROR", DateTime.Now, ex.Message);
                 return "PENDING";
             }

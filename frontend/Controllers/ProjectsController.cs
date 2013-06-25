@@ -121,7 +121,7 @@ namespace Localactors.webapp.Controllers
             if(ModelState.IsValid) {
                 //send email
                 string body = string.Format("From: {0}\r\nName (if loggedin): {1}\r\nProject: {2}\r\nProjectID: {3}\r\n\r\nQuestion: {4}",question.Email, question.UserName,question.ProjectName,question.ProjectID,question.Question );
-                SendMailAws(ConfigurationManager.AppSettings["Email_Info"], "Question about project: " + question.ProjectName, body);
+                SendMailAwsAdmin( "Question about project: " + question.ProjectName, body);
                 
                 return RedirectToAction("Details", "Projects", new {id = question.ProjectID});
             }
@@ -250,14 +250,14 @@ namespace Localactors.webapp.Controllers
 
                 if (isspam){
                     string spam = string.Format("From: {0}\r\nProject: {1}\r\nProjectID: {2}\r\n\r\nGuestbook SPAM TEXT: {3}\r\n\r\nThis post was not saved.", CurrentUser.Email, project.Title, model.ProjectID, model.Text);
-                    SendMailAws(ConfigurationManager.AppSettings["Email_Info"], "New Guestbook Post SPAM: " + project.Title, spam);
                     SendMailAwsAdmin("New Guestbook Post SPAM: " + project.Title, spam);
+
+                    LogStuff("SPAM",DateTime.Now,spam);
                 }else {
                     project.project_guestbook.Add(model);
                     db.SaveChanges();
 
                     string body = string.Format("From: {0}\r\nProject: {1}\r\nProjectID: {2}\r\n\r\nGuestbook Post: {3}", CurrentUser.Email, project.Title, model.ProjectID, model.Text);
-                    SendMailAws(ConfigurationManager.AppSettings["Email_Info"], "New Guestbook Post: " + project.Title, body);
                     SendMailAws(project.user.Email, "New Guestbook Post: " + project.Title, body);
                     SendMailAwsAdmin("New Guestbook Post: " + project.Title, body);
                 }
@@ -386,8 +386,8 @@ namespace Localactors.webapp.Controllers
                 if (isspam)
                 {
                     string spam = string.Format("From: {0}\r\nProject: {1}\r\nProjectID: {2}\r\n\r\nComment SPAM TEXT: {3}\r\n\r\nThis post was not saved.", CurrentUser.Email, project.Title, update.ProjectID, model.Text);
-                    SendMailAws(ConfigurationManager.AppSettings["Email_Info"], "New Comment SPAM: " + project.Title, spam);
                     SendMailAwsAdmin("New Comment SPAM: " + project.Title, spam);
+                    LogStuff("SPAM", DateTime.Now, spam);
                 }
                 else {
 
@@ -395,7 +395,6 @@ namespace Localactors.webapp.Controllers
                     db.SaveChanges();
 
                     string body = string.Format("From: {0}\r\nProject: {1}\r\nProjectID: {2}\r\n\r\nComment: {3}", CurrentUser.Email, project.Title, update.ProjectID, model.Text);
-                    SendMailAws(ConfigurationManager.AppSettings["Email_Info"], "New Comment : " + project.Title, body);
                     SendMailAws(project.user.Email, "New Comment : " + project.Title, body);
                     SendMailAwsAdmin("New Comment : " + project.Title, body);
                 }

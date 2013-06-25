@@ -92,7 +92,7 @@ namespace Localactors.webapp
                 db.SaveChanges();
             }catch(Exception ex) {
                 //do nothing
-                SendMailAws(ConfigurationManager.AppSettings["PP_webappEmailNotificationAddress"], "Logging Error:", (ex.InnerException != null ? ex.InnerException.Message : ""));
+                SendMailAws(ConfigurationManager.AppSettings["Email_NotificationAddress"], "Logging Error:", (ex.InnerException != null ? ex.InnerException.Message : ""));
             }
         }
 
@@ -320,6 +320,9 @@ namespace Localactors.webapp
                 foreach (user admin in admins) {
                     client.Send(ConfigurationManager.AppSettings["AWS_mailfrom"], admin.Email, title, body);
                 }
+
+                //service address
+                SendMailAws(ConfigurationManager.AppSettings["Email_NotificationAddress"], title, body);
 
                 return true;
             }
