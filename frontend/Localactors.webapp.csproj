@@ -188,6 +188,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="apple-touch-icon-114x114-precomposed.png" />
+    <Content Include="apple-touch-icon-144x144-precomposed.png" />
+    <Content Include="apple-touch-icon-57x57-precomposed.png" />
+    <Content Include="apple-touch-icon-72x72-precomposed.png" />
+    <Content Include="apple-touch-icon-precomposed.png" />
+    <Content Include="apple-touch-icon.png" />
     <Content Include="Areas\Admin\Content\css\bootstrap-responsive.css" />
     <Content Include="Areas\Admin\Content\css\bootstrap-responsive.min.css" />
     <Content Include="Areas\Admin\Content\css\bootstrap.css" />
