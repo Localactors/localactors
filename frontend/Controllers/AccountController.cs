@@ -258,8 +258,6 @@ namespace Localactors.webapp.Controllers
 
                 SendMailAwsTemplate(geo, null, geo.Email, "registration_welcome.html", "Welcome to Localactors.org", "");
 
-                //SendMailAws("diego@nonmonkey.com", "User Confirmed", geo.Email);
-
                 return RedirectToAction("Login");
             }
 
