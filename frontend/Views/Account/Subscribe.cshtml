@@ -11,27 +11,23 @@
     @Html.ValidationSummary(true)
     <div class='container-form'>
         <div class="mail">
-            @Html.TextBoxFor(model => model.Email)
-            <label for="Email" class="" style="text-align: right;">
--                    <span></span> Email</label>
+            <label for="Email" class="" style="text-align: right;">Email</label>
             @Html.ValidationMessageFor(model => model.Email)
+            @Html.TextBoxFor(model => model.Email)
         </div>
         <div class="password">
+            <label for="Password" class="" style="text-align: right;">Password</label>
             @Html.PasswordFor(model => model.Password)
-            <label for="Password" class="" style="text-align: right;">
--                    <span></span> Password</label>
             @Html.ValidationMessageFor(model => model.Password)
         </div>
         <div class="confirm-password">
+            <label for="Confirm" class="" style="text-align: right;">Password Confirm</label>
             @Html.PasswordFor(model => model.Confirm)
-            <label for="Confirm" class="" style="text-align: right;">
--                    <span></span> Password Confirm</label>
             @Html.ValidationMessageFor(model => model.Confirm)
         </div>
         <div class="newsletter">
+            <label for="Newsletter" class="" style="text-align: right;">Newsletter</label>
             @Html.CheckBoxFor(model => model.Newsletter)
-            <label for="Newsletter" class="" style="text-align: right;">
--                    <span></span> Newsletter</label>
             @Html.ValidationMessageFor(model => model.Newsletter)
         </div>
     </div>
