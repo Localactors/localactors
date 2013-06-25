@@ -8,6 +8,7 @@ using Amazon.S3;
 using Amazon.S3.Model;
 using Localactors.entities;
 using System.Drawing;
+using Akismet.NET;
 
 namespace Localactors.webapp.Controllers
 { 
@@ -233,13 +234,33 @@ namespace Localactors.webapp.Controllers
 
             if (ModelState.IsValid )
             {
-                project.project_guestbook.Add(model);
-                db.SaveChanges();
 
-                string body = string.Format("From: {0}\r\nProject: {1}\r\nProjectID: {2}\r\n\r\nGestbook Post: {3}", CurrentUser.Email, project.Title, model.ProjectID, model.Text);
-                SendMailAws(ConfigurationManager.AppSettings["Email_Info"], "New Guestbook Post: " + project.Title, body);
-                SendMailAws(project.user.Email, "New Guestbook Post: " + project.Title, body);
-                SendMailAwsAdmin("New Guestbook Post: " + project.Title, body);
+                Validator validator = new Validator(ConfigurationManager.AppSettings["Akismet_Key"]);
+                bool isspam = validator.IsSpam(new Comment()
+                                     {
+                                             comment_author_email = CurrentUser.Email, 
+                                             blog = "http://localactors.org", 
+                                             comment_author = CurrentUser.UserName, 
+                                             comment_content = model.Text, 
+                                             user_agent = Request.UserAgent, 
+                                             user_ip = Request.UserHostAddress, 
+                                             referrer = Request.UrlReferrer!=null? Request.UrlReferrer.AbsoluteUri:"", 
+                                             comment_type = "comment"
+                                     });
+
+                if (isspam){
+                    string spam = string.Format("From: {0}\r\nProject: {1}\r\nProjectID: {2}\r\n\r\nGuestbook SPAM TEXT: {3}\r\n\r\nThis post was not saved.", CurrentUser.Email, project.Title, model.ProjectID, model.Text);
+                    SendMailAws(ConfigurationManager.AppSettings["Email_Info"], "New Guestbook Post SPAM: " + project.Title, spam);
+                    SendMailAwsAdmin("New Guestbook Post SPAM: " + project.Title, spam);
+                }else {
+                    project.project_guestbook.Add(model);
+                    db.SaveChanges();
+
+                    string body = string.Format("From: {0}\r\nProject: {1}\r\nProjectID: {2}\r\n\r\nGuestbook Post: {3}", CurrentUser.Email, project.Title, model.ProjectID, model.Text);
+                    SendMailAws(ConfigurationManager.AppSettings["Email_Info"], "New Guestbook Post: " + project.Title, body);
+                    SendMailAws(project.user.Email, "New Guestbook Post: " + project.Title, body);
+                    SendMailAwsAdmin("New Guestbook Post: " + project.Title, body);
+                }
             }
 
             //redirect & reload
@@ -347,13 +368,37 @@ namespace Localactors.webapp.Controllers
 
             if (ModelState.IsValid)
             {
-                update.update_comment.Add(model);
-                db.SaveChanges();
 
-                string body = string.Format("From: {0}\r\nProject: {1}\r\nProjectID: {2}\r\n\r\nComment: {3}", CurrentUser.Email, project.Title, update.ProjectID, model.Text);
-                SendMailAws(ConfigurationManager.AppSettings["Email_Info"], "New Comment : " + project.Title, body);
-                SendMailAws(project.user.Email, "New Comment : " + project.Title, body);
-                SendMailAwsAdmin("New Comment : " + project.Title, body);
+
+                Validator validator = new Validator(ConfigurationManager.AppSettings["Akismet_Key"]);
+                bool isspam = validator.IsSpam(new Comment()
+                {
+                    comment_author_email = CurrentUser.Email,
+                    blog = "http://localactors.org",
+                    comment_author = CurrentUser.UserName,
+                    comment_content = model.Text,
+                    user_agent = Request.UserAgent,
+                    user_ip = Request.UserHostAddress,
+                    referrer = Request.UrlReferrer != null ? Request.UrlReferrer.AbsoluteUri : "",
+                    comment_type = "comment"
+                });
+
+                if (isspam)
+                {
+                    string spam = string.Format("From: {0}\r\nProject: {1}\r\nProjectID: {2}\r\n\r\nComment SPAM TEXT: {3}\r\n\r\nThis post was not saved.", CurrentUser.Email, project.Title, update.ProjectID, model.Text);
+                    SendMailAws(ConfigurationManager.AppSettings["Email_Info"], "New Comment SPAM: " + project.Title, spam);
+                    SendMailAwsAdmin("New Comment SPAM: " + project.Title, spam);
+                }
+                else {
+
+                    update.update_comment.Add(model);
+                    db.SaveChanges();
+
+                    string body = string.Format("From: {0}\r\nProject: {1}\r\nProjectID: {2}\r\n\r\nComment: {3}", CurrentUser.Email, project.Title, update.ProjectID, model.Text);
+                    SendMailAws(ConfigurationManager.AppSettings["Email_Info"], "New Comment : " + project.Title, body);
+                    SendMailAws(project.user.Email, "New Comment : " + project.Title, body);
+                    SendMailAwsAdmin("New Comment : " + project.Title, body);
+                }
             }
 
             if (Request.UrlReferrer != null) {

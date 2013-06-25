@@ -124,6 +124,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Akismet.NET\Comment.cs" />
+    <Compile Include="Akismet.NET\IValidator.cs" />
+    <Compile Include="Akismet.NET\Validator.cs" />
     <Compile Include="App_GlobalResources\MyResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
