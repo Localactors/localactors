@@ -290,7 +290,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
         public ActionResult DeleteConfirmed(int id)
         {            
             user user = db.users.Single(u => u.UserID == id);
-            user.Enabled = false;
+            db.users.DeleteObject(user);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
