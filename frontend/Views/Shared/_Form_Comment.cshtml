@@ -5,30 +5,36 @@
     <input type="hidden" name="UserID" value="@User.Identity"/>
     <input type="hidden" name="Date" value="@DateTime.Now.ToShortDateString()"/>
     
-     <div class='container-comment'>
-         <div class='askaquestion-cont'>
+    <div class='container-comment'>
+        <div class='askaquestion-cont'>
             <div class='editor-label'>
-              Add a Comment:
+                Add a Comment:
             </div>
-            <div class='editor-field'></div>
-              <textarea cols='30' id='Text' name='Text' rows='2'></textarea>
-              <span class='field-validation-valid' data-valmsg-for='Text' data-valmsg-replace='true'></span>
-         <div>
-          <div class='editor-field'>
-            <input type="file" id="Picture" name="Picture" class="imageupload" />
-            @Html.ValidationMessage("Picture")
-          </div>
-        
-          <div class='create-comment'>
-            <div class='clear-box'></div>
-            <div class='button_container'>
-              <div class='corner_left'></div>
-              <h4 class='buttons yellow_button'>
-                <input class='btn' type='submit' value='Create'>
-              </h4>
-              <div class='corner_right'></div>
+            <div class='editor-field'>
             </div>
-          </div>
+            <textarea cols='30' id='Text' name='Text' rows='2'></textarea>
+            <span class='field-validation-valid' data-valmsg-for='Text' data-valmsg-replace='true'>
+            </span>
+            <div>
+                <div class='editor-field'>
+                    <input type="file" id="Picture" name="Picture" class="imageupload" />
+                    @Html.ValidationMessage("Picture")
+                </div>
+                <div class='create-comment'>
+                    <div class='clear-box'>
+                    </div>
+                    <div class='button_container'>
+                        <div class='corner_left'>
+                        </div>
+                        <h4 class='buttons yellow_button'>
+                            <input class='btn' type='submit' value='Create'>
+                        </h4>
+                        <div class='corner_right'>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
 
 }
