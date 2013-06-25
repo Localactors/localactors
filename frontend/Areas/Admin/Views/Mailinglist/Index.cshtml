@@ -9,6 +9,10 @@
     <li class="active"><a href='@Url.Action("Index","Mailinglist")'>Mailing List</a> <span class="divider">/</span></li>
 </ul>
 
+<p>
+    @Html.ActionLink("Add New", "Create", new { }, new { @class = "btn" }) @Html.ActionLink("Export", "Export", new { }, new { @class = "btn", target="_blank" }) 
+</p>
+
 <table class="table table-condensed table-striped table-bordered">
     <tr>
         <th>
@@ -20,9 +24,7 @@
         <th>
             Date
         </th>
-        <th>
-            Suppress
-        </th>
+       
         <th></th>
     </tr>
 
@@ -37,9 +39,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.Date)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Suppress)
-        </td>
+       
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.AddressID }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.AddressID })

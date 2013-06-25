@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using Localactors.entities;
@@ -19,6 +20,22 @@ namespace Localactors.webapp.Areas.Admin.Controllers
         public ViewResult Index()
         {
             return View(db.mailinglists.ToList());
+        }
+
+        public ActionResult Export()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendFormat("{0},{1}\r\n", "Address", "Name");
+            foreach (var source in db.mailinglists.ToList()) {
+                sb.AppendFormat("{0},{1}\r\n",source.Address,source.Name);
+            }
+            sb.AppendLine();
+
+            //output
+            Response.Clear();
+            Response.ContentType = "application/CSV";
+            Response.AddHeader("Content-Disposition", "attachment;filename=mailinglist.csv");
+            return Content(sb.ToString());
         }
 
   

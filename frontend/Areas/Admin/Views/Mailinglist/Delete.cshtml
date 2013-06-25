@@ -37,6 +37,7 @@
 @using (Html.BeginForm()) {
     <p>
         <input type="submit" class="btn"  value="Delete" /> |
+        <input type="hidden" name="id"  value="@Model.AddressID" /> |
         @Html.ActionLink("Back to List", "Index",new{},new{@class="btn"})
     </p>
 }
