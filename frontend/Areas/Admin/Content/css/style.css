@@ -17,15 +17,15 @@ body > .navbar .brand:hover {
 hr{ clear: both;}
 
 
-.editor-label{ float:left;width: 140px;clear: left;}
-.editor-field{ float:left;width: 300px;}
+.editor-label{ float:left;width: 100px;clear: left;padding-top: 1px;margin-top: 1px;overflow: hidden;}
+.editor-field{ float:left;width: 500px;padding-top: 1px;margin-top: 1px;}
 .display-label{ float:left;width: 160px;clear: left;display: inline-block;padding: 5px;text-align: left;font-weight: bold;color: #999;}
 .display-field{ float:left;width: 500px;display: inline-block;padding: 5px;}
 .field-validation-valid, .input-validation-error, .field-validation-error{ color: red;display: block;clear: both;}
 fieldset{ margin: 5px;padding: 5px;}
 .text-box{}
 .single-line{}
-.wysiwyg{}
+.wysiwyg{ width: 400px;height: 200px;}
 
 form p{ display: block;clear: left;}
 form.compact{ display: inline-block;float: left;margin: 2px;overflow: auto;}

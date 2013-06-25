@@ -65,7 +65,7 @@
                     @Model.Title</h4>
             </div>
             <p>
-                @Model.Question
+                @Html.Raw(Model.Question)
             </p>
         </div>
         <div class='answer'>
@@ -74,7 +74,7 @@
                     @Model.Subtitle</h4>
             </div>
             <p>
-                @Model.Answer
+                @Html.Raw(Model.Answer)
             </p>
         </div>
     </div>

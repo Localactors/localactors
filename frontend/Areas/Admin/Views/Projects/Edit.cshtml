@@ -104,7 +104,7 @@
                         @Html.LabelFor(model => model.AgencyObjective, "Agency Objective")
                     </div>
                     <div class="editor-field">
-                        @Html.TextAreaFor(model => model.AgencyObjective)
+                        @Html.TextAreaFor(model => model.AgencyObjective, new { @class = "wysiwyg" })
                         @Html.ValidationMessageFor(model => model.AgencyObjective)
                     </div>
                     <div class="editor-label">
@@ -130,35 +130,35 @@
                     </div>
                     <hr />
                     <div class="editor-label">
-                        @Html.LabelFor(model => model.Title)
+                        @Html.LabelFor(model => model.Title,"Project Title")
                     </div>
                     <div class="editor-field">
                         @Html.EditorFor(model => model.Title)
                         @Html.ValidationMessageFor(model => model.Title)
                     </div>
                     <div class="editor-label">
-                        @Html.LabelFor(model => model.Description)
+                        @Html.LabelFor(model => model.Description,"Project Description")
                     </div>
                     <div class="editor-field">
-                        @Html.TextAreaFor(model => model.Description, "Project Description")
+                        @Html.TextAreaFor(model => model.Description , new { @class = "wysiwyg" })
                         @Html.ValidationMessageFor(model => model.Description)
                     </div>
                     <div class="editor-label">
                         @Html.LabelFor(model => model.ProjectGoal, "Project Goal")
                     </div>
                     <div class="editor-field">
-                        @Html.TextAreaFor(model => model.ProjectGoal)
+                        @Html.TextAreaFor(model => model.ProjectGoal, new { @class = "wysiwyg" })
                         @Html.ValidationMessageFor(model => model.ProjectGoal)
                     </div>
                     <div class="editor-label">
-                        @Html.LabelFor(model => model.ProjectPlan, "Project Plan (description)")
+                        @Html.LabelFor(model => model.ProjectPlan, "Project Plan (plain escription)")
                     </div>
                     <div class="editor-field">
-                        @Html.TextAreaFor(model => model.ProjectPlan)
+                        @Html.TextAreaFor(model => model.ProjectPlan, new { @class = "wysiwyg" })
                         @Html.ValidationMessageFor(model => model.ProjectPlan)
                     </div>
                     <div class="editor-label">
-                        @Html.LabelFor(model => model.Cover, "Use as Cover Project")
+                        @Html.LabelFor(model => model.Cover, "Use as Cover Project (not used atm)")
                     </div>
                     <div class="editor-field">
                         @Html.CheckBoxFor(x => x.Cover)
@@ -257,7 +257,7 @@
                         @Html.ValidationMessageFor(model => model.CountryID)
                     </div>
                     <div class="editor-label">
-                        @Html.LabelFor(model => model.Location, "Location (campo libero)")
+                        @Html.LabelFor(model => model.Location, "Location (free textfield)")
                     </div>
                     <div class="editor-field">
                         @Html.EditorFor(model => model.Location)
@@ -329,7 +329,7 @@
                             Title/Description</label>
                     </div>
                     <div class="editor-field">
-                        <input class="text-box single-line" id="Title" name="Title" type="text" value="" />
+                        <input class="text-box single-line" id="Title"  name="Title" type="text" value="" />
                         <span class="field-validation-valid" data-valmsg-for="Title" data-valmsg-replace="true">
                         </span>
                     </div>
@@ -566,7 +566,7 @@
                             Intro</label>
                     </div>
                     <div class="editor-field">
-                        <textarea id="" name="Intro" class="wysiwyg" rows="5" style="width: 100%;"></textarea>
+                        <textarea id="" name="Intro" class="wysiwyg" ></textarea>
                     </div>
                     <div class="editor-label">
                         <label for="Date">
@@ -684,7 +684,7 @@
                             Description</label>
                     </div>
                     <div class="editor-field">
-                        <textarea name="Description" class="text-box single-line" id="Description"></textarea>
+                        <textarea name="Description"   class="wysiwyg" id="Description"></textarea>
                         <span class="field-validation-valid" data-valmsg-for="Description" data-valmsg-replace="true">
                         </span>
                     </div>
@@ -761,7 +761,7 @@
                             Motivation</label>
                     </div>
                     <div class="editor-field">
-                        <textarea name="Motivation" class="text-box single-line" id="Motivation"></textarea>
+                        <textarea name="Motivation" class="wysiwyg" id="Motivation"></textarea>
                         <span class="field-validation-valid" data-valmsg-for="Motivation" data-valmsg-replace="true">
                         </span>
                     </div>
@@ -770,7 +770,7 @@
                             Goal</label>
                     </div>
                     <div class="editor-field">
-                        <textarea name="Goal" class="text-box single-line" id="Goal"></textarea>
+                        <textarea name="Goal" class="wysiwyg" id="Goal" ></textarea>
                         <span class="field-validation-valid" data-valmsg-for="Goal" data-valmsg-replace="true">
                         </span>
                     </div>

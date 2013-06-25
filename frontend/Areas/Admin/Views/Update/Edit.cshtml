@@ -39,7 +39,7 @@
             @Html.LabelFor(model => model.Intro)
         </div>
         <div class="editor-field">
-            @Html.TextAreaFor(model => model.Intro)
+            @Html.TextAreaFor(model => model.Intro, new { @class = "wysiwyg" })
             @Html.ValidationMessageFor(model => model.Intro)
         </div>
         <div class="editor-label">
@@ -91,7 +91,7 @@
                     Text</label>
             </div>
             <div class="editor-field">
-                <textarea id="Text" name="Text"></textarea>
+                <textarea id="Text" name="Text" class="wysiwyg"></textarea>
             </div>
         </div>
     <div class="modal-footer">
@@ -188,7 +188,7 @@
                     Description</label>
             </div>
             <div class="editor-field">
-                <textarea id="" name="Text"></textarea>
+                <textarea id="" name="Text" class="wysiwyg"></textarea>
             </div>
         </div>
     <div class="modal-footer">
@@ -227,7 +227,7 @@
                     Caption</label>
             </div>
             <div class="editor-field">
-                <textarea id="" name="Text"></textarea>
+                <textarea id="" name="Text" class="wysiwyg"></textarea>
             </div>
             <div class="editor-field">
                 <input class="text-box single-line" id="" name="Url" type="file" value="" />
@@ -258,7 +258,7 @@
                     Caption</label>
             </div>
             <div class="editor-field">
-                <input class="text-box single-line" id="" name="Title" type="text" value="" />
+                <input class="text-box single-line" id="" name="Title" type="text" value=""  class="wysiwyg" />
             </div>
             <div class="editor-label">
                 <label for="Url">
@@ -301,7 +301,7 @@
                     Question</label>
             </div>
             <div class="editor-field">
-                <textarea id="" name="Question" ></textarea>
+                <textarea id="" name="Question" class="wysiwyg"></textarea>
             </div>
             
             <div class="editor-label">
@@ -317,7 +317,7 @@
                     Answer</label>
             </div>
             <div class="editor-field">
-                <textarea id="" name="Answer"></textarea>
+                <textarea id="" name="Answer" class="wysiwyg"></textarea>
             </div>
         </div>
     <div class="modal-footer">
@@ -345,14 +345,14 @@
                     Question</label>
             </div>
             <div class="editor-field">
-                <textarea id="" name="Question" class="wysiwyg" rows="12" style="width:100%;"></textarea>
+                <textarea id="" name="Question" class="wysiwyg" ></textarea>
             </div>
             <div class="editor-label">
                 <label for="Answer">
                     Answer</label>
             </div>
             <div class="editor-field">
-                <textarea id="" name="Answer" class="wysiwyg" rows="12" style="width:100%;"></textarea>
+                <textarea id="" name="Answer" class="wysiwyg" ></textarea>
             </div>
         </div>
     <div class="modal-footer">
@@ -389,7 +389,7 @@
                     Quote</label>
             </div>
             <div class="editor-field">
-                <textarea id="" name="Text"></textarea>
+                <textarea id="" name="Text" class="wysiwyg"></textarea>
             </div>
         </div>
     <div class="modal-footer">
@@ -448,7 +448,7 @@
             <input type="hidden" name="ContentTypeID" value="12" />
             <input type="hidden" name="ContentTypeName" value="HTML" />
             <div>
-                <textarea id="" name="Text" class="wysiwyg" rows="12" style="width:100%;"></textarea>
+                <textarea id="" name="Text" class="wysiwyg"></textarea>
             </div>
         </div>
     <div class="modal-footer">

@@ -5,7 +5,7 @@ $(document).ready(function () {
     });
 
     $('.datepicker').datepicker(); //Initialise any date pickers
-    $('.wysiwyg').wysihtml5(); //Initializes the wysiwyg editor
+    //$('.wysiwyg').wysihtml5(); //Initializes the wysiwyg editor
 
     //datepicker on modal
     $('.modal').on('shown', function () {
