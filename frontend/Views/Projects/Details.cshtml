@@ -23,25 +23,27 @@
         <p>
             @Html.Raw(Model.Description)
         </p>
-        <ul>
-            <li>
-                <h1 class='title'>
-                    Project Photos:</h1>
-            </li>
-        </ul>
-            @foreach (var item in Model.project_photo.OrderBy(x => x.PhotoID))
-            {
+        
+        @if (Model.project_photo.Any()) {
+            <ul>
+                <li>
+                    <h1 class='title'>
+                        Project Photos:</h1>
+                </li>
+            </ul>
+            foreach (var item in Model.project_photo.OrderBy(x => x.PhotoID)) {
                 <div class='photo'>
-                     <img src="@item.Url" alt="" />
+                    <img src="@item.Url" alt="" />
                     <div class='description'>
-                      <div class='arrow'></div>
-                      <p>
-                        @Html.Raw(item.Caption)
-                      </p>
+                        <div class='arrow'></div>
+                        <p>
+                            @Html.Raw(item.Caption)
+                        </p>
                     </div>
                 </div>
-                
             }
+        }
+
         <ul>
             <li>
                 <h1 class='title'>
