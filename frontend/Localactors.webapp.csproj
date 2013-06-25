@@ -812,6 +812,7 @@
     <Content Include="Scripts\wysihtml5-0.3.0_rc2.js" />
     <Content Include="Scripts\wysihtml5-0.3.0_rc2.min.js" />
     <Content Include="Templates\donation_thankyou.htm" />
+    <Content Include="Templates\registration_confirm.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
