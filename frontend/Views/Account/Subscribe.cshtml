@@ -26,14 +26,10 @@
             @Html.ValidationMessageFor(model => model.Confirm)
         </div>
         <div class="newsletter">
-<<<<<<< HEAD
-            @Html.CheckBoxFor(model => model.Newsletter ,new{@class="newsletter"})
-            <label for="Newsletter" class="newsletter"><span></span> Newsletter</label>
-=======
+
             <input class="newsletter" data-val="true" data-val-required="The Newsletter field is required." id="Newsletter" name="Newsletter" type="checkbox" value="true" />
-            <label for="Newsletter" class="" style="text-align: right;"><span></span> Newsletter</label>
+            <label for="Newsletter" class="newsletter" style="text-align: right;"><span></span> Newsletter</label>
             <input name="Newsletter" type="hidden" value="false" />
->>>>>>> 5b7fd5c488824ffe65a67001a7a6abea1c5efc70
             @Html.ValidationMessageFor(model => model.Newsletter)
         </div>
 
