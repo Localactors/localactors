@@ -49,7 +49,7 @@
         }
         @if (isauthenticated)
         {
-            <li>Html.RenderPartial("_Form_Comment",Model); </li>
+            <li>@{ Html.RenderPartial("_Form_Comment", Model); }</li>
             <hr class='spacer-comments' />
         }
         else
