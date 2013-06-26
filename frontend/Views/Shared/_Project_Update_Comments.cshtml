@@ -41,18 +41,16 @@
             </li>
             <hr class='spacer-comments' />
         }
-        @if (isauthenticated)
+       
+    </ul>
+</div>
+ @if (isauthenticated)
         {
-            <li>@{ Html.RenderPartial("_Form_Comment", Model); }</li>
+           @{ Html.RenderPartial("_Form_Comment", Model); }
             <hr class='spacer-comments' />
         }
         else
         {
-            <li>
-                <div>
-                    To post comments on the Project you need to register or login.</div>
-            </li>
+            <p>To post comments on the Project you need to register or login.</p>  
             <hr class='spacer-comments' />
         }
-    </ul>
-</div>
