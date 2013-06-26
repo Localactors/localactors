@@ -73,11 +73,11 @@
      
         <td style="white-space: nowrap;">
             
-            @Html.ActionLink("Edit", "Edit", new { id=item.ProjectID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ProjectID }) | 
+            @Html.ActionLink("Edit", "Edit", new { id = item.ProjectID }, new { }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ProjectID }, new { }) | 
             @Html.ActionLink("Updates", "Index", "Update", new { projectid = item.ProjectID },new{})  |
             @Html.ActionLink("Add Update", "Create", "Update", new { projectid = item.ProjectID },new{}) | 
-            @(item.Enabled ? Html.ActionLink("Disable", "Disable","Projects", new {id = item.ProjectID}) : Html.ActionLink("Enable", "Enable","Projects", new {id = item.ProjectID}))
+            @(item.Enabled ? Html.ActionLink("Disable", "Disable", "Projects", new { id = item.ProjectID }, new { }) : Html.ActionLink("Enable", "Enable", "Projects", new { id = item.ProjectID }, new { }))
         </td>
     </tr>
 }
