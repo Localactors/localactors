@@ -4,7 +4,6 @@
     bool isadmin = User.IsInRole("admin") || ViewBag.UserID == Model.UserID;
     bool isauthenticated = User.Identity.IsAuthenticated;
 }
-
 <div id='comments'>
     <h3 class='number-comments'>
         @Model.update_comment.Count comments:
@@ -41,16 +40,16 @@
             </li>
             <hr class='spacer-comments' />
         }
-       
     </ul>
 </div>
- @if (isauthenticated)
-        {
-           @{ Html.RenderPartial("_Form_Comment", Model); }
-            <hr class='spacer-comments' />
-        }
-        else
-        {
-            <p>To post comments on the Project you need to register or login.</p>  
-            <hr class='spacer-comments' />
-        }
+@if (isauthenticated)
+{
+    Html.RenderPartial("_Form_Comment", Model); 
+    <hr class='spacer-comments' />
+}
+else
+{
+    <p>
+        To post comments on the Project you need to register or login.</p>  
+    <hr class='spacer-comments' />
+}
