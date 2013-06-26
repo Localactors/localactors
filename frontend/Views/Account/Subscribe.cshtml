@@ -1,6 +1,8 @@
 ﻿@model SubscribeModel
 @{
-    ViewBag.Title = "Registrazione Utente";
+    ViewBag.Title = "User Registration";
+    ViewBag.Description = "Register and become a Localactor";
+    ViewBag.Keywords = "project,local,support,community,register";
 }
 
 @using (Html.BeginForm("Subscribe","Account",FormMethod.Post,new{@class="blue-form", id="register"}))
