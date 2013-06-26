@@ -47,10 +47,10 @@
  @if (isauthenticated)
         {
            @{ Html.RenderPartial("_Form_Comment", Model); }
-            <hr class='spacer-comments' />
+            
         }
         else
         {
             <p>To post comments on the Project you need to register or login.</p>  
-            <hr class='spacer-comments' />
+            
         }
