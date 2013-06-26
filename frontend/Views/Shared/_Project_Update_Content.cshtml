@@ -1,6 +1,10 @@
 ﻿@using System.Configuration
 @model update
-@{
-    bool isadmin = User.IsInRole("admin") || ViewBag.UserID == Model.UserID;
-    bool isauthenticated = User.Identity.IsAuthenticated;
-}
+<div class='update-contents'>
+    @foreach (update_content content in Model.update_content)
+    {
+        <div class='update-content'>
+            @{ Html.RenderPartial("_Update_Content", content); }
+        </div>
+    }
+</div>

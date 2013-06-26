@@ -1,10 +1,13 @@
-﻿<div id='comments'>
-    @foreach (update_content content in Model.update_content)
-    {
-        { Html.RenderPartial("_Update_Content", content); }
-    }
+﻿@using System.Configuration
+@model update
+@{
+    bool isadmin = User.IsInRole("admin") || ViewBag.UserID == Model.UserID;
+    bool isauthenticated = User.Identity.IsAuthenticated;
+}
+
+<div id='comments'>
     <h3 class='number-comments'>
-        19 comments:
+        @Model.update_comment.Count comments:
     </h3>
     <ul>
         @foreach (var item in Model.update_comment.OrderByDescending(x => x.CommentID))
