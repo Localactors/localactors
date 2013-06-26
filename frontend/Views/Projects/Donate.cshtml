@@ -100,8 +100,8 @@
                 <div class='paypal-button'>
                     <div class='clear-box'>
                     </div>
-                    @if (User.Identity.IsAuthenticated)
-                    {
+       @*             @if (User.Identity.IsAuthenticated)
+                    {*@
                         <form action="@ConfigurationManager.AppSettings["PP_IPNEndpoint"]" method="post" target="_top">
                             <INPUT TYPE="hidden" name="cmd" value="_xclick">
                             <INPUT TYPE="hidden" name="charset" value="utf-8">
@@ -142,12 +142,12 @@
                         
                
 
-                    }
+@*                    }
                     else
                     {
                         <div>
                             To donate using Paypal you need to register or login first :)</div>
-                    }
+                    }*@
                 </div>
             </div>
         </div>
