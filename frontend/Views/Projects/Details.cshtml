@@ -2,6 +2,8 @@
 @model Localactors.entities.project
 @{
     ViewBag.Title = Model.Title + "";
+    ViewBag.Description = Model.Description;
+    ViewBag.Keywords = "project,local,support,community,details";
 }
 @{Html.RenderPartial("_Project_Header", Model);}
 <div id='project-update-tab'>

@@ -2,6 +2,8 @@
 @model Localactors.entities.project
 @{
     ViewBag.Title = Model.Title + " Guestbook";
+    ViewBag.Description = Model.Description;
+    ViewBag.Keywords = "project,local,support,community,guestbook";
     bool isadmin = User.IsInRole("admin") || ViewBag.UserID == Model.UserID;
     bool isauthenticated = User.Identity.IsAuthenticated;
 }

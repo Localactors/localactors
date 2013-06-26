@@ -2,23 +2,8 @@
 @model IEnumerable<Localactors.entities.donation>
 @{
     ViewBag.Title = "Donations";
-    var PP_URL = Url.Content("~/Scripts/paypal-button.min.js") + "?merchant=" + ConfigurationManager.AppSettings["PP_MerchantAccountId"];
 }
-<div class='call top'>
-    <script src="@PP_URL"
-            data-button="donate" 
-            data-name="Project" 
-            data-number="1" 
-            data-custom="@User.Identity.Name"
-            data-currency="@ConfigurationManager.AppSettings["PP_Currency"]"
-            data-callback="@ConfigurationManager.AppSettings["PP_Callback"]" 
-        @if (@ConfigurationManager.AppSettings["PP_environment"] == "sandbox")
-        {
-            <text>data-env = "sandbox"</text>
-        }
-            data-return="@Url.AbsoluteAction("return", "donation", new { })"
-        ></script>
-</div>
+@*
 <div class='call top'>
 <table>
     <tr>
@@ -55,4 +40,4 @@
         </tr>
     }
 </table>
-</div>
+</div>*@
