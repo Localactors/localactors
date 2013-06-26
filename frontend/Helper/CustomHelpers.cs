@@ -27,6 +27,18 @@ public static class HtmlHelperExtensions {
         return new HtmlString(cookievalue);
     }
 
+    public static HtmlString ExternalUrl(this HtmlHelper helper, string url) {
+        if (url == null)
+            return null;
+
+        string value = url.ToLower();
+        if (value.IndexOf("http://") <= 0)
+            value = "http://" + value;
+
+
+        return new HtmlString(value);
+    }
+
     public static HtmlString Pager(this HtmlHelper helper, int curpage, int totalpages, int showpages) {
         int delta = showpages;
 

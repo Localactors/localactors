@@ -109,14 +109,17 @@
                 <h2 class='subtitle'>
                     Contacts</h2>
             </li>
-            <li><a class='link' href='@Model.AgencyWebsite'>@Model.AgencyWebsite</a> </li>
+            @if (Model.AgencyWebsite != null)
+            {
+                <li><a class='link' href='@Html.ExternalUrl(Model.AgencyWebsite)'>@Model.AgencyWebsite</a> </li>
+            }
             @if (Model.AgencyLink1 != null)
             {
-                <li><a class='link' href='@Model.AgencyLink1'>@Model.AgencyLink1</a> </li>
+                <li><a class='link' href='@Html.ExternalUrl(Model.AgencyLink1)'>@Model.AgencyLink1</a> </li>
             }
             @if (Model.AgencyLink2 != null)
             {
-                <li><a class='link' href='@Model.AgencyLink2'>@Model.AgencyLink2</a> </li>
+                <li><a class='link' href='@Html.ExternalUrl(Model.AgencyLink2)'>@Model.AgencyLink2</a> </li>
             }
         </ul>
     </div>
