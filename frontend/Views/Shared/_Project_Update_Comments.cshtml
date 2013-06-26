@@ -42,13 +42,13 @@
         }
     </ul>
 </div>
- @if (isauthenticated)
-        {
-           @{ Html.RenderPartial("_Form_Comment", Model); }
+@if (isauthenticated)
+{
+    Html.RenderPartial("_Form_Comment", Model);
+}
+else
+{
+    <p>
+        To post comments on the Project you need to register or login.</p>  
             
-        }
-        else
-        {
-            <p>To post comments on the Project you need to register or login.</p>  
-            
-        }
+}
