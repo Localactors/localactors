@@ -14,7 +14,9 @@ yepnope([{
 				yep: [basicURl+'toe/dist/toe.min.js','scripts/320.js'],
 				nope: ['/scripts/960.js']
 			}]);
-        yepnope([{ load: ['/scripts/site2.js']}]);
+        yepnope([{ load: ['/scripts/site2.js', 
+        '/Scripts/jquery.validate.min.js', 
+        '/Scripts/jquery.validate.unobtrusive.min.js']}]);
 	}
 },{
 	load: basicURl+'enquire/dist/enquire.min.js',
