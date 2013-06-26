@@ -1,3 +1,10 @@
+//logging function
+window.Log = function () {
+    if (this.console) {
+        console.log(Array.prototype.slice.call(arguments));
+    }
+}
+
 $(document).ready(function () {
 
     $(".close").click(function () {
@@ -32,7 +39,6 @@ $(document).ready(function () {
 
     try {
         $('.datepicker').datepicker(); //Initialise any date pickers
-        //    $('.wysiwyg').wysihtml5(); //Initializes the wysiwyg editor
     } catch (e) {
         Log(e);
     }
@@ -70,11 +76,3 @@ $(document).ready(function () {
     }
 });
 
-//logging function
-function Log() {
-    log.history = log.history || [];   // store logs to an array for reference
-    log.history.push(arguments);
-    if (this.console) {
-        console.log(Array.prototype.slice.call(arguments));
-    }
-}

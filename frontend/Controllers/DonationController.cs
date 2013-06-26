@@ -159,6 +159,11 @@ namespace Localactors.webapp.Controllers
             string body = "";
             string nl = "\r\n";
 
+            //done
+            if(Request.Form == null || string.IsNullOrEmpty(Request.Form.ToString())) {
+                return RedirectToAction("Index", "Projects");
+            }
+
 
             try {
 
