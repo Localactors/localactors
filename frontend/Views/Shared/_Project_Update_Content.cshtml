@@ -4,42 +4,62 @@
     bool isadmin = User.IsInRole("admin") || ViewBag.UserID == Model.UserID ;
     bool isauthenticated = User.Identity.IsAuthenticated;
 }
-<div class='single-update-body'>
+<div class='clear'></div>
+    <hr class='update'>
+    <div id='comments'>
     @foreach (update_content content in Model.update_content)
     {
         { Html.RenderPartial("_Update_Content", content); }
     }
-    <div class='comments-container'>
-        <a name="comments-@Model.UpdateID" id="comments" ></a>
-        <h4>
-            Comments</h4>
+
+
+          <h3 class='number-comments'>
+            19 comments:
+          </h3>
+        <ul>
         @foreach (var item in Model.update_comment.OrderByDescending(x => x.CommentID))
         {
-            <div class="comment-single-entry">
-                <div>
-                    from: @item.user.UserName</div>
-                <div>
-                    date: @item.Date</div>
-                <div>@item.Text</div>
-                <div><img src="@item.Picture" /></div>
-                @if (isadmin || ViewBag.UserID == item.UserID)
-                {
-                    <div class="admin">
-                        @using (Html.BeginForm("CommentDelete", "Projects"))
-                        {
-                            <input type="hidden" name="CommentID" value="@item.CommentID"/>
-                            <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
-                            <input type="submit" value="delete" class="btn"/>
-                        }
-                    </div>
-                }
-            </div>
+            <li>
+                 <div class='container-photo-profile'>
+                    <img alt='' class='photo-profile' src='@item.user.ProfilePhoto' />
+                  </div>
+                  <h3 class='name'>from: @item.user.UserName</h3>
+                  <p class='date'>
+                    date: @item.Date <span class="slash">/</span>
+                  </p>
+                  <div class='content'>
+                    <p>
+                      @item.Text
+                    </p>
+                    <img alt='' class='photo-comment' src='@item.Picture' />
+                  </div>
+                    @if (isadmin || ViewBag.UserID == item.UserID)
+                    {
+                        <div class="admin">
+                            @using (Html.BeginForm("CommentDelete", "Projects"))
+                            {
+                                <input type="hidden" name="CommentID" value="@item.CommentID"/>
+                                <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+                                <input type="submit" value="delete" class="btn"/>
+                            }
+                        </div>
+                    }
+                </div>
+            </li>
+             <hr class='spacer-comments'>
         }
         @if (isauthenticated)
         {
-            Html.RenderPartial("_Form_Comment",Model);
+            <li>
+                Html.RenderPartial("_Form_Comment",Model);
+            </li>
+             <hr class='spacer-comments'>
         }else {
-            <div>To post comments on the Project you need to register or login.</div>
+            <li>
+                <div>To post comments on the Project you need to register or login.</div>
+            </li>
+             <hr class='spacer-comments'>
         }
+        </ul>
     </div>
 </div>
