@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Text;
 using System.Web.Mvc;
 using System.Linq;
@@ -18,8 +19,10 @@ namespace Localactors.webapp.Controllers
         public ActionResult Index() {
 
             HomeModel model = new HomeModel();
+            int take = 5;
+            int.TryParse(ConfigurationManager.AppSettings["Pagesize_HomeProjects"], out take);
             model.publishers = db.users.Where(x => x.Role == "publisher" && x.Enabled).ToList();
-            model.projects = db.projects.OrderByDescending("ProjectID" ).Where(x=>x.Enabled).Take(5).ToList();
+            model.projects = db.projects.OrderByDescending("ProjectID").Where(x => x.Enabled).Take(take).ToList();
 
 
             return View(model);
@@ -61,10 +64,6 @@ namespace Localactors.webapp.Controllers
             return View();
         }
 
-
-        public ActionResult fourofour() {
-            return View();
-        }
 
     }
 }
