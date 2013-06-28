@@ -609,6 +609,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\admin.js" />
+    <Content Include="Scripts\handlebars.js" />
     <Content Include="Scripts\locales\bootstrap-wysihtml5.ar-AR.js" />
     <Content Include="Scripts\locales\bootstrap-wysihtml5.bg-BG.js" />
     <Content Include="Scripts\locales\bootstrap-wysihtml5.ca-CT.js" />

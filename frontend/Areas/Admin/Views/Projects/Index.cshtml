@@ -1,15 +1,88 @@
 ﻿@model IEnumerable<Localactors.entities.project>
-
 @{
     ViewBag.Title = "Projects";
 }
+<script>
+    window.showallcomments = function () {
+        $(".commentstoggle").each(function () {
+            $(this).click();
+        });
+    };
+    window.showcomments = function (id) {
+        $("#commentcell" + id).html("");
+
+        $.ajax({
+            dataType: "json",
+            url: "/admin/projects/comments/" + id,
+            data: null,
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    var tmp = data[i]["date"];
+                    if (tmp) {
+                        data[i]["date"] = new Date(parseInt(tmp.substr(6)));
+                    }
+                }
+
+                var source = $("#comments-template").html();
+                var template = Handlebars.compile(source);
+                var html = template(data);
+
+                $("#commentcell" + id).html(html);
+                $("#commentrow" + id).show();
+            }
+        });
+        return false;
+    };
+    window.hidecomments = function (id) {
+        $("#commentcell" + id).html("");
+        $("#commentrow" + id).hide();
+    };
+    window.deletecomment = function (id) {
+        $.ajax({
+            dataType: "text",
+            url: "/admin/projects/deletecomment/" + id,
+            data: null,
+            success: function (text) {
+                data = text;
+                $("#comment" + id).hide();
+            }
+        });
+        return false;
+    };
+
+</script>
+<script id="comments-template" type="text/x-handlebars-template">
+    {{#each .}}
+    <table class="table table-condensed table-bordered" id="comment{{id}}" > 
+        <tr>
+            <td colspan="2">
+                <a href="/admin/user/edit/{{user.id}}">{{user.name}}</a> {{date}} <a href="javascript:void(0);" onclick="deletecomment({{id}});"><i class="icon-remove-circle"></i></a>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <a href="/admin/update/edit/{{update.id}}">{{update.title}}</a>
+            </td>
+        </tr>
+        <tr>
+            <td class="body" style="width:32px;">
+                <div><img src="{{picture}}" width="64px"></div>
+            </td>
+            <td class="body">
+                <div>{{message}}</div>
+            </td>
+        </tr>
+    </table>
+    {{/each}}
+</script>
+
 <ul class="breadcrumb">
     <li><a href='@Url.Action("Index","Home")'>Home</a> <span class="divider">/</span></li>
     <li class="active"><a href='@Url.Action("Index","projects")'>Projects</a> </li>
 </ul>
 
 <p>
-    @Html.ActionLink("Create New", "Create", new { }, new { @class = "btn" })
+    @Html.ActionLink("Create New", "Create", new { }, new { @class = "btn" })  <a href="javascript:void(0);" class="btn" onclick="showallcomments();"> Show Comments</a>
 </p>
 <table class="table table-condensed table-bordered">
     <tr>
@@ -50,7 +123,7 @@
             @Html.ActionLink(item.user.UserName, "Edit","User", new { id=item.UserID },new{})
         </td>
         <td>
-           @Html.Raw(item.AgancyName)
+            @Html.Raw(item.AgancyName)
         </td>
         <td>
             @Html.Raw(item.Title)
@@ -77,8 +150,16 @@
             @Html.ActionLink("Delete", "Delete", new { id = item.ProjectID }, new { }) | 
             @Html.ActionLink("Updates", "Index", "Update", new { projectid = item.ProjectID },new{})  |
             @Html.ActionLink("Add Update", "Create", "Update", new { projectid = item.ProjectID },new{}) | 
-            @(item.Enabled ? Html.ActionLink("Disable", "Disable", "Projects", new { id = item.ProjectID }, new { }) : Html.ActionLink("Enable", "Enable", "Projects", new { id = item.ProjectID }, new { }))
+            @(item.Enabled ? Html.ActionLink("Disable", "Disable", "Projects", new { id = item.ProjectID }, new { }) : Html.ActionLink("Enable", "Enable", "Projects", new { id = item.ProjectID }, new { })) | 
+               <a href="javascript:void(0);" class="commentstoggle" onclick="showcomments(@item.ProjectID);">comments</a>
         </td>
+    </tr>
+    <tr id="commentrow@(item.ProjectID)" style="display: none;">
+        <td><a href="javascript:void(0);" class="commentstoggle" onclick="hidecomments(@item.ProjectID);">hide</a></td>
+        <td class="comments" id="commentcell@(item.ProjectID)" colspan="8">
+        
+        </td>
+        <td></td>
     </tr>
 }
 

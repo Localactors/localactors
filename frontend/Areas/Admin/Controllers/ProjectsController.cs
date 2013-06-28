@@ -32,7 +32,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
             return View(project);
         }
 
-     
+        
 
         public ActionResult Create()
         {
@@ -425,6 +425,38 @@ namespace Localactors.webapp.Areas.Admin.Controllers
             }
 
             return RedirectToAction("Edit", "Projects", new { id = item.ProjectID },"costs");
+        }
+
+        public ActionResult Comments(int id) {
+            var items = db.update_comment.Include("update").Where(x => x.update.ProjectID == id).Select(x=>new
+                                                                                                               {
+                                                                                                                       id = x.CommentID,
+                                                                                                                       message = x.Text,
+                                                                                                                       picture= x.Picture,
+                                                                                                                       date = x.Date,
+                                                                                                                       update = new
+                                                                                                                                    {
+                                                                                                                                            id = x.UpdateID,
+                                                                                                                                            title=x.update.Title,
+                                                                                                                                            projectid = x.update.ProjectID
+                                                                                                                                    },
+                                                                                                                       user = new
+                                                                                                                                  {
+                                                                                                                                          id=x.UserID,
+                                                                                                                                          name = x.user.UserName
+                                                                                                                                  }
+                                                                                                               });
+
+            return new LargeJsonResult(items.ToList());
+        }
+        public ActionResult DeleteComment(int id) {
+            var item = db.update_comment.FirstOrDefault(x => x.CommentID == id);
+            if(item!=null) {
+                db.update_comment.DeleteObject(item);
+                db.SaveChanges();
+            }
+
+            return Content("ok");
         }
 
         protected override void Dispose(bool disposing)
