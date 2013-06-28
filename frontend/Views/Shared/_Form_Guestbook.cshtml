@@ -28,7 +28,7 @@
             Picture
         </div>
         <div class='editor-field upload-pic'>
-            <input name='Picture' type='text' value="@Model.Picture">
+            <input name='Picture' type='hidden' value="@Model.Picture">
             <input class='imageupload' id='Picture' name='Picture' type='file' value="">
             <span class='field-validation-valid' data-valmsg-for='Picture' data-valmsg-replace='true'></span>
             <img src="@string.Format("{0}?v={1}", Model.Picture, DateTime.Now.Ticks)" class="imagepreview" alt=""  />

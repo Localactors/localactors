@@ -842,7 +842,7 @@
     <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Errors\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\Account\ChangePassword.cshtml" />
     <Content Include="Areas\Admin\Views\Account\Index.cshtml" />
@@ -938,7 +938,7 @@
     <None Include="Content\fonts\nasalization\nasalization_rg-webfont.woff" />
     <Content Include="Views\Shared\_Metatags.cshtml" />
     <Content Include="Views\Home\TOS.cshtml" />
-    <Content Include="Views\Shared\fourofour.cshtml" />
+    <Content Include="Views\Errors\fourofour.cshtml" />
     <Content Include="Views\Projects\Index.cshtml" />
     <Content Include="Views\Projects\Details.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
@@ -981,6 +981,7 @@
     <Content Include="Views\Shared\_ProfileBar_Donation.cshtml" />
     <Content Include="Views\Projects\Donate.cshtml" />
     <Content Include="Views\Shared\_Project_Update_Comments.cshtml" />
+    <Content Include="Views\Errors\fivehundred.cshtml" />
     <None Include="_bin_deployableAssemblies\it\Microsoft.Web.Infrastructure.resources.dll" />
     <None Include="_bin_deployableAssemblies\Microsoft.Web.Infrastructure.dll" />
     <None Include="_bin_deployableAssemblies\it\System.Web.WebPages.Razor.resources.dll" />

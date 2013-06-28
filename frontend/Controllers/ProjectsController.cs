@@ -293,7 +293,7 @@ namespace Localactors.webapp.Controllers
                     SendMailAwsAdmin("New Guestbook Post: " + project.Title, body);
 
                     //return view with model
-                    return RedirectToAction("Guestbook",new{id=project.ProjectID});
+                    return RedirectToAction("Guestbook",new{id=project.ProjectID,ts=DateTime.Now.Ticks.ToString()});
                 }
             }
 
