@@ -1,9 +1,9 @@
 //logging function
-window.Log = function () {
+window.Log = function() {
     if (this.console) {
         console.log(Array.prototype.slice.call(arguments));
     }
-}
+};
 
 $(document).ready(function () {
 
@@ -43,9 +43,7 @@ $(document).ready(function () {
         Log(e);
     }
 
-});
-
-$(document).ready(function () {
+    //uploader
     try {
         $(".imageupload").disableValidation = true;
         $(".imageupload").change(function () {
@@ -57,7 +55,7 @@ $(document).ready(function () {
         $("input[type=file]").each(function () {
             var input = $(this);
             var name = input.attr("id");
-            var btn = $("<input type='button' value='upload'></input>");
+            var btn = $("<input type='button' value='upload' class='uploadbutton btn'></input>");
             var img = $(".imagepreview");
 
             input.after(btn);

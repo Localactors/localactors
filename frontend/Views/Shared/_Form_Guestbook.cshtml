@@ -1,5 +1,5 @@
-﻿@model Localactors.entities.project
-@using (Html.BeginForm("GuestbookCreate", "Projects", FormMethod.Post, new { enctype = "multipart/form-data", id = "mainform" }))
+﻿@model Localactors.entities.project_guestbook
+@using (Html.BeginForm("GuestbookCreate", "Projects", FormMethod.Post, new { enctype = "multipart/form-data", id = "mainform", @class="blue-form" }))
 {
     <div class='container-comment'>
         <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
@@ -10,7 +10,7 @@
             Text
         </div>
         <div class='editor-field'>
-            <textarea cols='20' id='Text' name='Text' rows='2' data-val-required="The Text is Mandatory.">@ViewBag.guestbook_text</textarea>
+            <textarea cols='20' id='Text' name='Text' rows='2' data-val-required="The Text is Mandatory.">@Model.Text</textarea>
             <span class='field-validation-valid' data-valmsg-for='Text' data-valmsg-replace='true'>
             </span>
         </div>
@@ -19,7 +19,7 @@
             Link
         </div>
         <div class='editor-field'>
-            <input class='' id='Link' name='Link' type='Text' value="">
+            <input class='' id='Link' name='Link' type='Text' value="@Model.Link">
             <span class='field-validation-valid' data-valmsg-for='Link' data-valmsg-replace='true'>
             </span>
         </div>
@@ -28,9 +28,10 @@
             Picture
         </div>
         <div class='editor-field upload-pic'>
+            <input name='Picture' type='text' value="@Model.Picture">
             <input class='imageupload' id='Picture' name='Picture' type='file' value="">
-            <span class='field-validation-valid' data-valmsg-for='Picture' data-valmsg-replace='true'>
-            </span>
+            <span class='field-validation-valid' data-valmsg-for='Picture' data-valmsg-replace='true'></span>
+            <img src="@string.Format("{0}?v={1}", Model.Picture, DateTime.Now.Ticks)" class="imagepreview" alt=""  />
         </div>
 
         <div class='create-comment'>

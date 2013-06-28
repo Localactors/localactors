@@ -1,23 +1,23 @@
 ﻿@using System.Configuration
-@model Localactors.entities.project
+@model Localactors.webapp.Controllers.ProjectsController.GuestBookModel
 @{
-    ViewBag.Title = Model.Title + " Guestbook";
-    ViewBag.Description = Model.Description;
+    ViewBag.Title = Model.project.Title + " Guestbook";
+    ViewBag.Description = Model.project.Description;
     ViewBag.Keywords = "project,local,support,community,guestbook";
-    bool isadmin = User.IsInRole("admin") || ViewBag.UserID == Model.UserID;
+    bool isadmin = User.IsInRole("admin") || ViewBag.UserID == Model.project.UserID;
     bool isauthenticated = User.Identity.IsAuthenticated;
 }
 
-@{Html.RenderPartial("_Project_Header", Model);}
+@{Html.RenderPartial("_Project_Header", Model.project);}
 <div id='project-update-tab'>
     <ul class='tab'>
-        <li><a href='@Url.Action("Updates", "Projects", new { id = Model.ProjectID })'>Update
-            <span class="number">(@Model.updates.Count)</span></a> </li>
-        <li><a href='@Url.Action("Details", "Projects", new { id = Model.ProjectID })'>Project
+        <li><a href='@Url.Action("Updates", "Projects", new { id = Model.project.ProjectID })'>Update
+            <span class="number">(@Model.project.updates.Count)</span></a> </li>
+        <li><a href='@Url.Action("Details", "Projects", new { id = Model.project.ProjectID })'>Project
             Details</a> </li>
-        <li class='active'><a href='@Url.Action("Guestbook", "Projects", new { id = Model.ProjectID })'>
-            Guestbook <span class="number">(@Model.project_guestbook.Count)</span></a></li>
-        <li><a href='@Url.Action("Ask", "Projects", new { id = Model.ProjectID })'>Ask a Question</a>
+        <li class='active'><a href='@Url.Action("Guestbook", "Projects", new { id = Model.project.ProjectID })'>
+            Guestbook <span class="number">(@Model.project.project_guestbook.Count)</span></a></li>
+        <li><a href='@Url.Action("Ask", "Projects", new { id = Model.project.ProjectID })'>Ask a Question</a>
         </li>
     </ul>
     <hr class='tab-line'>
@@ -26,10 +26,10 @@
     <div id='guestbook'>
         <div id='comments'>
             <h3 class='number-comments'>
-                @Model.project_guestbook.Count comments:
+                @Model.project.project_guestbook.Count comments:
             </h3>
             <ul>
-                @foreach (var item in Model.project_guestbook)
+                @foreach (var item in Model.project.project_guestbook)
                 {
                     <li>
                         <div class='container-photo-profile'>
@@ -43,19 +43,15 @@
                         <div class='content'>
                             @if (!string.IsNullOrEmpty(item.Text))
                             {
-                                <p>
-                                    @item.Text
-                                </p>
+                                <p>@item.Text</p>
                             }
                             @if (!string.IsNullOrEmpty(item.Link))
                             {
-                                <div>
-                                    <a href="@item.Link">@item.Link</a></div>
+                                <div><a href="@item.Link">@item.Link</a></div>
                             }
                             @if (!string.IsNullOrEmpty(item.Picture))
                             {
-                                <div>
-                                    <img src="@item.Picture" /></div>
+                                <div><img src="@item.Picture" /></div>
                             }
                             @if (isadmin || ViewBag.UserID == item.UserID)
                             {
@@ -63,7 +59,7 @@
                                     @using (Html.BeginForm("GuestbookDelete", "Projects"))
                                     {
                                         <input type="hidden" name="GuestpostID" value="@item.GuestpostID"/>
-                                        <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+                                        <input type="hidden" name="ProjectID" value="@item.ProjectID"/>
                                         <input type="submit" value="delete" class="btn" />
                                     }
                                 </div>
@@ -76,7 +72,7 @@
         </div>
         @if (isauthenticated)
         {
-            { Html.RenderPartial("_Form_Guestbook", Model); }
+            { Html.RenderPartial("_Form_Guestbook", Model.project_guestbook); }
         }
         else
         {
