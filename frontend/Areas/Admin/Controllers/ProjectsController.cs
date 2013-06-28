@@ -459,6 +459,35 @@ namespace Localactors.webapp.Areas.Admin.Controllers
             return Content("ok");
         }
 
+        public ActionResult Posts(int id)
+        {
+            var items = db.project_guestbook.Include("user").Where(x => x.ProjectID == id).Select(x => new
+            {
+                id = x.GuestpostID,
+                message = x.Text,
+                picture = x.Picture,
+                date = x.Date,
+                user = new
+                {
+                    id = x.UserID,
+                    name = x.user.UserName
+                }
+            });
+
+            return new LargeJsonResult(items.ToList());
+        }
+        public ActionResult DeletePost(int id)
+        {
+            var item = db.project_guestbook.FirstOrDefault(x => x.GuestpostID == id);
+            if (item != null)
+            {
+                db.project_guestbook.DeleteObject(item);
+                db.SaveChanges();
+            }
+
+            return Content("ok");
+        }
+
         protected override void Dispose(bool disposing)
         {
             db.Dispose();
