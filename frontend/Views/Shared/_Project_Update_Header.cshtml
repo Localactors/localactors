@@ -27,7 +27,7 @@
     <div class='update-headline-container'>
         <div class='main-container'>
             <p class='info-project-track'>
-                <span class="number">@((Model.Date - Model.project.DateEnd).Days)</span> days /
+                <span class="number">since last update @((Model.Date - Model.project.DateEnd).Days)</span> days /
                 <span class="number">&#128; @Model.project.donations.Where(x => x.Date <= Model.Date).Sum(x => x.Amount)</span>
                 raised of <span class="number">&#128; @Model.project.Target</span> pledged / <span
                     class="number">@Model.project.donations.Where(x => x.Date <= Model.Date).Select(x => x.UserID).Distinct().Count()</span>
