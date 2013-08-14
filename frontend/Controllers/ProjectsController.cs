@@ -279,7 +279,7 @@ namespace Localactors.webapp.Controllers
                 if (isspam)
                 {
                     string spam = string.Format("From: {0}\r\nProject: {1}\r\nProjectID: {2}\r\n\r\nGuestbook SPAM TEXT: {3}\r\n\r\nThis post was not saved.", CurrentUser.Email, project.Title, model.ProjectID, model.Text);
-                    SendMailAwsAdmin("New Guestbook Post SPAM: " + project.Title, spam);
+                    //SendMailAwsAdmin("New Guestbook Post SPAM: " + project.Title, spam);
 
                     LogStuff("SPAM", DateTime.Now, spam);
                 }
@@ -428,7 +428,7 @@ namespace Localactors.webapp.Controllers
                 if (isspam)
                 {
                     string spam = string.Format("From: {0}\r\nProject: {1}\r\nProjectID: {2}\r\n\r\nComment SPAM TEXT: {3}\r\n\r\nThis post was not saved.", CurrentUser.Email, project.Title, update.ProjectID, model.Text);
-                    SendMailAwsAdmin("New Comment SPAM: " + project.Title, spam);
+                    //SendMailAwsAdmin("New Comment SPAM: " + project.Title, spam);
                     LogStuff("SPAM", DateTime.Now, spam);
                 }
                 else
