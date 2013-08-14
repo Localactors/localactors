@@ -2,7 +2,7 @@
 @model Localactors.entities.project
 <ul id='info-project'>
     <li>
-        <h2>@((DateTime.Now - Model.DateEnd).Days)</h2>
+        <h2>@(Math.Abs((DateTime.Now - Model.DateEnd).Days))</h2>
         <h3>
             Days
         </h3>
