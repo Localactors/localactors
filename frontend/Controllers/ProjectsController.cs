@@ -168,7 +168,7 @@ namespace Localactors.webapp.Controllers
                 .Include("tags")
                 .Single(p => p.ProjectID == id);
 
-            model.project_guestbook = new project_guestbook() { ProjectID = id, Date = DateTime.Now, UserID = CurrentUser.UserID };
+            model.project_guestbook = new project_guestbook() { ProjectID = id, Date = DateTime.Now, UserID = CurrentUser!=null ? CurrentUser.UserID : 0 };
 
             ViewBag.UserID = CurrentUser != null ? CurrentUser.UserID : 0;
             return View(model);

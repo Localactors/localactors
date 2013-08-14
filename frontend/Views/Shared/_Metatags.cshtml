@@ -1,5 +1,4 @@
-﻿
-<meta charset="UTF-8">
+﻿<meta charset="UTF-8">
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 <meta name='description' http-equiv="@ViewBag.Description">
 <meta name='keywords' http-equiv="@ViewBag.Keywords">
@@ -7,15 +6,18 @@
 <meta content='width=device-width, initial-scale=1, maximum-scale=1' name='viewport'>
 <meta content='yes' name='apple-mobile-web-app-capable'>
 <meta content='black' name='apple-mobile-web-app-status-bar-style'>
-<meta content='Localactors' property='og:title'>
-<meta content='website' property='og:type'>
-<meta content='http://localactors.org' property='og:url'>
-<meta content='http://localactors.org/content/images/world2-mobile.png' property='og:image'>
-<meta content='Localactors' property='og:site_name'>
-<meta content='217698528368134' property='fb:app_id'>
+
 <link href='/apple-touch-icon-144x144-precomposed.png' rel='apple-touch-icon-precomposed' sizes='144x144' type='image/png'>
 <link href='/apple-touch-icon-114x114-precomposed.png' rel='apple-touch-icon-precomposed' sizes='114x114' type='image/png'>
 <link href='/apple-touch-icon-72x72-precomposed.png' rel='apple-touch-icon-precomposed' sizes='72x72' type='image/png'>
 <link href='/apple-touch-icon-57x57-precomposed.png' rel='apple-touch-icon-precomposed' type='image/png'>
 <link href='/apple-touch-icon.png' rel='shortcut icon'>
 <link href='@Url.Content("~/content/images/favicon.gif")' rel='shortcut icon' type='image/gif'>
+
+<meta property="og:title" content="@ViewBag.Title" />
+<meta property="og:description" content="@ViewBag.Description" />
+<meta property='og:site_name' content='Localactors'>
+<meta property='fb:app_id' content='217698528368134'>
+<meta property='og:image' content='@(ViewBag.Image ?? "http://localactors.org/content/images/world2-mobile.png")'>
+<meta property='og:url' content='http://localactors.org'>
+<meta property='og:type' content='website'>

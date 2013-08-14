@@ -5,6 +5,7 @@
     ViewBag.Description = Model.Description;
     ViewBag.Keywords = "project,local,support,community,donate";
     //var PP_URL = Url.Content("~/Scripts/paypal-button.min.js") + "?merchant=" + ConfigurationManager.AppSettings["PP_MerchantAccountId"];
+    ViewBag.Image = Model.Project.Image;
 }
 @{Html.RenderPartial("_Project_Header", Model);}
 <div id='project-update-tab'>

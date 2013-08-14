@@ -4,6 +4,7 @@
     ViewBag.Title = Model.Project.Title + ": Ask a Question";
     ViewBag.Description = Model.Project.Description;
     ViewBag.Keywords = "project,local,support,community,questions";
+    ViewBag.Image = Model.Project.Image;
 }
 @{Html.RenderPartial("_Project_Header", Model.Project);}
 <div id='project-update-tab'>
