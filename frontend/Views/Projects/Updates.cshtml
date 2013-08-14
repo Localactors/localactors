@@ -2,7 +2,7 @@
 @model Localactors.entities.project
 @{
     ViewBag.Title = Model.Title != null ? Model.Title + " Updates" : "Project Updates";
-    ViewBag.Description = Model.Description;
+    ViewBag.Description = System.Text.RegularExpressions.Regex.Replace(Model.Description, @"<[^>]*>", String.Empty);
     ViewBag.Keywords = "project,local,support,community,updates,blog";
     ViewBag.Image = Model.Image;
 }

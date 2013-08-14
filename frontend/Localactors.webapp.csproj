@@ -507,6 +507,7 @@
     <Content Include="Content\images\img1.png" />
     <Content Include="Content\images\large_libera.jpg" />
     <Content Include="Content\images\large_scriviassocia.jpg" />
+    <Content Include="Content\images\logo_big.png" />
     <Content Include="Content\images\logo_mail-original.png" />
     <Content Include="Content\images\logo_mail.png" />
     <Content Include="Content\images\logo_mail_mobile-original.png" />

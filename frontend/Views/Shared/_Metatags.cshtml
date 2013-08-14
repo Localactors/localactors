@@ -1,6 +1,7 @@
-﻿<meta charset="UTF-8">
+﻿
+<meta charset="UTF-8">
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
-<meta name='description' http-equiv="@ViewBag.Description">
+<meta name='description' http-equiv="@Html.Raw(ViewBag.Description)">
 <meta name='keywords' http-equiv="@ViewBag.Keywords">
 <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible'>
 <meta content='width=device-width, initial-scale=1, maximum-scale=1' name='viewport'>
@@ -15,7 +16,7 @@
 <link href='@Url.Content("~/content/images/favicon.gif")' rel='shortcut icon' type='image/gif'>
 
 <meta property="og:title" content="@ViewBag.Title" />
-<meta property="og:description" content="@ViewBag.Description" />
+<meta property="og:description" content="@Html.Raw(ViewBag.Description)" />
 <meta property='og:site_name' content='Localactors'>
 <meta property='fb:app_id' content='217698528368134'>
 <meta property='og:image' content='@(ViewBag.Image ?? "http://localactors.org/content/images/logo_big.png")'>

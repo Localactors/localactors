@@ -2,9 +2,9 @@
 @model Localactors.entities.project
 @{
     ViewBag.Title = Model.Title + "";
-    ViewBag.Description = Model.Description;
+    ViewBag.Description = System.Text.RegularExpressions.Regex.Replace(Model.Description, @"<[^>]*>", String.Empty);
     ViewBag.Keywords = "project,local,support,community,details";
-    ViewBag.Image = Model.Project.Image;
+    ViewBag.Image = Model.Image;
 }
 @{Html.RenderPartial("_Project_Header", Model);}
 <div id='project-update-tab'>

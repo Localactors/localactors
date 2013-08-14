@@ -2,7 +2,7 @@
 @model Localactors.webapp.Controllers.ProjectsController.AskModel
 @{
     ViewBag.Title = Model.Project.Title + ": Ask a Question";
-    ViewBag.Description = Model.Project.Description;
+    ViewBag.Description = System.Text.RegularExpressions.Regex.Replace(Model.Project.Description, @"<[^>]*>", String.Empty);
     ViewBag.Keywords = "project,local,support,community,questions";
     ViewBag.Image = Model.Project.Image;
 }

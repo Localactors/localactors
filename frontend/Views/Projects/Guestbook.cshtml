@@ -2,9 +2,9 @@
 @model Localactors.webapp.Controllers.ProjectsController.GuestBookModel
 @{
     ViewBag.Title = Model.project.Title + " Guestbook";
-    ViewBag.Description = Model.project.Description;
+    ViewBag.Description = System.Text.RegularExpressions.Regex.Replace(Model.project.Description, @"<[^>]*>", String.Empty);
     ViewBag.Keywords = "project,local,support,community,guestbook";
-    ViewBag.Image = Model.Project.Image;
+    ViewBag.Image = Model.project.Image;
     bool isadmin = User.IsInRole("admin") || ViewBag.UserID == Model.project.UserID;
     bool isauthenticated = User.Identity.IsAuthenticated;
 }
