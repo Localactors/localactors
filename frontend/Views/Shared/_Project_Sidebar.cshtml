@@ -1,8 +1,18 @@
 ﻿@using System.Configuration
 @model Localactors.entities.project
+           
+@{
+
+    int daysleft = (DateTime.Now - Model.DateEnd).Days;
+    if(daysleft >0){ daysleft = 0;}
+    daysleft = Math.Abs(daysleft);
+}
+     
+           
+
 <ul id='info-project'>
     <li>
-        <h2>@(Math.Abs((DateTime.Now - Model.DateEnd).Days))</h2>
+        <h2>@daysleft</h2>
         <h3>
             Days
         </h3>
