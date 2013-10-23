@@ -920,6 +920,7 @@
     <Content Include="Areas\Admin\Views\Logs\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Logs\Details.cshtml" />
     <Content Include="Areas\Publisher\Views\Web.config" />
+    <Content Include="Areas\Publisher\Views\Home\Index.cshtml" />
     <None Include="Content\fonts\droid-sans\droidsans-bold-webfont.eot" />
     <None Include="Content\fonts\droid-sans\droidsans-bold-webfont.ttf" />
     <None Include="Content\fonts\droid-sans\droidsans-bold-webfont.woff" />
