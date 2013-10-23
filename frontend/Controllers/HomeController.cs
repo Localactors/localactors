@@ -19,7 +19,7 @@ namespace Localactors.webapp.Controllers
         public ActionResult Index() {
 
             HomeModel model = new HomeModel();
-            int take = 5;
+            int take = 12;
             int.TryParse(ConfigurationManager.AppSettings["Pagesize_HomeProjects"], out take);
             model.publishers = db.users.Where(x => x.Role == "publisher" && x.Enabled).ToList();
             model.projects = db.projects.OrderByDescending("ProjectID").Where(x => x.Enabled).Take(take).ToList();
