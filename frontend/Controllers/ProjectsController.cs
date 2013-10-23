@@ -123,9 +123,24 @@ namespace Localactors.webapp.Controllers
 
             if (ModelState.IsValid)
             {
-                //send email
-                string body = string.Format("From: {0}\r\nName (if loggedin): {1}\r\nProject: {2}\r\nProjectID: {3}\r\n\r\nQuestion: {4}", question.Email, question.UserName, question.ProjectName, question.ProjectID, question.Question);
-                SendMailAwsAdmin("Question about project: " + question.ProjectName, body);
+                Validator validator = new Validator(ConfigurationManager.AppSettings["Akismet_Key"]);
+                bool isspam = validator.IsSpam(new Comment()
+                {
+                    comment_author_email = question.Email,
+                    blog = ConfigurationManager.AppSettings["Akismet_Url"],
+                    comment_author = question.Email,
+                    comment_content = question.Question,
+                    user_agent = Request.UserAgent,
+                    user_ip = Request.UserHostAddress,
+                    referrer = Request.UrlReferrer != null ? Request.UrlReferrer.AbsoluteUri : "",
+                    comment_type = "question"
+                });
+
+                if (!isspam) {
+                    //send email
+                    string body = string.Format("From: {0}\r\nName (if loggedin): {1}\r\nProject: {2}\r\nProjectID: {3}\r\n\r\nQuestion: {4}", question.Email, question.UserName, question.ProjectName, question.ProjectID, question.Question);
+                    SendMailAwsAdmin("Question about project: " + question.ProjectName, body);
+                }
 
                 return RedirectToAction("Details", "Projects", new { id = question.ProjectID });
             }
