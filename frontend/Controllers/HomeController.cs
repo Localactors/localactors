@@ -22,7 +22,7 @@ namespace Localactors.webapp.Controllers
             int take = 12;
             int.TryParse(ConfigurationManager.AppSettings["Pagesize_HomeProjects"], out take);
             model.publishers = db.users.Where(x => x.Role == "publisher" && x.Enabled).ToList();
-            model.projects = db.projects.OrderByDescending("ProjectID").Where(x => x.Enabled).Take(take).ToList();
+            model.projects = db.projects.OrderByDescending("DateUpdate").Where(x => x.Enabled).Take(take).ToList();
 
 
             return View(model);
