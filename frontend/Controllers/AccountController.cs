@@ -65,19 +65,19 @@ namespace Localactors.webapp.Controllers
 
             if (geo == null)
             {
-                ModelState.AddModelError("Username", "wrong user or password");
+                ModelState.AddModelError("Username", "Wrong user or password");
                 return View(model);
             }
 
             if (geo.Confirmed == false)
             {
-                ModelState.AddModelError("Username", "User not yet confirmed. Check your inbox for the confirmation email.");
+                ModelState.AddModelError("Username", "User not confirmed. Check your inbox for the confirmation email.");
                 return View(model);
             }
 
             if (geo.Enabled == false)
             {
-                ModelState.AddModelError("Username", "user not enabled");
+                ModelState.AddModelError("Username", "User not enabled");
                 return View(model);
             }
 
