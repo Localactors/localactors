@@ -152,6 +152,8 @@
     <Compile Include="Areas\Admin\Controllers\UpdateController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserRolesController.cs" />
+    <Compile Include="Areas\Publisher\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Publisher\PublisherAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DonationController.cs" />
     <Compile Include="Controllers\ErrorsController.cs" />
@@ -917,6 +919,7 @@
     <Content Include="Areas\Admin\Views\Plans\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Logs\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Logs\Details.cshtml" />
+    <Content Include="Areas\Publisher\Views\Web.config" />
     <None Include="Content\fonts\droid-sans\droidsans-bold-webfont.eot" />
     <None Include="Content\fonts\droid-sans\droidsans-bold-webfont.ttf" />
     <None Include="Content\fonts\droid-sans\droidsans-bold-webfont.woff" />
@@ -1001,6 +1004,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Publisher\Models\" />
+    <Folder Include="Areas\Publisher\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

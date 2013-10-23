@@ -28,7 +28,7 @@ namespace Localactors.webapp.Controllers
                 projects = projects.Where(x => x.tags.Any(y => y.Name == tag));
             }
 
-            projects = projects.OrderBy("DateUpdate");
+            projects = projects.OrderByDescending("DateUpdate");
 
             return View(projects.ToList());
         }
