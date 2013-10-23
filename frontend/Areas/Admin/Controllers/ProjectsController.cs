@@ -211,6 +211,12 @@ namespace Localactors.webapp.Areas.Admin.Controllers
                 if (project.Image == null)
                     project.Image = "https://s3-eu-west-1.amazonaws.com/localactors-webapp/projects/placeholder_project.png";
 
+                if(project.Enabled) {
+                    var user = project.user;
+                    if (user.Role == "supporter") ;
+                    user.Role = "publisher";
+                }
+
                 project.DateUpdate = DateTime.Now;
                 db.projects.Attach(project);
                 db.ObjectStateManager.ChangeObjectState(project, EntityState.Modified);
@@ -274,6 +280,13 @@ namespace Localactors.webapp.Areas.Admin.Controllers
         {
             project project = db.projects.Single(p => p.ProjectID == id);
             project.Enabled = true;
+
+            if(project.Enabled) {
+                    var user = project.user;
+                    if (user.Role == "supporter") ;
+                    user.Role = "publisher";
+                }
+
             db.SaveChanges();
             return RedirectToAction("Index");
         }
