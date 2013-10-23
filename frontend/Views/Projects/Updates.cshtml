@@ -22,7 +22,7 @@
 <div id='update-body'>
     @{Html.RenderPartial("_Project_Sidebar", Model);}
 
-    @foreach(var update in Model.updates) {
+    @foreach(var update in Model.updates.OrderByDescending(x=>x.Date)) {
         {Html.RenderPartial("_Project_Update", update);}
     }
     
