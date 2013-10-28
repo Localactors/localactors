@@ -1,0 +1,61 @@
+﻿@model Localactors.entities.project
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<ul class="breadcrumb">
+    <li><a href='@Url.Action("Index","Home")'>Home</a> <span class="divider">/</span></li>
+    <li><a href='@Url.Action("Index","projects")'>Projects</a> <span class="divider">/</span></li>
+    <li class="active"><a href="/admin/projects/delete/@Model.ProjectID"> @Model.Title (delete)</a> </li>
+</ul>
+
+<fieldset>
+
+
+    <div class="display-label">user</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.user.Role)
+    </div>
+
+    <div class="display-label">Title</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Title)
+    </div>
+
+    <div class="display-label">Description</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Description)
+    </div>
+
+    <div class="display-label">Date</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Date)
+    </div>
+
+    <div class="display-label">DateStart</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DateStart)
+    </div>
+
+    <div class="display-label">DateEnd</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DateEnd)
+    </div>
+
+    <div class="display-label">country</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.country.Code)
+    </div>
+
+    <div class="display-label">Location</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Location)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" class="btn"  value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index",new{},new{@class="btn"})
+    </p>
+}

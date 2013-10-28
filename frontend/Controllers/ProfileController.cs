@@ -71,7 +71,7 @@ namespace Localactors.webapp.Controllers
         public ViewResult Index()
         {
             LocalactorsModel model = new LocalactorsModel();
-            model.publishers = db.users.Include("projects").Where(x => x.Role == "publisher" && x.Enabled).ToList();
+            model.publishers = db.users.Include("projects").Where(x => x.Role == "publisher" && x.Enabled && x.EnablePublisher).ToList();
             model.supporters = db.users.Where(x => x.Role == "supporter" && x.Enabled).ToList();
             return View(model);
         }

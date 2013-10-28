@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Localactors.entities.project_photo>
+@{
+    ViewBag.Title = "Index";
+}
+<ul class="breadcrumb">
+    <li><a href='@Url.Action("Index", "Home", new { Area = "Publisher" })'>Publisher Home</a>
+        <span class="divider">/</span></li>
+    <li><a href='@Url.Action("Index", "Home", new { Area = "Publisher" })'>Projects</a>
+        <span class="divider">/</span></li>
+    <li><a href='@Url.Action("Edit", "Projects", new { id = @ViewBag.Project.ProjectID, Area = "Publisher" })'>
+        @ViewBag.Project.Title</a> <span class="divider">/</span></li>
+    <li class="active"><a href='@Url.Action("Index", "ProjectPhotos", new { projectid = @ViewBag.Project.ProjectID, Area = "Publisher" })'>
+        Photos</a> </li>
+</ul>
+<p>
+    @Html.ActionLink("Create New", "Create", new { Area = "Publisher", projectid = ViewBag.Project.ProjectID }, new { @class = "btn" })
+</p>
+<table class="table table-condensed table-bordered">
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <img src="@item.Url" alt="@item.Caption" width="128px" />
+            </td>
+            <td>
+                <div class="well well-small">
+                    @Html.DisplayFor(modelItem => item.Url)
+                </div>
+                <div class="">@Html.DisplayFor(modelItem => item.Caption)</div>
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.PhotoID }, new { }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.PhotoID }, new { })
+            </td>
+        </tr>
+    }
+</table>

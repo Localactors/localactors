@@ -17,7 +17,7 @@ namespace Localactors.webapp.Areas.Publisher
 
             context.MapRoute(
                 "Publisher_default_home",
-                "/Publisher",
+                "Publisher",
                 new {controller="home", action = "Index", id = UrlParameter.Optional }
            );
 

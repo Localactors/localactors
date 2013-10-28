@@ -1,0 +1,513 @@
+﻿@model Localactors.entities.update
+@{
+    ViewBag.Title = "Update For " + Model.project.Title;
+}
+
+<script type="text/javascript">
+
+    var awsbase = '@System.Configuration.ConfigurationManager.AppSettings["AWSS3BucketUrl"]';
+    var baseurl = awsbase;
+
+</script>
+
+
+<ul class="breadcrumb">
+    <li><a href='@Url.Action("Index", "Home", new { Area = "Publisher" })'>Publisher Home</a>
+        <span class="divider">/</span></li>
+    <li><a href='@Url.Action("Index", "Home", new { Area = "Publisher" })'>Projects</a>
+        <span class="divider">/</span></li>
+    <li><a href='@Url.Action("Edit", "Projects", new { id = @ViewBag.Project.ProjectID, Area = "Publisher" })'>
+            @ViewBag.Project.Title</a> <span class="divider">/</span></li>
+    <li><a href='@Url.Action("Index", "Update", new { projectid = @ViewBag.Project.ProjectID, Area = "Publisher" })'>
+            Updates</a>  <span class="divider">/</span></li>
+    <li class="active"><a href='@Url.Action("Edit", "Update", new {id=Model.UpdateID, projectid = @ViewBag.Project.ProjectID, Area = "Publisher" })'>
+                           Edit Update</a> </li>
+</ul>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        @Html.HiddenFor(model => model.UpdateID)
+        @Html.HiddenFor(model => model.UserID)
+        @Html.HiddenFor(model => model.DateCreated)
+     
+            @Html.HiddenFor(model => model.ProjectID, "project")
+       
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Title)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Title)
+            @Html.ValidationMessageFor(model => model.Title)
+        </div>
+         <div class="editor-label">
+            @Html.LabelFor(model => model.Intro)
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.Intro, new { @class = "wysiwyg" })
+            @Html.ValidationMessageFor(model => model.Intro)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Date)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Date)
+            @Html.ValidationMessageFor(model => model.Date)
+        </div>
+        <p>
+            <input type="submit" class="btn"  value="Save" />
+        </p>
+    </fieldset>
+}
+<hr />
+<h2>Add Content</h2>
+<a href="#modalparagraph" role="button" class="btn" data-toggle="modal">Paragraph</a>
+<div id="modalparagraph" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="Add Content" aria-hidden="true">
+    <form action="@Url.Action("ContentCreate", "Update")" method="POST"  enctype="multipart/form-data">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            ×</button>
+        <h3 id="">
+            Paragraph</h3>
+    </div>
+        <div class="modal-body">
+
+            <input type="hidden" name="UpdateID" value="@Model.UpdateID"/>
+            <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+            <input type="hidden" name="ContentTypeID" value="2" />
+            <input type="hidden" name="ContentTypeName" value="PARAGRAPH" />
+            <div class="editor-label">
+                <label for="Title">
+                    Title</label>
+            </div>
+            <div class="editor-field">
+                <input class="text-box single-line" name="Title" type="text" value="" />
+            </div>
+            
+            <div class="editor-label">
+                <label for="Subtitle">
+                    Subtitle</label>
+            </div>
+            <div class="editor-field">
+                <input class="text-box single-line" name="Subtitle" type="text" value="" />
+            </div>
+            
+            <div class="editor-label">
+                <label for="Text">
+                    Text</label>
+            </div>
+            <div class="editor-field">
+                <textarea id="Text" name="Text" class="wysiwyg"></textarea>
+            </div>
+        </div>
+    <div class="modal-footer">
+        <input type="submit" class="btn btn-primary" value="Create" />
+    </div>
+    </form>
+</div>
+<a href="#modalmap" role="button" class="btn" data-toggle="modal">Map</a>
+<div id="modalmap" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="Add Map" aria-hidden="true">
+    <form action="@Url.Action("ContentCreate", "Update")" method="POST"  enctype="multipart/form-data">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            ×</button>
+        <h3 id="">
+            Map</h3>
+    </div>
+        <div class="modal-body">
+        
+            <input type="hidden" name="UpdateID" value="@Model.UpdateID"/>
+            <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+            <input type="hidden" name="ContentTypeID" value="3" />
+            <input type="hidden" name="ContentTypeName" value="MAP" />
+            <div class="editor-label">
+                <label for="Title">
+                    Address</label>
+            </div>
+            <div class="editor-field">
+                <textarea id="" name="Text"></textarea>
+            </div>
+        </div>
+    <div class="modal-footer">
+        <input type="submit" class="btn btn-primary" value="Create" />
+    </div>
+    </form>
+</div>
+@*<a href="#modallist" role="button" class="btn" data-toggle="modal">List Item</a>
+<div id="modallist" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="Add List Item" aria-hidden="true">
+    <form action="@Url.Action("ContentCreate", "Update")" method="POST"  enctype="multipart/form-data">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            ×</button>
+        <h3 id="">
+            List Item</h3>
+    </div>
+    <div class="modal-body">
+        <input type="hidden" name="UpdateID" value="@Model.UpdateID"/>
+        <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+        <input type="hidden" name="ContentTypeID" value="4" />
+        <input type="hidden" name="ContentTypeName" value="LIST" />
+        <div class="editor-label">
+            <label for="Title">
+                Item Text</label>
+        </div>
+        <div class="editor-field">
+            <input class="text-box single-line" name="Title" type="text" value="" />
+        </div>
+    </div>
+    <div class="modal-footer">
+        <input type="submit" class="btn btn-primary" value="Create" />
+    </div>
+    </form>
+</div>*@
+<a href="#modalachievement" role="button" class="btn" data-toggle="modal">Achievement</a>
+<div id="modalachievement" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="Add Achievement" aria-hidden="true">
+    <form action="@Url.Action("ContentCreate", "Update")" method="POST"  enctype="multipart/form-data">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            ×</button>
+        <h3 id="">
+            Achievement</h3>
+    </div>
+        <div class="modal-body">
+          
+            <input type="hidden" name="UpdateID" value="@Model.UpdateID"/>
+            <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+            <input type="hidden" name="ContentTypeID" value="5" />
+            <input type="hidden" name="ContentTypeName" value="ACHIEVEMENT" />
+            <div class="editor-label">
+                <label for="Title">
+                    Title</label>
+            </div>
+            <div class="editor-field">
+                <input class="text-box single-line" id="" name="Title" type="text" value="" />
+            </div>
+            <div class="editor-label">
+                <label for="Date">
+                    Date</label>
+            </div>
+            <div class="editor-field">
+                <input class="datepicker" data-date-format="dd/mm/yyyy" id="" name="Date" type="text" value="" />
+            </div>
+            <div class="editor-label">
+                <label for="Text">
+                    Description</label>
+            </div>
+            <div class="editor-field">
+                <textarea id="" name="Text" class="wysiwyg"></textarea>
+            </div>
+        </div>
+    <div class="modal-footer">
+        <input type="submit" class="btn btn-primary" value="Create" />
+    </div>
+    </form>
+</div>
+<a href="#modalphoto" role="button" class="btn" data-toggle="modal">Photo</a>
+<div id="modalphoto" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="Add Photo" aria-hidden="true">
+    <form action="@Url.Action("ContentCreate", "Update")"  method="POST" enctype="multipart/form-data">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            ×</button>
+        <h3 id="">
+            Photo</h3>
+    </div>
+        <div class="modal-body">
+     
+            <input type="hidden" name="UpdateID" value="@Model.UpdateID"/>
+            <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+            <input type="hidden" name="ContentTypeID" value="6" />
+            <input type="hidden" name="ContentTypeName" value="PHOTO" />
+            <div class="editor-label">
+                <label for="Title">
+                    Title</label>
+            </div>
+            <div class="editor-field">
+                <input class="text-box single-line" id="" name="Title" type="text" value="" />
+            </div>
+            <div class="editor-label">
+                <label for="Url">
+                    File</label>
+            </div>
+             <div class="editor-label">
+                <label for="Text">
+                    Caption</label>
+            </div>
+            <div class="editor-field">
+                <textarea id="" name="Text" class=""></textarea>
+            </div>
+            <div class="editor-field">
+                <input class="text-box single-line" id="" name="Url" type="file" value="" />
+            </div>
+        </div>
+    <div class="modal-footer">
+        <input type="submit" class="btn btn-primary" value="Create" />
+    </div>
+    </form>
+</div>
+<a href="#modalvideo" role="button" class="btn" data-toggle="modal">Video</a>
+<div id="modalvideo" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="Add Video" aria-hidden="true">
+    <form action="@Url.Action("ContentCreate", "Update")" method="POST"  enctype="multipart/form-data">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            ×</button>
+        <h3 id="">
+            Video</h3>
+    </div>
+        <div class="modal-body">
+          
+            <input type="hidden" name="UpdateID" value="@Model.UpdateID"/>
+            <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+            <input type="hidden" name="ContentTypeID" value="7" />
+            <input type="hidden" name="ContentTypeName" value="Video" />
+            <div class="editor-label">
+                <label for="Title">
+                    Caption</label>
+            </div>
+            <div class="editor-field">
+                <input class="text-box single-line" id="" name="Title" type="text" value=""  class="" />
+            </div>
+            <div class="editor-label">
+                <label for="Url">
+                    File</label>
+            </div>
+            <div class="editor-field">
+                <input class="text-box single-line" id="" name="Url" type="file" value="" />
+            </div>
+        </div>
+    <div class="modal-footer">
+        <input type="submit" class="btn btn-primary" value="Create" />
+    </div>
+    </form>
+</div>
+<a href="#modalinterview" role="button" class="btn" data-toggle="modal">Interview</a>
+<div id="modalinterview" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="Add Interview" aria-hidden="true">
+    <form action="@Url.Action("ContentCreate", "Update")" method="POST"  enctype="multipart/form-data">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            ×</button>
+        <h3 id="">
+            Interview</h3>
+    </div>
+        <div class="modal-body">
+        
+            <input type="hidden" name="UpdateID" value="@Model.UpdateID"/>
+            <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+            <input type="hidden" name="ContentTypeID" value="8" />
+            <input type="hidden" name="ContentTypeName" value="INTERVIEW" />
+           <div class="editor-label">
+                <label for="Title">
+                    Interviewer Name</label>
+            </div>
+            <div class="editor-field">
+                <input class="text-box single-line" name="Title" type="text" value="" />
+            </div>
+    
+            <div class="editor-label">
+                <label for="Question">
+                    Question</label>
+            </div>
+            <div class="editor-field">
+                <textarea id="" name="Question" class="wysiwyg"></textarea>
+            </div>
+            
+            <div class="editor-label">
+                <label for="Subtitle">
+                    Interviewee Name</label>
+            </div>
+            <div class="editor-field">
+                <input class="text-box single-line" name="Subtitle" type="text" value="" />
+            </div>
+
+            <div class="editor-label">
+                <label for="Answer">
+                    Answer</label>
+            </div>
+            <div class="editor-field">
+                <textarea id="" name="Answer" class="wysiwyg"></textarea>
+            </div>
+        </div>
+    <div class="modal-footer">
+        <input type="submit" class="btn btn-primary" value="Create" />
+    </div>
+    </form>
+</div>
+<a href="#modalquestion" role="button" class="btn" data-toggle="modal">Q&amp;A</a>
+<div id="modalquestion" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="Add Question" aria-hidden="true">
+    <form action="@Url.Action("ContentCreate", "Update")" method="POST"  enctype="multipart/form-data">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            ×</button>
+        <h3 id="">
+            Question</h3>
+    </div>
+        <div class="modal-body">
+          
+            <input type="hidden" name="UpdateID" value="@Model.UpdateID"/>
+            <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+            <input type="hidden" name="ContentTypeID" value="9" />
+            <input type="hidden" name="ContentTypeName" value="QUESTION" />
+            <div class="editor-label">
+                <label for="Question">
+                    Question</label>
+            </div>
+            <div class="editor-field">
+                <textarea id="" name="Question" class="wysiwyg" ></textarea>
+            </div>
+            <div class="editor-label">
+                <label for="Answer">
+                    Answer</label>
+            </div>
+            <div class="editor-field">
+                <textarea id="" name="Answer" class="wysiwyg" ></textarea>
+            </div>
+        </div>
+    <div class="modal-footer">
+        <input type="submit" class="btn btn-primary" value="Create" />
+    </div>
+    </form>
+</div>
+<a href="#modalquote" role="button" class="btn" data-toggle="modal">Quote</a>
+<div id="modalquote" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="Add Quote" aria-hidden="true">
+    <form action="@Url.Action("ContentCreate", "Update")" method="POST"  enctype="multipart/form-data">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            ×</button>
+        <h3 id="">
+            Quote</h3>
+    </div>
+        <div class="modal-body">
+         
+            <input type="hidden" name="UpdateID" value="@Model.UpdateID"/>
+            <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+            <input type="hidden" name="ContentTypeID" value="10" />
+            <input type="hidden" name="ContentTypeName" value="QUOTE" />
+            
+             <div class="editor-label">
+                <label for="Title">
+                    Author</label>
+            </div>
+            <div class="editor-field">
+                <input class="text-box single-line" name="Title" type="text" value="@Model.Title" />
+            </div>
+
+            <div class="editor-label">
+                <label for="Text">
+                    Quote</label>
+            </div>
+            <div class="editor-field">
+                <textarea id="" name="Text" class="wysiwyg"></textarea>
+            </div>
+        </div>
+    <div class="modal-footer">
+        <input type="submit"  class="btn btn-primary" value="Create" />
+    </div>
+    </form>
+</div>
+<a href="#modallink" role="button" class="btn" data-toggle="modal">Link</a>
+<div id="modallink" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="Add Link" aria-hidden="true">
+    <form action="@Url.Action("ContentCreate", "Update")" method="POST"  enctype="multipart/form-data">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                ×</button>
+            <h3 id="">
+                Link</h3>
+        </div>
+        <div class="modal-body">
+          
+            <input type="hidden" name="UpdateID" value="@Model.UpdateID"/>
+            <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+            <input type="hidden" name="ContentTypeID" value="11" />
+            <input type="hidden" name="ContentTypeName" value="LINK" />
+            <div class="editor-label">
+                <label for="Title">
+                    Title</label>
+            </div>
+            <div class="editor-field">
+                <input class="text-box single-line" id="" name="Title" type="text" value="" />
+            </div>
+            <div class="editor-label">
+                <label for="Url">
+                    Url</label>
+            </div>
+            <div class="editor-field">
+                <input class="text-box single-line"  name="Url" type="text" value="http://" />
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input type="submit" class="btn btn-primary" value="Create" />
+        </div>
+    </form>
+</div>
+<a href="#modalhtml" role="button" class="btn" data-toggle="modal">Html Block</a>
+<div id="modalhtml" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="Add Html Block" aria-hidden="true">
+    <form action="@Url.Action("ContentCreate", "Update")" method="POST"  enctype="multipart/form-data">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            ×</button>
+        <h3 id="">
+            Html Block</h3>
+    </div>
+        <div class="modal-body">
+         
+            <input type="hidden" name="UpdateID" value="@Model.UpdateID"/>
+            <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+            <input type="hidden" name="ContentTypeID" value="12" />
+            <input type="hidden" name="ContentTypeName" value="HTML" />
+            <div>
+                <textarea id="" name="Text" class="wysiwyg"></textarea>
+            </div>
+        </div>
+    <div class="modal-footer">
+        <input type="submit" class="btn btn-primary" value="Create" />
+    </div>
+    </form>
+</div>
+<br /><br/>
+<table class="table table-condensed table-striped table-bordered">
+    <tr>
+        <th>
+            ID
+        </th>
+        <th>
+            Order
+        </th>
+        <th>
+            update_content_type
+        </th>
+        <th>
+            Title
+        </th>
+        <th colspan="2">
+        </th>
+    </tr>
+    @foreach (var item in Model.update_content.OrderByDescending(x => x.ContentID).OrderByDescending(x => x.Order))
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContentID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.update_content_type.ContentTypeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @*                @Html.ActionLink("Edit", "Edit", new { id=item.ContentID }) |
+                @Html.ActionLink("Details", "Details", new { id=item.ContentID }) |
+               *@ @Html.ActionLink("Delete", "ContentDelete", new { id = item.ContentID, updateid = item.UpdateID })
+           
+                @{ /*Html.RenderPartial("_ContentEditor", item);*/ }
+            </td>
+            <td>
+                @Html.ActionLink("UP", "ContentUp", new { id = item.ContentID, updateid = item.UpdateID }) |
+                @Html.ActionLink("DOWN", "ContentDown", new { id = item.ContentID, updateid = item.UpdateID })
+            </td>
+        </tr>
+    }
+</table>
+

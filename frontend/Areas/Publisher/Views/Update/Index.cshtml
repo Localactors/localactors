@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Localactors.entities.update>
+
+@{
+    ViewBag.Title = "Index for " + ViewBag.Project.Title;
+}
+
+<ul class="breadcrumb">
+    <li><a href='@Url.Action("Index", "Home", new { Area = "Publisher" })'>Publisher Home</a>
+        <span class="divider">/</span></li>
+    <li><a href='@Url.Action("Index", "Home", new { Area = "Publisher" })'>Projects</a>
+        <span class="divider">/</span></li>
+    <li><a href='@Url.Action("Edit", "Projects", new { id = @ViewBag.Project.ProjectID, Area = "Publisher" })'>
+        @ViewBag.Project.Title</a> <span class="divider">/</span></li>
+    <li class="active"><a href='@Url.Action("Index", "Update", new { projectid = @ViewBag.Project.ProjectID, Area = "Publisher" })'>
+        Updates</a> </li>
+</ul>
+
+<p>
+    @Html.ActionLink("Create New", "Create", new { projectid = ViewBag.Projectid },new{@class="btn"})
+</p>
+<table class="table table-condensed table-striped table-bordered">
+    <tr>
+    
+        <th>
+            Title
+        </th>
+        <th>
+            Date
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+     
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.UpdateID }) | 
+            @Html.ActionLink("Delete", "Delete", new { id=item.UpdateID })
+        </td>
+    </tr>
+}
+
+</table>

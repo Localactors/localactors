@@ -1,0 +1,48 @@
+﻿@model Localactors.entities.update
+
+@{
+    ViewBag.Title = "New Update for " + ViewBag.Project.Title;
+}
+
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    <fieldset>
+
+
+            @Html.HiddenFor(model => model.ProjectID)  
+
+   
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Title)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Title)
+            @Html.ValidationMessageFor(model => model.Title)
+        </div>
+        
+         <div class="editor-label">
+            @Html.LabelFor(model => model.Intro)
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.Intro)
+            @Html.ValidationMessageFor(model => model.Intro)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Date)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Date)
+            @Html.ValidationMessageFor(model => model.Date)
+        </div>
+
+        <p>
+            <input type="submit" class="btn"  value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index",new {projectid = ViewBag.Project.ProjectID})
+</div>

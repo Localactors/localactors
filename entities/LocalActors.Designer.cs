@@ -5418,7 +5418,8 @@ namespace Localactors.entities
         /// <param name="privacy">Initial value of the Privacy property.</param>
         /// <param name="newsletter">Initial value of the Newsletter property.</param>
         /// <param name="reset">Initial value of the Reset property.</param>
-        public static user Createuser(global::System.Int32 userID, global::System.String role, global::System.String userName, global::System.String userPassword, global::System.Boolean enabled, global::System.Boolean confirmed, global::System.Boolean shouldChangePassword, global::System.Boolean privacy, global::System.Boolean newsletter, global::System.Boolean reset)
+        /// <param name="enablePublisher">Initial value of the EnablePublisher property.</param>
+        public static user Createuser(global::System.Int32 userID, global::System.String role, global::System.String userName, global::System.String userPassword, global::System.Boolean enabled, global::System.Boolean confirmed, global::System.Boolean shouldChangePassword, global::System.Boolean privacy, global::System.Boolean newsletter, global::System.Boolean reset, global::System.Boolean enablePublisher)
         {
             user user = new user();
             user.UserID = userID;
@@ -5431,6 +5432,7 @@ namespace Localactors.entities
             user.Privacy = privacy;
             user.Newsletter = newsletter;
             user.Reset = reset;
+            user.EnablePublisher = enablePublisher;
             return user;
         }
 
@@ -6112,6 +6114,30 @@ namespace Localactors.entities
         private global::System.String _Contact_Tel;
         partial void OnContact_TelChanging(global::System.String value);
         partial void OnContact_TelChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean EnablePublisher
+        {
+            get
+            {
+                return _EnablePublisher;
+            }
+            set
+            {
+                OnEnablePublisherChanging(value);
+                ReportPropertyChanging("EnablePublisher");
+                _EnablePublisher = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("EnablePublisher");
+                OnEnablePublisherChanged();
+            }
+        }
+        private global::System.Boolean _EnablePublisher;
+        partial void OnEnablePublisherChanging(global::System.Boolean value);
+        partial void OnEnablePublisherChanged();
 
         #endregion
 

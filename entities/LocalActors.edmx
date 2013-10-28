@@ -352,6 +352,7 @@
           <Property Name="Email" Type="varchar" MaxLength="200" />
           <Property Name="CountryID" Type="int" />
           <Property Name="Enabled" Type="bool" Nullable="false" />
+          <Property Name="EnablePublisher" Type="bool" Nullable="false" />
           <Property Name="Confirmed" Type="bool" Nullable="false" />
           <Property Name="ShouldChangePassword" Type="bool" Nullable="false" />
           <Property Name="Privacy" Type="bool" Nullable="false" />
@@ -938,6 +939,7 @@
           <NavigationProperty Name="update_comment" Relationship="localactorsModel.FK_update_comment_user" FromRole="user" ToRole="update_comment" />
           <NavigationProperty Name="donations" Relationship="localactorsModel.FK_donation_user" FromRole="user" ToRole="donation" />
           <NavigationProperty Name="followedProjects" Relationship="localactorsModel.user_follow_project" FromRole="user" ToRole="project" />
+          <Property Type="Boolean" Name="EnablePublisher" Nullable="false" />
         </EntityType>
         <Association Name="FK_user_country">
           <End Type="localactorsModel.country" Role="country" Multiplicity="0..1" />
@@ -1429,6 +1431,7 @@
           <EntitySetMapping Name="users">
             <EntityTypeMapping TypeName="localactorsModel.user">
               <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="EnablePublisher" ColumnName="EnablePublisher" />
                 <ScalarProperty Name="Contact_Tel" ColumnName="Contact_Tel" />
                 <ScalarProperty Name="Contact_Skype" ColumnName="Contact_Skype" />
                 <ScalarProperty Name="Contact_Web" ColumnName="Contact_Web" />

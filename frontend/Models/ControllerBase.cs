@@ -523,6 +523,11 @@ namespace Localactors.webapp
             return Json(new { result = "OK" });
         }
 
-        
+
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
+        }
     }
 }

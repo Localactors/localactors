@@ -1,0 +1,130 @@
+﻿@using System.Configuration
+@model Localactors.entities.user
+@{
+    ViewBag.Title = "Account Settings";
+}
+
+<ul class="breadcrumb">
+    <li><a href='@Url.Action("Index","Home",new{Area="Publisher"})'>Publisher Home</a> <span class="divider">/</span></li>
+    <li class="active"><a href='@Url.Action("Settings","Home")'>Settings</a> </li>
+</ul>
+
+<div id='update-body'>
+    @using (Html.BeginForm("Settings", "Home", FormMethod.Post, new { enctype = "multipart/form-data", id = "mainform", area="Publisher" }))
+    {
+        <div class='container-comment'>
+            @Html.ValidationSummary(true)
+            <div id='user-info'>
+                @Html.HiddenFor(model => model.UserID)
+                @Html.HiddenFor(model => model.UserName)
+                <div class="editor-label">
+                    First Name
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Name)
+                    @Html.ValidationMessageFor(model => model.Name)
+                </div>
+                <div class="editor-label">
+                    Last Name
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Lastname)
+                    @Html.ValidationMessageFor(model => model.Lastname)
+                </div>
+                <div class="editor-label">
+                    Your Details
+                </div>
+                <div class="editor-field">
+                    @Html.TextAreaFor(model => model.Bio)
+                    @Html.ValidationMessageFor(model => model.Bio)
+                </div>
+                <div class="editor-label">
+                    Country
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownList("CountryID", String.Empty)
+                    @Html.ValidationMessageFor(model => model.CountryID)
+                </div>
+                <div class="editor-label">
+                    Avatar
+                </div>
+                <div class="editor-field">
+                    @Html.HiddenFor(model => model.Image)
+                    <input type="file" id="Image" name="Image" class="imageupload" />
+                    @Html.ValidationMessageFor(model => model.Image)
+                    @Html.ValidationMessage("Image")
+                    @if (!string.IsNullOrEmpty(Model.Image))
+                    {
+                        <img src="@string.Format("{0}?v={1}", Model.Image, DateTime.Now.Ticks)" class="imagepreview" alt=""  />
+                    }
+                </div>
+            </div>
+            <hr class='spacer' />
+            <div id='user-contacts'>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Contact_Blog, "Blog Url")
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Contact_Blog)
+                    @Html.ValidationMessageFor(model => model.Contact_Blog)
+                </div>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Contact_Email, "Contact Email")
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Contact_Email)
+                    @Html.ValidationMessageFor(model => model.Contact_Email)
+                </div>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Contact_Facebook, "Facebook")
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Contact_Facebook)
+                    @Html.ValidationMessageFor(model => model.Contact_Facebook)
+                </div>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Contact_Linkedin, "Linkedin")
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Contact_Linkedin)
+                    @Html.ValidationMessageFor(model => model.Contact_Linkedin)
+                </div>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Contact_Skype, "Skype Name")
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Contact_Skype)
+                    @Html.ValidationMessageFor(model => model.Contact_Skype)
+                </div>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Contact_Tel, "Contact Telephone")
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Contact_Tel)
+                    @Html.ValidationMessageFor(model => model.Contact_Tel)
+                </div>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Contact_Twitter, "Twitter")
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Contact_Twitter)
+                    @Html.ValidationMessageFor(model => model.Contact_Twitter)
+                </div>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Contact_Web, "Website")
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Contact_Web)
+                    @Html.ValidationMessageFor(model => model.Contact_Web)
+                </div>
+            </div>
+
+            <p >
+               
+                        <input type='submit' value='  Update  ' class="btn">
+         
+        
+            </p>
+        </div>
+    }
+</div>

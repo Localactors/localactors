@@ -1,0 +1,657 @@
+﻿@using System.Configuration
+@model Localactors.entities.project
+@{
+    ViewBag.Title = "Edit";
+}
+<ul class="breadcrumb">
+    <li><a href='@Url.Action("Index", "Home", new { Area = "Publisher" })'>Publisher Home</a>
+        <span class="divider">/</span></li>
+    <li><a href='@Url.Action("Index", "Home", new { Area = "Publisher" })'>Projects</a>
+        <span class="divider">/</span></li>
+    <li class="active"><a href='@Url.Action("Edit", "Projects", new { id = Model.ProjectID, Area = "Publisher" })'>
+        @Model.Title</a> </li>
+</ul>
+<script type="text/javascript">
+    var awsbase = '@ConfigurationManager.AppSettings["AWSS3BucketUrl"]';
+    var baseurl = awsbase;
+</script>
+<div class="tabbable ">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#project" data-toggle="tab">Project</a></li>
+        <li><a href="#plan" data-toggle="tab">Plan</a></li>
+        <li><a href="#costs" data-toggle="tab">Costs</a></li>
+        <li><a href="#photos" data-toggle="tab">Photos</a></li>
+        <li><a href="#tags" data-toggle="tab">Tags</a></li>
+        <li><a href="#updates" data-toggle="tab">Updates</a></li>
+        <li><a href="#donations" data-toggle="tab">Donations</a></li>
+        <li><a href="#achievements" data-toggle="tab">Achievements</a></li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active" id="project">
+            @using (Html.BeginForm("Edit", "Projects", FormMethod.Post, new { enctype = "multipart/form-data", id = "mainform" }))
+            {
+           
+                @Html.ValidationSummary(false)
+                <fieldset>
+                    @Html.HiddenFor(model => model.ProjectID)
+                    @Html.HiddenFor(model => model.UserID)
+                    @Html.HiddenFor(model => model.Enabled)
+                    @Html.HiddenFor(model => model.DateUpdate)
+                    @Html.HiddenFor(model => model.Cover)
+                    @Html.HiddenFor(model => model.Date)
+                    <div class="panel">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.AgancyName, "Agency Name")
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.AgancyName)
+                            @Html.ValidationMessageFor(model => model.AgancyName)
+                        </div>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.AgencyLogo, "Agency Logo")
+                        </div>
+                        <div class="editor-field">
+                            @Html.HiddenFor(model => model.AgencyLogo)
+                            <input type="file" id="AgencyLogo" name="AgencyLogo" class="imageupload" />
+                            @Html.ValidationMessageFor(model => model.AgencyLogo)
+                            <img src="@string.Format("{0}?v={1}", Model.AgencyLogo, DateTime.Now.Ticks)" class="imagepreview" alt=""  />
+                        </div>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.AgencyObjective, "Agency Objective")
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextAreaFor(model => model.AgencyObjective, new { @class = "wysiwyg" })
+                            @Html.ValidationMessageFor(model => model.AgencyObjective)
+                        </div>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.AgencyWebsite, "Agency Website")
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.AgencyWebsite)
+                            @Html.ValidationMessageFor(model => model.AgencyWebsite)
+                        </div>
+                        @*                    <div class="editor-label">
+                        @Html.LabelFor(model => model.AgencyLink1, "Agency Link #1")
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.AgencyLink1)
+                        @Html.ValidationMessageFor(model => model.AgencyLink1)
+                    </div>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.AgencyLink2, "Agency Link #2")
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.AgencyLink2)
+                        @Html.ValidationMessageFor(model => model.AgencyLink2)
+                    </div>*@
+                    </div>
+                    <div class="panel">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Title, "Project Title")
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Title)
+                            @Html.ValidationMessageFor(model => model.Title)
+                        </div>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.CountryID, "country")
+                        </div>
+                        <div class="editor-field">
+                            @Html.DropDownList("CountryID", String.Empty)
+                            @Html.ValidationMessageFor(model => model.CountryID)
+                        </div>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Location, "Location (free textfield)")
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Location)
+                            @Html.ValidationMessageFor(model => model.Location)
+                        </div>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Description, "Project Description")
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextAreaFor(model => model.Description, new { @class = "wysiwyg" })
+                            @Html.ValidationMessageFor(model => model.Description)
+                        </div>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.ProjectGoal, "Project Goal")
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextAreaFor(model => model.ProjectGoal, new { @class = "wysiwyg" })
+                            @Html.ValidationMessageFor(model => model.ProjectGoal)
+                        </div>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.ProjectPlan, "Project Plan (plain escription)")
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextAreaFor(model => model.ProjectPlan, new { @class = "wysiwyg" })
+                            @Html.ValidationMessageFor(model => model.ProjectPlan)
+                        </div>
+                        <div class="editor-label">
+                            Image
+                        </div>
+                        <div class="editor-field">
+                            @Html.HiddenFor(model => model.Image)
+                            <input type="file" id="Image" name="Image" class="imageupload" />
+                            @Html.ValidationMessageFor(model => model.Image)
+                            @Html.ValidationMessage("Image")
+                            @if (!string.IsNullOrEmpty(Model.Image))
+                            {
+                                <img src="@string.Format("{0}?v={1}", Model.Image, DateTime.Now.Ticks)" class="imagepreview" alt=""  width="128px" />
+                            }
+                        </div>
+                    </div>
+                    
+                    <div class="panel">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.DateStart)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.DateStart)
+                            @Html.ValidationMessageFor(model => model.DateStart)
+                        </div>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.DateEnd)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.DateEnd)
+                            @Html.ValidationMessageFor(model => model.DateEnd)
+                        </div>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Target, "Economic Target")
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Target) &euro;
+                            @Html.ValidationMessageFor(model => model.Target)
+                        </div>
+                    </div>
+                    <div class="panel">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Website, "Official Website")
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Website)
+                            @Html.ValidationMessageFor(model => model.Website)
+                        </div>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Twitter)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Twitter)
+                            @Html.ValidationMessageFor(model => model.Twitter)
+                        </div>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Facebook)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Facebook)
+                            @Html.ValidationMessageFor(model => model.Facebook)
+                        </div>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Blog)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Blog)
+                            @Html.ValidationMessageFor(model => model.Blog)
+                        </div>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Web, "Link")
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Web)
+                            @Html.ValidationMessageFor(model => model.Web)
+                        </div>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Video, "Video (link)")
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Video)
+                            @Html.ValidationMessageFor(model => model.Video)
+                        </div>
+                    </div>
+
+                    <p>
+                        <input type="submit" class="btn" value="Save" />
+                    </p>
+                </fieldset>
+      
+         
+            }
+        </div>
+        <div class="tab-pane" id="plan">
+            <h3>
+                Project Plan</h3>
+            <div style="overflow: auto;">
+                <table class="table table-condensed table-striped table-bordered">
+                    <tr>
+                        <th>
+                            Title/Description
+                        </th>
+                        <th>
+                            Date/Time/Month
+                        </th>
+                        <th>
+                        </th>
+                        <th>
+                        </th>
+                    </tr>
+                    @foreach (var item in Model.project_plan.OrderBy(x => x.Order))
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Title)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Time)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Delete", "Delete", "Plans", new { id = item.PlanID, projectid = Model.ProjectID }, new { })
+                            </td>
+                            <td>@Html.ActionLink("UP", "PlanUp", "Projects", new { id = item.PlanID }, new { })
+                                |
+                                @Html.ActionLink("DOWN", "PlanDown", "Projects", new { id = item.PlanID }, new { })
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+            <a href="#modelplane" role="button" class="btn" data-toggle="modal">Add Project Plan
+                Step</a>
+            <div id="modelplane" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="Add Plan"
+                aria-hidden="true">
+                <form action="@Url.Action("Create", "Plans")" method="POST"  enctype="multipart/form-data">
+                <div class="modal-header">
+                    <h3 id="">
+                        Project Plan Step</h3>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="projectid" value="@Model.ProjectID"/>
+                    <input type="hidden" name="returntoproject" value="@Model.ProjectID"/>
+                    <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+                    <input type="hidden" name="Order" value="10" />
+                    <div class="editor-label">
+                        <label for="Title">
+                            Title/Description</label>
+                    </div>
+                    <div class="editor-field">
+                        <input class="text-box single-line" id="Title" name="Title" type="text" value="" />
+                        <span class="field-validation-valid" data-valmsg-for="Title" data-valmsg-replace="true">
+                        </span>
+                    </div>
+                    <div class="editor-label">
+                        <label for="Time">
+                            Date/Time/Month</label>
+                    </div>
+                    <div class="editor-field">
+                        <input class="text-box single-line" id="" name="Time" type="text" value="" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn" class="btn btn-primary" value="Create" />
+                </div>
+                </form>
+            </div>
+        </div>
+        <div class="tab-pane " id="costs">
+            <h3>
+                Project Costs</h3>
+            <div style="overflow: auto;">
+                <table class="table table-condensed table-striped table-bordered">
+                    <tr>
+                        <th>
+                            Title/Description
+                        </th>
+                        <th>
+                            Amount
+                        </th>
+                        <th>
+                        </th>
+                        <th>
+                        </th>
+                    </tr>
+                    @foreach (var item in Model.project_cost.OrderBy(x => x.Order))
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Title)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Goal)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Delete", "Delete", "Costs", new { id = item.CostID, projectid = Model.ProjectID }, new { })
+                            </td>
+                            <td>@Html.ActionLink("UP", "CostUp", "Projects", new { id = item.CostID }, new { })
+                                |
+                                @Html.ActionLink("DOWN", "CostDown", "Projects", new { id = item.CostID }, new { })
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+            <a href="#modalcost" role="button" class="btn" data-toggle="modal">Add Cost</a>
+            <div id="modalcost" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="Add Cost"
+                aria-hidden="true">
+                <form action="@Url.Action("Create", "Costs")" method="POST"  enctype="multipart/form-data">
+                <div class="modal-header">
+                    <h3 id="">
+                        Project Cost</h3>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="projectid" value="@Model.ProjectID"/>
+                    <input type="hidden" name="returntoproject" value="@Model.ProjectID"/>
+                    <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+                    <input type="hidden" name="Order" value="10" />
+                    <div class="editor-label">
+                        <label for="Title">
+                            Title/Description</label>
+                    </div>
+                    <div class="editor-field">
+                        <input class="text-box single-line" id="Title" name="Title" type="text" value="" />
+                        <span class="field-validation-valid" data-valmsg-for="Title" data-valmsg-replace="true">
+                        </span>
+                    </div>
+                    <div class="editor-label">
+                        <label for="Goal">
+                            Cost/Amount</label>
+                    </div>
+                    <div class="editor-field">
+                        <input class="text-box single-line" id="" name="Goal" type="text" value="" />
+                        <span class="field-validation-valid" data-valmsg-for="Goal" data-valmsg-replace="true">
+                        </span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn" class="btn btn-primary" value="Create" />
+                </div>
+                </form>
+            </div>
+        </div>
+        <div class="tab-pane " id="photos">
+            <h3>
+                Photos</h3>
+            <div style="overflow: auto;">
+                @foreach (var item in Model.project_photo)
+                {
+                    <div style="margin:2px;padding:2px;border:1px solid #ccc;display:inline-block;float:left;">
+                        <a href="@Url.Action("Edit", "ProjectPhotos", new { id = item.PhotoID, returntoproject = item.ProjectID })">
+                            <img src="@item.Url" alt="@item.Caption" width="128px" />
+                        </a>
+                    </div>
+
+                }
+            </div>
+            <a href="#modalphoto" role="button" class="btn" data-toggle="modal">Add Photo</a>
+            <a href="@Url.Action("Index", "ProjectPhotos", new { projectid = Model.ProjectID })"  class="btn">
+                Project Photos</a>
+            <div id="modalphoto" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="Add Photo"
+                aria-hidden="true">
+                <form action="@Url.Action("Create", "ProjectPhotos")" method="POST"  enctype="multipart/form-data">
+                <div class="modal-header">
+                    <h3 id="">
+                        Photo</h3>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="projectid" value="@Model.ProjectID"/>
+                    <input type="hidden" name="returntoproject" value="@Model.ProjectID"/>
+                    <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+                    <div class="editor-label">
+                        <label for="Caption">
+                            Caption</label>
+                    </div>
+                    <div class="editor-field">
+                        <input class="text-box single-line" id="Caption" name="Caption" type="text" value="" />
+                        <span class="field-validation-valid" data-valmsg-for="Caption" data-valmsg-replace="true">
+                        </span>
+                    </div>
+                    <div class="editor-label">
+                        <label for="Url">
+                            Photo</label>
+                    </div>
+                    <div class="editor-field">
+                        <input class="text-box single-line" id="" name="Url" type="file" value="" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn" class="btn btn-primary" value="Create" />
+                </div>
+                </form>
+            </div>
+        </div>
+        <div class="tab-pane " id="tags">
+            <h3>
+                Tags</h3>
+            <div>
+                @foreach (var item in Model.tags)
+                {
+                    <span>@Html.ActionLink(item.Name + " (x)", "TagRemove", new { id = item.TagID, projectid = Model.ProjectID }, new { @class = "btn" })
+                    </span>
+                }
+            </div>
+            <br />
+            <form action="@Url.Action("TagAdd")" method="POST"  enctype="multipart/form-data">
+            <input type="hidden" name="projectid" value="@Model.ProjectID"/>
+            <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+            <div class="editor-label">
+                <label for="tagname">
+                    Add Tag</label>
+            </div>
+            <div class="editor-field">
+                <input id="tagname" name="tagname" type="text" value="" />
+            </div>
+            <input type="submit" class="btn" class="btn btn-primary" value="Add Tag" />
+            </form>
+            <div style="overflow: auto;">
+                @foreach (var item in ViewBag.Tags)
+                {
+                    <form action="@Url.Action("TagAdd")" method="POST"  enctype="multipart/form-data" class="compact">
+                    <input type="hidden" name="projectid" value="@Model.ProjectID"/>
+                    <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+                    <input type="submit" class="btn"  class="btn" id="tagname" name="tagname" value="@item.Name" />
+                    </form> 
+                }
+            </div>
+        </div>
+        <div class="tab-pane" id="updates">
+            <h3>
+                Updates</h3>
+            <table class="table table-condensed table-striped table-bordered">
+                <tr>
+                    <th>
+                        Title
+                    </th>
+                    <th>
+                        Date
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+                @foreach (var item in Model.updates.OrderByDescending(x => x.UpdateID))
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Date)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", "Update", new { id = item.UpdateID }, new { })
+                            |
+                            @Html.ActionLink("Delete", "Delete", "Update", new { id = item.UpdateID, projectid = Model.ProjectID }, new { })
+                        </td>
+                    </tr>
+                }
+            </table>
+            <a href="#modalupdate" role="button" class="btn" data-toggle="modal">Add Update</a>
+            <a href="@Url.Action("index", "Update", new { projectid = Model.ProjectID })" role="button" class="btn" data-toggle="">
+                Project Updates</a>
+            <div id="modalupdate" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="Add Update"
+                aria-hidden="true">
+                <form action="@Url.Action("Create", "Update")" method="POST"  enctype="multipart/form-data">
+                <div class="modal-header">
+                    <h3 id="">
+                        Update</h3>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="projectid" value="@Model.ProjectID"/>
+                    <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+                    <div class="editor-label">
+                        <label for="Title">
+                            Title</label>
+                    </div>
+                    <div class="editor-field">
+                        <input class="text-box single-line" id="Title" name="Title" type="text" value="" />
+                        <span class="field-validation-valid" data-valmsg-for="Title" data-valmsg-replace="true">
+                        </span>
+                    </div>
+                    <div class="editor-label">
+                        <label for="Title">
+                            Intro</label>
+                    </div>
+                    <div class="editor-field">
+                        <textarea id="" name="Intro" class="wysiwyg"></textarea>
+                    </div>
+                    <div class="editor-label">
+                        <label for="Date">
+                            Date</label>
+                    </div>
+                    <div class="editor-field">
+                        <input class="datepicker" data-date-format="dd/mm/yyyy" data-val="true" data-val-required="Il campo Date &amp;#232; obbligatorio."
+                            id="Date" name="Date" type="text" value="22/05/2013" />
+                        <span class="field-validation-valid" data-valmsg-for="Date" data-valmsg-replace="true">
+                        </span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn" class="btn btn-primary" value="Create" />
+                </div>
+                </form>
+            </div>
+        </div>
+        <div class="tab-pane" id="donations">
+            <h3>
+                Donations</h3>
+            <table class="table table-condensed table-striped table-bordered">
+                <tr>
+                    <th>
+                        user
+                    </th>
+                    <th>
+                        Date
+                    </th>
+                    <th>
+                        Amount
+                    </th>
+                    <th>
+                        Currency
+                    </th>
+                </tr>
+                @foreach (var item in Model.donations.OrderByDescending(x => x.InvestmentID))
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.user.UserName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Amount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Currency)
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <div class="tab-pane" id="achievements">
+            <h3>
+                Achievements</h3>
+            <table class="table table-condensed table-striped table-bordered">
+                <tr>
+                    <th>
+                        Date
+                    </th>
+                    <th>
+                        Title
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+                @foreach (var item in Model.achievements.OrderByDescending(x => x.Date))
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", "Achievements", new { id = item.AchievementID }, new { })
+                            |
+                            @Html.ActionLink("Delete", "Delete", "Achievements", new { id = item.AchievementID, projectid = Model.ProjectID }, new { })
+                        </td>
+                    </tr>
+                }
+            </table>
+            <a href="#modalachievement" role="button" class="btn" data-toggle="modal">Add Achievement</a>
+            <div id="modalachievement" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="Add Achievement"
+                aria-hidden="true">
+                <form action="@Url.Action("Create", "Achievements")" method="POST"  enctype="multipart/form-data">
+                <div class="modal-header">
+                    <h3 id="">
+                        Achievement</h3>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="projectid" value="@Model.ProjectID"/>
+                    <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
+                    <div class="editor-label">
+                        <label for="Date">
+                            Date</label>
+                    </div>
+                    <div class="editor-field">
+                        <input class="datepicker" data-date-format="dd/mm/yyyy" data-val="true" data-val-required="Il campo Date &amp;#232; obbligatorio."
+                            id="Date" name="Date" type="text" value="" />
+                        <span class="field-validation-valid" data-valmsg-for="Date" data-valmsg-replace="true">
+                        </span>
+                    </div>
+                    <div class="editor-label">
+                        <label for="Title">
+                            Title</label>
+                    </div>
+                    <div class="editor-field">
+                        <input class="text-box single-line" id="Title" name="Title" type="text" value="" />
+                        <span class="field-validation-valid" data-valmsg-for="Title" data-valmsg-replace="true">
+                        </span>
+                    </div>
+                    <div class="editor-label">
+                        <label for="Motivation">
+                            Motivation</label>
+                    </div>
+                    <div class="editor-field">
+                        <textarea name="Motivation" class="wysiwyg" id="Motivation"></textarea>
+                        <span class="field-validation-valid" data-valmsg-for="Motivation" data-valmsg-replace="true">
+                        </span>
+                    </div>
+                    <div class="editor-label">
+                        <label for="Goal">
+                            Goal</label>
+                    </div>
+                    <div class="editor-field">
+                        <textarea name="Goal" class="wysiwyg" id="Goal"></textarea>
+                        <span class="field-validation-valid" data-valmsg-for="Goal" data-valmsg-replace="true">
+                        </span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn" class="btn btn-primary" value="Create" />
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

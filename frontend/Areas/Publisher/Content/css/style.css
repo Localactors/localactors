@@ -1,0 +1,55 @@
+﻿.underbar{ height: 48px;overflow: auto;}
+.datepicker{z-index:1155;}
+.panel {
+  min-height: 20px;
+  padding: 5px;
+  margin-bottom: 5px;
+    overflow: auto;
+    white-space: inherit;
+  border: 1px solid #eee;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
+}
+body > .navbar .brand {
+    color: #000000;
+    float: right;
+    font-weight: bold;
+    margin-left: 20px;
+    padding-left: 0;
+    padding-right: 0;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 0 30px rgba(255, 255, 255, 0.125);
+    transition: all 0.2s linear 0s;
+}
+body > .navbar .brand:hover {
+    text-decoration: none;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 0 30px rgba(255, 255, 255, 0.4);
+}
+hr{ clear: both;}
+
+
+.editor-label{ float:left;width: 100px;clear: left;padding-top: 1px;margin-top: 1px;overflow: hidden;}
+.editor-field{ float:left;width: 500px;padding-top: 1px;margin-top: 1px;}
+.display-label{ float:left;width: 160px;clear: left;display: inline-block;padding: 5px;text-align: left;font-weight: bold;color: #999;}
+.display-field{ float:left;width: 500px;display: inline-block;padding: 5px;}
+.field-validation-valid, .input-validation-error, .field-validation-error{ color: red;display: block;clear: both;}
+fieldset{ margin: 5px;padding: 5px;}
+.text-box{}
+.single-line{}
+.wysiwyg{ width: 400px;height: 200px;}
+
+form p{ display: block;clear: left;}
+form.compact{ display: inline-block;float: left;margin: 2px;overflow: auto;}
+.formsmall{ border: 1px solid #ccc;font-size: 80%;padding: 4px;display: inline-block;}
+.formsmall label{ font-size: 10px;text-align: right;padding-right: 8px;}
+.formsmall input, .formsmall select{font-size: 10px;margin: 1px;padding: 1px;height: 18px;}
+
+
+.imageupload{}
+.imagepreview{ border-radius: 5px;border: 1px solid #ccc;box-shadow: 2px 2px 3px black;}
+
+.userthumbnail { height: 32px;border-radius: 24px;}
+.projectthumbnail { height: 32px;width: 32px; border-radius: 24px;}
+
+.disabled{ background-color: #ccc;color: #666;}

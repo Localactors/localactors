@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
-using System.Data.Entity;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -13,38 +11,37 @@ using Amazon.S3;
 using Amazon.S3.Model;
 using Localactors.entities;
 
-namespace Localactors.webapp.Areas.Admin.Controllers
+namespace Localactors.webapp.Areas.Publisher.Controllers
 {
-    [Authorize(Roles = "admin")]
+    [Authorize(Roles = "publisher,admin")]
     [ValidateInput(false)]
-    public class ProjectsController : ControllerBase
+    public class ProjectsController : Localactors.webapp.Areas.Publisher.ControllerBase
     {
       
-        public ViewResult Index()
-        {
-            var projects = db.projects.Include("country").Include("user");
+        public ActionResult Index() {
+            return RedirectToAction("Index", "Home");
+
+
+            var projects = db.projects.Include("country").Include("user").Where(x => x.UserID == CurrentUser.UserID);
             return View(projects.ToList());
         }
 
-        public ViewResult Details(int id)
-        {
-            project project = db.projects.Single(p => p.ProjectID == id);
-            return View(project);
-        }
 
         
 
         public ActionResult Create()
         {
             ViewBag.CountryID = new SelectList(db.countries, "CountryID", "Name");
-            ViewBag.UserID = new SelectList(db.users.Where(x => x.Role == "admin" || x.Role == "publisher"), "UserID", "UserName");
+
             var model = new project();
+            model.UserID = CurrentUser.UserID;
             model.Date = DateTime.Now;
             model.DateStart = DateTime.Now;
             model.DateEnd = DateTime.Now.AddDays(60);
             model.DateUpdate = DateTime.Now;
             model.Target = 1000;
             model.Image = "https://s3-eu-west-1.amazonaws.com/localactors-webapp/projects/placeholder_project.png";
+
             return View(model);
         } 
         [HttpPost]
@@ -92,8 +89,12 @@ namespace Localactors.webapp.Areas.Admin.Controllers
                                     ModelState.Remove(keyname);
                                     ModelState.Add(keyname, new ModelState());
                                     ModelState.SetModelValue(keyname, new ValueProviderResult(address, address, null));
-                                    project.Image = address;
-   
+                                    if (keyname.IndexOf("AgencyLogo") >= 0) {
+                                        project.AgencyLogo = address;
+                                    }
+                                    else {
+                                        project.Image = address;
+                                    }
                                 }
 
                             }
@@ -104,7 +105,6 @@ namespace Localactors.webapp.Areas.Admin.Controllers
                         }
 
                         ViewBag.CountryID = new SelectList(db.countries, "CountryID", "Name");
-                        ViewBag.UserID = new SelectList(db.users.Where(x => x.Role == "admin" || x.Role == "publisher"), "UserID", "UserName", project.UserID);
                         return View(project);
                     }
                 }
@@ -114,16 +114,19 @@ namespace Localactors.webapp.Areas.Admin.Controllers
                 if (project.Image == null)
                     project.Image = "https://s3-eu-west-1.amazonaws.com/localactors-webapp/projects/placeholder_project.png";
 
+                project.UserID = CurrentUser.UserID;
                 project.Enabled = false;
                 project.DateUpdate = DateTime.Now;
                 db.projects.AddObject(project);
                 db.SaveChanges();
-                //return RedirectToAction("Index");  
-                return RedirectToAction("Create","Update",new{projectid = project.ProjectID});  
+
+                SendMailAwsAdmin("New Project", "A new project has been created by a Publisher. You need to check and enable it. Project:" + project.Title);
+                TempData["info"] = "Your project has been created and is waiting for approval. Please be patient.";
+ 
+                return RedirectToAction("Edit","Projects",new{id = project.ProjectID,Area="Publisher"});  
             }
 
             ViewBag.CountryID = new SelectList(db.countries, "CountryID", "Name");
-            ViewBag.UserID = new SelectList(db.users.Where(x => x.Role == "admin" || x.Role == "publisher"), "UserID", "UserName", project.UserID);
             return View(project);
         }
  
@@ -135,17 +138,20 @@ namespace Localactors.webapp.Areas.Admin.Controllers
                 .Include("updates")
                 .Include("donations")
                 .Include("achievements")
-                .Single(p => p.ProjectID == id);
+                .Single(p => p.ProjectID == id && p.UserID == CurrentUser.UserID);
 
-            ViewBag.Supporters = new SelectList(db.users.Where(x => x.Role == "admin" || x.Role == "supporter"), "UserID", "UserName");
             ViewBag.CountryID = new SelectList(db.countries, "CountryID", "Name", project.CountryID);
-            ViewBag.UserID = new SelectList(db.users.Where(x => x.Role == "admin" || x.Role == "publisher"), "UserID", "UserName", project.UserID);
             ViewBag.Tags = db.tags;
             return View(project);
         }
         [HttpPost]
         public ActionResult Edit(project project)
         {
+            var dbproject = db.projects.Single(p => p.ProjectID == project.ProjectID && p.UserID == CurrentUser.UserID);
+            if(dbproject == null) {
+                return RedirectToAction("Index", "Home", new {Area = "Publisher"});
+            }
+
             if (Request.Files != null && Request.Files.Count > 0)
             {
                 foreach (string keyname in Request.Files)
@@ -188,7 +194,14 @@ namespace Localactors.webapp.Areas.Admin.Controllers
                                     ModelState.Remove(keyname);
                                     ModelState.Add(keyname, new ModelState());
                                     ModelState.SetModelValue(keyname, new ValueProviderResult(address, address, null));
-                                    project.Image = address;
+                                    if (keyname.IndexOf("AgencyLogo") >= 0)
+                                    {
+                                        project.AgencyLogo = address;
+                                    }
+                                    else
+                                    {
+                                        project.Image = address;
+                                    }
 
                                 }
                             }
@@ -197,9 +210,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
                             }
                         }
 
-                        ViewBag.Supporters = new SelectList(db.users.Where(x => x.Role == "admin" || x.Role == "supporter"), "UserID", "UserName");
                         ViewBag.CountryID = new SelectList(db.countries, "CountryID", "Name", project.CountryID);
-                        ViewBag.UserID = new SelectList(db.users.Where(x => x.Role == "admin" || x.Role == "publisher"), "UserID", "UserName", project.UserID);
                         ViewBag.Tags = db.tags;
                         return View(project);
                     }
@@ -211,100 +222,27 @@ namespace Localactors.webapp.Areas.Admin.Controllers
                 if (project.Image == null)
                     project.Image = "https://s3-eu-west-1.amazonaws.com/localactors-webapp/projects/placeholder_project.png";
 
-                if(project.Enabled) {
-                    var user = project.user;
-                    user.EnablePublisher = true;
-                    if (user.Role == "supporter") {
-                        user.Role = "publisher";
-                    }
-                }
 
+                project.UserID = CurrentUser.UserID;
                 project.DateUpdate = DateTime.Now;
-                db.projects.Attach(project);
-                db.ObjectStateManager.ChangeObjectState(project, EntityState.Modified);
+                db.projects.ApplyCurrentValues(project);
+          
                 db.SaveChanges();
+
+                SendMailAwsAdmin("Project modified", "A project has been modified by a Publisher. Project:" + project.Title);
+                return RedirectToAction("Index", "Home", new { Area = "Publisher" });
             }
 
-            ViewBag.Supporters = new SelectList(db.users.Where(x => x.Role == "admin" || x.Role == "supporter"), "UserID", "UserName");
             ViewBag.CountryID = new SelectList(db.countries, "CountryID", "Name", project.CountryID);
-            ViewBag.UserID = new SelectList(db.users.Where(x => x.Role == "admin" || x.Role == "publisher"), "UserID", "UserName", project.UserID);
             ViewBag.Tags = db.tags;
             return View(project);
         }
 
-        public ActionResult Delete(int id)
-        {
-            project project = db.projects.Single(p => p.ProjectID == id);
-            return View(project);
-        }
-        [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            project project = db.projects.Single(p => p.ProjectID == id);
-
-            //{
-            //    var list = project.updates.SelectMany(x => x.update_content);
-            //    foreach (var item in list)
-            //        db.update_content.DeleteObject(item);
-            //}
-
-            //var list = project.updates.SelectMany(x => x.update_content);
-            //foreach (var item in project.updates.SelectMany(x => x.update_comment))
-            //    db.update_comment.DeleteObject(item);
-
-            //foreach (var item in project.updates)
-            //    db.updates.DeleteObject(item);
-
-            //foreach (var item in project.tags)
-            //    project.tags.Remove(item);
-
-            //foreach (var item in project.project_photo)
-            //    project.project_photo.Remove(item);
-
-            //foreach (var item in project.donations)
-            //    project.donations.Remove(item);
-
-            //foreach (var item in project.achievements)
-            //    project.achievements.Remove(item);
-
-            //foreach (var item in project.followers)
-            //    project.followers.Remove(item);
-
-            //foreach (var item in project.project_guestbook)
-            //    project.project_guestbook.Remove(item);
-
-            db.projects.DeleteObject(project);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        public ActionResult Enable(int id)
-        {
-            project project = db.projects.Single(p => p.ProjectID == id);
-            project.Enabled = true;
-
-            if(project.Enabled) {
-                var user = project.user;
-                user.EnablePublisher = true;
-                    if (user.Role == "supporter") 
-                        user.Role = "publisher";
-                }
-
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        public ActionResult Disable(int id)
-        {
-            project project = db.projects.Single(p => p.ProjectID == id);
-            project.Enabled = false;
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+      
 
         public ActionResult TagRemove(int id, int projectid)
         {
-            project project = db.projects.Single(p => p.ProjectID == projectid);
+            project project = db.projects.Single(p => p.ProjectID == projectid && p.UserID == CurrentUser.UserID);
             tag tag = db.tags.Single(x => x.TagID == id);
             project.tags.Remove(tag);
             db.SaveChanges();
@@ -328,7 +266,7 @@ namespace Localactors.webapp.Areas.Admin.Controllers
                 //db.SaveChanges();
             }
 
-            project project = db.projects.Single(p => p.ProjectID == projectid);
+            project project = db.projects.Single(p => p.ProjectID == projectid && p.UserID == CurrentUser.UserID);
             if(!project.tags.Contains(tag)) {
                 project.tags.Add(tag);
                 db.SaveChanges();
@@ -443,66 +381,6 @@ namespace Localactors.webapp.Areas.Admin.Controllers
             return RedirectToAction("Edit", "Projects", new { id = item.ProjectID },"costs");
         }
 
-        public ActionResult Comments(int id) {
-            var items = db.update_comment.Include("update").Where(x => x.update.ProjectID == id).Select(x=>new
-                                                                                                               {
-                                                                                                                       id = x.CommentID,
-                                                                                                                       message = x.Text,
-                                                                                                                       picture= x.Picture,
-                                                                                                                       date = x.Date,
-                                                                                                                       update = new
-                                                                                                                                    {
-                                                                                                                                            id = x.UpdateID,
-                                                                                                                                            title=x.update.Title,
-                                                                                                                                            projectid = x.update.ProjectID
-                                                                                                                                    },
-                                                                                                                       user = new
-                                                                                                                                  {
-                                                                                                                                          id=x.UserID,
-                                                                                                                                          name = x.user.UserName
-                                                                                                                                  }
-                                                                                                               });
-
-            return new LargeJsonResult(items.ToList());
-        }
-        public ActionResult DeleteComment(int id) {
-            var item = db.update_comment.FirstOrDefault(x => x.CommentID == id);
-            if(item!=null) {
-                db.update_comment.DeleteObject(item);
-                db.SaveChanges();
-            }
-
-            return Content("ok");
-        }
-
-        public ActionResult Posts(int id)
-        {
-            var items = db.project_guestbook.Include("user").Where(x => x.ProjectID == id).Select(x => new
-            {
-                id = x.GuestpostID,
-                message = x.Text,
-                picture = x.Picture,
-                date = x.Date,
-                user = new
-                {
-                    id = x.UserID,
-                    name = x.user.UserName
-                }
-            });
-
-            return new LargeJsonResult(items.ToList());
-        }
-        public ActionResult DeletePost(int id)
-        {
-            var item = db.project_guestbook.FirstOrDefault(x => x.GuestpostID == id);
-            if (item != null)
-            {
-                db.project_guestbook.DeleteObject(item);
-                db.SaveChanges();
-            }
-
-            return Content("ok");
-        }
 
         protected override void Dispose(bool disposing)
         {

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="ISO-8859-1">
+    <meta http-equiv="Content-type" content="text/html;charset=ISO-8859-1" />
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="robots" content="no-index,no-follow" />
+
+    <link href="@Url.Content("~/Areas/Publisher/Content/css/bootstrap.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Areas/Publisher/Content/css/bootstrap-responsive.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Areas/Publisher/Content/css/jqueryui/custom.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Areas/Publisher/Content/css/style.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/css/datepicker.css")" rel="stylesheet" />
+
+    <script src="@Url.Content("~/Scripts/jquery-1.7.2.min.js")" type="text/javascript"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/bootstrap.js")" ></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/bootstrap-datepicker.js")" ></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/handlebars.js")" ></script>
+    
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+    <script type="text/javascript" src="@Url.Content("~/Scripts/publisher.js")" ></script>
+    <link href='@Url.Content("~/content/images/favicon.gif")' rel='shortcut icon' type='image/gif'>
+    <!--TINYMCE JS-->
+    <script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
+    <script type="text/javascript">
+        tinymce.init({ selector: '.wysiwyg' });
+
+    </script>
+</head>
+<body>
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar">
+                    </span>
+                </button>
+                <a class="brand" href="@Url.Action("Index", "Home", new { Area = "Publisher" })">Localactors</a>
+                <div class="nav-collapse collapse">
+                    <ul class="nav">
+                        <li><a href="@Url.Action("Index", "Home")" >Projects</a></li>
+   
+                        <li class="divider-vertical"></li>
+                        @if (Request.IsAuthenticated)
+                        {                   
+                            <li><a href="@Url.Action("Settings", "Home")">@User.Identity.Name</a></li>
+                            <li><a href="@Url.Action("Logout", "Account")">logout</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="@Url.Action("Login", "Account")">Login</a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="underbar">
+    </div>
+    <div class="container">
+        @{Html.RenderPartial("_Warnings");}
+        @RenderBody()
+    </div>
+</body>
+</html>
