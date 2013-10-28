@@ -1552,7 +1552,8 @@ namespace Localactors.entities
         /// <param name="cover">Initial value of the Cover property.</param>
         /// <param name="target">Initial value of the Target property.</param>
         /// <param name="enabled">Initial value of the Enabled property.</param>
-        public static project Createproject(global::System.Int32 projectID, global::System.Int32 userID, global::System.String title, global::System.DateTime date, global::System.DateTime dateStart, global::System.DateTime dateEnd, global::System.Int32 countryID, global::System.Boolean cover, global::System.Int32 target, global::System.Boolean enabled)
+        /// <param name="approved">Initial value of the Approved property.</param>
+        public static project Createproject(global::System.Int32 projectID, global::System.Int32 userID, global::System.String title, global::System.DateTime date, global::System.DateTime dateStart, global::System.DateTime dateEnd, global::System.Int32 countryID, global::System.Boolean cover, global::System.Int32 target, global::System.Boolean enabled, global::System.Boolean approved)
         {
             project project = new project();
             project.ProjectID = projectID;
@@ -1565,6 +1566,7 @@ namespace Localactors.entities
             project.Cover = cover;
             project.Target = target;
             project.Enabled = enabled;
+            project.Approved = approved;
             return project;
         }
 
@@ -2246,6 +2248,30 @@ namespace Localactors.entities
         private global::System.Boolean _Enabled;
         partial void OnEnabledChanging(global::System.Boolean value);
         partial void OnEnabledChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean Approved
+        {
+            get
+            {
+                return _Approved;
+            }
+            set
+            {
+                OnApprovedChanging(value);
+                ReportPropertyChanging("Approved");
+                _Approved = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Approved");
+                OnApprovedChanged();
+            }
+        }
+        private global::System.Boolean _Approved;
+        partial void OnApprovedChanging(global::System.Boolean value);
+        partial void OnApprovedChanged();
 
         #endregion
 

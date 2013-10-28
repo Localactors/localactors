@@ -190,7 +190,7 @@
     </tr>
 
 @foreach (var item in Model) {
-    <tr class="@(item.Enabled == false ? "disabled":"")">
+    <tr class="@(item.Approved == false ? "disabled":"")">
         <td style="background:url(@item.Image); background-size:cover;background-repeat:no-repeat;width:90px;">
             
         </td>

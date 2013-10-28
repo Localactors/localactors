@@ -228,22 +228,23 @@
             @Html.EditorFor(model => model.Enabled)
             @Html.ValidationMessageFor(model => model.Enabled)
         </div>
+        
+          <div class="editor-label">
+            @Html.LabelFor(model => model.EnablePublisher,"Show Publisher")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EnablePublisher)
+            @Html.ValidationMessageFor(model => model.EnablePublisher)
+        </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Confirmed)
+            @Html.LabelFor(model => model.Confirmed,"Email Confirmed")
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.Confirmed)
             @Html.ValidationMessageFor(model => model.Confirmed)
         </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ShouldChangePassword)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.ShouldChangePassword)
-            @Html.ValidationMessageFor(model => model.ShouldChangePassword)
-        </div>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Privacy)
@@ -264,6 +265,7 @@
    
             @Html.HiddenFor(model => model.Reset)
   
+            @Html.HiddenFor(model => model.ShouldChangePassword)
 
 
             @Html.HiddenFor(model => model.ResetEndDate)

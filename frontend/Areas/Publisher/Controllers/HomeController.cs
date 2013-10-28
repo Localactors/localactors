@@ -20,7 +20,13 @@ namespace Localactors.webapp.Areas.Publisher.Controllers
     public class HomeController : Localactors.webapp.Areas.Publisher.ControllerBase
     {
         public ActionResult Index() {
+
             var user = db.users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+
+            if(string.IsNullOrEmpty(user.Name) || string.IsNullOrEmpty(user.Lastname) || string.IsNullOrEmpty(user.Image)) {
+                TempData["warning"] = "You need to update your profile to better sponsor your project! <a href='"+ Url.Action("Settings","Home") +"'>click here</a>";
+            }
+
             if(user == null) {
                 return Redirect("/");
             }

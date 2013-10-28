@@ -83,7 +83,8 @@
         <legend>project</legend>
         
       @Html.HiddenFor(model => model.DateUpdate)
-      
+       @Html.HiddenFor(model => model.Approved)
+       @Html.HiddenFor(model => model.Enabled)
 
         <div class="editor-label">
             @Html.LabelFor(model => model.UserID, "user")

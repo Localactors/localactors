@@ -154,105 +154,182 @@
     <li class="active"><a href='@Url.Action("Index","projects")'>Projects</a> </li>
 </ul>
 
-<p>
+<div class="panel">
+<h4>Projects to be Approved</h4>
+    <table class="table table-condensed table-bordered">
+        <tr>
+            <th></th>
+            <th>
+                user
+            </th>
+            <th>
+                Agency
+            </th>
+            <th>
+                Title
+            </th>
+            <th>
+                Target 
+            </th>
+            <th>
+                Ends
+            </th>
+            <th>Days</th>
+            <th>
+                Country
+            </th>
+            <th>
+                Location
+            </th>
+            <th></th>
+ 
+        </tr>
+
+        @foreach (var item in Model.Where(x=>x.Approved == false)) {
+            <tr>
+               <td style="background:url(@item.Image); background-size:cover;background-repeat:no-repeat;width:90px;min-height: 40px;">
+                <p style="height: 40px;" />
+                </td>
+                <td>
+                    @Html.ActionLink(item.user.UserName, "Edit","User", new { id=item.UserID },new{})
+                </td>
+                <td>
+                    @Html.Raw(item.AgancyName)
+                </td>
+                <td>
+                    @Html.Raw(item.Title)
+                </td>
+
+      
+                <td>
+                    @Html.DisplayFor(modelItem => item.Target)
+                </td>
+                <td >
+                    @item.DateEnd.ToShortDateString()
+                </td>
+                <td> @((item.DateEnd-DateTime.Now).Days)</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.country.Code)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Location)
+                </td>
+     
+                <td style="white-space: nowrap;">
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ProjectID }, new { }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ProjectID }, new { }) | 
+                    @Html.ActionLink("Approve", "Approve", "Projects", new { id = item.ProjectID }, new { })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+<hr/>
+
+<div class="panel">
+    <p>
     @Html.ActionLink("Create New", "Create", new { }, new { @class = "btn" })  
     <a href="javascript:void(0);" class="btn" onclick="showallcomments();">Show Comments</a> 
     <a href="javascript:void(0);" class="btn" onclick="showallposts();">Show Guestbook</a>
 </p>
-<table class="table table-condensed table-bordered">
-    <tr>
-        <th></th>
-        <th>
-            user
-        </th>
-        <th>
-            Agency
-        </th>
-        <th>
-            Title
-        </th>
+    <table class="table table-condensed table-bordered">
+        <tr>
+            <th></th>
+            <th>
+                user
+            </th>
+            <th>
+                Agency
+            </th>
+            <th>
+                Title
+            </th>
 
-        <th>
-            Target 
-        </th>
-        <th>
-            Ends
-        </th>
-        <th>Days</th>
-        <th>
-            Country
-        </th>
-        <th>
-            Location
-        </th>
-        <th></th>
+            <th>
+                Target 
+            </th>
+            <th>
+                Ends
+            </th>
+            <th>Days</th>
+            <th>
+                Country
+            </th>
+            <th>
+                Location
+            </th>
+            <th></th>
  
-    </tr>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr class="@(item.Enabled == false ? "disabled":"")">
-        <td style="background:url(@item.Image); background-size:cover;background-repeat:no-repeat;width:90px;">
-            
-        </td>
-        <td>
-            @Html.ActionLink(item.user.UserName, "Edit","User", new { id=item.UserID },new{})
-        </td>
-        <td>
-            @Html.Raw(item.AgancyName)
-        </td>
-        <td>
-            @Html.Raw(item.Title)
-        </td>
+        @foreach (var item in Model.Where(x => x.Approved))
+        {
+            <tr class="@(item.Enabled == false ? "disabled":"")">
+                <td style="background:url(@item.Image); background-size:cover;background-repeat:no-repeat;width:90px;">
+                <p style="height: 40px;" />
+                </td>
+                <td>
+                    @Html.ActionLink(item.user.UserName, "Edit","User", new { id=item.UserID },new{})
+                </td>
+                <td>
+                    @Html.Raw(item.AgancyName)
+                </td>
+                <td>
+                    @Html.Raw(item.Title)
+                </td>
 
       
-        <td>
-            @Html.DisplayFor(modelItem => item.Target)
-        </td>
-        <td >
-            @item.DateEnd.ToShortDateString()
-        </td>
-        <td> @((item.DateEnd-DateTime.Now).Days)</td>
-        <td>
-            @Html.DisplayFor(modelItem => item.country.Code)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Location)
-        </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Target)
+                </td>
+                <td >
+                    @item.DateEnd.ToShortDateString()
+                </td>
+                <td> @((item.DateEnd-DateTime.Now).Days)</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.country.Code)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Location)
+                </td>
      
-        <td style="white-space: nowrap;">
+                <td style="white-space: nowrap;">
             
-            @Html.ActionLink("Edit", "Edit", new { id = item.ProjectID }, new { }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.ProjectID }, new { }) | 
-            @Html.ActionLink("Updates", "Index", "Update", new { projectid = item.ProjectID },new{})  |
-            @Html.ActionLink("Add Update", "Create", "Update", new { projectid = item.ProjectID },new{}) | 
-            @(item.Enabled ? Html.ActionLink("Disable", "Disable", "Projects", new { id = item.ProjectID }, new { }) : Html.ActionLink("Enable", "Enable", "Projects", new { id = item.ProjectID }, new { })) 
-            <br/>
-            <a href="javascript:void(0);" class="commentstoggle" onclick="showcomments(@item.ProjectID);">comments</a>  |  
-            <a href="javascript:void(0);" class="poststoggle" onclick="showposts(@item.ProjectID);">guestbook</a>
-        </td>
-    </tr>
-    <tr id="commentrow@(item.ProjectID)" style="display: none;">
-        <td >
-            Comments <a href="javascript:void(0);" class="" onclick="hidecomments(@item.ProjectID);"><i class="icon-minus-sign"></i></a>
-        </td>
-        <td class="comments" id="commentcell@(item.ProjectID)" colspan="8">
-            &nbsp;
-        </td>
-        <td>
-            &nbsp;
-        </td>
-    </tr>
-    <tr id="postrow@(item.ProjectID)" style="display: none;">
-        <td >
-            Guestbook <a href="javascript:void(0);" class="" onclick="hideposts(@item.ProjectID);"><i class="icon-minus-sign"></i></a>
-        </td>
-        <td class="comments" id="postcell@(item.ProjectID)" colspan="8">
-            &nbsp;
-        </td>
-        <td>
-            &nbsp;
-        </td>
-    </tr>
-}
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ProjectID }, new { }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ProjectID }, new { }) | 
+                    @Html.ActionLink("Updates", "Index", "Update", new { projectid = item.ProjectID },new{})  |
+                    @Html.ActionLink("Add Update", "Create", "Update", new { projectid = item.ProjectID },new{}) | 
+                    @(item.Enabled ? Html.ActionLink("Disable", "Disable", "Projects", new { id = item.ProjectID }, new { }) : Html.ActionLink("Enable", "Enable", "Projects", new { id = item.ProjectID }, new { })) 
+                    <br/>
+                    <a href="javascript:void(0);" class="commentstoggle" onclick="showcomments(@item.ProjectID);">comments</a>  |  
+                    <a href="javascript:void(0);" class="poststoggle" onclick="showposts(@item.ProjectID);">guestbook</a>
+                </td>
+            </tr>
+            <tr id="commentrow@(item.ProjectID)" style="display: none;">
+                <td >
+                    Comments <a href="javascript:void(0);" class="" onclick="hidecomments(@item.ProjectID);"><i class="icon-minus-sign"></i></a>
+                </td>
+                <td class="comments" id="commentcell@(item.ProjectID)" colspan="8">
+                    &nbsp;
+                </td>
+                <td>
+                    &nbsp;
+                </td>
+            </tr>
+            <tr id="postrow@(item.ProjectID)" style="display: none;">
+                <td >
+                    Guestbook <a href="javascript:void(0);" class="" onclick="hideposts(@item.ProjectID);"><i class="icon-minus-sign"></i></a>
+                </td>
+                <td class="comments" id="postcell@(item.ProjectID)" colspan="8">
+                    &nbsp;
+                </td>
+                <td>
+                    &nbsp;
+                </td>
+            </tr>
+        }
 
-</table>
+    </table>
+</div>

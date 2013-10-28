@@ -44,6 +44,8 @@ namespace Localactors.webapp.Areas.Admin.Controllers
             model.DateEnd = DateTime.Now.AddDays(60);
             model.DateUpdate = DateTime.Now;
             model.Target = 1000;
+            model.Approved = true;
+            model.Enabled = false;
             model.Image = "https://s3-eu-west-1.amazonaws.com/localactors-webapp/projects/placeholder_project.png";
             return View(model);
         } 
@@ -285,19 +287,33 @@ namespace Localactors.webapp.Areas.Admin.Controllers
 
             if(project.Enabled) {
                 var user = project.user;
-                user.EnablePublisher = true;
-                    if (user.Role == "supporter") 
-                        user.Role = "publisher";
+                if (user.Role == "supporter") 
+                    user.Role = "publisher";
                 }
 
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
         public ActionResult Disable(int id)
         {
             project project = db.projects.Single(p => p.ProjectID == id);
             project.Enabled = false;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        public ActionResult Approve(int id)
+        {
+            project project = db.projects.Single(p => p.ProjectID == id);
+            project.Approved = true;
+
+            if (project.Enabled)
+            {
+                var user = project.user;
+                user.EnablePublisher = true;
+                if (user.Role == "supporter")
+                    user.Role = "publisher";
+            }
+
             db.SaveChanges();
             return RedirectToAction("Index");
         }

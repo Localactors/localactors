@@ -21,7 +21,7 @@ namespace Localactors.webapp.Controllers
             var projects = db.projects
                 .Include("country")
                 .Include("user")
-                .Include("tags").Where(x => x.Enabled);
+                .Include("tags").Where(x => x.Enabled && x.Approved);
 
             if (tag != null)
             {

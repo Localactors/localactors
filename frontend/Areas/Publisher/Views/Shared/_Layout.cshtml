@@ -47,7 +47,7 @@
                         @if (Request.IsAuthenticated)
                         {                   
                             <li><a href="@Url.Action("Settings", "Home")">@User.Identity.Name</a></li>
-                            <li><a href="@Url.Action("Logout", "Account")">logout</a></li>
+                            <li><a href="@Url.Action("Logout", "Account",new{Area = ""})">logout</a></li>
                         }
                         else
                         {

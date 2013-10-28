@@ -29,7 +29,7 @@
         <th>
             Ends
         </th>
-        <th>Days</th>
+        <th>Days Left</th>
    
         <th>
             Location
@@ -45,7 +45,7 @@
         </td>
 
         <td>
-            <div class="label">@(item.Enabled ? "Active" : "Waiting Approvation")</div>
+            <span class="label label-important">@(item.Approved ? "Approved" : "To be Approved")</span> 
         </td>
         <td>
             @Html.Raw(item.Title)
@@ -53,7 +53,7 @@
 
       
         <td>
-            @Html.DisplayFor(modelItem => item.Target)
+            @Html.DisplayFor(modelItem => item.Target) &euro;
         </td>
         <td >
             @item.DateEnd.ToShortDateString()

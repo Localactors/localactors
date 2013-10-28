@@ -68,6 +68,7 @@
                 @Html.ValidationSummary(false)
                 <fieldset>
                     @Html.HiddenFor(model => model.ProjectID)
+                    @Html.HiddenFor(model => model.Approved)
                     @Html.HiddenFor(model => model.DateUpdate)
                     <div class="editor-label">
                         @Html.LabelFor(model => model.Enabled )
@@ -75,6 +76,13 @@
                     <div class="editor-field">
                         @Html.EditorFor(model => model.Enabled)
                         @Html.ValidationMessageFor(model => model.Enabled)
+                    </div>
+                     <div class="editor-label">
+                        @Html.LabelFor(model => model.Approved,"Approved for Publishing" )
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Approved)
+                        @Html.ValidationMessageFor(model => model.Approved)
                     </div>
                     <div class="editor-label">
                         @Html.LabelFor(model => model.UserID, "user")

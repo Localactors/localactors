@@ -3,28 +3,28 @@
     { 
         <div class="alert alert-success" data-alert="alert">
             <a class="close" href="#">×</a>
-            <p>@TempData["success"]</p>
+            <p>@Html.Raw(TempData["success"].ToString())</p>
         </div>
     }
     @if (TempData["warning"] != null)
     { 
         <div class="alert alert-warning" data-alert="alert">
             <a class="close" href="#">×</a>
-            <p>@TempData["warning"]</p>
+            <p>@Html.Raw(TempData["warning"].ToString())</p>
         </div>
     }
     @if (TempData["error"] != null)
     { 
         <div class="alert alert-error" data-alert="alert">
             <a class="close" href="#">×</a>
-            <p>@TempData["error"]</p>
+            <p>@Html.Raw(TempData["error"].ToString())</p>
         </div>
     }
-      @if (TempData["info"] != null)
+    @if (TempData["info"] != null)
     { 
         <div class="alert alert-info" data-alert="alert">
             <a class="close" href="#">×</a>
-            <p>@TempData["info"]</p>
+            <p>@Html.Raw(TempData["info"].ToString())</p>
         </div>
     }
 </div>
