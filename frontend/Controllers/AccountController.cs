@@ -8,14 +8,11 @@ using System.Web.Security;
 using Localactors.entities;
 using WSC_webapp.Models;
 
-namespace Localactors.webapp.Controllers
-{
+namespace Localactors.webapp.Controllers {
 
-    public class AccountController : ControllerBase
-    {
+    public class AccountController : ControllerBase {
 
-        public ActionResult Index()
-        {
+        public ActionResult Index() {
             Response.Cache.SetCacheability(HttpCacheability.NoCache);
 
             if (!Request.IsAuthenticated)
@@ -28,8 +25,7 @@ namespace Localactors.webapp.Controllers
             return View(user);
         }
 
-        public ActionResult Details(string username)
-        {
+        public ActionResult Details(string username) {
             //if (!Request.IsAuthenticated)
             //    return RedirectToAction("Index", "Home");
             Response.Cache.SetCacheability(HttpCacheability.NoCache);
@@ -43,8 +39,7 @@ namespace Localactors.webapp.Controllers
 
         //LOGIN
         [HttpGet]
-        public ActionResult Login(string ReturnUrl)
-        {
+        public ActionResult Login(string ReturnUrl) {
             Response.Cache.SetCacheability(HttpCacheability.NoCache);
 
             LoginModel model = new LoginModel();
@@ -53,40 +48,35 @@ namespace Localactors.webapp.Controllers
             return View(model);
         }
         [HttpPost]
-        public ActionResult Login(LoginModel model)
-        {
+        public ActionResult Login(LoginModel model) {
 
             Response.Cache.SetCacheability(HttpCacheability.NoCache);
 
             if (!ModelState.IsValid)
                 return View(model);
 
-            user geo = db.users.FirstOrDefault(x => (x.UserName.ToLower() == model.Username.ToLower() || x.Email.ToLower() == model.Username.ToLower()));
+            user user = db.users.FirstOrDefault(x => (x.UserName.ToLower() == model.Username.ToLower() || x.Email.ToLower() == model.Username.ToLower()));
 
-            if (geo == null)
-            {
+            if (user == null) {
                 ModelState.AddModelError("Username", "Wrong user or password");
                 return View(model);
             }
 
-            if (geo.Confirmed == false)
-            {
+            if (user.Confirmed == false) {
                 ModelState.AddModelError("Username", "User not confirmed. Check your inbox for the confirmation email.");
                 return View(model);
             }
 
-            if (geo.Enabled == false)
-            {
+            if (user.Enabled == false) {
                 ModelState.AddModelError("Username", "User not enabled");
                 return View(model);
             }
 
             string sha = computeHash(model.Password.ToUpper());
-            if (geo.UserPassword == sha || (geo.UserPassword.Length < 10 && geo.UserPassword.ToUpper() == model.Password.ToUpper()))
-            {
-                geo.Reset = false;
-                geo.Email_Hash = null;
-                geo.DateLastLogin = DateTime.Now;
+            if (user.UserPassword == sha || (user.UserPassword.Length < 10 && user.UserPassword.ToUpper() == model.Password.ToUpper())) {
+                user.Reset = false;
+                user.Email_Hash = null;
+                user.DateLastLogin = DateTime.Now;
                 db.SaveChanges();
 
                 //TempData["success"] = "Accesso effettuato, benvenuto " + geo.UserName;
@@ -97,12 +87,20 @@ namespace Localactors.webapp.Controllers
                 FormsAuthentication.SetAuthCookie(model.Username.ToLower(), model.RememberMe);
 
                 //data cookies
-                PushCookies(geo);
+                PushCookies(user);
 
-                if (!string.IsNullOrEmpty(model.ReturnUrl))
+                if (!string.IsNullOrEmpty(model.ReturnUrl)) {
                     return Redirect(model.ReturnUrl);
-                else
+                }
+                else {
+                    if (user.Role == "publisher") {
+                        return RedirectToAction("Index", "Home", new { Area = "Publisher" });
+                    }
+                    if (user.Role == "admin") {
+                        return RedirectToAction("Index", "Home", new { Area = "Admin" });
+                    }
                     return RedirectToAction("Index", "Home");
+                }
             }
 
 
@@ -113,8 +111,7 @@ namespace Localactors.webapp.Controllers
             return View(model);
         }
         [HttpGet]
-        public ActionResult Logout()
-        {
+        public ActionResult Logout() {
             Response.Cache.SetCacheability(HttpCacheability.NoCache);
 
             //remove cookies
@@ -126,25 +123,21 @@ namespace Localactors.webapp.Controllers
 
         //SUBSCRIBE
         [HttpGet]
-        public ActionResult Subscribe()
-        {
+        public ActionResult Subscribe() {
 
             return View();
         }
         [HttpPost]
-        public ActionResult Subscribe(SubscribeModel model)
-        {
+        public ActionResult Subscribe(SubscribeModel model) {
             if (!ModelState.IsValid)
                 return View(model);
 
-            if (model.Password != model.Confirm)
-            {
+            if (model.Password != model.Confirm) {
                 ModelState.AddModelError("Confirm", "Passwords do not match");
                 return View(model);
             }
 
-            if (!model.Terms.Equals("I Agree", StringComparison.InvariantCultureIgnoreCase))
-            {
+            if (!model.Terms.Equals("I Agree", StringComparison.InvariantCultureIgnoreCase)) {
                 ModelState.AddModelError("Terms", "You need to read and agree to the terms and conditions.");
                 return View(model);
             }
@@ -163,9 +156,8 @@ namespace Localactors.webapp.Controllers
             //    ModelState.AddModelError("Username", "Nome Utente gia registrato");
             //    return View(model);
             //}
-            var geo = db.users.FirstOrDefault(x => x.Email.ToLower() == model.Email.ToLower());
-            if (geo != null)
-            {
+            var user = db.users.FirstOrDefault(x => x.Email.ToLower() == model.Email.ToLower());
+            if (user != null) {
                 ModelState.AddModelError("Email", "Email address already registered");
                 return View(model);
             }
@@ -186,26 +178,24 @@ namespace Localactors.webapp.Controllers
             //}
 
             string key = computeHash(DateTime.Now.ToString("dd/MM/yyHHmmss") + model.Email);
-            user newuser = new user
-                                  {
-                                      UserPassword = computeHash(model.Password.ToUpper()),
-                                      UserName = model.Email.ToLower(),
-                                      Name = "",
-                                      Lastname = "",
-                                      Email = model.Email,
-                                      DateJoined = DateTime.Now,
-                                      DateLastLogin = DateTime.Now,
-                                      Enabled = true,
-                                      Confirmed = false,
-                                      Reset = false,
-                                      Role = "supporter",
-                                      Email_Hash = key,
-                                      Newsletter = model.Newsletter,
-                                      Image = "https://s3-eu-west-1.amazonaws.com/localactors-webapp/users/default_user_256.png"
-                                  };
+            user newuser = new user {
+                UserPassword = computeHash(model.Password.ToUpper()),
+                UserName = model.Email.ToLower(),
+                Name = "",
+                Lastname = "",
+                Email = model.Email,
+                DateJoined = DateTime.Now,
+                DateLastLogin = DateTime.Now,
+                Enabled = true,
+                Confirmed = false,
+                Reset = false,
+                Role = "supporter",
+                Email_Hash = key,
+                Newsletter = model.Newsletter,
+                Image = "https://s3-eu-west-1.amazonaws.com/localactors-webapp/users/default_user_256.png"
+            };
 
-            if (model.Privacy.Equals("I Agree", StringComparison.InvariantCultureIgnoreCase))
-            {
+            if (model.Privacy.Equals("I Agree", StringComparison.InvariantCultureIgnoreCase)) {
                 newuser.Privacy = true;
             }
 
@@ -232,31 +222,28 @@ namespace Localactors.webapp.Controllers
 
         }
         [HttpGet]
-        public ActionResult SubscribeConfirm(string key = null)
-        {
+        public ActionResult SubscribeConfirm(string key = null) {
 
             if (key == null)
                 key = "";
 
             ViewBag.key = key;
 
-            if (!string.IsNullOrEmpty(key))
-            {
-                user geo = db.users.FirstOrDefault(x => x.Email_Hash == key && x.Confirmed == false);
-                if (geo == null)
-                {
+            if (!string.IsNullOrEmpty(key)) {
+                user user = db.users.FirstOrDefault(x => x.Email_Hash == key && x.Confirmed == false);
+                if (user == null) {
                     ModelState.AddModelError(string.Empty, "Wrong code or account already active");
                     return View();
                 }
 
-                geo.Role = "supporter";
-                geo.Enabled = true;
-                geo.Confirmed = true;
-                geo.Reset = false;
-                geo.Email_Hash = null;
+                user.Role = "supporter";
+                user.Enabled = true;
+                user.Confirmed = true;
+                user.Reset = false;
+                user.Email_Hash = null;
                 db.SaveChanges();
 
-                SendMailAwsTemplate(geo, null, geo.Email, "registration_welcome.html", "Welcome to Localactors.org", "");
+                SendMailAwsTemplate(user, null, user.Email, "registration_welcome.html", "Welcome to Localactors.org", "");
 
                 return RedirectToAction("Login");
             }
@@ -266,29 +253,25 @@ namespace Localactors.webapp.Controllers
 
         //RESET PASSWORD
         [HttpGet]
-        public ActionResult ShouldChangePassword(string username)
-        {
+        public ActionResult ShouldChangePassword(string username) {
             ViewBag.username = username;
             return View();
         }
         [HttpGet]
-        public ActionResult ResetPasswordRequest(string username)
-        {
+        public ActionResult ResetPasswordRequest(string username) {
             ResetPasswordRequestModel model = new ResetPasswordRequestModel();
             model.Username = username;
 
             return View(model);
         }
         [HttpPost]
-        public ActionResult ResetPasswordRequest(ResetPasswordRequestModel model)
-        {
+        public ActionResult ResetPasswordRequest(ResetPasswordRequestModel model) {
             if (!ModelState.IsValid)
                 return View(model);
 
             user user = db.users.FirstOrDefault(x => x.UserName == model.Username || x.Email == model.Username);
 
-            if (user == null)
-            {
+            if (user == null) {
                 ModelState.AddModelError(string.Empty, "User not found");
                 return View(model);
             }
@@ -305,13 +288,11 @@ namespace Localactors.webapp.Controllers
             string body = string.Format("Ciao \r\n\r\nTo reset your password you should open the following link:\r\n\r\n{0}\r\n\r\nOr manually input the following code;\r\n\r\n \r\ncode:{1}", url, key);
 
             bool sent = SendMailAws(user.Email, title, body);
-            if (sent)
-            {
+            if (sent) {
                 db.SaveChanges();
                 return RedirectToAction("ResetPassword");
             }
-            else
-            {
+            else {
                 ModelState.AddModelError("username", "There was an error sending the email");
                 return View(model);
 
@@ -323,45 +304,40 @@ namespace Localactors.webapp.Controllers
             return RedirectToAction("ResetPassword");
         }
         [HttpGet]
-        public ActionResult ResetPassword(string key)
-        {
+        public ActionResult ResetPassword(string key) {
             ResetPasswordModel model = new ResetPasswordModel { Key = key };
             return View(model);
         }
         [HttpPost]
-        public ActionResult ResetPassword(ResetPasswordModel model)
-        {
+        public ActionResult ResetPassword(ResetPasswordModel model) {
             if (!ModelState.IsValid)
                 return View(model);
 
-            if (string.IsNullOrEmpty(model.Key))
-            {
+            if (string.IsNullOrEmpty(model.Key)) {
                 ModelState.AddModelError("Password", "Wrong code, Please try again resetting your password");
                 return View(model);
             }
 
-            if (model.Password != model.Confirm)
-            {
+            if (model.Password != model.Confirm) {
                 ModelState.AddModelError("Confirm", "The passwords do not match");
                 return View(model);
             }
 
-            user geo = db.users.FirstOrDefault(x => x.Reset && x.Email_Hash == model.Key && x.ResetEndDate.HasValue && x.ResetEndDate.Value >= DateTime.Now);
-            if (geo == null)
-            {
+            user user = db.users.FirstOrDefault(x => x.Reset && x.Email_Hash == model.Key && x.ResetEndDate.HasValue && x.ResetEndDate.Value >= DateTime.Now);
+            if (user == null) {
                 ModelState.AddModelError("Password", "Old reset code, please try again requesting a passowrd reset");
                 return View(model);
             }
 
 
-            geo.Reset = false;
-            geo.ShouldChangePassword = false;
-            geo.ResetEndDate = null;
-            geo.UserPassword = computeHash(model.Password.ToUpper());
-            geo.Email_Hash = null;
+            user.Reset = false;
+            user.ShouldChangePassword = false;
+            user.ResetEndDate = null;
+            user.UserPassword = computeHash(model.Password.ToUpper());
+            user.Email_Hash = null;
 
             db.SaveChanges();
-            SendMailAws("diego@nonmonkey.com", "User Password Reset", geo.Email);
+            SendMailAws("diego@nonmonkey.com", "User Password Reset", user.Email);
 
             return RedirectToAction("Login");
         }
@@ -369,8 +345,7 @@ namespace Localactors.webapp.Controllers
         //DETAILS
         [HttpGet]
         [CustomAuthorize]
-        public ActionResult UserSettings()
-        {
+        public ActionResult UserSettings() {
             user user = db.users.FirstOrDefault(x => x.UserName == User.Identity.Name);
             SettingsModel model = new SettingsModel();
 
@@ -383,35 +358,29 @@ namespace Localactors.webapp.Controllers
         }
         [HttpPost]
         [CustomAuthorize]
-        public ActionResult UserSettings(SettingsModel model)
-        {
+        public ActionResult UserSettings(SettingsModel model) {
             if (!ModelState.IsValid)
                 return View(model);
 
             user user = db.users.FirstOrDefault(x => x.UserName == User.Identity.Name);
 
-            if (!string.IsNullOrEmpty(model.OldPassword))
-            {
-                if (string.IsNullOrEmpty(model.Password) || string.IsNullOrEmpty(model.Confirm))
-                {
+            if (!string.IsNullOrEmpty(model.OldPassword)) {
+                if (string.IsNullOrEmpty(model.Password) || string.IsNullOrEmpty(model.Confirm)) {
                     ModelState.AddModelError("Password", "Specificare una nuova password");
                     return View(model);
                 }
-                if (model.Password != model.Confirm)
-                {
+                if (model.Password != model.Confirm) {
                     ModelState.AddModelError("Confirm", "Le password non coincidono");
                     return View(model);
                 }
-                if (model.Password == model.OldPassword)
-                {
+                if (model.Password == model.OldPassword) {
                     ModelState.AddModelError("Password", "Devi specificare una password divera dalla precedente.");
                     return View(model);
                 }
 
 
                 string sha = computeHash(model.OldPassword);
-                if (sha != user.UserPassword && (model.OldPassword != user.UserPassword && user.UserPassword.Length <= 10))
-                {
+                if (sha != user.UserPassword && (model.OldPassword != user.UserPassword && user.UserPassword.Length <= 10)) {
                     ModelState.AddModelError("OldPassword", "La password non è corretta");
                     return View(model);
                 }

@@ -231,6 +231,7 @@
     <Content Include="Areas\Publisher\Content\css\bootstrap-responsive.min.css" />
     <Content Include="Areas\Publisher\Content\css\bootstrap.css" />
     <Content Include="Areas\Publisher\Content\css\bootstrap.min.css" />
+    <Content Include="Areas\Publisher\Content\css\bootstrap.skinned.min.css" />
     <Content Include="Areas\Publisher\Content\css\jqueryui\custom.css" />
     <Content Include="Areas\Publisher\Content\css\jqueryui\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Areas\Publisher\Content\css\jqueryui\images\ui-bg_glass_55_fbf9ee_1x400.png" />
