@@ -199,6 +199,8 @@
           <Property Name="Web" Type="varchar" MaxLength="255" />
           <Property Name="Video" Type="varchar" MaxLength="255" />
           <Property Name="Website" Type="varchar" MaxLength="255" />
+          <Property Name="Latitude" Type="double" />
+          <Property Name="Longitude" Type="double" />
         </EntityType>
         <EntityType Name="project_cost">
           <Key>
@@ -1099,6 +1101,8 @@
           <NavigationProperty Name="donations" Relationship="localactorsModel.FK_donation_project" FromRole="project" ToRole="donation" />
           <NavigationProperty Name="followers" Relationship="localactorsModel.user_follow_project" FromRole="project" ToRole="user" />
           <Property Type="Boolean" Name="Approved" Nullable="false" />
+          <Property Type="Double" Name="Latitude" />
+          <Property Type="Double" Name="Longitude" />
         </EntityType>
         <Association Name="FK_achievement_project">
           <End Type="localactorsModel.project" Role="project" Multiplicity="1" />
@@ -1511,6 +1515,8 @@
           <EntitySetMapping Name="projects">
             <EntityTypeMapping TypeName="localactorsModel.project">
               <MappingFragment StoreEntitySet="project">
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
                 <ScalarProperty Name="Approved" ColumnName="Approved" />
                 <ScalarProperty Name="Enabled" ColumnName="Enabled" />
                 <ScalarProperty Name="DateUpdate" ColumnName="DateUpdate" />
