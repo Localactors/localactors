@@ -40,6 +40,7 @@
                     @Html.HiddenFor(model => model.Cover)
                     @Html.HiddenFor(model => model.Date)
                     <div class="panel">
+                        <div class="caption">Agency</div>
                         <div class="editor-label">
                             @Html.LabelFor(model => model.AgancyName, "Agency Name")
                         </div>
@@ -54,13 +55,13 @@
                             @Html.HiddenFor(model => model.AgencyLogo)
                             <input type="file" id="AgencyLogo" name="AgencyLogo" class="imageupload" />
                             @Html.ValidationMessageFor(model => model.AgencyLogo)
-                            <img src="@string.Format("{0}?v={1}", Model.AgencyLogo, DateTime.Now.Ticks)" class="imagepreview" alt=""  />
+                            <img src="@string.Format("{0}?v={1}", Model.AgencyLogo, DateTime.Now.Ticks)" class="imagepreview" alt="" width="128" />
                         </div>
                         <div class="editor-label">
                             @Html.LabelFor(model => model.AgencyObjective, "Agency Objective")
                         </div>
                         <div class="editor-field">
-                            @Html.TextAreaFor(model => model.AgencyObjective, new { @class = "wysiwyg" })
+                            @Html.TextAreaFor(model => model.AgencyObjective)
                             @Html.ValidationMessageFor(model => model.AgencyObjective)
                         </div>
                         <div class="editor-label">
@@ -86,6 +87,7 @@
                     </div>*@
                     </div>
                     <div class="panel">
+                         <div class="caption">Project Details</div>
                         <div class="editor-label">
                             @Html.LabelFor(model => model.Title, "Project Title")
                         </div>
@@ -122,7 +124,7 @@
                             @Html.ValidationMessageFor(model => model.ProjectGoal)
                         </div>
                         <div class="editor-label">
-                            @Html.LabelFor(model => model.ProjectPlan, "Project Plan (plain escription)")
+                            @Html.LabelFor(model => model.ProjectPlan, "Project Plan (plain description)")
                         </div>
                         <div class="editor-field">
                             @Html.TextAreaFor(model => model.ProjectPlan, new { @class = "wysiwyg" })
@@ -138,12 +140,13 @@
                             @Html.ValidationMessage("Image")
                             @if (!string.IsNullOrEmpty(Model.Image))
                             {
-                                <img src="@string.Format("{0}?v={1}", Model.Image, DateTime.Now.Ticks)" class="imagepreview" alt=""  width="128px" />
+                                <img src="@string.Format("{0}?v={1}", Model.Image, DateTime.Now.Ticks)" class="imagepreview" alt=""  width="128" />
                             }
                         </div>
                     </div>
                     
                     <div class="panel">
+                         <div class="caption">Date and Economic Target</div>
                         <div class="editor-label">
                             @Html.LabelFor(model => model.DateStart)
                         </div>
@@ -167,6 +170,7 @@
                         </div>
                     </div>
                     <div class="panel">
+                         <div class="caption">Contacts and Links</div>
                         <div class="editor-label">
                             @Html.LabelFor(model => model.Website, "Official Website")
                         </div>
