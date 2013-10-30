@@ -1,0 +1,155 @@
+﻿@using System.Configuration
+@model Localactors.entities.project
+@Html.ValidationSummary(false)
+<fieldset>
+    @Html.HiddenFor(model => model.ProjectID)
+    @Html.HiddenFor(model => model.UserID)
+    @Html.HiddenFor(model => model.Enabled)
+    @Html.HiddenFor(model => model.DateUpdate)
+    @Html.HiddenFor(model => model.Cover)
+    @Html.HiddenFor(model => model.Date)
+    <div class="panel">
+        <div class="caption">
+            Agency</div>
+        <div class="fieldblock">
+            @Html.LabelFor(model => model.AgancyName, "Agency Name")
+            @Html.EditorFor(model => model.AgancyName)
+            @Html.ValidationMessageFor(model => model.AgancyName)
+        </div>
+        <hr/>
+        <div class="fieldblock span4">
+            @Html.LabelFor(model => model.AgencyLogo, "Agency Logo")
+            @Html.HiddenFor(model => model.AgencyLogo)
+            <input type="file" id="AgencyLogo" name="AgencyLogo" class="imageupload" />
+            @Html.ValidationMessageFor(model => model.AgencyLogo)
+            <img src="@string.Format("{0}?v={1}", Model.AgencyLogo, DateTime.Now.Ticks)" class="imagepreview" alt="" width="128" />
+        </div>
+        <div class="fieldblock span4">
+            @Html.LabelFor(model => model.AgencyObjective, "Agency Objective")
+            @Html.TextAreaFor(model => model.AgencyObjective)
+            @Html.ValidationMessageFor(model => model.AgencyObjective)
+        </div>
+        <hr/>
+        <div class="fieldblock span4">
+            @Html.LabelFor(model => model.AgencyWebsite, "Agency Website")
+            @Html.EditorFor(model => model.AgencyWebsite)
+            @Html.ValidationMessageFor(model => model.AgencyWebsite)
+        </div>
+                          
+        <div class="fieldblock span4">
+            @Html.LabelFor(model => model.AgencyLink1, "Agency Link #1")
+            @Html.EditorFor(model => model.AgencyLink1)
+            @Html.ValidationMessageFor(model => model.AgencyLink1)
+        </div>
+        <div class="fieldblock span4">
+            @Html.LabelFor(model => model.AgencyLink2, "Agency Link #2")
+            @Html.EditorFor(model => model.AgencyLink2)
+            @Html.ValidationMessageFor(model => model.AgencyLink2)
+        </div>
+    </div>
+    <div class="panel">
+        <div class="caption">
+            Project Location</div>
+        <div class="fieldblock span4">
+            @Html.LabelFor(model => model.CountryID, "country")
+            @Html.DropDownList("CountryID", String.Empty)
+            @Html.ValidationMessageFor(model => model.CountryID)
+        </div>
+        <div class="fieldblock span4">
+            @Html.LabelFor(model => model.Location, "Location (free text)")
+            @Html.EditorFor(model => model.Location)
+            @Html.ValidationMessageFor(model => model.Location)
+        </div>
+    </div>
+    <div class="panel">
+        <div class="caption">
+            Project Details</div>
+        <div class="fieldblock span20">
+            @Html.LabelFor(model => model.Title, "Project Title")
+            @Html.EditorFor(model => model.Title)
+            @Html.ValidationMessageFor(model => model.Title)
+        </div>
+        <hr/>
+        <div class="fieldblock span4">
+            @Html.LabelFor(model => model.Description, "Project Description")
+            @Html.TextAreaFor(model => model.Description, new { @class = "wysiwyg" })
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+        <div class="fieldblock span4">
+            @Html.LabelFor(model => model.ProjectGoal, "Project Goal")
+            @Html.TextAreaFor(model => model.ProjectGoal, new { @class = "wysiwyg" })
+            @Html.ValidationMessageFor(model => model.ProjectGoal)
+        </div>
+        <div class="fieldblock span4">
+            @Html.LabelFor(model => model.ProjectPlan, "Project Plan (plain description)")
+            @Html.TextAreaFor(model => model.ProjectPlan, new { @class = "wysiwyg" })
+            @Html.ValidationMessageFor(model => model.ProjectPlan)
+        </div>
+        <div class="fieldblock span4">
+            Image
+            @Html.HiddenFor(model => model.Image)
+            <input type="file" id="Image" name="Image" class="imageupload" />
+            @Html.ValidationMessageFor(model => model.Image)
+            @Html.ValidationMessage("Image")
+            @if (!string.IsNullOrEmpty(Model.Image)) {
+                <img src="@string.Format("{0}?v={1}", Model.Image, DateTime.Now.Ticks)" class="imagepreview" alt=""  width="128" />
+            }
+        </div>
+    </div>
+    <div class="panel">
+        <div class="caption">
+            Date and Economic Target</div>
+        <div class="fieldblock span4">
+            @Html.LabelFor(model => model.DateStart)
+            @Html.EditorFor(model => model.DateStart)
+            @Html.ValidationMessageFor(model => model.DateStart)
+        </div>
+        <div class="fieldblock span4">
+            @Html.LabelFor(model => model.DateEnd)
+            @Html.EditorFor(model => model.DateEnd)
+            @Html.ValidationMessageFor(model => model.DateEnd)
+        </div>
+        <div class="fieldblock span4">
+            @Html.LabelFor(model => model.Target, "Economic Target")
+            @Html.EditorFor(model => model.Target) &euro;
+            @Html.ValidationMessageFor(model => model.Target)
+        </div>
+    </div>
+    <div class="panel">
+        <div class="caption">
+            Contacts and Links</div>
+        <div class="fieldblock span4">
+            @Html.LabelFor(model => model.Website, "Official Website")
+            @Html.EditorFor(model => model.Website)
+            @Html.ValidationMessageFor(model => model.Website)
+        </div>
+        <div class="fieldblock span4">
+            @Html.LabelFor(model => model.Twitter)
+            @Html.EditorFor(model => model.Twitter)
+            @Html.ValidationMessageFor(model => model.Twitter)
+        </div>
+        <div class="fieldblock span4">
+            @Html.LabelFor(model => model.Facebook)
+            @Html.EditorFor(model => model.Facebook)
+            @Html.ValidationMessageFor(model => model.Facebook)
+        </div>
+        <div class="fieldblock span4">
+            @Html.LabelFor(model => model.Blog)
+            @Html.EditorFor(model => model.Blog)
+            @Html.ValidationMessageFor(model => model.Blog)
+        </div>
+        <div class="fieldblock span4">
+            @Html.LabelFor(model => model.Web, "Link")
+            @Html.EditorFor(model => model.Web)
+            @Html.ValidationMessageFor(model => model.Web)
+        </div>
+        <div class="fieldblock span4">
+            @Html.LabelFor(model => model.Video, "Video (link)")
+            @Html.EditorFor(model => model.Video)
+            @Html.ValidationMessageFor(model => model.Video)
+        </div>
+    </div>
+    <p>
+        <input type="submit" class="btn btn-primary" value="Save" />
+    </p>
+</fieldset>

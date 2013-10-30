@@ -28,175 +28,9 @@
     </ul>
     <div class="tab-content">
         <div class="tab-pane active" id="project">
-            @using (Html.BeginForm("Edit", "Projects", FormMethod.Post, new { enctype = "multipart/form-data", id = "mainform" }))
-            {
+            @using (Html.BeginForm("Edit", "Projects", FormMethod.Post, new { enctype = "multipart/form-data", id = "mainform" })) {
            
-                @Html.ValidationSummary(false)
-                <fieldset>
-                    @Html.HiddenFor(model => model.ProjectID)
-                    @Html.HiddenFor(model => model.UserID)
-                    @Html.HiddenFor(model => model.Enabled)
-                    @Html.HiddenFor(model => model.DateUpdate)
-                    @Html.HiddenFor(model => model.Cover)
-                    @Html.HiddenFor(model => model.Date)
-                    <div class="panel">
-                        <div class="caption">Agency</div>
-                        <div class="fieldblock">
-                            @Html.LabelFor(model => model.AgancyName, "Agency Name")
-                 
-                            @Html.EditorFor(model => model.AgancyName)
-                            @Html.ValidationMessageFor(model => model.AgancyName)
-                        </div>
-                        <div class="fieldblock">
-                            @Html.LabelFor(model => model.AgencyLogo, "Agency Logo")
-                      
-                            @Html.HiddenFor(model => model.AgencyLogo)
-                            <input type="file" id="AgencyLogo" name="AgencyLogo" class="imageupload" />
-                            @Html.ValidationMessageFor(model => model.AgencyLogo)
-                            <img src="@string.Format("{0}?v={1}", Model.AgencyLogo, DateTime.Now.Ticks)" class="imagepreview" alt="" width="128" />
-                        </div>
-                        <div class="fieldblock">
-                            @Html.LabelFor(model => model.AgencyObjective, "Agency Objective")
-                    
-                            @Html.TextAreaFor(model => model.AgencyObjective)
-                            @Html.ValidationMessageFor(model => model.AgencyObjective)
-                        </div>
-                        <div class="fieldblock">
-                            @Html.LabelFor(model => model.AgencyWebsite, "Agency Website")
-                      
-                            @Html.EditorFor(model => model.AgencyWebsite)
-                            @Html.ValidationMessageFor(model => model.AgencyWebsite)
-                        </div>
-                        @*                   
-                    <div class="fieldblock">
-                        @Html.LabelFor(model => model.AgencyLink1, "Agency Link #1")
-                        @Html.EditorFor(model => model.AgencyLink1)
-                        @Html.ValidationMessageFor(model => model.AgencyLink1)
-                    </div>
-                    <div class="fieldblock">
-                        @Html.LabelFor(model => model.AgencyLink2, "Agency Link #2")
-                        @Html.EditorFor(model => model.AgencyLink2)
-                        @Html.ValidationMessageFor(model => model.AgencyLink2)
-                    </div>*@
-                    </div>
-                    <div class="panel">
-                         <div class="caption">Project Details</div>
-                        <div class="fieldblock">
-                            @Html.LabelFor(model => model.Title, "Project Title")
-                 
-                            @Html.EditorFor(model => model.Title)
-                            @Html.ValidationMessageFor(model => model.Title)
-                        </div>
-                        <div class="fieldblock">
-                            @Html.LabelFor(model => model.CountryID, "country")
-                   
-                            @Html.DropDownList("CountryID", String.Empty)
-                            @Html.ValidationMessageFor(model => model.CountryID)
-                        </div>
-                        <div class="fieldblock">
-                            @Html.LabelFor(model => model.Location, "Location (free textfield)")
-                       
-                            @Html.EditorFor(model => model.Location)
-                            @Html.ValidationMessageFor(model => model.Location)
-                        </div>
-                        <div class="fieldblock">
-                            @Html.LabelFor(model => model.Description, "Project Description")
-             
-                            @Html.TextAreaFor(model => model.Description, new { @class = "wysiwyg" })
-                            @Html.ValidationMessageFor(model => model.Description)
-                        </div>
-                        <div class="fieldblock">
-                            @Html.LabelFor(model => model.ProjectGoal, "Project Goal")
-                    
-                            @Html.TextAreaFor(model => model.ProjectGoal, new { @class = "wysiwyg" })
-                            @Html.ValidationMessageFor(model => model.ProjectGoal)
-                        </div>
-                        <div class="fieldblock">
-                            @Html.LabelFor(model => model.ProjectPlan, "Project Plan (plain description)")
-              
-                            @Html.TextAreaFor(model => model.ProjectPlan, new { @class = "wysiwyg" })
-                            @Html.ValidationMessageFor(model => model.ProjectPlan)
-                        </div>
-                        <div class="fieldblock">
-                            Image
-        
-                            @Html.HiddenFor(model => model.Image)
-                            <input type="file" id="Image" name="Image" class="imageupload" />
-                            @Html.ValidationMessageFor(model => model.Image)
-                            @Html.ValidationMessage("Image")
-                            @if (!string.IsNullOrEmpty(Model.Image))
-                            {
-                                <img src="@string.Format("{0}?v={1}", Model.Image, DateTime.Now.Ticks)" class="imagepreview" alt=""  width="128" />
-                            }
-                        </div>
-                    </div>
-                    
-                    <div class="panel">
-                         <div class="caption">Date and Economic Target</div>
-                        <div class="fieldblock">
-                            @Html.LabelFor(model => model.DateStart)
-              
-                            @Html.EditorFor(model => model.DateStart)
-                            @Html.ValidationMessageFor(model => model.DateStart)
-                        </div>
-                        <div class="fieldblock">
-                            @Html.LabelFor(model => model.DateEnd)
-                  
-                            @Html.EditorFor(model => model.DateEnd)
-                            @Html.ValidationMessageFor(model => model.DateEnd)
-                        </div>
-                        <div class="fieldblock">
-                            @Html.LabelFor(model => model.Target, "Economic Target")
-                    
-                            @Html.EditorFor(model => model.Target) &euro;
-                            @Html.ValidationMessageFor(model => model.Target)
-                        </div>
-                    </div>
-                    <div class="panel">
-                         <div class="caption">Contacts and Links</div>
-                        <div class="fieldblock">
-                            @Html.LabelFor(model => model.Website, "Official Website")
-                 
-                            @Html.EditorFor(model => model.Website)
-                            @Html.ValidationMessageFor(model => model.Website)
-                        </div>
-                        <div class="fieldblock">
-                            @Html.LabelFor(model => model.Twitter)
-               
-                            @Html.EditorFor(model => model.Twitter)
-                            @Html.ValidationMessageFor(model => model.Twitter)
-                        </div>
-                        <div class="fieldblock">
-                            @Html.LabelFor(model => model.Facebook)
-                  
-                            @Html.EditorFor(model => model.Facebook)
-                            @Html.ValidationMessageFor(model => model.Facebook)
-                        </div>
-                        <div class="fieldblock">
-                            @Html.LabelFor(model => model.Blog)
-               
-                            @Html.EditorFor(model => model.Blog)
-                            @Html.ValidationMessageFor(model => model.Blog)
-                        </div>
-                        <div class="fieldblock">
-                            @Html.LabelFor(model => model.Web, "Link")
-            
-                            @Html.EditorFor(model => model.Web)
-                            @Html.ValidationMessageFor(model => model.Web)
-                        </div>
-                        <div class="fieldblock">
-                            @Html.LabelFor(model => model.Video, "Video (link)")
-               
-                            @Html.EditorFor(model => model.Video)
-                            @Html.ValidationMessageFor(model => model.Video)
-                        </div>
-                    </div>
-
-                    <p>
-                        <input type="submit" class="btn" value="Save" />
-                    </p>
-                </fieldset>
-      
+                {Html.RenderPartial("_ProjectForm",Model);}
          
             }
         </div>
@@ -217,8 +51,7 @@
                         <th>
                         </th>
                     </tr>
-                    @foreach (var item in Model.project_plan.OrderBy(x => x.Order))
-                    {
+                    @foreach (var item in Model.project_plan.OrderBy(x => x.Order)) {
                         <tr>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Title)
@@ -291,8 +124,7 @@
                         <th>
                         </th>
                     </tr>
-                    @foreach (var item in Model.project_cost.OrderBy(x => x.Order))
-                    {
+                    @foreach (var item in Model.project_cost.OrderBy(x => x.Order)) {
                         <tr>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Title)
@@ -353,9 +185,9 @@
             <h3>
                 Photos</h3>
             <div style="overflow: auto;">
-                @foreach (var item in Model.project_photo)
-                {
-                    <div style="margin:2px;padding:2px;border:1px solid #ccc;display:inline-block;float:left;">
+                @foreach (var item in Model.project_photo) {
+                    <div style="margin: 2px; padding: 2px; border: 1px solid #ccc; display: inline-block;
+                        float: left;">
                         <a href="@Url.Action("Edit", "ProjectPhotos", new { id = item.PhotoID, returntoproject = item.ProjectID })">
                             <img src="@item.Url" alt="@item.Caption" width="128px" />
                         </a>
@@ -404,8 +236,7 @@
             <h3>
                 Tags</h3>
             <div>
-                @foreach (var item in Model.tags)
-                {
+                @foreach (var item in Model.tags) {
                     <span>@Html.ActionLink(item.Name + " (x)", "TagRemove", new { id = item.TagID, projectid = Model.ProjectID }, new { @class = "btn" })
                     </span>
                 }
@@ -424,8 +255,7 @@
             <input type="submit" class="btn" class="btn btn-primary" value="Add Tag" />
             </form>
             <div style="overflow: auto;">
-                @foreach (var item in ViewBag.Tags)
-                {
+                @foreach (var item in ViewBag.Tags) {
                     <form action="@Url.Action("TagAdd")" method="POST"  enctype="multipart/form-data" class="compact">
                     <input type="hidden" name="projectid" value="@Model.ProjectID"/>
                     <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
@@ -448,8 +278,7 @@
                     <th>
                     </th>
                 </tr>
-                @foreach (var item in Model.updates.OrderByDescending(x => x.UpdateID))
-                {
+                @foreach (var item in Model.updates.OrderByDescending(x => x.UpdateID)) {
                     <tr>
                         <td>
                             @Html.DisplayFor(modelItem => item.Title)
@@ -529,8 +358,7 @@
                         Currency
                     </th>
                 </tr>
-                @foreach (var item in Model.donations.OrderByDescending(x => x.InvestmentID))
-                {
+                @foreach (var item in Model.donations.OrderByDescending(x => x.InvestmentID)) {
                     <tr>
                         <td>
                             @Html.DisplayFor(modelItem => item.user.UserName)
@@ -562,8 +390,7 @@
                     <th>
                     </th>
                 </tr>
-                @foreach (var item in Model.achievements.OrderByDescending(x => x.Date))
-                {
+                @foreach (var item in Model.achievements.OrderByDescending(x => x.Date)) {
                     <tr>
                         <td>
                             @Html.DisplayFor(modelItem => item.Date)

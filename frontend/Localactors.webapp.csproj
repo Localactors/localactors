@@ -984,6 +984,7 @@
     <Content Include="Areas\Publisher\Views\UpdateContents\Edit.cshtml" />
     <Content Include="Areas\Publisher\Views\UpdateContents\Index.cshtml" />
     <Content Include="Areas\Publisher\Views\Home\Settings.cshtml" />
+    <Content Include="Areas\Publisher\Views\Projects\_ProjectForm.cshtml" />
     <None Include="Content\fonts\droid-sans\droidsans-bold-webfont.eot" />
     <None Include="Content\fonts\droid-sans\droidsans-bold-webfont.ttf" />
     <None Include="Content\fonts\droid-sans\droidsans-bold-webfont.woff" />
