@@ -16,7 +16,7 @@
                     <img alt='' class='photo-profile' src='@item.user.Image' />
                 </div>
                 <h3 class='name'>
-                    from: @item.user.UserName</h3>
+                    from: @(item.user.Name ?? item.user.UserName.Substring(0,item.user.UserName.IndexOf("@")))</h3>
                 <p class='date'>
                     date: @item.Date <span class="slash">/</span>
                 </p>

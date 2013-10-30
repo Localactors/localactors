@@ -37,28 +37,23 @@
                             <img alt='' class='photo-profile' src='@item.user.Image'>
                         </div>
                         <h3 class='name'>
-                            @item.user.Name @item.user.Lastname</h3>
+                            @(item.user.Name ?? item.user.UserName.Substring(0, item.user.UserName.IndexOf("@")))</h3>
                         <p class='date'>
                             @item.Date.ToLongDateString() <span class="slash">/</span> @item.Date.ToShortTimeString()
                         </p>
                         <div class='content'>
-                            @if (!string.IsNullOrEmpty(item.Text))
-                            {
+                            @if (!string.IsNullOrEmpty(item.Text)) {
                                 <p>@item.Text</p>
                             }
-                            @if (!string.IsNullOrEmpty(item.Link))
-                            {
+                            @if (!string.IsNullOrEmpty(item.Link)) {
                                 <div><a href="@item.Link">@item.Link</a></div>
                             }
-                            @if (!string.IsNullOrEmpty(item.Picture))
-                            {
+                            @if (!string.IsNullOrEmpty(item.Picture)) {
                                 <div><img src="@item.Picture" /></div>
                             }
-                            @if (isadmin || ViewBag.UserID == item.UserID)
-                            {
+                            @if (isadmin || ViewBag.UserID == item.UserID) {
                                 <div class="admin">
-                                    @using (Html.BeginForm("GuestbookDelete", "Projects"))
-                                    {
+                                    @using (Html.BeginForm("GuestbookDelete", "Projects")) {
                                         <input type="hidden" name="GuestpostID" value="@item.GuestpostID"/>
                                         <input type="hidden" name="ProjectID" value="@item.ProjectID"/>
                                         <input type="submit" value="delete" class="btn" />
@@ -71,12 +66,10 @@
                 }
             </ul>
         </div>
-        @if (isauthenticated)
-        {
+        @if (isauthenticated) {
             { Html.RenderPartial("_Form_Guestbook", Model.project_guestbook); }
         }
-        else
-        {
+        else {
             <div>
                 To post comments on the Project Guestbook you need to register or login.</div>
         }
