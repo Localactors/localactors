@@ -30,6 +30,7 @@
     line-height: 20px;
 }
 
+.panel .fieldblock{ width: 400px;padding: 5px 5%;}
 
 
 body > .navbar .brand {

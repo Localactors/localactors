@@ -41,99 +41,85 @@
                     @Html.HiddenFor(model => model.Date)
                     <div class="panel">
                         <div class="caption">Agency</div>
-                        <div class="editor-label">
+                        <div class="fieldblock">
                             @Html.LabelFor(model => model.AgancyName, "Agency Name")
-                        </div>
-                        <div class="editor-field">
+                 
                             @Html.EditorFor(model => model.AgancyName)
                             @Html.ValidationMessageFor(model => model.AgancyName)
                         </div>
-                        <div class="editor-label">
+                        <div class="fieldblock">
                             @Html.LabelFor(model => model.AgencyLogo, "Agency Logo")
-                        </div>
-                        <div class="editor-field">
+                      
                             @Html.HiddenFor(model => model.AgencyLogo)
                             <input type="file" id="AgencyLogo" name="AgencyLogo" class="imageupload" />
                             @Html.ValidationMessageFor(model => model.AgencyLogo)
                             <img src="@string.Format("{0}?v={1}", Model.AgencyLogo, DateTime.Now.Ticks)" class="imagepreview" alt="" width="128" />
                         </div>
-                        <div class="editor-label">
+                        <div class="fieldblock">
                             @Html.LabelFor(model => model.AgencyObjective, "Agency Objective")
-                        </div>
-                        <div class="editor-field">
+                    
                             @Html.TextAreaFor(model => model.AgencyObjective)
                             @Html.ValidationMessageFor(model => model.AgencyObjective)
                         </div>
-                        <div class="editor-label">
+                        <div class="fieldblock">
                             @Html.LabelFor(model => model.AgencyWebsite, "Agency Website")
-                        </div>
-                        <div class="editor-field">
+                      
                             @Html.EditorFor(model => model.AgencyWebsite)
                             @Html.ValidationMessageFor(model => model.AgencyWebsite)
                         </div>
-                        @*                    <div class="editor-label">
+                        @*                   
+                    <div class="fieldblock">
                         @Html.LabelFor(model => model.AgencyLink1, "Agency Link #1")
-                    </div>
-                    <div class="editor-field">
                         @Html.EditorFor(model => model.AgencyLink1)
                         @Html.ValidationMessageFor(model => model.AgencyLink1)
                     </div>
-                    <div class="editor-label">
+                    <div class="fieldblock">
                         @Html.LabelFor(model => model.AgencyLink2, "Agency Link #2")
-                    </div>
-                    <div class="editor-field">
                         @Html.EditorFor(model => model.AgencyLink2)
                         @Html.ValidationMessageFor(model => model.AgencyLink2)
                     </div>*@
                     </div>
                     <div class="panel">
                          <div class="caption">Project Details</div>
-                        <div class="editor-label">
+                        <div class="fieldblock">
                             @Html.LabelFor(model => model.Title, "Project Title")
-                        </div>
-                        <div class="editor-field">
+                 
                             @Html.EditorFor(model => model.Title)
                             @Html.ValidationMessageFor(model => model.Title)
                         </div>
-                        <div class="editor-label">
+                        <div class="fieldblock">
                             @Html.LabelFor(model => model.CountryID, "country")
-                        </div>
-                        <div class="editor-field">
+                   
                             @Html.DropDownList("CountryID", String.Empty)
                             @Html.ValidationMessageFor(model => model.CountryID)
                         </div>
-                        <div class="editor-label">
+                        <div class="fieldblock">
                             @Html.LabelFor(model => model.Location, "Location (free textfield)")
-                        </div>
-                        <div class="editor-field">
+                       
                             @Html.EditorFor(model => model.Location)
                             @Html.ValidationMessageFor(model => model.Location)
                         </div>
-                        <div class="editor-label">
+                        <div class="fieldblock">
                             @Html.LabelFor(model => model.Description, "Project Description")
-                        </div>
-                        <div class="editor-field">
+             
                             @Html.TextAreaFor(model => model.Description, new { @class = "wysiwyg" })
                             @Html.ValidationMessageFor(model => model.Description)
                         </div>
-                        <div class="editor-label">
+                        <div class="fieldblock">
                             @Html.LabelFor(model => model.ProjectGoal, "Project Goal")
-                        </div>
-                        <div class="editor-field">
+                    
                             @Html.TextAreaFor(model => model.ProjectGoal, new { @class = "wysiwyg" })
                             @Html.ValidationMessageFor(model => model.ProjectGoal)
                         </div>
-                        <div class="editor-label">
+                        <div class="fieldblock">
                             @Html.LabelFor(model => model.ProjectPlan, "Project Plan (plain description)")
-                        </div>
-                        <div class="editor-field">
+              
                             @Html.TextAreaFor(model => model.ProjectPlan, new { @class = "wysiwyg" })
                             @Html.ValidationMessageFor(model => model.ProjectPlan)
                         </div>
-                        <div class="editor-label">
+                        <div class="fieldblock">
                             Image
-                        </div>
-                        <div class="editor-field">
+        
                             @Html.HiddenFor(model => model.Image)
                             <input type="file" id="Image" name="Image" class="imageupload" />
                             @Html.ValidationMessageFor(model => model.Image)
@@ -147,69 +133,60 @@
                     
                     <div class="panel">
                          <div class="caption">Date and Economic Target</div>
-                        <div class="editor-label">
+                        <div class="fieldblock">
                             @Html.LabelFor(model => model.DateStart)
-                        </div>
-                        <div class="editor-field">
+              
                             @Html.EditorFor(model => model.DateStart)
                             @Html.ValidationMessageFor(model => model.DateStart)
                         </div>
-                        <div class="editor-label">
+                        <div class="fieldblock">
                             @Html.LabelFor(model => model.DateEnd)
-                        </div>
-                        <div class="editor-field">
+                  
                             @Html.EditorFor(model => model.DateEnd)
                             @Html.ValidationMessageFor(model => model.DateEnd)
                         </div>
-                        <div class="editor-label">
+                        <div class="fieldblock">
                             @Html.LabelFor(model => model.Target, "Economic Target")
-                        </div>
-                        <div class="editor-field">
+                    
                             @Html.EditorFor(model => model.Target) &euro;
                             @Html.ValidationMessageFor(model => model.Target)
                         </div>
                     </div>
                     <div class="panel">
                          <div class="caption">Contacts and Links</div>
-                        <div class="editor-label">
+                        <div class="fieldblock">
                             @Html.LabelFor(model => model.Website, "Official Website")
-                        </div>
-                        <div class="editor-field">
+                 
                             @Html.EditorFor(model => model.Website)
                             @Html.ValidationMessageFor(model => model.Website)
                         </div>
-                        <div class="editor-label">
+                        <div class="fieldblock">
                             @Html.LabelFor(model => model.Twitter)
-                        </div>
-                        <div class="editor-field">
+               
                             @Html.EditorFor(model => model.Twitter)
                             @Html.ValidationMessageFor(model => model.Twitter)
                         </div>
-                        <div class="editor-label">
+                        <div class="fieldblock">
                             @Html.LabelFor(model => model.Facebook)
-                        </div>
-                        <div class="editor-field">
+                  
                             @Html.EditorFor(model => model.Facebook)
                             @Html.ValidationMessageFor(model => model.Facebook)
                         </div>
-                        <div class="editor-label">
+                        <div class="fieldblock">
                             @Html.LabelFor(model => model.Blog)
-                        </div>
-                        <div class="editor-field">
+               
                             @Html.EditorFor(model => model.Blog)
                             @Html.ValidationMessageFor(model => model.Blog)
                         </div>
-                        <div class="editor-label">
+                        <div class="fieldblock">
                             @Html.LabelFor(model => model.Web, "Link")
-                        </div>
-                        <div class="editor-field">
+            
                             @Html.EditorFor(model => model.Web)
                             @Html.ValidationMessageFor(model => model.Web)
                         </div>
-                        <div class="editor-label">
+                        <div class="fieldblock">
                             @Html.LabelFor(model => model.Video, "Video (link)")
-                        </div>
-                        <div class="editor-field">
+               
                             @Html.EditorFor(model => model.Video)
                             @Html.ValidationMessageFor(model => model.Video)
                         </div>
@@ -274,7 +251,7 @@
                     <input type="hidden" name="returntoproject" value="@Model.ProjectID"/>
                     <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
                     <input type="hidden" name="Order" value="10" />
-                    <div class="editor-label">
+                    <div class="">
                         <label for="Title">
                             Title/Description</label>
                     </div>
@@ -283,7 +260,7 @@
                         <span class="field-validation-valid" data-valmsg-for="Title" data-valmsg-replace="true">
                         </span>
                     </div>
-                    <div class="editor-label">
+                    <div class="">
                         <label for="Time">
                             Date/Time/Month</label>
                     </div>
@@ -347,7 +324,7 @@
                     <input type="hidden" name="returntoproject" value="@Model.ProjectID"/>
                     <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
                     <input type="hidden" name="Order" value="10" />
-                    <div class="editor-label">
+                    <div class="">
                         <label for="Title">
                             Title/Description</label>
                     </div>
@@ -356,7 +333,7 @@
                         <span class="field-validation-valid" data-valmsg-for="Title" data-valmsg-replace="true">
                         </span>
                     </div>
-                    <div class="editor-label">
+                    <div class="">
                         <label for="Goal">
                             Cost/Amount</label>
                     </div>
@@ -400,7 +377,7 @@
                     <input type="hidden" name="projectid" value="@Model.ProjectID"/>
                     <input type="hidden" name="returntoproject" value="@Model.ProjectID"/>
                     <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
-                    <div class="editor-label">
+                    <div class="">
                         <label for="Caption">
                             Caption</label>
                     </div>
@@ -409,7 +386,7 @@
                         <span class="field-validation-valid" data-valmsg-for="Caption" data-valmsg-replace="true">
                         </span>
                     </div>
-                    <div class="editor-label">
+                    <div class="">
                         <label for="Url">
                             Photo</label>
                     </div>
@@ -437,7 +414,7 @@
             <form action="@Url.Action("TagAdd")" method="POST"  enctype="multipart/form-data">
             <input type="hidden" name="projectid" value="@Model.ProjectID"/>
             <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
-            <div class="editor-label">
+            <div class="">
                 <label for="tagname">
                     Add Tag</label>
             </div>
@@ -501,7 +478,7 @@
                 <div class="modal-body">
                     <input type="hidden" name="projectid" value="@Model.ProjectID"/>
                     <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
-                    <div class="editor-label">
+                    <div class="">
                         <label for="Title">
                             Title</label>
                     </div>
@@ -510,14 +487,14 @@
                         <span class="field-validation-valid" data-valmsg-for="Title" data-valmsg-replace="true">
                         </span>
                     </div>
-                    <div class="editor-label">
+                    <div class="">
                         <label for="Title">
                             Intro</label>
                     </div>
                     <div class="editor-field">
                         <textarea id="" name="Intro" class="wysiwyg"></textarea>
                     </div>
-                    <div class="editor-label">
+                    <div class="">
                         <label for="Date">
                             Date</label>
                     </div>
@@ -613,7 +590,7 @@
                 <div class="modal-body">
                     <input type="hidden" name="projectid" value="@Model.ProjectID"/>
                     <input type="hidden" name="ProjectID" value="@Model.ProjectID"/>
-                    <div class="editor-label">
+                    <div class="">
                         <label for="Date">
                             Date</label>
                     </div>
@@ -623,7 +600,7 @@
                         <span class="field-validation-valid" data-valmsg-for="Date" data-valmsg-replace="true">
                         </span>
                     </div>
-                    <div class="editor-label">
+                    <div class="">
                         <label for="Title">
                             Title</label>
                     </div>
@@ -632,7 +609,7 @@
                         <span class="field-validation-valid" data-valmsg-for="Title" data-valmsg-replace="true">
                         </span>
                     </div>
-                    <div class="editor-label">
+                    <div class="">
                         <label for="Motivation">
                             Motivation</label>
                     </div>
@@ -641,7 +618,7 @@
                         <span class="field-validation-valid" data-valmsg-for="Motivation" data-valmsg-replace="true">
                         </span>
                     </div>
-                    <div class="editor-label">
+                    <div class="">
                         <label for="Goal">
                             Goal</label>
                     </div>
