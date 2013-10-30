@@ -15,6 +15,9 @@ using DataAnnotationsExtensions;
         [EqualTo("Password")]
         public string Confirm { get; set; }
 
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+
         [Required]
         public string Privacy { get; set; }
 

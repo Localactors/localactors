@@ -15,6 +15,16 @@
             @Html.TextBoxFor(model => model.Email)
             @Html.ValidationMessageFor(model => model.Email)
         </div>
+        <div class="mail">
+            <label for="FirstName" class="" style="text-align: right;">First Name</label>   
+            @Html.TextBoxFor(model => model.FirstName)
+            @Html.ValidationMessageFor(model => model.FirstName)
+        </div>
+           <div class="mail">
+            <label for="LastName" class="" style="text-align: right;">Last Name</label>   
+            @Html.TextBoxFor(model => model.LastName)
+            @Html.ValidationMessageFor(model => model.LastName)
+        </div>
         <div class="password">
             <label for="Password" class="" style="text-align: right;">Password</label>
             @Html.PasswordFor(model => model.Password)

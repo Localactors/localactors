@@ -181,8 +181,8 @@ namespace Localactors.webapp.Controllers {
             user newuser = new user {
                 UserPassword = computeHash(model.Password.ToUpper()),
                 UserName = model.Email.ToLower(),
-                Name = "",
-                Lastname = "",
+                Name = model.FirstName,
+                Lastname = model.LastName,
                 Email = model.Email,
                 DateJoined = DateTime.Now,
                 DateLastLogin = DateTime.Now,
