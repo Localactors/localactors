@@ -21,7 +21,13 @@ namespace Localactors.webapp.Areas.Publisher.Controllers
 
         public ActionResult Index(int projectid = 0)
         {
-            if (projectid <= 0) return RedirectToAction("Index", "Projects");
+
+            if (string.IsNullOrEmpty(CurrentUser.Name) || string.IsNullOrEmpty(CurrentUser.Lastname) || string.IsNullOrEmpty(CurrentUser.Image)) {
+                TempData["warning"] = "You need to update your profile to better sponsor your project and to make your profile visible to backers! <a href='" + Url.Action("Settings", "Home") + "'>click here</a>";
+            }
+
+            if (projectid <= 0) 
+                return RedirectToAction("Index", "Projects");
 
             var updates = db.updates.Include("project").Include("update_content").Where(x => x.ProjectID == projectid);
 

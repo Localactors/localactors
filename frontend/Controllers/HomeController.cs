@@ -21,7 +21,7 @@ namespace Localactors.webapp.Controllers
             HomeModel model = new HomeModel();
             int take = 12;
             int.TryParse(ConfigurationManager.AppSettings["Pagesize_HomeProjects"], out take);
-            model.publishers = db.users.Where(x => x.Role == "publisher" && x.Enabled && x.EnablePublisher && x.Name!=null && x.Image!=null).ToList();
+            model.publishers = db.users.Where(x => (x.Role == "publisher") && x.Enabled && x.EnablePublisher && x.Name != null && x.Image != null).ToList();
             model.projects = db.projects.OrderByDescending("DateUpdate").Where(x => x.Enabled && x.Approved).Take(take).ToList();
 
 

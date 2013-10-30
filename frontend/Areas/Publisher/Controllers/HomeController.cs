@@ -20,18 +20,20 @@ namespace Localactors.webapp.Areas.Publisher.Controllers
     public class HomeController : Localactors.webapp.Areas.Publisher.ControllerBase
     {
         public ActionResult Index() {
+            if (string.IsNullOrEmpty(CurrentUser.Name) || string.IsNullOrEmpty(CurrentUser.Lastname) || string.IsNullOrEmpty(CurrentUser.Image)) {
+                TempData["warning"] = "You need to update your profile to better sponsor your project and to make your profile visible to backers! <a href='" + Url.Action("Settings", "Home") + "'>click here</a>";
+            }
+
 
             var user = db.users.FirstOrDefault(x => x.UserName == User.Identity.Name);
 
-            if(string.IsNullOrEmpty(user.Name) || string.IsNullOrEmpty(user.Lastname) || string.IsNullOrEmpty(user.Image)) {
-                TempData["warning"] = "You need to update your profile to better sponsor your project! <a href='"+ Url.Action("Settings","Home") +"'>click here</a>";
-            }
+           
 
             if(user == null) {
                 return Redirect("/");
             }
 
-            if(user.Role!="publisher") {
+            if(user.Role=="supporter" || user.Role == "user") {
                 user.Role = "publisher";
                 user.EnablePublisher = false;
                 db.SaveChanges();
