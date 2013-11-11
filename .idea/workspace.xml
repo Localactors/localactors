@@ -2,22 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cfbdd311-09f8-46c6-b0dd-5e948adcf494" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/Views/Projects/Index.cshtml" afterPath="$PROJECT_DIR$/frontend/Views/Projects/Index.cshtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/Scripts/application.js" afterPath="$PROJECT_DIR$/frontend/Scripts/application.js" />
     </list>
     <ignored path="localactors.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/Dummy.txt" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1384163011876" ignored="false" />
-    <file path="$PROJECT_DIR$/../localactors-static/source/content/css/partials/_320grid.sass" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383240522526" ignored="false" />
+    <file path="$PROJECT_DIR$/../localactors-static/source/content/css/partials/_320grid.sass" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1384170186687" ignored="false" />
     <file path="$PROJECT_DIR$/../localactors-static/source/content/css/partials/_map.sass" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1380630269681" ignored="false" />
-    <file path="$PROJECT_DIR$/../localactors-static/source/content/css/partials/_960grid.sass" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383239927027" ignored="false" />
+    <file path="$PROJECT_DIR$/../localactors-static/source/content/css/partials/_960grid.sass" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1384170128321" ignored="false" />
     <file path="/*.regexp" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1384162891027" ignored="false" />
-    <file path="/_320grid.sass" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383239945000" ignored="false" />
+    <file path="/_320grid.sass" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1384170186687" ignored="false" />
     <file path="$PROJECT_DIR$/../localactors-static/build/content/css/application.css" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1380630521436" ignored="false" />
-    <file path="$PROJECT_DIR$/../localactors-static/source/project_update.html.haml" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383239613741" ignored="false" />
-    <file path="$PROJECT_DIR$/../localactors-static/source/single_update.html.haml" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383239062473" ignored="false" />
-    <file path="/a.dummy" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1384162474382" ignored="false" />
+    <file path="$PROJECT_DIR$/../localactors-static/source/project_update.html.haml" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1384170485550" ignored="false" />
+    <file path="$PROJECT_DIR$/../localactors-static/source/single_update.html.haml" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1384170446972" ignored="false" />
+    <file path="/a.dummy" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1384170435000" ignored="false" />
     <file path="$PROJECT_DIR$/../localactors-static/source/update/project_header.html.haml" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383239485927" ignored="false" />
-    <file path="$PROJECT_DIR$/../localactors-static/source/update/project_update_header.html.haml" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383240498809" ignored="false" />
+    <file path="$PROJECT_DIR$/../localactors-static/source/update/project_update_header.html.haml" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1384170417611" ignored="false" />
     <file path="/project_update.html.haml" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383239606975" ignored="false" />
     <file path="/_header.haml" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383346645251" ignored="false" />
     <file path="$PROJECT_DIR$/../flr/source/partials/_header.haml" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383996446239" ignored="false" />
@@ -27,7 +28,7 @@
     <file path="$PROJECT_DIR$/../flr/source/css/site.css.sass" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383314457223" ignored="false" />
     <file path="/site.css.sass" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383314448569" ignored="false" />
     <file path="$PROJECT_DIR$/../flr/config.rb" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383346695895" ignored="false" />
-    <file path="/config.rb" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383346695895" ignored="false" />
+    <file path="/config.rb" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1384174427637" ignored="false" />
     <file path="/_collection-gallery.haml" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383345894229" ignored="false" />
     <file path="$PROJECT_DIR$/../flr/source/partials/_collection-gallery.haml" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383345900259" ignored="false" />
     <file path="/fw13.html.haml" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383345865035" ignored="false" />
@@ -43,15 +44,25 @@
     <file path="$PROJECT_DIR$/../flr/source/events.html.haml" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383346560245" ignored="false" />
     <file path="/events.html.haml" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383346560245" ignored="false" />
     <file path="$PROJECT_DIR$/../flr/source/partials/vfno.haml" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383346581838" ignored="false" />
-    <file path="$PROJECT_DIR$/../localactors-static/source/projects.html.haml" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383380791868" ignored="false" />
+    <file path="$PROJECT_DIR$/../localactors-static/source/projects.html.haml" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1384167827105" ignored="false" />
     <file path="$PROJECT_DIR$/../localactors-static/Gemfile" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383841243409" ignored="false" />
     <file path="/Gemfile" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383841237420" ignored="false" />
     <file path="$PROJECT_DIR$/../localactors-static/source/layouts/html5.haml" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383841825866" ignored="false" />
-    <file path="$PROJECT_DIR$/../localactors-static/source/scripts/map.js" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383841719065" ignored="false" />
-    <file path="/map.js" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383841709223" ignored="false" />
+    <file path="$PROJECT_DIR$/../localactors-static/source/scripts/map.js" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1384169803458" ignored="false" />
+    <file path="/map.js" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1384169799360" ignored="false" />
     <file path="/html5.haml" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383841823014" ignored="false" />
     <file path="$PROJECT_DIR$/../flr/source/newsletters/tsp_1.html.haml" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383926125621" ignored="false" />
     <file path="/tsp_1.html.haml" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383926125621" ignored="false" />
+    <file path="$PROJECT_DIR$/.idea/workspace.xml" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1384175974910" ignored="false" />
+    <file path="/projects.html.haml" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1384165168067" ignored="false" />
+    <file path="$PROJECT_DIR$/../localactors-static/build/thank_you.html" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1384169869603" ignored="false" />
+    <file path="$PROJECT_DIR$/../localactors-static/build/update/project_update_header.html" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1384174473727" ignored="false" />
+    <file path="$PROJECT_DIR$/../localactors-static/build/project_update.html" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1384174473727" ignored="false" />
+    <file path="$PROJECT_DIR$/../localactors-static/build/donation.html" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1384169869603" ignored="false" />
+    <file path="$PROJECT_DIR$/../localactors-static/build/single_update.html" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1384174473727" ignored="false" />
+    <file path="$PROJECT_DIR$/../localactors-static/build/footer.html" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1384174473727" ignored="false" />
+    <file path="$PROJECT_DIR$/../localactors-static/config.rb" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1384174583027" ignored="false" />
+    <file path="/Index.cshtml" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1384175477728" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +100,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_Project_Updates.cshtml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="_Project_Updates.cshtml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/frontend/Views/Shared/_Project_Updates.cshtml">
           <provider selected="true" editor-type-id="text-editor">
             <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
@@ -101,7 +112,25 @@
       <file leaf-file-name="_Project_Update_Header.cshtml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/frontend/Views/Shared/_Project_Update_Header.cshtml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="23" selection-start="1248" selection-end="1248" vertical-scroll-proportion="0.0">
+            <state line="22" column="180" selection-start="714" selection-end="871" vertical-scroll-proportion="-6.470588">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_Layout.cshtml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/frontend/Views/Shared/_Layout.cshtml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Index.cshtml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/frontend/Views/Projects/Index.cshtml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="7" column="26" selection-start="391" selection-end="391" vertical-scroll-proportion="-0.37755102">
               <folding />
             </state>
           </provider>
@@ -138,6 +167,7 @@
         <option value="$PROJECT_DIR$/frontend/Views/Home/HowTo.cshtml" />
         <option value="$PROJECT_DIR$/frontend/Views/Home/Index.cshtml" />
         <option value="$PROJECT_DIR$/frontend/Views/Shared/_Project_Update_Header.cshtml" />
+        <option value="$PROJECT_DIR$/frontend/Views/Projects/Index.cshtml" />
       </list>
     </option>
   </component>
@@ -280,11 +310,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Profile" />
+              <option name="myItemId" value="Templates" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -302,11 +328,79 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Views" />
+              <option name="myItemId" value="Scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="localactors" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="localactors" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Home" />
+              <option name="myItemId" value="frontend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Properties" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="localactors" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="localactors" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="frontend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Models" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="localactors" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="localactors" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="frontend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Helper" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="localactors" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="localactors" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="frontend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Controllers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -493,11 +587,6 @@
         <state line="33" column="24" selection-start="1431" selection-end="1431" vertical-scroll-proportion="0.40633246" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/Views/Projects/Index.cshtml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/frontend/Views/Projects/Updates.cshtml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
@@ -553,16 +642,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/Views/Shared/_Project_Update_Header.cshtml">
+    <entry file="file://$PROJECT_DIR$/frontend/Views/Shared/_Project_Updates.cshtml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="23" selection-start="1248" selection-end="1248" vertical-scroll-proportion="0.0">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/Views/Shared/_Project_Updates.cshtml">
+    <entry file="file://$PROJECT_DIR$/frontend/Views/Shared/_Project_Update_Header.cshtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="180" selection-start="714" selection-end="871" vertical-scroll-proportion="-6.470588">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/Views/Shared/_Layout.cshtml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/Views/Projects/Index.cshtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="26" selection-start="391" selection-end="391" vertical-scroll-proportion="-0.37755102">
           <folding />
         </state>
       </provider>
