@@ -4,8 +4,8 @@
            
      @{
          var description = Model.Intro!=null ? System.Text.RegularExpressions.Regex.Replace(Model.Intro, @"<[^>]*>", String.Empty).Trim():Model.project.Description;
-         description = System.Text.RegularExpressions.Regex.Replace(Model.project.Description, @"<[^>]*>", String.Empty).Trim();
-         }      
+         //description = System.Text.RegularExpressions.Regex.Replace(Model.project.Description, @"<[^>]*>", String.Empty).Trim();
+          }      
 
 <div class='single-update-header'>
     <div class='date'>
