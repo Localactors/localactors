@@ -21,7 +21,6 @@ function latlong(address,title,url){
                 map: map,
                 position: latlong,
                 icon: "https://s3-eu-west-1.amazonaws.com/localactors-webapp/content/images/googlemap/"+random+".png",
-                title: title,
             });
 
             // Set up markers with info windows
