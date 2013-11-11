@@ -1,0 +1,26 @@
+﻿@using System.Configuration
+@model Localactors.entities.update
+@{
+    ViewBag.Title = (Model.Title != null ? Model.Title + " Update: " : "Project Update: ") +  Model.Title;
+    ViewBag.Description = System.Text.RegularExpressions.Regex.Replace(Model.Intro, @"<[^>]*>", String.Empty);
+    ViewBag.Keywords = "project,local,support,community,updates,blog,"+ Model.Title;
+    ViewBag.Image = Model.project.Image;
+}
+
+@{Html.RenderPartial("_Project_Header", Model.project);}
+
+<div id='project-update-tab'>
+    <ul class='tab'>
+        <li class='active'><a href='@Url.Action("Updates","Projects",new{id=Model.ProjectID})'>Update <span class="number">(@Model.project.updates.Count)</span></a> </li>
+        <li><a href='@Url.Action("Details","Projects",new{id=Model.ProjectID})'>Project Details</a> </li>
+        <li><a href='@Url.Action("Guestbook","Projects",new{id=Model.ProjectID})'>Guestbook <span class="number">(@Model.project.project_guestbook.Count)</span></a> </li>
+        <li><a href='@Url.Action("Ask","Projects",new{id=Model.ProjectID})'>Ask a Question</a> </li>
+    </ul>
+    <hr class='tab-line'>
+</div>
+
+<div id='update-body'>
+    @{Html.RenderPartial("_Project_Sidebar", Model.project);}
+    @{Html.RenderPartial("_Project_Update", Model);}
+</div>
+

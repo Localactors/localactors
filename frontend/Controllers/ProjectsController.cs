@@ -51,6 +51,18 @@ namespace Localactors.webapp.Controllers
             return View(project);
         }
 
+
+        [OutputCache(VaryByParam = "*", Duration = 60)]
+        public ViewResult Update(int id) {
+            
+
+            update update = db.updates.FirstOrDefault(x => x.UpdateID == id);
+
+            ViewBag.UserID = CurrentUser != null ? CurrentUser.UserID : 0;
+            return View(update);
+        }
+
+
         [OutputCache(VaryByParam = "*", Duration = 60)]
         public ViewResult Donate(int id)
         {

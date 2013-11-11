@@ -1052,6 +1052,7 @@
     <Content Include="Views\Projects\Donate.cshtml" />
     <Content Include="Views\Shared\_Project_Update_Comments.cshtml" />
     <Content Include="Views\Errors\fivehundred.cshtml" />
+    <Content Include="Views\Projects\Update.cshtml" />
     <None Include="_bin_deployableAssemblies\it\Microsoft.Web.Infrastructure.resources.dll" />
     <None Include="_bin_deployableAssemblies\Microsoft.Web.Infrastructure.dll" />
     <None Include="_bin_deployableAssemblies\it\System.Web.WebPages.Razor.resources.dll" />

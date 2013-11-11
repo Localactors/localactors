@@ -15,12 +15,16 @@
     <div class='comments-container'>
         <div class='comments'>
             <div class='arrow'>
-            </div>
+            </div> 
             <a href='#comments-@Model.ProjectID'>@Model.update_comment.Count Comments</a>
         </div>
         <div class='share'>
            <!-- AddThis Button BEGIN -->
-             <div addthis:description='THE DESCRIPTION' addthis:title='THE TITLE' addthis:url='THE URL' class='addthis_toolbox addthis_default_style addthis_32x32_style'>
+            <div 
+                addthis:description='@System.Text.RegularExpressions.Regex.Replace(Model.Intro, @"<[^>]*>", String.Empty).Truncate(256)' 
+                addthis:title='@Model.Title' 
+                addthis:url='@Url.Action("Update", "Projects", new { id = Model.UpdateID },"http")' 
+                class='addthis_toolbox addthis_default_style addthis_32x32_style'>
                <a class='addthis_button_facebook'></a>
                <a class='addthis_button_twitter'></a>
                <a class='addthis_button_google_plusone_share'></a>
@@ -45,7 +49,7 @@
             <div class='clear'>
             </div>
             <h1 class='title-update'>
-                <a href="@Url.Action("Updates", "Projects", new { id = Model.ProjectID })">
+                <a href="@Url.Action("Update", "Projects", new { id = Model.UpdateID })">
                     @Html.Raw(Model.Title)
                 </a>
             </h1>
