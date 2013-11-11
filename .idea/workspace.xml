@@ -2,12 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cfbdd311-09f8-46c6-b0dd-5e948adcf494" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/Scripts/map.js" afterPath="$PROJECT_DIR$/frontend/Scripts/map.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="localactors.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1384182446623" ignored="false" />
+    <file path="/Dummy.txt" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1384183793781" ignored="false" />
     <file path="$PROJECT_DIR$/../localactors-static/source/content/css/partials/_320grid.sass" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1384170186687" ignored="false" />
     <file path="$PROJECT_DIR$/../localactors-static/source/content/css/partials/_map.sass" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1380630269681" ignored="false" />
     <file path="$PROJECT_DIR$/../localactors-static/source/content/css/partials/_960grid.sass" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1384170128321" ignored="false" />
@@ -93,7 +92,7 @@
       <file leaf-file-name="map.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/frontend/Scripts/map.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="118" selection-start="771" selection-end="771" vertical-scroll-proportion="0.41301626">
+            <state line="22" column="118" selection-start="771" selection-end="771" vertical-scroll-proportion="0.4140527">
               <folding />
             </state>
           </provider>
@@ -477,13 +476,18 @@
       <created>1384182360847</created>
       <updated>1384182360847</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="map js no title">
+      <created>1384183795866</created>
+      <updated>1384183795866</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="6" />
     <editor active="true" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32889965" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -498,7 +502,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32848486" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -546,7 +549,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="map js" />
+    <option name="LAST_COMMIT_MESSAGE" value="map js no title" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -563,6 +566,7 @@
     <MESSAGE value="fix vat in footer" />
     <MESSAGE value="better lin to create a project, share in project update" />
     <MESSAGE value="map js" />
+    <MESSAGE value="map js no title" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -652,7 +656,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/frontend/Scripts/map.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="118" selection-start="771" selection-end="771" vertical-scroll-proportion="0.41301626">
+        <state line="22" column="118" selection-start="771" selection-end="771" vertical-scroll-proportion="0.4140527">
           <folding />
         </state>
       </provider>
