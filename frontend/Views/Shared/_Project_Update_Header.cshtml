@@ -1,6 +1,12 @@
 ﻿@using System.Configuration
 @using System.Globalization
 @model update
+           
+     @{
+         var description = Model.Intro!=null ? System.Text.RegularExpressions.Regex.Replace(Model.Intro, @"<[^>]*>", String.Empty).Trim():Model.project.Description;
+         description = System.Text.RegularExpressions.Regex.Replace(Model.project.Description, @"<[^>]*>", String.Empty).Trim();
+         }      
+
 <div class='single-update-header'>
     <div class='date'>
         <h3 class='day'>
@@ -14,14 +20,13 @@
     </div>
     <div class='comments-container'>
         <div class='comments'>
-            <div class='arrow'>
-            </div> 
+            <div class='arrow'></div> 
             <a href='#comments-@Model.ProjectID'>@Model.update_comment.Count Comments</a>
         </div>
         <div class='share'>
            <!-- AddThis Button BEGIN -->
             <div 
-                addthis:description='@System.Text.RegularExpressions.Regex.Replace(Model.Intro, @"<[^>]*>", String.Empty).Truncate(256)' 
+                addthis:description='@description.Truncate(256)' 
                 addthis:title='@Model.Title' 
                 addthis:url='@Url.Action("Update", "Projects", new { id = Model.UpdateID },"http")' 
                 class='addthis_toolbox addthis_default_style addthis_32x32_style'>
