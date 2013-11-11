@@ -1,7 +1,8 @@
 //logging function
-window.Log = function() {
+window.Log = function () {
     if (this.console) {
-        console.log(Array.prototype.slice.call(arguments));
+        console.log(arguments);
+        //console.log(Array.prototype.slice.call(arguments));
     }
 };
 
