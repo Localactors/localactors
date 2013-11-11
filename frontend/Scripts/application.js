@@ -6,7 +6,8 @@ load: [ basicURl+'jquery.js',
 					basicURl+'jquery-ui/ui/jquery.ui.core.js',
 					basicURl+'jquery-ui/ui/jquery.ui.widget.js',
 					basicURl+'jquery-ui/ui/jquery.ui.accordion.js',
-					basicURl+'response.js'],
+					basicURl+'response.js',
+                    basicURl+'map.js],
 	complete: function(){
 		Response.create({ mode: 'src',  prefix: 'src', breakpoints: [0,980] });
 		yepnope([
