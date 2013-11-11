@@ -1,5 +1,3 @@
-
-
 var addresses = new Array();
 var geocoder;
 var map;
@@ -22,7 +20,7 @@ function latlong(address,title,url){
             var marker = new google.maps.Marker({
                 map: map,
                 position: latlong,
-                icon: "content/images/googlemap/"+random+".png",
+                icon: "https://s3-eu-west-1.amazonaws.com/localactors-webapp/content/images/googlemap/"+random+".png",
                 title: title,
             });
 
