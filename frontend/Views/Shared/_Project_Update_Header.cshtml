@@ -19,9 +19,18 @@
             <a href='#comments-@Model.ProjectID'>@Model.update_comment.Count Comments</a>
         </div>
         <div class='share'>
-            <div class='arrow'>
-            </div>
-            <a href='#'>Share</a>
+           <!-- AddThis Button BEGIN -->
+             <div addthis:description='THE DESCRIPTION' addthis:title='THE TITLE' addthis:url='THE URL' class='addthis_toolbox addthis_default_style addthis_32x32_style'>
+               <a class='addthis_button_facebook'></a>
+               <a class='addthis_button_twitter'></a>
+               <a class='addthis_button_google_plusone_share'></a>
+               <a class='addthis_counter addthis_bubble_style'></a>
+             </div>
+             <script>
+               var addthis_config = {"data_track_addressbar":true};
+             </script>
+             <script src='//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f0a3fcd63f94cae' type='text/javascript'></script>
+             <!-- AddThis Button END -->
         </div>
     </div>
     <div class='update-headline-container'>

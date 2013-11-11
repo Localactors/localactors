@@ -2,23 +2,60 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cfbdd311-09f8-46c6-b0dd-5e948adcf494" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/localactors.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/scopes/scope_settings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/Views/Home/HowTo.cshtml" afterPath="$PROJECT_DIR$/frontend/Views/Home/HowTo.cshtml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/Views/Home/Index.cshtml" afterPath="$PROJECT_DIR$/frontend/Views/Home/Index.cshtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/Views/Shared/_Project_Update_Header.cshtml" afterPath="$PROJECT_DIR$/frontend/Views/Shared/_Project_Update_Header.cshtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="localactors.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1380627108240" ignored="false" />
-    <file path="$PROJECT_DIR$/../localactors-static/source/content/css/partials/_320grid.sass" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1380630364333" ignored="false" />
+    <file path="/Dummy.txt" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1384162147074" ignored="false" />
+    <file path="$PROJECT_DIR$/../localactors-static/source/content/css/partials/_320grid.sass" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383240522526" ignored="false" />
     <file path="$PROJECT_DIR$/../localactors-static/source/content/css/partials/_map.sass" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1380630269681" ignored="false" />
-    <file path="$PROJECT_DIR$/../localactors-static/source/content/css/partials/_960grid.sass" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1380630300176" ignored="false" />
-    <file path="/*.regexp" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1380629686284" ignored="false" />
-    <file path="/_320grid.sass" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1380630069976" ignored="false" />
+    <file path="$PROJECT_DIR$/../localactors-static/source/content/css/partials/_960grid.sass" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383239927027" ignored="false" />
+    <file path="/*.regexp" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1384162891027" ignored="false" />
+    <file path="/_320grid.sass" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383239945000" ignored="false" />
     <file path="$PROJECT_DIR$/../localactors-static/build/content/css/application.css" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1380630521436" ignored="false" />
+    <file path="$PROJECT_DIR$/../localactors-static/source/project_update.html.haml" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383239613741" ignored="false" />
+    <file path="$PROJECT_DIR$/../localactors-static/source/single_update.html.haml" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383239062473" ignored="false" />
+    <file path="/a.dummy" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1384162474382" ignored="false" />
+    <file path="$PROJECT_DIR$/../localactors-static/source/update/project_header.html.haml" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383239485927" ignored="false" />
+    <file path="$PROJECT_DIR$/../localactors-static/source/update/project_update_header.html.haml" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383240498809" ignored="false" />
+    <file path="/project_update.html.haml" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383239606975" ignored="false" />
+    <file path="/_header.haml" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383346645251" ignored="false" />
+    <file path="$PROJECT_DIR$/../flr/source/partials/_header.haml" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383996446239" ignored="false" />
+    <file path="$PROJECT_DIR$/../flr/source/press.html.haml" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383314655032" ignored="false" />
+    <file path="/press.html.haml" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383314649024" ignored="false" />
+    <file path="$PROJECT_DIR$/../flr/source/js/main.js" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383346251670" ignored="false" />
+    <file path="$PROJECT_DIR$/../flr/source/css/site.css.sass" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383314457223" ignored="false" />
+    <file path="/site.css.sass" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383314448569" ignored="false" />
+    <file path="$PROJECT_DIR$/../flr/config.rb" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383346695895" ignored="false" />
+    <file path="/config.rb" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383346695895" ignored="false" />
+    <file path="/_collection-gallery.haml" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383345894229" ignored="false" />
+    <file path="$PROJECT_DIR$/../flr/source/partials/_collection-gallery.haml" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383345900259" ignored="false" />
+    <file path="/fw13.html.haml" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383345865035" ignored="false" />
+    <file path="$PROJECT_DIR$/../flr/source/collections/fw13.html.haml" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383347700561" ignored="false" />
+    <file path="/main.js" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383345518242" ignored="false" />
+    <file path="$PROJECT_DIR$/../flr/source/css/partials/_320.sass" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383345633428" ignored="false" />
+    <file path="/_320.sass" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383345616593" ignored="false" />
+    <file path="$PROJECT_DIR$/../flr/source/js/newsletter_submit.js" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383345981791" ignored="false" />
+    <file path="$PROJECT_DIR$/../flr/source/js/swapGIF.js" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383346051343" ignored="false" />
+    <file path="$PROJECT_DIR$/../flr/source/js/partials/newsletter_submit.js" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383346258516" ignored="false" />
+    <file path="$PROJECT_DIR$/../flr/source/js/partials/swapGIF.js" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383346300355" ignored="false" />
+    <file path="$PROJECT_DIR$/../flr/source/index.html.haml" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383346600955" ignored="false" />
+    <file path="$PROJECT_DIR$/../flr/source/events.html.haml" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383346560245" ignored="false" />
+    <file path="/events.html.haml" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383346560245" ignored="false" />
+    <file path="$PROJECT_DIR$/../flr/source/partials/vfno.haml" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383346581838" ignored="false" />
+    <file path="$PROJECT_DIR$/../localactors-static/source/projects.html.haml" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383380791868" ignored="false" />
+    <file path="$PROJECT_DIR$/../localactors-static/Gemfile" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383841243409" ignored="false" />
+    <file path="/Gemfile" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383841237420" ignored="false" />
+    <file path="$PROJECT_DIR$/../localactors-static/source/layouts/html5.haml" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383841825866" ignored="false" />
+    <file path="$PROJECT_DIR$/../localactors-static/source/scripts/map.js" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383841719065" ignored="false" />
+    <file path="/map.js" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383841709223" ignored="false" />
+    <file path="/html5.haml" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383841823014" ignored="false" />
+    <file path="$PROJECT_DIR$/../flr/source/newsletters/tsp_1.html.haml" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383926125621" ignored="false" />
+    <file path="/tsp_1.html.haml" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1383926125621" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,10 +75,46 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Index.cshtml" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/frontend/Views/Home/Index.cshtml">
+      <file leaf-file-name="_Project_Header.cshtml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/frontend/Views/Shared/_Project_Header.cshtml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="103" selection-start="1344" selection-end="1344" vertical-scroll-proportion="0.40076336">
+            <state line="30" column="39" selection-start="1073" selection-end="1073" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_Project_Update.cshtml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/frontend/Views/Shared/_Project_Update.cshtml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_Project_Updates.cshtml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/frontend/Views/Shared/_Project_Updates.cshtml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_Project_Update_Header.cshtml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/frontend/Views/Shared/_Project_Update_Header.cshtml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="30" column="23" selection-start="1248" selection-end="1248" vertical-scroll-proportion="0.61403507">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Localactors.webapp.csproj" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/frontend/Localactors.webapp.csproj">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="1040" column="28" selection-start="69584" selection-end="69584" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -65,7 +138,10 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
+        <option value="$PROJECT_DIR$/frontend/Views/Shared/_Footer.cshtml" />
+        <option value="$PROJECT_DIR$/frontend/Views/Home/HowTo.cshtml" />
         <option value="$PROJECT_DIR$/frontend/Views/Home/Index.cshtml" />
+        <option value="$PROJECT_DIR$/frontend/Views/Shared/_Project_Update_Header.cshtml" />
       </list>
     </option>
   </component>
@@ -77,7 +153,7 @@
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
     <OptionsSetting value="true" id="Checkout" />
-    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="false" id="Update" />
     <OptionsSetting value="true" id="Status" />
     <OptionsSetting value="true" id="Edit" />
     <ConfirmationsSetting value="0" id="Add" />
@@ -190,6 +266,50 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="Projects" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="localactors" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="localactors" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="frontend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Profile" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="localactors" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="localactors" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="frontend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="Home" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -242,43 +362,67 @@
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="options.lastSelected" value="org.jetbrains.plugins.ruby.settings.RubyIdeSdkConfigurable" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../flr" />
     <property name="FullScreen" value="true" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RunManager">
     <list size="0" />
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false" SSL_PROTOCOLS="sslv3">
+    <option name="USER" value="" />
+    <option name="PASSWORD" value="" />
+    <option name="mySSHConnectionTimeout" value="30000" />
+    <option name="mySSHReadTimeout" value="30000" />
+    <option name="LAST_MERGED_REVISION" />
+    <option name="MERGE_DRY_RUN" value="false" />
+    <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
+    <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
+    <option name="IGNORE_SPACES_IN_MERGE" value="false" />
+    <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
+    <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
+    <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
+    <option name="FORCE_UPDATE" value="false" />
+    <option name="IGNORE_EXTERNALS" value="false" />
+    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="cfbdd311-09f8-46c6-b0dd-5e948adcf494" name="Default" comment="" />
       <created>1380626794101</created>
       <updated>1380626794101</updated>
     </task>
+    <task id="LOCAL-00001" summary="fix vat in footer">
+      <created>1383134109504</created>
+      <updated>1383134109504</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32889965" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32848486" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24964131" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29411766" sideWeight="0.67151517" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32889965" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -323,7 +467,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix vat in footer" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -337,14 +481,83 @@
     <option name="UPDATE_FILTER_BY_SCOPE" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
+    <MESSAGE value="fix vat in footer" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/frontend/Views/Shared/_Footer.cshtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="24" selection-start="1431" selection-end="1431" vertical-scroll-proportion="0.40633246" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/Views/Projects/Index.cshtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/Views/Projects/Updates.cshtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/Views/Profile/Index.cshtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/Views/Home/CallForProjects.cshtml">
+      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="16" selection-start="548" selection-end="548" vertical-scroll-proportion="5.5555553">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/frontend/Views/Home/Index.cshtml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="103" selection-start="1344" selection-end="1344" vertical-scroll-proportion="0.40076336">
+        <state line="23" column="25" selection-start="1122" selection-end="1122" vertical-scroll-proportion="0.44005102" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/Views/Home/HowTo.cshtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="257" column="10" selection-start="11939" selection-end="11939" vertical-scroll-proportion="4.917092" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/Localactors.webapp.csproj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1040" column="28" selection-start="69584" selection-end="69584" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/Views/Shared/_Project_Header.cshtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="39" selection-start="1073" selection-end="1073" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/Views/Shared/_Project_Update.cshtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/Views/Shared/_Project_Updates.cshtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/Views/Shared/_Project_Update_Header.cshtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="23" selection-start="1248" selection-end="1248" vertical-scroll-proportion="0.61403507">
           <folding />
         </state>
       </provider>
