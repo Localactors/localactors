@@ -6,7 +6,7 @@
     </list>
     <ignored path="localactors.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1384179935870" ignored="false" />
+    <file path="/Dummy.txt" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1384179962843" ignored="false" />
     <file path="$PROJECT_DIR$/../localactors-static/source/content/css/partials/_320grid.sass" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1384170186687" ignored="false" />
     <file path="$PROJECT_DIR$/../localactors-static/source/content/css/partials/_map.sass" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1380630269681" ignored="false" />
     <file path="$PROJECT_DIR$/../localactors-static/source/content/css/partials/_960grid.sass" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1384170128321" ignored="false" />
@@ -458,7 +458,11 @@
       <created>1384179938301</created>
       <updated>1384179938301</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="map js">
+      <created>1384179964776</created>
+      <updated>1384179964776</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">
