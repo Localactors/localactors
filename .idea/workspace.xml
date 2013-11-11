@@ -6,7 +6,7 @@
     </list>
     <ignored path="localactors.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1384179082224" ignored="false" />
+    <file path="/Dummy.txt" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1384179935870" ignored="false" />
     <file path="$PROJECT_DIR$/../localactors-static/source/content/css/partials/_320grid.sass" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1384170186687" ignored="false" />
     <file path="$PROJECT_DIR$/../localactors-static/source/content/css/partials/_map.sass" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1380630269681" ignored="false" />
     <file path="$PROJECT_DIR$/../localactors-static/source/content/css/partials/_960grid.sass" changelist="cfbdd311-09f8-46c6-b0dd-5e948adcf494" time="1384170128321" ignored="false" />
@@ -83,7 +83,7 @@
       <file leaf-file-name="application.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/frontend/Scripts/application.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="33" selection-start="611" selection-end="611" vertical-scroll-proportion="0.30112922">
+            <state line="9" column="37" selection-start="359" selection-end="359" vertical-scroll-proportion="0.1693852">
               <folding />
             </state>
           </provider>
@@ -454,19 +454,23 @@
       <created>1384179088571</created>
       <updated>1384179088571</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="map js">
+      <created>1384179938301</created>
+      <updated>1384179938301</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32889965" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30703014" sideWeight="0.67151517" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30703014" sideWeight="0.67151517" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -627,7 +631,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/frontend/Scripts/application.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="33" selection-start="611" selection-end="611" vertical-scroll-proportion="0.30112922">
+        <state line="9" column="37" selection-start="359" selection-end="359" vertical-scroll-proportion="0.1693852">
           <folding />
         </state>
       </provider>
