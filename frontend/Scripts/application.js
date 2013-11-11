@@ -1,4 +1,4 @@
-var basicURl = '/scripts/vendor/'
+var basicURl = '/scripts/vendor/';
 yepnope([{
 load: [ basicURl+'jquery.js',
 					basicURl+'jquery-ujs.js',
